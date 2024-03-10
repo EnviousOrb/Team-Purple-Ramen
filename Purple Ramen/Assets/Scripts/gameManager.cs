@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 
 public class gameManager : MonoBehaviour
@@ -7,6 +8,7 @@ public class gameManager : MonoBehaviour
     public static gameManager instance;
     [SerializeField] GameObject menuActive;
     [SerializeField] GameObject menuPause;
+    [SerializeField] GameObject menuLose;
     [SerializeField] GameObject menuWin;
 
     public GameObject player;
@@ -27,11 +29,12 @@ public class gameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Cancel") && menuActive == null)
+        if (Input.GetButtonDown("Cancel"))
         {
-            statePaused();
-            menuActive = menuPause;
-            menuActive.SetActive(isPaused);
+            if (menuActive == null)
+                statePaused();
+            else
+                stateResume();
         }
     }
 
@@ -40,7 +43,9 @@ public class gameManager : MonoBehaviour
         isPaused = !isPaused;
         Time.timeScale = 0;
         Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.lockState = CursorLockMode.None;
+        menuActive = menuPause;
+        menuActive.SetActive(true);
     }
 
     public void stateResume()
@@ -49,18 +54,11 @@ public class gameManager : MonoBehaviour
         Time.timeScale = TimeScaleOrig;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-        menuActive.SetActive(isPaused);
+        menuActive.SetActive(false);
         menuActive = null;
     }
-    public void updateGameGoal(int amount)
+    public void UpdateEnemyCount(int amount)
     {
         enemyCount += amount;
-        if (enemyCount <= 0)
-        {
-            statePaused();
-            menuActive = menuWin;
-            menuActive.SetActive(true);
-        }
     }
-
 }
