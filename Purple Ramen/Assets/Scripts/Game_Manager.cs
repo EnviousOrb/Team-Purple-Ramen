@@ -12,6 +12,7 @@ public class Game_Manager : MonoBehaviour
     //public PlayerController PS;
     public bool isPaused;
     float TimeScaleOrig;
+    int enemyCount;
 
     // Awake is called before Start
     void Awake()
@@ -49,5 +50,9 @@ public class Game_Manager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         menuActive.SetActive(isPaused);
         menuActive = null;
+    }
+    public void UpdateEnemyCount(int amount)
+    {
+        enemyCount += amount;
     }
 }

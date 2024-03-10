@@ -8,7 +8,7 @@ public class playerController : MonoBehaviour
     [SerializeField] CharacterController controller;
 
     [HeaderAttribute("-----Player Stats-----")]
-    [Range(1, 5)][SerializeField] float speed;
+    [Range(1, 25)][SerializeField] float speed;
     [Range(1, 3)][SerializeField] int jumps;
     [Range(5, 25)][SerializeField] int jumpSpeed;
     [Range(-15, -35)][SerializeField] int gravity;

@@ -22,14 +22,14 @@ public class enemyAI : MonoBehaviour, IDamage
     void Start()
     {
         // Register this enemy with the game manager to update the game's goal.
-        gameManager.instance.updateGameGoal(1);
+        Game_Manager.instance.UpdateEnemyCount(1);
     }
 
     // Update is called once per frame
     void Update()
     {
         // Set the enemy's destination to the player's current position.
-        agent.SetDestination(gameManager.instance.player.transform.position);
+        agent.SetDestination(Game_Manager.instance.player.transform.position);
 
         // If not already shooting, start the shooting coroutine.
         if (!isShooting)
@@ -58,7 +58,7 @@ public class enemyAI : MonoBehaviour, IDamage
         // If HP drops to 0 or below, update the game goal and destroy the enemy game object.
         if (HP <= 0)
         {
-            gameManager.instance.updateGameGoal(-1);
+            Game_Manager.instance.UpdateEnemyCount(-1);
             Destroy(gameObject);
         }
     }
