@@ -62,5 +62,9 @@ public class gameManager : MonoBehaviour
             menuActive.SetActive(true);
         }
     }
+    public void UpdateEnemyCount(int amount)
+    {
+        enemyCount -= amount;
+    }
 
 }
