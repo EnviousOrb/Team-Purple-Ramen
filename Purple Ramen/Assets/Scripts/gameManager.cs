@@ -2,30 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Game_Manager : MonoBehaviour
+public class gameManager : MonoBehaviour
 {
-    public static Game_Manager instance;
+    public static gameManager instance;
     [SerializeField] GameObject menuActive;
     [SerializeField] GameObject menuPause;
+    [SerializeField] GameObject menuWin;
 
     public GameObject player;
-    //public PlayerController PS;
+    public playerController PS;
     public bool isPaused;
     float TimeScaleOrig;
+    int enemyCount;
 
     // Awake is called before Start
     void Awake()
     {
         instance = this;
         player = GameObject.FindWithTag("Player");
-        //PS = player.GetComponent<Player_Controller>();
+        PS = player.GetComponent<playerController>();
         TimeScaleOrig = Time.timeScale;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetButtonDown("Cancel") && menuActive == null)
+        if (Input.GetButtonDown("Cancel") && menuActive == null)
         {
             statePaused();
             menuActive = menuPause;
@@ -50,4 +52,15 @@ public class Game_Manager : MonoBehaviour
         menuActive.SetActive(isPaused);
         menuActive = null;
     }
+    public void updateGameGoal(int amount)
+    {
+        enemyCount += amount;
+        if (enemyCount <= 0)
+        {
+            statePaused();
+            menuActive = menuWin;
+            menuActive.SetActive(true);
+        }
+    }
+
 }
