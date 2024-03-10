@@ -32,12 +32,15 @@ public class playerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * shootDistance, Color.red);
-        movement();
-
-        if (Input.GetButton("Shoot") && !isShooting)
+        if (!gameManager.instance.isPaused)
         {
-            StartCoroutine(shoot());
+            Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * shootDistance, Color.red);
+            movement();
+
+            if (Input.GetButton("Shoot") && !isShooting)
+            {
+                StartCoroutine(shoot());
+            }
         }
     }
 
