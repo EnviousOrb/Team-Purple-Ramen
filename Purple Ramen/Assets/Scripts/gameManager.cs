@@ -36,8 +36,19 @@ public class gameManager : MonoBehaviour
             else
                 stateResume();
         }
+        if (enemyCount == 0)
+        {
+            stateWin();
+        }
     }
-
+    public void stateWin()
+    {
+        Time.timeScale = 0;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        menuActive = menuWin;
+        menuActive.SetActive(true);
+    }
     public void statePaused()
     {
         isPaused = !isPaused;
