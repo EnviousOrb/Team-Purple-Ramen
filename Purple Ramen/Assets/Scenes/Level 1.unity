@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: c28fd391b5e2b454789fdb539cafea6c, type: 2}
 --- !u!1001 &474096186
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -131,6 +131,38 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 157510457839487175, guid: f6998f1464317a94f8fea5951da90003, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 157510457839487175, guid: f6998f1464317a94f8fea5951da90003, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 203520999940125846, guid: f6998f1464317a94f8fea5951da90003, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 203520999940125846, guid: f6998f1464317a94f8fea5951da90003, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 951810513761450015, guid: f6998f1464317a94f8fea5951da90003, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 951810513761450015, guid: f6998f1464317a94f8fea5951da90003, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2291578655022753788, guid: f6998f1464317a94f8fea5951da90003, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2291578655022753788, guid: f6998f1464317a94f8fea5951da90003, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 3074770827146561795, guid: f6998f1464317a94f8fea5951da90003, type: 3}
       propertyPath: m_LocalPosition.x
       value: -11.076149
@@ -171,9 +203,41 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3686018797829128788, guid: f6998f1464317a94f8fea5951da90003, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3686018797829128788, guid: f6998f1464317a94f8fea5951da90003, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4599343619920929678, guid: f6998f1464317a94f8fea5951da90003, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4599343619920929678, guid: f6998f1464317a94f8fea5951da90003, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4737085018221698053, guid: f6998f1464317a94f8fea5951da90003, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4737085018221698053, guid: f6998f1464317a94f8fea5951da90003, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 8190468465892166709, guid: f6998f1464317a94f8fea5951da90003, type: 3}
       propertyPath: m_Name
       value: Room
+      objectReference: {fileID: 0}
+    - target: {fileID: 8190468465892166709, guid: f6998f1464317a94f8fea5951da90003, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8190468465892166709, guid: f6998f1464317a94f8fea5951da90003, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -287,7 +351,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2244432817087856242, guid: 9e90d5e71c73cf64d8dffb5e50171eed, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.5
+      value: 30.05
       objectReference: {fileID: 0}
     - target: {fileID: 2244432817087856242, guid: 9e90d5e71c73cf64d8dffb5e50171eed, type: 3}
       propertyPath: m_LocalPosition.y
@@ -295,7 +359,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2244432817087856242, guid: 9e90d5e71c73cf64d8dffb5e50171eed, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.25
+      value: -19.45
       objectReference: {fileID: 0}
     - target: {fileID: 2244432817087856242, guid: 9e90d5e71c73cf64d8dffb5e50171eed, type: 3}
       propertyPath: m_LocalRotation.w
@@ -442,6 +506,10 @@ PrefabInstance:
     - target: {fileID: 9163603172430416668, guid: d65890ac9c49be94bacb019ceb52bbc6, type: 3}
       propertyPath: m_Name
       value: Floor
+      objectReference: {fileID: 0}
+    - target: {fileID: 9163603172430416668, guid: d65890ac9c49be94bacb019ceb52bbc6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
