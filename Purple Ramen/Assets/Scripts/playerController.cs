@@ -13,6 +13,7 @@ public class playerController : MonoBehaviour, IDamage
     [Range(1, 3)][SerializeField] int jumps;
     [Range(5, 25)][SerializeField] int jumpSpeed;
     [Range(-15, -35)][SerializeField] int gravity;
+    [SerializeField] float sprintMultiplier;
 
     [HeaderAttribute("-----Gun Stats-----")]
     [SerializeField] int shootDamage;
@@ -24,10 +25,12 @@ public class playerController : MonoBehaviour, IDamage
     int jumpcount;
     Vector3 moveDir;
     Vector3 playerVel;
+    float originalSpeed;
 
     // Start is called before the first frame update
     void Start()
     {
+        originalSpeed = speed;
         maxhp = HP;
     }
 
@@ -50,6 +53,11 @@ public class playerController : MonoBehaviour, IDamage
 
     void movement()
     {
+        if (Input.GetButton("Fire3"))
+            speed = originalSpeed * sprintMultiplier;
+        else
+            speed = originalSpeed;
+
         if (controller.isGrounded)
         {
             jumpcount = 0;
