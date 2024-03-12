@@ -34,32 +34,29 @@ public class gameManager : MonoBehaviour
         {
             if (menuActive == null)
                 statePaused();
-            else
-                stateResume();
+            else if (menuActive == menuPause)
+                stateNormal();
         }
       
     }
     public void stateWin()
     {
-        Time.timeScale = 0;
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
         menuActive = menuWin;
-        menuActive.SetActive(true);
+        Pause();
     }
     public void statePaused()
     {
-        isPaused = !isPaused;
-        Time.timeScale = 0;
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
         menuActive = menuPause;
-        menuActive.SetActive(true);
+        Pause();
     }
-
-    public void stateResume()
+    public void stateLose()
     {
-        isPaused = !isPaused;
+        menuActive = menuLose;
+        Pause();
+    }
+    public void stateNormal()
+    {
+        isPaused = false;
         Time.timeScale = TimeScaleOrig;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
@@ -74,5 +71,13 @@ public class gameManager : MonoBehaviour
         {
             stateWin();
         }
+    }
+    void Pause()
+    {
+        isPaused = true;
+        Time.timeScale = 0;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        menuActive.SetActive(true);
     }
 }

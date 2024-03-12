@@ -17,6 +17,7 @@ public class enemyAI : MonoBehaviour, IDamage
     [SerializeField] GameObject bullet; // Prefab of the bullet that the enemy shoots.
     [SerializeField] float shootRate; // How often the enemy can shoot.
 
+    Color originalColor;
     bool isShooting; // Tracks whether the enemy is currently shooting.
     bool playerInRange;
     // Start is called before the first frame update
@@ -24,6 +25,7 @@ public class enemyAI : MonoBehaviour, IDamage
     {
         // Register this enemy with the game manager to update the game's goal.
         gameManager.instance.UpdateEnemyCount(1);
+        originalColor = model.material.color;
     }
 
     // Update is called once per frame
@@ -74,6 +76,6 @@ public class enemyAI : MonoBehaviour, IDamage
     {
         model.material.color = Color.red; // Change color to red.
         yield return new WaitForSeconds(0.1f); // Wait for 0.1 seconds.
-        model.material.color = Color.white; // Change color back to white.
+        model.material.color = originalColor; // Change color back to white.
     }
 }
