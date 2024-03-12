@@ -37,7 +37,8 @@ public class enemyAI : MonoBehaviour, IDamage
         if(playerInRange)
         {
             agent.SetDestination(gameManager.instance.player.transform.position);
-            transform.forward = gameManager.instance.player.transform.position;
+            Quaternion turn = Quaternion.LookRotation(new Vector3(gameManager.instance.player.transform.position.x, transform.position.y, gameManager.instance.player.transform.position.z));
+            transform.rotation=Quaternion.RotateTowards(transform.rotation, turn, Time.deltaTime * speed);
            if (!isShooting)
         {
             StartCoroutine(shoot());
