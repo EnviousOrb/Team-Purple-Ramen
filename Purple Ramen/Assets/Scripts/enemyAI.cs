@@ -76,7 +76,7 @@ public class enemyAI : MonoBehaviour, IDamage
     {
         model.material.color = Color.red; // Change color to red.
         yield return new WaitForSeconds(0.1f); // Wait for 0.1 seconds.
-        model.material.color = originalColor; // Change color back to white.
+        model.material.color = originalColor; 
     }
 
     private void OnTriggerEnter(Collider other)
