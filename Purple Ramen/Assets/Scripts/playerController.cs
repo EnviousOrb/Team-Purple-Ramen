@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class playerController : MonoBehaviour
+public class playerController : MonoBehaviour, IDamage
 {
     [HeaderAttribute("-----Components-----")]
     [SerializeField] CharacterController controller;
 
     [HeaderAttribute("-----Player Stats-----")]
-    [Range(1, 25)][SerializeField] float speed;
+    [Range(0, 10)][SerializeField] int HP;
+    [Range(1, 5)][SerializeField] float speed;
     [Range(1, 3)][SerializeField] int jumps;
     [Range(5, 25)][SerializeField] int jumpSpeed;
     [Range(-15, -35)][SerializeField] int gravity;
@@ -32,9 +33,11 @@ public class playerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!gameManager.instance.isPaused)
+        //if (!gameManager.instance.isPaused)
         {
-            Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * shootDistance, Color.red);
+            #if UNITY_EDITOR
+            Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * shootDistance, Color.green);
+            #endif
             movement();
 
             if (Input.GetButton("Shoot") && !isShooting)
@@ -75,10 +78,9 @@ public class playerController : MonoBehaviour
         if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootDistance))
         {
             Debug.Log(hit.collider.name);
-
             IDamage dmg = hit.collider.GetComponent<IDamage>();
 
-            if (dmg != null)
+            if (hit.transform != transform && dmg != null)
             {
                 dmg.takeDamage(shootDamage);
             }
@@ -86,5 +88,10 @@ public class playerController : MonoBehaviour
 
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
+    }
+
+    public void takeDamage(int amount)
+    {
+        HP -= amount;
     }
 }
