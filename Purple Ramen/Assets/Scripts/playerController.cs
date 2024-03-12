@@ -102,5 +102,19 @@ public class playerController : MonoBehaviour, IDamage
     public void takeDamage(int amount)
     {
         HP -= amount;
+        StartCoroutine(flashdmgScreen());
+        if(HP <= 0) 
+        {
+            gameManager.instance.stateLose();
+        }
     }
+
+    IEnumerator flashdmgScreen()
+    {
+        gameManager.instance.playerDamageEffect.SetActive(true);
+        yield return new WaitForSeconds(.1f);
+        gameManager.instance.playerDamageEffect.SetActive(false);
+    }
+
+
 }

@@ -37,6 +37,7 @@ public class enemyAI : MonoBehaviour, IDamage
         if(playerInRange)
         {
             agent.SetDestination(gameManager.instance.player.transform.position);
+            transform.forward = gameManager.instance.player.transform.position;
            if (!isShooting)
         {
             StartCoroutine(shoot());
