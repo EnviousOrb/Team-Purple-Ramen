@@ -13,8 +13,9 @@ public class enemyAI : MonoBehaviour, IDamage
 
     [SerializeField] int HP; // Health points of the enemy.
     [SerializeField] int speed; // Movement speed of the enemy.
+    [SerializeField] int stoppingDist;
 
-    [SerializeField] GameObject bullet; // Prefab of the bullet that the enemy shoots.
+    [SerializeField] GameObject projectile; // Prefab of the bullet that the enemy shoots.
     [SerializeField] float shootRate; // How often the enemy can shoot.
 
     Color originalColor;
@@ -26,22 +27,21 @@ public class enemyAI : MonoBehaviour, IDamage
         // Register this enemy with the game manager to update the game's goal.
         gameManager.instance.UpdateEnemyCount(1);
         originalColor = model.material.color;
+        agent.speed = speed;
+        agent.stoppingDistance = stoppingDist;
     }
 
     // Update is called once per frame
     void Update()
     {
         // Set the enemy's destination to the player's current position.
-     
-
-        if(playerInRange)
+        if (playerInRange)
         {
             agent.SetDestination(gameManager.instance.player.transform.position);
-           if (!isShooting)
-        {
-            StartCoroutine(shoot());
-        }
-
+            if (!isShooting)
+            {
+                StartCoroutine(shoot());
+            }
         }
         // If not already shooting, start the shooting coroutine.
     }
@@ -51,7 +51,7 @@ public class enemyAI : MonoBehaviour, IDamage
     {
         isShooting = true;
         // Create a bullet at the shooting position.
-        Instantiate(bullet, shootPos.position, transform.rotation);
+        Instantiate(projectile, shootPos.position, transform.rotation);
         // Wait for a period equal to shootRate before allowing the enemy to shoot again.
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
@@ -76,6 +76,6 @@ public class enemyAI : MonoBehaviour, IDamage
     {
         model.material.color = Color.red; // Change color to red.
         yield return new WaitForSeconds(0.1f); // Wait for 0.1 seconds.
-        model.material.color = originalColor; 
+        model.material.color = originalColor;
     }
 }
