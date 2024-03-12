@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -17,7 +18,7 @@ public class enemyAI : MonoBehaviour, IDamage
     [SerializeField] float shootRate; // How often the enemy can shoot.
 
     bool isShooting; // Tracks whether the enemy is currently shooting.
-
+    bool playerInRange;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,13 +30,18 @@ public class enemyAI : MonoBehaviour, IDamage
     void Update()
     {
         // Set the enemy's destination to the player's current position.
-        agent.SetDestination(gameManager.instance.player.transform.position);
+     
 
-        // If not already shooting, start the shooting coroutine.
-        if (!isShooting)
+        if(playerInRange)
+        {
+            agent.SetDestination(gameManager.instance.player.transform.position);
+           if (!isShooting)
         {
             StartCoroutine(shoot());
         }
+
+        }
+        // If not already shooting, start the shooting coroutine.
     }
 
     // Coroutine to handle shooting.
@@ -58,8 +64,8 @@ public class enemyAI : MonoBehaviour, IDamage
         // If HP drops to 0 or below, update the game goal and destroy the enemy game object.
         if (HP <= 0)
         {
-            gameManager.instance.UpdateEnemyCount(-1);
             Destroy(gameObject);
+            gameManager.instance.UpdateEnemyCount(-1);
         }
     }
 
