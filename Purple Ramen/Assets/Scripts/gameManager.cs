@@ -36,10 +36,6 @@ public class gameManager : MonoBehaviour
             else
                 stateResume();
         }
-        if (enemyCount == 0)
-        {
-            stateWin();
-        }
     }
     public void stateWin()
     {
