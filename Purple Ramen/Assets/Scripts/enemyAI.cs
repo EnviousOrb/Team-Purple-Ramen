@@ -18,7 +18,7 @@ public class enemyAI : MonoBehaviour, IDamage
     [SerializeField] GameObject projectile; // Prefab of the bullet that the enemy shoots.
     [SerializeField] float shootRate; // How often the enemy can shoot.
 
-    Color originalColor;
+    Material originalColor;
     bool isShooting; // Tracks whether the enemy is currently shooting.
     bool playerInRange;
     // Start is called before the first frame update
@@ -26,7 +26,7 @@ public class enemyAI : MonoBehaviour, IDamage
     {
         // Register this enemy with the game manager to update the game's goal.
         gameManager.instance.UpdateEnemyCount(1);
-        originalColor = model.material.color;
+        originalColor = model.material;
         agent.speed = speed;
         agent.stoppingDistance = stoppingDist;
     }
@@ -39,10 +39,10 @@ public class enemyAI : MonoBehaviour, IDamage
         {
             agent.SetDestination(gameManager.instance.player.transform.position);
             transform.forward = gameManager.instance.player.transform.position;
-           if (!isShooting)
-        {
-            StartCoroutine(shoot());
-        }
+            if (!isShooting)
+            {
+                StartCoroutine(shoot());
+            }
 
         }
         // If not already shooting, start the shooting coroutine.
@@ -53,7 +53,10 @@ public class enemyAI : MonoBehaviour, IDamage
     {
         isShooting = true;
         // Create a bullet at the shooting position.
-        Instantiate(projectile, shootPos.position, transform.rotation);
+        Vector3 playerPos = gameManager.instance.player.transform.position;
+        playerPos.y = playerPos.y - 1;
+        Vector3 playerdirection =  playerPos - transform.position;
+        Instantiate(projectile, shootPos.position, Quaternion.LookRotation(playerdirection));
         // Wait for a period equal to shootRate before allowing the enemy to shoot again.
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
@@ -78,12 +81,12 @@ public class enemyAI : MonoBehaviour, IDamage
     {
         model.material.color = Color.red; // Change color to red.
         yield return new WaitForSeconds(0.1f); // Wait for 0.1 seconds.
-        model.material.color = originalColor;
+        model.material = originalColor;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
             playerInRange = true;
         }
