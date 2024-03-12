@@ -2,7 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting.Antlr3.Runtime;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class gameManager : MonoBehaviour
 {
@@ -11,6 +14,8 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuLose;
     [SerializeField] GameObject menuWin;
+    [SerializeField] public GameObject playerDamageEffect;
+    [SerializeField] public Image HPbar;
     [SerializeField] TMP_Text countText;
     public GameObject player;
     public playerController PS;
@@ -80,4 +85,7 @@ public class gameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         menuActive.SetActive(true);
     }
+
+   
+
 }

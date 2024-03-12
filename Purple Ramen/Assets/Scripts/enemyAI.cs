@@ -38,10 +38,12 @@ public class enemyAI : MonoBehaviour, IDamage
         if (playerInRange)
         {
             agent.SetDestination(gameManager.instance.player.transform.position);
-            if (!isShooting)
-            {
-                StartCoroutine(shoot());
-            }
+            transform.forward = gameManager.instance.player.transform.position;
+           if (!isShooting)
+        {
+            StartCoroutine(shoot());
+        }
+
         }
         // If not already shooting, start the shooting coroutine.
     }
@@ -78,4 +80,21 @@ public class enemyAI : MonoBehaviour, IDamage
         yield return new WaitForSeconds(0.1f); // Wait for 0.1 seconds.
         model.material.color = originalColor;
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Player"))
+        {
+            playerInRange = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playerInRange = false;
+        }
+    }
+
 }
