@@ -7,12 +7,12 @@ public class ButtonFunctions : MonoBehaviour
 {
     public void resume()
     {
-        gameManager.instance.stateResume();
+        gameManager.instance.stateNormal();
     }
     public void restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        gameManager.instance.stateResume();
+        gameManager.instance.stateNormal();
     }
     public void quit()
     {
