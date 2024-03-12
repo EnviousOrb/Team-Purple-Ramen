@@ -78,4 +78,21 @@ public class enemyAI : MonoBehaviour, IDamage
         yield return new WaitForSeconds(0.1f); // Wait for 0.1 seconds.
         model.material.color = originalColor; // Change color back to white.
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Player"))
+        {
+            playerInRange = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playerInRange = false;
+        }
+    }
+
 }
