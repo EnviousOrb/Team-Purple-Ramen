@@ -17,7 +17,7 @@ public class enemyAI : MonoBehaviour, IDamage
     [SerializeField] GameObject bullet; // Prefab of the bullet that the enemy shoots.
     [SerializeField] float shootRate; // How often the enemy can shoot.
 
-    Color originalColor;
+    //Color originalColor;
     bool isShooting; // Tracks whether the enemy is currently shooting.
     bool playerInRange;
     // Start is called before the first frame update
@@ -39,10 +39,10 @@ public class enemyAI : MonoBehaviour, IDamage
             agent.SetDestination(gameManager.instance.player.transform.position);
             Quaternion turn = Quaternion.LookRotation(new Vector3(gameManager.instance.player.transform.position.x, transform.position.y, gameManager.instance.player.transform.position.z));
             transform.rotation=Quaternion.RotateTowards(transform.rotation, turn, Time.deltaTime * turnSpeed);
-           if (!isShooting)
-        {
-            StartCoroutine(shoot());
-        }
+            if (!isShooting)
+            {
+                StartCoroutine(shoot());
+            }
 
         }
         // If not already shooting, start the shooting coroutine.
@@ -68,8 +68,8 @@ public class enemyAI : MonoBehaviour, IDamage
         // If HP drops to 0 or below, update the game goal and destroy the enemy game object.
         if (HP <= 0)
         {
-            Destroy(gameObject);
             gameManager.instance.UpdateEnemyCount(-1);
+            Destroy(gameObject);
         }
     }
 
