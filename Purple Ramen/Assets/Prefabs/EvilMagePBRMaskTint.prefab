@@ -182,8 +182,8 @@ MonoBehaviour:
   shootPos: {fileID: 6341152858778154775}
   HP: 10
   speed: 4
-  stoppingDist: 10
-  projectile: {fileID: 7135714001530856501, guid: 197a9dc5b7c7eb84a98e3a96ec525dee, type: 3}
+  turnSpeed: 0
+  bullet: {fileID: 0}
   shootRate: 3
 --- !u!95 &2431089027449474225
 Animator:
@@ -220,7 +220,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 5
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 0
   m_AutoRepath: 1
