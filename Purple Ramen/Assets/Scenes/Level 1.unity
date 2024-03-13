@@ -1078,9 +1078,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
+<<<<<<< Updated upstream
     - target: {fileID: 6869758104727248407, guid: ee14244846738e3438e014b526395eb9, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 219.73788
+=======
+    - target: {fileID: 5910302038137435835, guid: ee14244846738e3438e014b526395eb9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+>>>>>>> Stashed changes
       objectReference: {fileID: 0}
     - target: {fileID: 8121380028771294804, guid: ee14244846738e3438e014b526395eb9, type: 3}
       propertyPath: m_Pivot.x
@@ -1512,7 +1518,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2244432817087856242, guid: 9e90d5e71c73cf64d8dffb5e50171eed, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.75
+      value: 0.99
       objectReference: {fileID: 0}
     - target: {fileID: 2244432817087856242, guid: 9e90d5e71c73cf64d8dffb5e50171eed, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1546,6 +1552,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5093528602304866976, guid: 9e90d5e71c73cf64d8dffb5e50171eed, type: 3}
+      propertyPath: bullet
+      value: 
+      objectReference: {fileID: 6654342452342103052, guid: 981cb1a764e5eb346aa6494c88ad1c1f, type: 3}
     - target: {fileID: 6691593255924920124, guid: 9e90d5e71c73cf64d8dffb5e50171eed, type: 3}
       propertyPath: m_Name
       value: Enemy 01
