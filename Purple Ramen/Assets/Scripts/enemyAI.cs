@@ -13,7 +13,7 @@ public class enemyAI : MonoBehaviour, IDamage
 
     [SerializeField] int HP; // Health points of the enemy.
     [SerializeField] int speed; // Movement speed of the enemy.
-
+    [SerializeField] int turnSpeed;
     [SerializeField] GameObject bullet; // Prefab of the bullet that the enemy shoots.
     [SerializeField] float shootRate; // How often the enemy can shoot.
 
@@ -38,7 +38,7 @@ public class enemyAI : MonoBehaviour, IDamage
         {
             agent.SetDestination(gameManager.instance.player.transform.position);
             Quaternion turn = Quaternion.LookRotation(new Vector3(gameManager.instance.player.transform.position.x, transform.position.y, gameManager.instance.player.transform.position.z));
-            transform.rotation=Quaternion.RotateTowards(transform.rotation, turn, Time.deltaTime * speed);
+            transform.rotation=Quaternion.RotateTowards(transform.rotation, turn, Time.deltaTime * turnSpeed);
            if (!isShooting)
         {
             StartCoroutine(shoot());
