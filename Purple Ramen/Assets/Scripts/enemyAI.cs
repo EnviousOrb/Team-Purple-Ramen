@@ -25,7 +25,7 @@ public class enemyAI : MonoBehaviour, IDamage
     {
         // Register this enemy with the game manager to update the game's goal.
         gameManager.instance.UpdateEnemyCount(1);
-        originalColor = model.material.color;
+        // originalColor = model.material.color;
     }
 
     // Update is called once per frame
