@@ -13,7 +13,7 @@ public class enemyAI : MonoBehaviour, IDamage
 
     [SerializeField] int HP; // Health points of the enemy.
     [SerializeField] int speed; // Movement speed of the enemy.
-
+    [SerializeField] int turnSpeed;
     [SerializeField] GameObject bullet; // Prefab of the bullet that the enemy shoots.
     [SerializeField] float shootRate; // How often the enemy can shoot.
 
@@ -25,7 +25,7 @@ public class enemyAI : MonoBehaviour, IDamage
     {
         // Register this enemy with the game manager to update the game's goal.
         gameManager.instance.UpdateEnemyCount(1);
-        originalColor = model.material.color;
+        // originalColor = model.material.color;
     }
 
     // Update is called once per frame
@@ -36,9 +36,9 @@ public class enemyAI : MonoBehaviour, IDamage
 
         if (playerInRange)
         {
+
             agent.SetDestination(gameManager.instance.player.transform.position);
-            Quaternion turn = Quaternion.LookRotation(new Vector3(gameManager.instance.player.transform.position.x, transform.position.y, gameManager.instance.player.transform.position.z));
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, turn, Time.deltaTime * speed);
+
             if (!isShooting)
             {
                 StartCoroutine(shoot());
@@ -78,7 +78,7 @@ public class enemyAI : MonoBehaviour, IDamage
     {
         model.material.color = Color.red; // Change color to red.
         yield return new WaitForSeconds(0.1f); // Wait for 0.1 seconds.
-        model.material.color = originalColor;
+        model.material.color = originalColor; 
     }
 
     private void OnTriggerEnter(Collider other)
