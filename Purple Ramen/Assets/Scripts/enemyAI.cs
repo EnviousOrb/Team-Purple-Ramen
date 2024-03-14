@@ -17,6 +17,7 @@ public class enemyAI : MonoBehaviour, IDamage
     [SerializeField] GameObject bullet; // Prefab of the bullet that the enemy shoots.
     [SerializeField] float shootRate; // How often the enemy can shoot.
     [SerializeField] Material damageMat;
+    [SerializeField] int stoppingDist;
 
     Material originalMat;
     bool isShooting; // Tracks whether the enemy is currently shooting.
@@ -27,6 +28,8 @@ public class enemyAI : MonoBehaviour, IDamage
         // Register this enemy with the game manager to update the game's goal.
         gameManager.instance.UpdateEnemyCount(1);
         originalMat = model.material;
+        agent.stoppingDistance = stoppingDist;
+        agent.speed = speed;
         // originalColor = model.material.color;
     }
 
