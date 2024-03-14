@@ -20,18 +20,19 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] int shootDistance;
     [SerializeField] float shootRate;
 
-    int maxhp;
-    bool isShooting;
     int jumpcount;
     Vector3 moveDir;
     Vector3 playerVel;
     float originalSpeed;
+    bool isShooting;
+    int HPoriginal;
 
     // Start is called before the first frame update
     void Start()
     {
         originalSpeed = speed;
-        maxhp = HP;
+        HPoriginal = HP;
+        updatePlayerUI();
     }
 
     // Update is called once per frame
@@ -103,7 +104,9 @@ public class playerController : MonoBehaviour, IDamage
     {
         HP -= amount;
         StartCoroutine(flashdmgScreen());
-        if(HP <= 0) 
+        updatePlayerUI();
+
+        if (HP <= 0) 
         {
             gameManager.instance.stateLose();
         }
@@ -116,5 +119,9 @@ public class playerController : MonoBehaviour, IDamage
         gameManager.instance.playerDamageEffect.SetActive(false);
     }
 
+    void updatePlayerUI()
+    {
+        gameManager.instance.playerHPBar.fillAmount = (float)HP / HPoriginal;
+    }
 
 }

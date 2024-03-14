@@ -10,15 +10,19 @@ using UnityEngine.UI;
 public class gameManager : MonoBehaviour
 {
     public static gameManager instance;
+
     [SerializeField] GameObject menuActive;
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuLose;
     [SerializeField] GameObject menuWin;
     [SerializeField] public GameObject playerDamageEffect;
-    [SerializeField] public Image HPbar;
     [SerializeField] TMP_Text countText;
+
+
+    public Image playerHPBar;
     public GameObject player;
     public playerController PS;
+    
     public bool isPaused;
     float TimeScaleOrig;
     int enemyCount;
@@ -85,7 +89,4 @@ public class gameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         menuActive.SetActive(true);
     }
-
-   
-
 }
