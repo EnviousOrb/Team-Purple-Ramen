@@ -55,7 +55,8 @@ public class enemyAI : MonoBehaviour, IDamage
     {
         isShooting = true;
         // Create a bullet at the shooting position.
-        Instantiate(bullet, shootPos.position, transform.rotation);
+        Vector3 playerDir = gameManager.instance.player.transform.position - transform.position; playerDir.y -= 1;
+        Instantiate(bullet, shootPos.position, Quaternion.LookRotation(playerDir));
         // Wait for a period equal to shootRate before allowing the enemy to shoot again.
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
