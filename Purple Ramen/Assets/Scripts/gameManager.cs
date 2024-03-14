@@ -23,7 +23,7 @@ public class gameManager : MonoBehaviour
     public Image playerHPBar;
     public GameObject player;
     public playerController PS;
-    
+
     public bool isPaused;
     float TimeScaleOrig;
     int enemyCount;
@@ -47,7 +47,7 @@ public class gameManager : MonoBehaviour
             else if (menuActive == menuPause)
                 stateNormal();
         }
-      
+
     }
     public void stateWin()
     {

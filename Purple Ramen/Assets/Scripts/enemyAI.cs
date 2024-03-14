@@ -16,8 +16,9 @@ public class enemyAI : MonoBehaviour, IDamage
     [SerializeField] int turnSpeed;
     [SerializeField] GameObject bullet; // Prefab of the bullet that the enemy shoots.
     [SerializeField] float shootRate; // How often the enemy can shoot.
+    [SerializeField] Material damageMat;
 
-    Color originalColor;
+    Material originalMat;
     bool isShooting; // Tracks whether the enemy is currently shooting.
     bool playerInRange;
     // Start is called before the first frame update
@@ -25,6 +26,7 @@ public class enemyAI : MonoBehaviour, IDamage
     {
         // Register this enemy with the game manager to update the game's goal.
         gameManager.instance.UpdateEnemyCount(1);
+        originalMat = model.material;
         // originalColor = model.material.color;
     }
 
@@ -76,9 +78,9 @@ public class enemyAI : MonoBehaviour, IDamage
     // Coroutine to flash the enemy's color to red when damaged.
     IEnumerator flashRed()
     {
-        model.material.color = Color.red; // Change color to red.
+        model.material = damageMat; // Change color to red.
         yield return new WaitForSeconds(0.1f); // Wait for 0.1 seconds.
-        model.material.color = originalColor; 
+        model.material = originalMat;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -96,5 +98,4 @@ public class enemyAI : MonoBehaviour, IDamage
             playerInRange = false;
         }
     }
-
 }

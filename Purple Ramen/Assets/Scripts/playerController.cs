@@ -40,9 +40,9 @@ public class playerController : MonoBehaviour, IDamage
     {
         if (!gameManager.instance.isPaused)
         {
-            #if UNITY_EDITOR
+#if UNITY_EDITOR
             Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * shootDistance, Color.green);
-            #endif
+#endif
             movement();
 
             if (Input.GetButton("Shoot") && !isShooting)
@@ -106,7 +106,7 @@ public class playerController : MonoBehaviour, IDamage
         StartCoroutine(flashdmgScreen());
         updatePlayerUI();
 
-        if (HP <= 0) 
+        if (HP <= 0)
         {
             gameManager.instance.stateLose();
         }
