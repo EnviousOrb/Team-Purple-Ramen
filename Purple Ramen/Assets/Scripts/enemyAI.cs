@@ -32,17 +32,17 @@ public class enemyAI : MonoBehaviour, IDamage
     void Update()
     {
         // Set the enemy's destination to the player's current position.
-     
 
-        if(playerInRange)
+
+        if (playerInRange)
         {
+
             agent.SetDestination(gameManager.instance.player.transform.position);
-            Quaternion turn = Quaternion.LookRotation(new Vector3(gameManager.instance.player.transform.position.x, transform.position.y, gameManager.instance.player.transform.position.z));
-            transform.rotation=Quaternion.RotateTowards(transform.rotation, turn, Time.deltaTime * turnSpeed);
-           if (!isShooting)
-        {
-            StartCoroutine(shoot());
-        }
+
+            if (!isShooting)
+            {
+                StartCoroutine(shoot());
+            }
 
         }
         // If not already shooting, start the shooting coroutine.
