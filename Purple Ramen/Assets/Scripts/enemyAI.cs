@@ -32,17 +32,17 @@ public class enemyAI : MonoBehaviour, IDamage
     void Update()
     {
         // Set the enemy's destination to the player's current position.
-     
 
-        if(playerInRange)
+
+        if (playerInRange)
         {
             agent.SetDestination(gameManager.instance.player.transform.position);
             Quaternion turn = Quaternion.LookRotation(new Vector3(gameManager.instance.player.transform.position.x, transform.position.y, gameManager.instance.player.transform.position.z));
-            transform.rotation=Quaternion.RotateTowards(transform.rotation, turn, Time.deltaTime * speed);
-           if (!isShooting)
-        {
-            StartCoroutine(shoot());
-        }
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, turn, Time.deltaTime * speed);
+            if (!isShooting)
+            {
+                StartCoroutine(shoot());
+            }
 
         }
         // If not already shooting, start the shooting coroutine.
@@ -78,12 +78,12 @@ public class enemyAI : MonoBehaviour, IDamage
     {
         model.material.color = Color.red; // Change color to red.
         yield return new WaitForSeconds(0.1f); // Wait for 0.1 seconds.
-        model.material.color = originalColor; 
+        model.material.color = originalColor;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
             playerInRange = true;
         }
