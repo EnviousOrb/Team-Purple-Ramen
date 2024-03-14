@@ -959,7 +959,7 @@ MonoBehaviour:
   speed: 10
   turnSpeed: 0
   bullet: {fileID: 7135714001530856501, guid: b179ba7001d400c4086e6c241141eb53, type: 3}
-  shootRate: 2
+  shootRate: 1
 --- !u!95 &4094116572191008513
 Animator:
   serializedVersion: 5
@@ -1022,7 +1022,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 15
+  m_Radius: 10
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &2785386229245704221
 CapsuleCollider:

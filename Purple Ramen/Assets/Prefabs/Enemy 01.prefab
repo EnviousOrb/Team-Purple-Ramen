@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -17328575495055429}
   m_Layer: 0
   m_Name: Enemy 01
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -53,6 +53,7 @@ MonoBehaviour:
   shootPos: {fileID: 0}
   HP: 5
   speed: 10
+  turnSpeed: 0
   bullet: {fileID: 6654342452342103052, guid: 981cb1a764e5eb346aa6494c88ad1c1f, type: 3}
   shootRate: 2
 --- !u!33 &4658433469811294535

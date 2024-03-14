@@ -15,7 +15,8 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuLose;
     [SerializeField] GameObject menuWin;
-    [SerializeField] public GameObject playerDamageEffect;
+    public GameObject playerDamageEffect;
+    public Image HPbar;
     [SerializeField] TMP_Text countText;
 
 
