@@ -1,11 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting.Antlr3.Runtime;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class gameManager : MonoBehaviour
 {
     public static gameManager instance;
+
     [SerializeField] GameObject menuActive;
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuLose;
@@ -15,8 +20,10 @@ public class gameManager : MonoBehaviour
     [SerializeField] TMP_Text countText;
 
 
+    public Image playerHPBar;
     public GameObject player;
     public playerController PS;
+
     public bool isPaused;
     float TimeScaleOrig;
     int enemyCount;
@@ -37,35 +44,29 @@ public class gameManager : MonoBehaviour
         {
             if (menuActive == null)
                 statePaused();
-            else
-                stateResume();
+            else if (menuActive == menuPause)
+                stateNormal();
         }
-        if (enemyCount == 0)
-        {
-            stateWin();
-        }
+
     }
     public void stateWin()
     {
-        Time.timeScale = 0;
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
         menuActive = menuWin;
-        menuActive.SetActive(true);
+        Pause();
     }
     public void statePaused()
     {
-        isPaused = !isPaused;
-        Time.timeScale = 0;
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
         menuActive = menuPause;
-        menuActive.SetActive(true);
+        Pause();
     }
-
-    public void stateResume()
+    public void stateLose()
     {
-        isPaused = !isPaused;
+        menuActive = menuLose;
+        Pause();
+    }
+    public void stateNormal()
+    {
+        isPaused = false;
         Time.timeScale = TimeScaleOrig;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
@@ -75,5 +76,18 @@ public class gameManager : MonoBehaviour
     public void UpdateEnemyCount(int amount)
     {
         enemyCount += amount;
+        countText.text = enemyCount.ToString();
+        if (enemyCount == 0)
+        {
+            stateWin();
+        }
+    }
+    void Pause()
+    {
+        isPaused = true;
+        Time.timeScale = 0;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        menuActive.SetActive(true);
     }
 }

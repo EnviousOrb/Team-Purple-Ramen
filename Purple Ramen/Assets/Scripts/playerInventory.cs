@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
 public class playerInventory : MonoBehaviour
 {
     [Header("General")]
@@ -45,10 +46,8 @@ public class playerInventory : MonoBehaviour
     [SerializeField] Sprite emptySlotSprite;
 
 
-
     private Dictionary<itemType, GameObject> itemSetActive = new Dictionary<itemType, GameObject>() { };
-    private Dictionary<itemType, GameObject>  itemInstantiate = new Dictionary<itemType, GameObject>() { };
-
+    private Dictionary<itemType, GameObject> itemInstantiate = new Dictionary<itemType, GameObject>() { };
 
     void Start()
     {
@@ -60,13 +59,13 @@ public class playerInventory : MonoBehaviour
         itemSetActive.Add(itemType.Tomato, item6);
         itemSetActive.Add(itemType.Watermelon, item7);
 
-        itemSetActive.Add(itemType.Apple, item1Prefab);
-        itemSetActive.Add(itemType.Banana, item2Prefab);
-        itemSetActive.Add(itemType.Carrot, item3Prefab);
-        itemSetActive.Add(itemType.Fish, item4Prefab);
-        itemSetActive.Add(itemType.Mushroom, item5Prefab);
-        itemSetActive.Add(itemType.Tomato, item6Prefab);
-        itemSetActive.Add(itemType.Watermelon, item7Prefab);
+        itemInstantiate.Add(itemType.Apple, item1Prefab);
+        itemInstantiate.Add(itemType.Banana, item2Prefab);
+        itemInstantiate.Add(itemType.Carrot, item3Prefab);
+        itemInstantiate.Add(itemType.Fish, item4Prefab);
+        itemInstantiate.Add(itemType.Mushroom, item5Prefab);
+        itemInstantiate.Add(itemType.Tomato, item6Prefab);
+        itemInstantiate.Add(itemType.Watermelon, item7Prefab);
 
         NewItemSelected();
     }
@@ -99,19 +98,19 @@ public class playerInventory : MonoBehaviour
             pickUpItem.SetActive(true);
         }
         //Item throw
-        if (Input.GetKeyDown(throwItemKey)&& inventoryList.Count > 1)
+        if (Input.GetKeyDown(throwItemKey) && inventoryList.Count > 0)
         {
             Instantiate(itemInstantiate[inventoryList[selectedItem]], position: throwItem.transform.position, new Quaternion());
             inventoryList.RemoveAt(selectedItem);
 
-            if(selectedItem != 0)
+            if (selectedItem != 0)
             {
                 selectedItem -= 1;
             }
             NewItemSelected();
         }
         //UI
-        for(int i = 0; i < 6; i++)
+        for (int i = 0; i < 6; i++)
         {
             if (i < inventoryList.Count)
             {
@@ -123,44 +122,39 @@ public class playerInventory : MonoBehaviour
             }
         }
 
-        if(Input.GetKeyDown(KeyCode.Alpha1) && inventoryList.Count > 0)
+        if (Input.GetKeyDown(KeyCode.Alpha1) && inventoryList.Count > 0)
         {
             selectedItem = 0;
             NewItemSelected();
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha1) && inventoryList.Count >12)
+        else if (Input.GetKeyDown(KeyCode.Alpha2) && inventoryList.Count > 1)
         {
             selectedItem = 1;
             NewItemSelected();
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha1) && inventoryList.Count > 2)
+        else if (Input.GetKeyDown(KeyCode.Alpha3) && inventoryList.Count > 2)
         {
             selectedItem = 2;
             NewItemSelected();
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha1) && inventoryList.Count > 3)
+        else if (Input.GetKeyDown(KeyCode.Alpha4) && inventoryList.Count > 3)
         {
             selectedItem = 3;
             NewItemSelected();
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha1) && inventoryList.Count > 4)
+        else if (Input.GetKeyDown(KeyCode.Alpha5) && inventoryList.Count > 4)
         {
             selectedItem = 4;
             NewItemSelected();
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha1) && inventoryList.Count > 5)
+        else if (Input.GetKeyDown(KeyCode.Alpha6) && inventoryList.Count > 5)
         {
             selectedItem = 5;
             NewItemSelected();
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha1) && inventoryList.Count > 6)
+        else if (Input.GetKeyDown(KeyCode.Alpha7) && inventoryList.Count > 6)
         {
             selectedItem = 6;
-            NewItemSelected();
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha1) && inventoryList.Count > 7)
-        {
-            selectedItem = 7;
             NewItemSelected();
         }
     }
@@ -175,8 +169,15 @@ public class playerInventory : MonoBehaviour
         item6.SetActive(false);
         item7.SetActive(false);
 
-        GameObject selectedItemGameObject = itemSetActive[inventoryList[selectedItem]];
-        selectedItemGameObject.SetActive(true);
+        if (selectedItem >= 0 && selectedItem < inventoryList.Count)
+        {
+            GameObject selectedItemGameObject = itemSetActive[inventoryList[selectedItem]];
+            selectedItemGameObject.SetActive(true);
+        }
+        else
+        {
+            Debug.Log("Invalid item selection");
+        }
     }
 }
 
