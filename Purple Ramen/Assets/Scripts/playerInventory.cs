@@ -11,6 +11,7 @@ public class playerInventory : MonoBehaviour
     [SerializeField] Camera cam;
     [SerializeField] GameObject throwItem;
     [SerializeField] GameObject pickUpItem;
+    [SerializeField] TMPro.TextMeshProUGUI pickupText;
 
     [Space(20)]
     [Header("Keys")]
@@ -81,6 +82,7 @@ public class playerInventory : MonoBehaviour
             if (item != null)
             {
                 pickUpItem.SetActive(true);
+                pickupText.text = "Press 'E' to pick up";
                 if (Input.GetKey(pickItemKey))
                 {
                     inventoryList.Add(hitinfo.collider.GetComponent<ItemPickable>().itemScriptableObject.itemType);
@@ -90,12 +92,13 @@ public class playerInventory : MonoBehaviour
             else
             {
                 pickUpItem.SetActive(false);
-
+                pickupText.text = "";
             }
         }
         else
         {
             pickUpItem.SetActive(true);
+            pickupText.text = "";
         }
         //Item throw
         if (Input.GetKeyDown(throwItemKey) && inventoryList.Count > 0)
@@ -110,7 +113,7 @@ public class playerInventory : MonoBehaviour
             NewItemSelected();
         }
         //UI
-        for (int i = 0; i < 6; i++)
+        for (int i = 0; i < inventorySlotImage.Length; i++)
         {
             if (i < inventoryList.Count)
             {
