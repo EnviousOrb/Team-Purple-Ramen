@@ -4745,6 +4745,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5835833071648471901, guid: 5ad35ef7bdc475b4a85f1a63cbc06d46, type: 3}
+      propertyPath: roamDist
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5835833071648471901, guid: 5ad35ef7bdc475b4a85f1a63cbc06d46, type: 3}
+      propertyPath: viewCone
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 5835833071648471901, guid: 5ad35ef7bdc475b4a85f1a63cbc06d46, type: 3}
+      propertyPath: roamPauseTime
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 6741884893250173928, guid: 5ad35ef7bdc475b4a85f1a63cbc06d46, type: 3}
       propertyPath: m_Radius
       value: 10
@@ -6356,8 +6368,20 @@ PrefabInstance:
     m_TransformParent: {fileID: 1466765416}
     m_Modifications:
     - target: {fileID: 2099840910313053543, guid: 5a4c4d3466242da408545ac40ec81404, type: 3}
+      propertyPath: roamDist
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2099840910313053543, guid: 5a4c4d3466242da408545ac40ec81404, type: 3}
+      propertyPath: viewCone
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 2099840910313053543, guid: 5a4c4d3466242da408545ac40ec81404, type: 3}
       propertyPath: shootRate
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2099840910313053543, guid: 5a4c4d3466242da408545ac40ec81404, type: 3}
+      propertyPath: roamPauseTime
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4916456958295779226, guid: 5a4c4d3466242da408545ac40ec81404, type: 3}
       propertyPath: m_Name
