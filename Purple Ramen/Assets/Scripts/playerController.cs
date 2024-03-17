@@ -76,6 +76,15 @@ public class playerController : MonoBehaviour, IDamage
             playerVel.y = jumpSpeed;
         }
 
+        if(Input.GetButtonDown("Crouch"))
+        {
+            crouch();
+        }
+        else if(Input.GetButtonUp("Crouch"))
+        {
+            unCrouch();
+        }
+
         playerVel.y += gravity * Time.deltaTime;
         controller.Move(playerVel * Time.deltaTime);
     }
@@ -122,5 +131,16 @@ public class playerController : MonoBehaviour, IDamage
     void updatePlayerUI()
     {
         gameManager.instance.HPbar.fillAmount = (float)HP / HPoriginal;
+    }
+
+    void crouch()
+    {
+        controller.height /= 2;
+
+    }
+
+    void unCrouch()
+    {
+        controller.height *= 2;
     }
 }
