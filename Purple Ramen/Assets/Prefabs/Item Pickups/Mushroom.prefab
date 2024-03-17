@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3323716255027082935}
   - component: {fileID: 7152995492745834779}
   - component: {fileID: 3160630515439062858}
+  - component: {fileID: -9075477183651105321}
   m_Layer: 0
   m_Name: Mushroom
   m_TagString: Untagged
@@ -120,6 +121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemData: {fileID: 11400000, guid: e6b32b5b464d84e4aad5411a49cd4f06, type: 2}
+  forceAmount: 10
 --- !u!114 &3160630515439062858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,3 +135,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemScriptableObject: {fileID: 11400000, guid: e6b32b5b464d84e4aad5411a49cd4f06, type: 2}
+--- !u!54 &-9075477183651105321
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6018852261703711327}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

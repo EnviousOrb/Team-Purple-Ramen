@@ -105,7 +105,6 @@ public class playerInventory : MonoBehaviour
         {
             Instantiate(itemInstantiate[inventoryList[selectedItem]], position: throwItem.transform.position, new Quaternion());
             inventoryList.RemoveAt(selectedItem);
-
             if (selectedItem != 0)
             {
                 selectedItem -= 1;
