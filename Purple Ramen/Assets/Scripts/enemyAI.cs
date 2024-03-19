@@ -13,7 +13,6 @@ public class enemyAI : MonoBehaviour, IDamage
 
     [SerializeField] int HP; // Health points of the enemy.
     [SerializeField] int speed; // Movement speed of the enemy.
-    [SerializeField] int turnSpeed;
     [SerializeField] GameObject bullet; // Prefab of the bullet that the enemy shoots.
     [SerializeField] float shootRate; // How often the enemy can shoot.
     [SerializeField] Material damageMat;
@@ -24,13 +23,15 @@ public class enemyAI : MonoBehaviour, IDamage
     //Variables for canSeePlayer
     [SerializeField] Transform headPos;
     [SerializeField] int viewCone;
+    [SerializeField] int faceTargetSpeed;
+    [SerializeField] float animatedSpeedTrans;
     float angleToPlayer;
     Vector3 playerDir;
 
 
     //Variables for roam
     bool destinationChosen;
-    private float stoppingDistOrig;
+    float stoppingDistOrig;
     Vector3 startingPos;
     [SerializeField] int roamDist;
     [SerializeField] int roamPauseTime;
@@ -44,9 +45,10 @@ public class enemyAI : MonoBehaviour, IDamage
         // Register this enemy with the game manager to update the game's goal.
         gameManager.instance.UpdateEnemyCount(1);
         originalMat = model.material;
-        agent.stoppingDistance = stoppingDist;
-        agent.speed = speed;
-        // originalColor = model.material.color;
+        stoppingDistOrig = agent.stoppingDistance;
+        agent.stoppingDistance = 0;
+        //agent.speed = speed;
+        
     }
 
     // Update is called once per frame
@@ -78,13 +80,13 @@ public class enemyAI : MonoBehaviour, IDamage
 
             Vector3 randomPos = Random.insideUnitSphere * roamDist;
             randomPos += startingPos;
+
             NavMeshHit hit;
             NavMesh.SamplePosition(randomPos, out hit, roamDist, 1);
             agent.SetDestination(hit.position);
 
             destinationChosen = false;
         }
-          
     }
 
     // Coroutine to handle shooting.
@@ -99,12 +101,18 @@ public class enemyAI : MonoBehaviour, IDamage
         isShooting = false;
     }
 
+    //public void createBullet()
+    //{
+    //    Instantiate(bullet, shootPos.position, Quaternion.LookRotation(playerDir));
+    //}
+
     // This method is called when the enemy takes damage.
     public void takeDamage(int amount)
     {
         HP -= amount; // Decrease HP by the damage amount.
         StartCoroutine(flashRed()); // Flash the model red to indicate damage.
 
+        agent.SetDestination(gameManager.instance.player.transform.position);
         // If HP drops to 0 or below, update the game goal and destroy the enemy game object.
         if (HP <= 0)
         {
@@ -134,6 +142,7 @@ public class enemyAI : MonoBehaviour, IDamage
         if (other.CompareTag("Player"))
         {
             playerInRange = false;
+            agent.stoppingDistance = 0;
         }
     }
 
@@ -141,18 +150,20 @@ public class enemyAI : MonoBehaviour, IDamage
     {
         playerDir = gameManager.instance.player.transform.position - headPos.position;
         angleToPlayer = Vector3.Angle(playerDir, transform.forward);
-        Debug.Log(angleToPlayer);
-        Debug.DrawRay(headPos.position, playerDir);
+        //Debug.Log(angleToPlayer);
+        Debug.DrawRay(headPos.position, playerDir, Color.yellow);
 
         RaycastHit hit;
+
         if(Physics.Raycast(headPos.position, playerDir, out hit))
         {
-            Debug.Log(hit.collider);
+            Debug.Log(hit.collider.name);
 
             if(hit.collider.CompareTag("Player") && angleToPlayer <= viewCone)
             {
-                agent.SetDestination(gameManager.instance.player.transform.position);
                 agent.stoppingDistance = stoppingDistOrig;
+                agent.SetDestination(gameManager.instance.player.transform.position);
+                
                 if (!isShooting)
                 {
                     StartCoroutine(shoot());
@@ -173,6 +184,6 @@ public class enemyAI : MonoBehaviour, IDamage
     void faceTarget()
     {
         Quaternion ROT= Quaternion.LookRotation(new Vector3(playerDir.x, transform.position.y, playerDir.z));
-        transform.rotation=Quaternion.Lerp(transform.rotation,ROT, Time.deltaTime);
+        transform.rotation=Quaternion.Lerp(transform.rotation,ROT, Time.deltaTime * faceTargetSpeed);
     }
 }

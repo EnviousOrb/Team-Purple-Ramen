@@ -233,11 +233,16 @@ MonoBehaviour:
   shootPos: {fileID: 7094881251577643639}
   HP: 5
   speed: 5
-  turnSpeed: 2
   bullet: {fileID: 6654342452342103052, guid: 981cb1a764e5eb346aa6494c88ad1c1f, type: 3}
   shootRate: 2
   damageMat: {fileID: 2100000, guid: 61a868ed95d3914428f24f0450c95593, type: 2}
   stoppingDist: 1
+  headPos: {fileID: 2331417670710559228}
+  viewCone: 90
+  faceTargetSpeed: 0
+  animatedSpeedTrans: 0
+  roamDist: 15
+  roamPauseTime: 5
 --- !u!195 &8702597916659829884
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -303,7 +308,7 @@ CapsuleCollider:
   m_Radius: 0.5
   m_Height: 0.5
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1 &3586243723454539905
 GameObject:
   m_ObjectHideFlags: 0
