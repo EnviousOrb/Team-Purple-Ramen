@@ -98,6 +98,7 @@ public class enemyAI : MonoBehaviour, IDamage
     IEnumerator shoot()
     {
         isShooting = true;
+        animator.SetTrigger("Shoot");
         // Create a bullet at the shooting position.
         Vector3 playerDir = gameManager.instance.player.transform.position - transform.position; playerDir.y -= 1;
         Instantiate(bullet, shootPos.position, Quaternion.LookRotation(playerDir));
