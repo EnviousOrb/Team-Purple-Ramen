@@ -6,8 +6,14 @@ using UnityEngine;
 public class ItemData : ScriptableObject
 {
     [Header("Properties")]
-    public itemType itemType;
+    public GameObject model;
     public Sprite itemSprite;
-}
 
-public enum itemType {Apple, Banana, Carrot, Fish, Mushroom, Tomato, Watermelon};
+    public ItemData Clone()
+    {
+        ItemData clone = ScriptableObject.CreateInstance<ItemData>();
+        clone.model = this.model;
+        clone.itemSprite = this.itemSprite;
+        return clone;
+    }
+}

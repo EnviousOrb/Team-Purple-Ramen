@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class playerController : MonoBehaviour, IDamage
 {
@@ -20,12 +21,20 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] int shootDistance;
     [SerializeField] float shootRate;
 
+    [HeaderAttribute("-----Item Inventory-----")]
+    [SerializeField] public List<ItemData> ItemList = new List<ItemData>();
+    [SerializeField] public List<Image> inventorySlotImage = new List<Image>();
+    [SerializeField] public List<Image> inventoryBackgroundImage = new List<Image>();
+    [SerializeField] Sprite emptySlotSprite;
+    [SerializeField] GameObject ItemModel;
+
     int jumpcount;
     Vector3 moveDir;
     Vector3 playerVel;
     float originalSpeed;
     bool isShooting;
     int HPoriginal;
+    int selectedItem;
 
     // Start is called before the first frame update
     void Start()
@@ -40,6 +49,7 @@ public class playerController : MonoBehaviour, IDamage
     {
         if (!gameManager.instance.isPaused)
         {
+            selectItem();
 #if UNITY_EDITOR
             Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * shootDistance, Color.green);
 #endif
@@ -142,5 +152,44 @@ public class playerController : MonoBehaviour, IDamage
     void unCrouch()
     {
         controller.height *= 2;
+    }
+
+    public void GetItem(ItemData Item)
+    {
+        ItemList.Add(Item);
+        // Update the inventory slot images
+        for (int i = 0; i < inventorySlotImage.Count; i++)
+        {
+            if (i < ItemList.Count)
+            {
+                inventorySlotImage[i].sprite = ItemList[i].itemSprite;
+                }
+            else
+            {
+                inventorySlotImage[i].sprite = emptySlotSprite;
+            }
+        }
+    }
+
+    void selectItem()
+    {
+        for (int i = 0; i < 7; i++)
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1 + i) && ItemList.Count > i)
+            {
+                selectedItem = i;
+                changeItem();
+                break;
+            }
+        }
+    }
+
+    void changeItem()
+    {
+        if (selectedItem >= 0 && selectedItem < ItemList.Count)
+        {
+            ItemModel = ItemList[selectedItem].model;
+            Debug.Log("Item changed to " + ItemModel);
+        }
     }
 }
