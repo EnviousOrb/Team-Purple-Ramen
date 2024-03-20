@@ -21,6 +21,6 @@ public class Chest : MonoBehaviour
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         playerController PC = gameManager.instance.PS;
         ItemData newItem = randomItem.Clone();
-        PC.ItemList.Add(newItem);
+        PC.GetItem(newItem);
     }
 }
