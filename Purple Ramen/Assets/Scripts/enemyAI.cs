@@ -18,7 +18,8 @@ public class enemyAI : MonoBehaviour, IDamage
     [SerializeField] Material damageMat;
     [SerializeField] int stoppingDist;
 
-
+    [SerializeField] Animator animator;
+    [SerializeField] int animSpeedTrans;
 
     //Variables for canSeePlayer
     [SerializeField] Transform headPos;
@@ -54,6 +55,10 @@ public class enemyAI : MonoBehaviour, IDamage
     // Update is called once per frame
     void Update()
     {
+
+        float animSpeed = agent.velocity.normalized.magnitude;
+        animator.SetFloat("Speed", Mathf.Lerp(animator.GetFloat("Speed"), animSpeed, Time.deltaTime * animSpeedTrans));
+
         // Set the enemy's destination to the player's current position.
 
 
