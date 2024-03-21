@@ -61,7 +61,14 @@ public class playerController : MonoBehaviour, IDamage
             }
         }
     }
-
+    public void spawnPlayer()
+    {
+        HP = HPoriginal;
+        updatePlayerUI();
+        controller.enabled = false;
+        transform.position = gameManager.instance.playerSpawnPos.transform.position;
+        controller.enabled = true;
+    }
     void movement()
     {
         if (Input.GetButton("Fire3"))

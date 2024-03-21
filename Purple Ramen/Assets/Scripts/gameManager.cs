@@ -15,11 +15,12 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuLose;
     [SerializeField] GameObject menuWin;
+     [SerializeField] public GameObject catMenu;
     public GameObject playerDamageEffect;
     public Image HPbar;
     [SerializeField] TMP_Text countText;
 
-
+    public GameObject playerSpawnPos;
     public Image playerHPBar;
     public GameObject player;
     public playerController PS;
@@ -35,6 +36,7 @@ public class gameManager : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         PS = player.GetComponent<playerController>();
         TimeScaleOrig = Time.timeScale;
+        playerSpawnPos = GameObject.FindWithTag("Player Spawn Pos");
     }
 
     // Update is called once per frame
