@@ -6,11 +6,15 @@ using UnityEngine;
 public class Chest : MonoBehaviour
 {
     [SerializeField] List<ItemData> chestList;
+    [SerializeField] AudioClip[] chestAudio;
     private Animator animate;
+    private AudioSource AS;
     private void Awake()
     {
         animate = GetComponent<Animator>();
         animate.SetBool("isInRange",false);
+        AS = GetComponent<AudioSource>();
+        StartCoroutine(AudioLoop());
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -24,6 +28,18 @@ public class Chest : MonoBehaviour
     {
         GiveItem();
         Destroy(gameObject);
+    }
+
+    private IEnumerator AudioLoop()
+    {
+        int clipIndex = 0;
+        while (true)
+        {
+            AS.clip = chestAudio[clipIndex];
+            AS.Play();
+            yield return new WaitForSeconds(chestAudio[clipIndex].length);
+            clipIndex = (clipIndex + 1) % chestAudio.Length;
+        }
     }
 
     public void GiveItem()
