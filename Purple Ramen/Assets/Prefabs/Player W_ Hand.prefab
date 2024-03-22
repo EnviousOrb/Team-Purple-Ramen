@@ -139,7 +139,8 @@ Transform:
   m_LocalPosition: {x: 0.5, y: 0.5, z: 0.5}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 4586823274549412196}
   m_Father: {fileID: 6526617481421063295}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &3642427678062738094
@@ -213,6 +214,37 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &2727965709462608149
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4586823274549412196}
+  m_Layer: 0
+  m_Name: WeaponPOS
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4586823274549412196
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2727965709462608149}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5962400209859259548}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5705932118580288315
 GameObject:
   m_ObjectHideFlags: 0
@@ -289,7 +321,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   emptySlotSprite: {fileID: 0}
-  ItemModel: {fileID: 0}
   WeaponList:
   - {fileID: 11400000, guid: 2d82750652d0f144e968a3c377912ad2, type: 2}
   - {fileID: 11400000, guid: 132e485d9d955dd48bf7a3c5f73ed0a7, type: 2}
