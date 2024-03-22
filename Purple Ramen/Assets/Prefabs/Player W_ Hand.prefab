@@ -264,20 +264,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 8571139137759410687}
-  HP: 5
+  weapon: {fileID: 0}
+  HP: 10
   speed: 5
   jumps: 2
   jumpSpeed: 12
   gravity: -25
   sprintMultiplier: 3
-  shootDamage: 1
-  shootDistance: 50
-  shootRate: 0.25
   ItemList: []
-  inventorySlotImage: []
-  inventoryBackgroundImage: []
+  inventorySlotImage:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  inventoryBackgroundImage:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   emptySlotSprite: {fileID: 0}
   ItemModel: {fileID: 0}
+  WeaponList:
+  - {fileID: 11400000, guid: 2d82750652d0f144e968a3c377912ad2, type: 2}
+  - {fileID: 11400000, guid: 132e485d9d955dd48bf7a3c5f73ed0a7, type: 2}
 --- !u!143 &8571139137759410687
 CharacterController:
   m_ObjectHideFlags: 0

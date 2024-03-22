@@ -7,6 +7,7 @@ public class playerController : MonoBehaviour, IDamage
 {
     [HeaderAttribute("-----Components-----")]
     [SerializeField] CharacterController controller;
+    [SerializeField] weaponController weapon;
 
     [HeaderAttribute("-----Player Stats-----")]
     [Range(0, 10)][SerializeField] int HP;
@@ -16,17 +17,15 @@ public class playerController : MonoBehaviour, IDamage
     [Range(-15, -35)][SerializeField] int gravity;
     [SerializeField] float sprintMultiplier;
 
-    [HeaderAttribute("-----Gun Stats-----")]
-    [SerializeField] int shootDamage;
-    [SerializeField] int shootDistance;
-    [SerializeField] float shootRate;
-
     [HeaderAttribute("-----Item Inventory-----")]
     [SerializeField] public List<ItemData> ItemList = new List<ItemData>();
     [SerializeField] public List<Image> inventorySlotImage = new List<Image>();
     [SerializeField] public List<Image> inventoryBackgroundImage = new List<Image>();
     [SerializeField] Sprite emptySlotSprite;
-    [SerializeField] GameObject ItemModel;
+
+    [HeaderAttribute("-----Weapon Inventory-----")]
+    [SerializeField] public WeaponData[] WeaponList;
+
 
     int jumpcount;
     Vector3 moveDir;
@@ -35,6 +34,8 @@ public class playerController : MonoBehaviour, IDamage
     bool isShooting;
     int HPoriginal;
     int selectedItem;
+    int currentWeaponIndex;
+    int rayDistance;
 
     // Start is called before the first frame update
     void Start()
@@ -42,6 +43,11 @@ public class playerController : MonoBehaviour, IDamage
         originalSpeed = speed;
         HPoriginal = HP;
         updatePlayerUI();
+
+        if (WeaponList.Length > 0)
+        {
+            weapon = WeaponList[0].weaponModel.GetComponent<weaponController>();
+        }
     }
 
     // Update is called once per frame
@@ -51,13 +57,21 @@ public class playerController : MonoBehaviour, IDamage
         {
             selectItem();
 #if UNITY_EDITOR
-            Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * shootDistance, Color.green);
+            Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * rayDistance, Color.green);
 #endif
             movement();
 
+            changeWeapon();
             if (Input.GetButton("Shoot") && !isShooting)
             {
-                StartCoroutine(shoot());
+                if (WeaponList[currentWeaponIndex].Tag == "Melee")
+                {
+                    StartCoroutine(weapon.SwordAttack());
+                }
+                else if (WeaponList[currentWeaponIndex].Tag == "Ranged")
+                {
+                    StartCoroutine(weapon.RangedAttack());
+                }
             }
         }
     }
@@ -104,26 +118,6 @@ public class playerController : MonoBehaviour, IDamage
 
         playerVel.y += gravity * Time.deltaTime;
         controller.Move(playerVel * Time.deltaTime);
-    }
-
-    IEnumerator shoot()
-    {
-        isShooting = true;
-
-        RaycastHit hit;
-        if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootDistance))
-        {
-            Debug.Log(hit.collider.name);
-            IDamage dmg = hit.collider.GetComponent<IDamage>();
-
-            if (hit.transform != transform && dmg != null)
-            {
-                dmg.takeDamage(shootDamage);
-            }
-        }
-
-        yield return new WaitForSeconds(shootRate);
-        isShooting = false;
     }
 
     public void takeDamage(int amount)
@@ -185,18 +179,17 @@ public class playerController : MonoBehaviour, IDamage
             if (Input.GetKeyDown(KeyCode.Alpha1 + i) && ItemList.Count > i)
             {
                 selectedItem = i;
-                changeItem();
                 break;
             }
         }
     }
 
-    void changeItem()
+    void changeWeapon()
     {
-        if (selectedItem >= 0 && selectedItem < ItemList.Count)
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
-            ItemModel = ItemList[selectedItem].model;
-            Debug.Log("Item changed to " + ItemModel);
+            currentWeaponIndex = (currentWeaponIndex + 1) % WeaponList.Length;
+            weapon = WeaponList[currentWeaponIndex].weaponModel.GetComponent<weaponController>();
         }
     }
 }

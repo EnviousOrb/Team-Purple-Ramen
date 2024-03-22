@@ -6,21 +6,32 @@ using UnityEngine;
 public class Chest : MonoBehaviour
 {
     [SerializeField] List<ItemData> chestList;
+    private Animator animate;
+    private void Awake()
+    {
+        animate = GetComponent<Animator>();
+        animate.SetBool("isInRange",false);
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            GiveItem();
-            Destroy(gameObject);
+            animate.SetBool("isInRange",true);
         }
     }
 
-    private void GiveItem()
+    public void DeleteChest()
     {
+        GiveItem();
+        Destroy(gameObject);
+    }
+
+    public void GiveItem()
+    {
+        // Give the item
         ItemData randomItem = chestList[Random.Range(0, chestList.Count)];
         GameObject player = GameObject.FindGameObjectWithTag("Player");
-        playerController PC = gameManager.instance.PS;
         ItemData newItem = randomItem.Clone();
-        PC.GetItem(newItem);
+        gameManager.instance.PS.GetItem(newItem);
     }
 }
