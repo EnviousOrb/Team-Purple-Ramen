@@ -26,15 +26,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400022, guid: 053a4ed4c00048f48a8055551095d11e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.7751646
+      value: 30.5
       objectReference: {fileID: 0}
     - target: {fileID: 400022, guid: 053a4ed4c00048f48a8055551095d11e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0000009536743
+      value: -0.0000019073486
       objectReference: {fileID: 0}
     - target: {fileID: 400022, guid: 053a4ed4c00048f48a8055551095d11e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.5649607
+      value: -4.25
       objectReference: {fileID: 0}
     - target: {fileID: 400022, guid: 053a4ed4c00048f48a8055551095d11e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -75,6 +75,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 100022, guid: 053a4ed4c00048f48a8055551095d11e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8970386219902587944}
+    - targetCorrespondingSourceObject: {fileID: 100022, guid: 053a4ed4c00048f48a8055551095d11e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6924541930024444264}
   m_SourcePrefab: {fileID: 100100000, guid: 053a4ed4c00048f48a8055551095d11e, type: 3}
 --- !u!1 &375361110523410214 stripped
 GameObject:
@@ -100,5 +103,17 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.16
+  m_Radius: 0.11
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6924541930024444264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 375361110523410214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d3290f26209d324cafbd753a90a86ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 3146190083327601501}
   - component: {fileID: 1586278001488478621}
   - component: {fileID: 9145475688714297068}
+  - component: {fileID: 2930686867536061832}
+  - component: {fileID: 4422207618920997917}
   m_Layer: 0
   m_Name: Bonfire_B_Big_Fire
   m_TagString: Untagged
@@ -4844,6 +4846,41 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &2930686867536061832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6236646709994630345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34d947c676c181447aee5b071f48bcb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rewardItem: {fileID: 11400000, guid: 9e1327838abd33344afd6b2a1714bf2e, type: 2}
+  itemListCheck: []
+--- !u!135 &4422207618920997917
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6236646709994630345}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 7.94
+  m_Center: {x: 0, y: 0, z: 2.55}
 --- !u!1001 &2215167672980184235
 PrefabInstance:
   m_ObjectHideFlags: 0
