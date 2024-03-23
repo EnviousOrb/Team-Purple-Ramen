@@ -21,7 +21,6 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] public List<ItemData> ItemList = new List<ItemData>();
     [SerializeField] public List<Image> inventorySlotImage = new List<Image>();
     [SerializeField] public List<Image> inventoryBackgroundImage = new List<Image>();
-    [SerializeField] Sprite emptySlotSprite;
 
     [HeaderAttribute("-----Weapon Inventory-----")]
     [SerializeField] public WeaponData[] WeaponList;
@@ -164,10 +163,10 @@ public class playerController : MonoBehaviour, IDamage
             if (i < ItemList.Count)
             {
                 inventorySlotImage[i].sprite = ItemList[i].itemSprite;
-                }
+            }
             else
             {
-                inventorySlotImage[i].sprite = emptySlotSprite;
+                inventorySlotImage[i].sprite = null;
             }
         }
     }

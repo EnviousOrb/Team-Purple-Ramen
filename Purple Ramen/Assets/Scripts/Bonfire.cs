@@ -18,12 +18,11 @@ public class Bonfire : MonoBehaviour
     }
     IEnumerator useBonfire()
     {
-        if (gameManager.instance.PS.ItemList.All(item => itemListCheck.Contains(item)))
+        if (itemListCheck.All(item => gameManager.instance.PS.ItemList.Contains(item)))
         {
             gameManager.instance.PS.ItemList.Clear();
-            gameManager.instance.PS.ItemList.Add(rewardItem);
+            gameManager.instance.PS.GetItem(rewardItem);
 
-            Debug.Log("You recieved: " + rewardItem.name);
             gameManager.instance.chestMenuGood.SetActive(true);
             yield return new WaitForSeconds(2f);
             gameManager.instance.chestMenuGood.SetActive(false);
@@ -31,16 +30,9 @@ public class Bonfire : MonoBehaviour
         }
         else
         {
-            Debug.Log("You don't have the required items.");
             gameManager.instance.chestMenuBad.SetActive(true);
             yield return new WaitForSeconds(2f);
             gameManager.instance.chestMenuBad.SetActive(false);
-
-
-
-
         }
     }
-
-
 }
