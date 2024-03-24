@@ -44,10 +44,21 @@ public class Chest : MonoBehaviour
 
     public void GiveItem()
     {
-        // Give the item
-        ItemData randomItem = chestList[Random.Range(0, chestList.Count)];
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        ItemData newItem = randomItem.Clone();
-        gameManager.instance.PS.GetItem(newItem);
+        // Directly use an item from the list without cloning
+        if (chestList.Count > 0)
+        {
+            List<ItemData> itemsNotOwned = chestList.FindAll(item => !gameManager.instance.PS.ItemList.Contains(item));
+            if (itemsNotOwned.Count > 0)
+            {
+                ItemData randomItem = itemsNotOwned[Random.Range(0, itemsNotOwned.Count)];
+                Debug.Log($"Awarding item: {randomItem.name}");
+                gameManager.instance.PS.GetItem(randomItem);
+            }
+            else
+            {
+                Debug.Log("Player already has all items.");
+            }
+        }
     }
+
 }
