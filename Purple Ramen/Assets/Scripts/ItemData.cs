@@ -8,12 +8,4 @@ public class ItemData : ScriptableObject
     [Header("Properties")]
     public GameObject model;
     public Sprite itemSprite;
-
-    public ItemData Clone()
-    {
-        ItemData clone = ScriptableObject.CreateInstance<ItemData>();
-        clone.model = this.model;
-        clone.itemSprite = this.itemSprite;
-        return clone;
-    }
 }

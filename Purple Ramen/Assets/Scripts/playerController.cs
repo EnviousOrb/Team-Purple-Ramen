@@ -23,6 +23,7 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] public List<ItemData> ItemList = new List<ItemData>(); // The list of items the player has.
     [SerializeField] public List<Image> inventorySlotImage = new List<Image>(); // UI images for inventory slots.
     [SerializeField] public List<Image> inventoryBackgroundImage = new List<Image>(); // UI images for inventory backgrounds.
+    [SerializeField] public Image indicator; // An indicator to show the player the current selected item
 
     //[HeaderAttribute("-----Weapon Inventory-----")]
     //[SerializeField] public WeaponData[] WeaponList; // Array of weapons available to the player.
@@ -45,7 +46,7 @@ public class playerController : MonoBehaviour, IDamage
     int selectedItem; // The index of the currently selected item.
     //int currentWeaponIndex; // The index of the currently equipped weapon.
     int rayDistance; // Distance for the raycast debug line.
-    
+
     // bools
     bool isShooting; // Flag to indicate if the player is currently shooting.
     bool isMeleeing; // Flag to indicate if the player is currently meleeing.
@@ -250,6 +251,7 @@ public class playerController : MonoBehaviour, IDamage
             if (Input.GetKeyDown(KeyCode.Alpha1 + i) && ItemList.Count > i)
             {
                 selectedItem = i; // Update the selected item index.
+                indicator.transform.position = inventorySlotImage[i].transform.position;
                 break;
             }
         }

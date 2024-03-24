@@ -9860,6 +9860,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 19aeab7c10b681946aff0a284d4d6994, type: 2}
   - {fileID: 11400000, guid: f0b5b7835099a8c41b2e100ae657fdf2, type: 2}
   - {fileID: 11400000, guid: e55479678bd143146848ccae2c7a1d0b, type: 2}
+  chestAudio:
+  - {fileID: 8300000, guid: bb5fe97048b5f844da1231d39f5ea3fa, type: 3}
+  - {fileID: 8300000, guid: e1ad9803bb50ca4418093584404ca5e6, type: 3}
+  - {fileID: 8300000, guid: d2400e0e202d38b459fc6737fda0d0cf, type: 3}
 --- !u!95 &7195094352904387238
 Animator:
   serializedVersion: 5
@@ -9933,7 +9937,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: bb5fe97048b5f844da1231d39f5ea3fa, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
