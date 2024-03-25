@@ -1743,10 +1743,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8102624940177304157, guid: bc31370304ee39047a4727c0608e4327, type: 3}
-      propertyPath: indicator
-      value: 
-      objectReference: {fileID: 812042363}
-    - target: {fileID: 8102624940177304157, guid: bc31370304ee39047a4727c0608e4327, type: 3}
       propertyPath: inventorySlotImage.Array.data[0]
       value: 
       objectReference: {fileID: 1125332920}
@@ -1783,17 +1779,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc31370304ee39047a4727c0608e4327, type: 3}
---- !u!114 &812042363 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4007600843076223281, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
-  m_PrefabInstance: {fileID: 2084769243}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &828994914
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5743,71 +5728,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1031330346068416777, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
-      propertyPath: m_text
-      value: You recieved... Baked Salmon with Potatoes!
-      objectReference: {fileID: 0}
-    - target: {fileID: 1031330346068416777, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
-      propertyPath: m_fontSize
-      value: 22
-      objectReference: {fileID: 0}
-    - target: {fileID: 1031330346068416777, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
-      propertyPath: m_margin.w
-      value: 33.14019
-      objectReference: {fileID: 0}
-    - target: {fileID: 1031330346068416777, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
-      propertyPath: m_margin.z
-      value: -125.563156
-      objectReference: {fileID: 0}
-    - target: {fileID: 1031330346068416777, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
-      propertyPath: m_fontSizeBase
-      value: 22
+    - target: {fileID: 196295510919095913, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2681700440528555825, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
-    - target: {fileID: 4073923195060205963, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
+    - target: {fileID: 3521519785380364224, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
       propertyPath: m_IsActive
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4557513588942351914, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
-      propertyPath: m_text
-      value: 'You don''t have the required items.
-
-'
-      objectReference: {fileID: 0}
-    - target: {fileID: 4557513588942351914, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
-      propertyPath: m_fontSize
-      value: 24
-      objectReference: {fileID: 0}
-    - target: {fileID: 4557513588942351914, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
-      propertyPath: m_margin.w
-      value: 43.937153
-      objectReference: {fileID: 0}
-    - target: {fileID: 4557513588942351914, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
-      propertyPath: m_margin.z
-      value: -26.62259
-      objectReference: {fileID: 0}
-    - target: {fileID: 4557513588942351914, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
-      propertyPath: m_fontSizeBase
-      value: 24
-      objectReference: {fileID: 0}
-    - target: {fileID: 4643839964121613088, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
-      propertyPath: m_Name
-      value: Bonfire Words
-      objectReference: {fileID: 0}
-    - target: {fileID: 5462150184091721331, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
-      propertyPath: m_Name
-      value: Bonfire Words
-      objectReference: {fileID: 0}
-    - target: {fileID: 5462150184091721331, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6308906071822312906, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -69.1
       objectReference: {fileID: 0}
     - target: {fileID: 7206692720888251142, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
       propertyPath: m_Pivot.x
@@ -5893,21 +5824,9 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7732355693011978283, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7732355693011978283, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -26.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7732355693011978283, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -63.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 8010255057196274359, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
+    - target: {fileID: 8644117617085074006, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
