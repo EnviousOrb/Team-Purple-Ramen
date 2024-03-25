@@ -77,15 +77,6 @@ public class gameManager : MonoBehaviour
         menuActive.SetActive(false);
         menuActive = null;
     }
-    public void UpdateEnemyCount(int amount)
-    {
-        enemyCount += amount;
-        countText.text = enemyCount.ToString();
-        if (enemyCount == 0)
-        {
-            stateWin();
-        }
-    }
     void Pause()
     {
         isPaused = true;
