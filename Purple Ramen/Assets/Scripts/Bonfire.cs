@@ -25,8 +25,7 @@ public class Bonfire : MonoBehaviour
             }
 
             player.GetItem(recipe.resultItem); // Add the reward item
-            //UIManager.instance.UpdateInventoryUI(itemList);
-            //UpdateInventoryUI(); // Ensure the inventory UI reflects these changes
+            UIManager.instance.UpdateInventoryUI(player.itemList);
 
             gameManager.instance.chestMenuGood.SetActive(true);
             yield return new WaitForSeconds(2f);
@@ -39,5 +38,6 @@ public class Bonfire : MonoBehaviour
             gameManager.instance.chestMenuBad.SetActive(false);
         }
     }
+
 }
 
