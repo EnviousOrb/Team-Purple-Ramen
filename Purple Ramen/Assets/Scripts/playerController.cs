@@ -213,18 +213,4 @@ public class playerController : MonoBehaviour, IDamage
         // Refresh the UI to reflect the new inventory state
         UIManager.instance.UpdateInventoryUI(itemList);
     }
-
-   //Handles input for item selection.
-   /*void selectItem()
-   {
-       for (int i = 0; i < 7; i++) // Listen for number key presses to select items.
-       {
-           if (Input.GetKeyDown(KeyCode.Alpha1 + i) && itemList.Count > i)
-           {
-               selectedItem = i; // Update the selected item index.
-               indicator.transform.position = UIManager.instance.inventoryUISlotLocation[i].transform.position;
-               break;
-           }
-       }
-   }*/
 }   

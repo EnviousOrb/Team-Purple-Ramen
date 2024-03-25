@@ -2111,7 +2111,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -19.046, y: -294}
+  m_AnchoredPosition: {x: 5, y: -323}
   m_SizeDelta: {x: 300, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1525871454658697935
@@ -2561,7 +2561,7 @@ GameObject:
   - component: {fileID: 2850771559615339571}
   - component: {fileID: 4557513588942351914}
   m_Layer: 5
-  m_Name: Cat Words
+  m_Name: Bonfire words
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2583,7 +2583,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -73, y: -40}
+  m_AnchoredPosition: {x: -38.7, y: -60.6}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2850771559615339571
@@ -2643,8 +2643,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 12
-  m_fontSizeBase: 12
+  m_fontSize: 24
+  m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2679,7 +2679,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 24.059166, y: -14.177771, z: -123.37598, w: -34.217873}
+  m_margin: {x: 24.059166, y: -14.177771, z: -53.854507, w: 44.77586}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -2903,7 +2903,7 @@ GameObject:
   - component: {fileID: 6056795770412265437}
   - component: {fileID: 1031330346068416777}
   m_Layer: 5
-  m_Name: Cat Words
+  m_Name: Bonfire words
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2925,7 +2925,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -73, y: -40}
+  m_AnchoredPosition: {x: -63.9, y: -63.8}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6056795770412265437
@@ -2956,7 +2956,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: You received!!!
+  m_text: You recieved... Baked Salmon with Potatoes!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2983,8 +2983,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 12
-  m_fontSizeBase: 12
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -3019,7 +3019,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 24.059166, y: -14.177771, z: -123.37598, w: -34.217873}
+  m_margin: {x: 24.059166, y: -14.177771, z: -110.38547, w: 40.88915}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -4209,7 +4209,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5580686379494255081
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4378,7 +4378,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -19.046, y: -294}
+  m_AnchoredPosition: {x: 5, y: -323}
   m_SizeDelta: {x: 300, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6892424388623490655
@@ -4590,7 +4590,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 817528130923804305, guid: 9a1e15dcfeb79414eb7941bd06e71e6f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -328.4
+      value: -368
       objectReference: {fileID: 0}
     - target: {fileID: 817528130923804305, guid: 9a1e15dcfeb79414eb7941bd06e71e6f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4732,6 +4732,10 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4465962908116602436, guid: 9a1e15dcfeb79414eb7941bd06e71e6f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4927200007197927882, guid: 9a1e15dcfeb79414eb7941bd06e71e6f, type: 3}
       propertyPath: m_LocalPosition.z
       value: -9.7
@@ -4841,7 +4845,8 @@ PrefabInstance:
       value: 759.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 1125297056845486061, guid: 9a1e15dcfeb79414eb7941bd06e71e6f, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9a1e15dcfeb79414eb7941bd06e71e6f, type: 3}

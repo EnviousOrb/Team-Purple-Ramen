@@ -49,7 +49,6 @@ public class enemyAI : MonoBehaviour, IDamage
 
     void Start()
     {
-        gameManager.instance.UpdateEnemyCount(1); // Registers enemy with the game manager.
         originalMat = model.material; // Stores the original material.
         stoppingDistOrig = agent.stoppingDistance; // Stores the original stopping distance.
         agent.stoppingDistance = 0; // Resets stopping distance for roaming behavior.
@@ -113,8 +112,6 @@ public class enemyAI : MonoBehaviour, IDamage
         {
             // Destroys the enemy game object.
             Destroy(gameObject);
-            // Notifies the game manager to decrement the enemy count.
-            gameManager.instance.UpdateEnemyCount(-1);
         }
     }
 
