@@ -59,7 +59,7 @@ public class Chest : MonoBehaviour
         // Check if there are items in the chest that the player doesn't already have
         if (chestList.Count > 0)
         {
-            List<ItemData> itemsNotOwned = chestList.FindAll(item => !gameManager.instance.PS.ItemList.Contains(item));
+            List<ItemData> itemsNotOwned = chestList.FindAll(item => !gameManager.instance.PS.itemList.Contains(item));
             if (itemsNotOwned.Count > 0)
             {
                 // Select a random item from those the player does not have and add it to their inventory

@@ -20,9 +20,7 @@ public class playerController : MonoBehaviour, IDamage
     
 
     [HeaderAttribute("----- Item Inventory -----")]
-    [SerializeField] public List<Image> inventorySlotImage = new List<Image>(); // UI images for inventory slots.
-
-    public List<ItemData> ItemList = new List<ItemData>(); // Player's inventory
+     public List<ItemData> itemList = new List<ItemData>(); // Player's inventory
     [SerializeField] List<Image> inventorySlots; // UI slots to display items in the inventory
 
     [SerializeField] public List<Image> inventoryBackgroundImage = new List<Image>(); // UI images for inventory backgrounds.
@@ -61,7 +59,7 @@ public class playerController : MonoBehaviour, IDamage
     {
         if (!gameManager.instance.isPaused) // Check if the game is not paused.
         {
-            selectItem(); // Handle item selection.
+            //selectItem(); // Handle item selection.
 #if UNITY_EDITOR
             // Draw a debug ray in the editor to visualize aiming or looking direction.
             Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * rayDistance, Color.green);
@@ -212,39 +210,24 @@ public class playerController : MonoBehaviour, IDamage
     public void GetItem(ItemData newItem)
     {
         // Add the new item to the inventory
-        ItemList.Add(newItem);
+        itemList.Add(newItem);
 
         // Refresh the UI to reflect the new inventory state
-        UpdateInventoryUI();
-    }
-
-    void UpdateInventoryUI()
-    {
-        for (int i = 0; i < inventorySlotImage.Count; i++)
-        {
-            if (i < ItemList.Count)
-            {
-                inventorySlotImage[i].sprite = ItemList[i].itemSprite;
-                inventorySlotImage[i].enabled = true;
-            }
-            else
-            {
-                inventorySlotImage[i].enabled = false;
-            }
-        }
+        UIManager.instance.UpdateInventoryUI(itemList);
+        //UpdateInventoryUI();
     }
 
     // Handles input for item selection.
-    void selectItem()
-    {
-        for (int i = 0; i < 7; i++) // Listen for number key presses to select items.
-        {
-            if (Input.GetKeyDown(KeyCode.Alpha1 + i) && ItemList.Count > i)
-            {
-                selectedItem = i; // Update the selected item index.
-                indicator.transform.position = inventorySlotImage[i].transform.position;
-                break;
-            }
-        }
-    }
+    //void selectItem()
+    //{
+    //    for (int i = 0; i < 7; i++) // Listen for number key presses to select items.
+    //    {
+    //        if (Input.GetKeyDown(KeyCode.Alpha1 + i) && ItemList.Count > i)
+    //        {
+    //            selectedItem = i; // Update the selected item index.
+    //            indicator.transform.position = inventorySlotImage[i].transform.position;
+    //            break;
+    //        }
+    //    }
+    //}
 }   
