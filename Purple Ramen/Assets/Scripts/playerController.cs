@@ -21,8 +21,12 @@ public class playerController : MonoBehaviour, IDamage
 
     [HeaderAttribute("----- Item Inventory -----")]
     [SerializeField] public List<Image> inventorySlotImage = new List<Image>(); // UI images for inventory slots.
+
     public List<ItemData> ItemList = new List<ItemData>(); // Player's inventory
     [SerializeField] List<Image> inventorySlots; // UI slots to display items in the inventory
+
+    [SerializeField] public List<Image> inventoryBackgroundImage = new List<Image>(); // UI images for inventory backgrounds.
+    [SerializeField] public Image indicator; // An indicator to show the player the current selected item
 
     [HeaderAttribute("----- Weapon Components -----")]
     [SerializeField] Transform shootPos; // The position from which bullets are fired.
@@ -41,7 +45,7 @@ public class playerController : MonoBehaviour, IDamage
     int HPoriginal; // The original health points of the player, for UI updates.
     int selectedItem; // The index of the currently selected item.
     int rayDistance; // Distance for the raycast debug line.
-    
+
     // bools
     bool isShooting; // Flag to indicate if the player is currently shooting.
     bool isMeleeing; // Flag to indicate if the player is currently meleeing.
@@ -238,6 +242,7 @@ public class playerController : MonoBehaviour, IDamage
             if (Input.GetKeyDown(KeyCode.Alpha1 + i) && ItemList.Count > i)
             {
                 selectedItem = i; // Update the selected item index.
+                indicator.transform.position = inventorySlotImage[i].transform.position;
                 break;
             }
         }
