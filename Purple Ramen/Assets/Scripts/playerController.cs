@@ -20,12 +20,9 @@ public class playerController : MonoBehaviour, IDamage
     
 
     [HeaderAttribute("----- Item Inventory -----")]
-    [SerializeField] public List<ItemData> ItemList = new List<ItemData>(); // The list of items the player has.
     [SerializeField] public List<Image> inventorySlotImage = new List<Image>(); // UI images for inventory slots.
-    [SerializeField] public List<Image> inventoryBackgroundImage = new List<Image>(); // UI images for inventory backgrounds.
-
-    //[HeaderAttribute("-----Weapon Inventory-----")]
-    //[SerializeField] public WeaponData[] WeaponList; // Array of weapons available to the player.
+    public List<ItemData> ItemList = new List<ItemData>(); // Player's inventory
+    [SerializeField] List<Image> inventorySlots; // UI slots to display items in the inventory
 
     [HeaderAttribute("----- Weapon Components -----")]
     [SerializeField] Transform shootPos; // The position from which bullets are fired.
@@ -43,7 +40,6 @@ public class playerController : MonoBehaviour, IDamage
     float originalSpeed; // The original speed of the player, for restoring after sprinting.
     int HPoriginal; // The original health points of the player, for UI updates.
     int selectedItem; // The index of the currently selected item.
-    //int currentWeaponIndex; // The index of the currently equipped weapon.
     int rayDistance; // Distance for the raycast debug line.
     
     // bools
@@ -55,12 +51,6 @@ public class playerController : MonoBehaviour, IDamage
         originalSpeed = speed; // Store the original speed.
         HPoriginal = HP; // Store the original HP for UI calculations.
         updatePlayerUI(); // Update the UI elements based on current stats.
-
-        // Initialize weapon if any are available.
-        //if (WeaponList.Length > 0)
-        //{
-        //    weapon = WeaponList[0].weaponModel.GetComponent<weaponController>();
-        //}
     }
 
     void Update()
@@ -79,15 +69,6 @@ public class playerController : MonoBehaviour, IDamage
             if (Input.GetButton("Shoot") && !isShooting && !isMeleeing)
             {
                 StartCoroutine(shoot());
-
-                //if (WeaponList[currentWeaponIndex].Tag == "Melee")
-                //{
-                //    StartCoroutine(weapon.SwordAttack()); // Perform a melee attack.
-                //}
-                //else if (WeaponList[currentWeaponIndex].Tag == "Ranged")
-                //{
-                //    StartCoroutine(weapon.RangedAttack()); // Perform a ranged attack.
-                //}
             }
 
             if (Input.GetButton("Fire2") && !isMeleeing && !isShooting)
@@ -224,20 +205,27 @@ public class playerController : MonoBehaviour, IDamage
         controller.height *= 2;
     }
 
-    // Adds an item to the player's inventory and updates UI.
-    public void GetItem(ItemData Item)
+    public void GetItem(ItemData newItem)
     {
-        ItemList.Add(Item); // Add item to inventory.
-                            // Update inventory UI slots with new item images.
+        // Add the new item to the inventory
+        ItemList.Add(newItem);
+
+        // Refresh the UI to reflect the new inventory state
+        UpdateInventoryUI();
+    }
+
+    void UpdateInventoryUI()
+    {
         for (int i = 0; i < inventorySlotImage.Count; i++)
         {
             if (i < ItemList.Count)
             {
                 inventorySlotImage[i].sprite = ItemList[i].itemSprite;
+                inventorySlotImage[i].enabled = true;
             }
             else
             {
-                inventorySlotImage[i].sprite = null;
+                inventorySlotImage[i].enabled = false;
             }
         }
     }
@@ -254,14 +242,4 @@ public class playerController : MonoBehaviour, IDamage
             }
         }
     }
-
-    // Changes the currently equipped weapon based on player input.
-    //void changeWeapon()
-    //{
-    //    if (Input.GetKeyDown(KeyCode.Tab)) // Listen for the Tab key to switch weapons.
-    //    {
-    //        currentWeaponIndex = (currentWeaponIndex + 1) % WeaponList.Length; // Cycle through the weapons.
-    //        weapon = WeaponList[currentWeaponIndex].weaponModel.GetComponent<weaponController>(); // Update the weapon controller reference.
-    //    }
-    //}
 }   

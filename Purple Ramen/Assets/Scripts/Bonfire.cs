@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Bonfire : MonoBehaviour
 {
-      [SerializeField]ItemData rewardItem;
+    [SerializeField] ItemData rewardItem;
     [SerializeField] public List<ItemData> itemListCheck = new List<ItemData>();
     
     private void OnTriggerEnter(Collider other)
