@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Bonfire : MonoBehaviour
 {
-    [SerializeField] recipeManager recipe; // Assume we've added a Recipe variable here
+    [SerializeField] recipeManager recipe; //serializes a variable from the recipe item
 
     private void OnTriggerEnter(Collider other)
     {

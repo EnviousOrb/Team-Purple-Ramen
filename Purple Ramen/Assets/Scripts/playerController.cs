@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,10 +22,7 @@ public class playerController : MonoBehaviour, IDamage
 
     [HeaderAttribute("----- Item Inventory -----")]
      public List<ItemData> itemList = new List<ItemData>(); // Player's inventory
-    [SerializeField] List<Image> inventorySlots; // UI slots to display items in the inventory
-
-    [SerializeField] public List<Image> inventoryBackgroundImage = new List<Image>(); // UI images for inventory backgrounds.
-    [SerializeField] public Image indicator; // An indicator to show the player the current selected item
+    //[SerializeField] public Image indicator; // An indicator to show the player the current selected item
 
     [HeaderAttribute("----- Weapon Components -----")]
     [SerializeField] Transform shootPos; // The position from which bullets are fired.
@@ -214,20 +212,19 @@ public class playerController : MonoBehaviour, IDamage
 
         // Refresh the UI to reflect the new inventory state
         UIManager.instance.UpdateInventoryUI(itemList);
-        //UpdateInventoryUI();
     }
 
-    // Handles input for item selection.
-    //void selectItem()
-    //{
-    //    for (int i = 0; i < 7; i++) // Listen for number key presses to select items.
-    //    {
-    //        if (Input.GetKeyDown(KeyCode.Alpha1 + i) && ItemList.Count > i)
-    //        {
-    //            selectedItem = i; // Update the selected item index.
-    //            indicator.transform.position = inventorySlotImage[i].transform.position;
-    //            break;
-    //        }
-    //    }
-    //}
+   //Handles input for item selection.
+   /*void selectItem()
+   {
+       for (int i = 0; i < 7; i++) // Listen for number key presses to select items.
+       {
+           if (Input.GetKeyDown(KeyCode.Alpha1 + i) && itemList.Count > i)
+           {
+               selectedItem = i; // Update the selected item index.
+               indicator.transform.position = UIManager.instance.inventoryUISlotLocation[i].transform.position;
+               break;
+           }
+       }
+   }*/
 }   

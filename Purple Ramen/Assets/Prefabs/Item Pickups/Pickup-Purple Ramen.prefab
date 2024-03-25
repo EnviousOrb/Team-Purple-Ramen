@@ -437,6 +437,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1129964256768804378}
+  - component: {fileID: -7696457467609425010}
   m_Layer: 0
   m_Name: Pickup-Purple Ramen
   m_TagString: Untagged
@@ -467,6 +468,19 @@ Transform:
   - {fileID: 4562633129962187643}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-7696457467609425010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5532211202041428160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a31cd167cad275541b225303ab01716e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ID: {fileID: 11400000, guid: 733dbf6e38ba1ef428edb53c23a718bd, type: 2}
 --- !u!1 &5677389527672819576
 GameObject:
   m_ObjectHideFlags: 0
