@@ -6,6 +6,7 @@ public class Chest : MonoBehaviour
 {
     [SerializeField] List<ItemData> chestList; // List of possible items to be awarded from this chest
     [SerializeField] AudioClip[] chestAudio; // Array of audio clips for chest interactions
+    [SerializeField] GameObject chestLight;
     private Animator animate;
     private AudioSource AS;
     private ItemData randomItem;
@@ -16,6 +17,7 @@ public class Chest : MonoBehaviour
         animate.SetBool("isInRange", false);
         AS = GetComponent<AudioSource>();
         StartCoroutine(AudioLoop());
+        chestLight.SetActive(false);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -24,6 +26,7 @@ public class Chest : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             animate.SetBool("isInRange", true);
+            chestLight.SetActive(true);
         }
     }
 
@@ -33,6 +36,7 @@ public class Chest : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             animate.SetBool("isInRange", false);
+            chestLight.SetActive(false);
         }
     }
 
@@ -43,6 +47,7 @@ public class Chest : MonoBehaviour
         {
             gameManager.instance.UpdateTextBox("You've recieved..." + randomItem.name);
         }
+        chestLight.SetActive(false);
         Destroy(gameObject); // Destroy the chest object after giving an item
     }
 
