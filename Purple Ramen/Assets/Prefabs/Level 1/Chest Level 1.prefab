@@ -10041,7 +10041,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2294895641248987853
 Transform:
   m_ObjectHideFlags: 0
@@ -10071,7 +10071,7 @@ Light:
   m_Color: {r: 0.9811321, g: 1, b: 1, a: 1}
   m_Intensity: 2
   m_Range: 34.8
-  m_SpotAngle: 30
+  m_SpotAngle: 92.4
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
@@ -10130,6 +10130,10 @@ PrefabInstance:
     - target: {fileID: 775891625844228329, guid: aa07ab89ea6ee01499da1aa93281c4b7, type: 3}
       propertyPath: m_Name
       value: ChestMarker
+      objectReference: {fileID: 0}
+    - target: {fileID: 775891625844228329, guid: aa07ab89ea6ee01499da1aa93281c4b7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1153814118572107744, guid: aa07ab89ea6ee01499da1aa93281c4b7, type: 3}
       propertyPath: m_LocalScale.x

@@ -17,7 +17,6 @@ public class Chest : MonoBehaviour
         animate.SetBool("isInRange", false);
         AS = GetComponent<AudioSource>();
         StartCoroutine(AudioLoop());
-        chestLight.SetActive(false);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -26,8 +25,12 @@ public class Chest : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             animate.SetBool("isInRange", true);
-            chestLight.SetActive(true);
         }
+    }
+
+    public void chestLightON()
+    {
+        chestLight.SetActive(true);
     }
 
     private void OnTriggerExit(Collider other)
@@ -36,7 +39,6 @@ public class Chest : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             animate.SetBool("isInRange", false);
-            chestLight.SetActive(false);
         }
     }
 
@@ -47,7 +49,6 @@ public class Chest : MonoBehaviour
         {
             gameManager.instance.UpdateTextBox("You've recieved..." + randomItem.name);
         }
-        chestLight.SetActive(false);
         Destroy(gameObject); // Destroy the chest object after giving an item
     }
 
