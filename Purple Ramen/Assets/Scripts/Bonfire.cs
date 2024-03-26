@@ -27,15 +27,15 @@ public class Bonfire : MonoBehaviour
             player.GetItem(recipe.resultItem); // Add the reward item
             UIManager.instance.UpdateInventoryUI(player.itemList);
 
-            gameManager.instance.BonfireGood.SetActive(true);
+            gameManager.instance.cauldronMenuGood.SetActive(true);
             yield return new WaitForSeconds(2f);
-            gameManager.instance.BonfireGood.SetActive(false);
+            gameManager.instance.cauldronMenuGood.SetActive(false);
         }
         else
         {
-            gameManager.instance.BonfireBad.SetActive(true);
+            gameManager.instance.cauldronMenuBad.SetActive(true);
             yield return new WaitForSeconds(2f);
-            gameManager.instance.BonfireBad.SetActive(false);
+            gameManager.instance.cauldronMenuBad.SetActive(false);
         }
     }
 
