@@ -27,17 +27,18 @@ public class Bonfire : MonoBehaviour
             player.GetItem(recipe.resultItem); // Add the reward item
             UIManager.instance.UpdateInventoryUI(player.itemList);
 
-            gameManager.instance.cauldronMenuGood.SetActive(true);
+            gameManager.instance.UpdateTextBox("You've recieved..." + recipe.resultItem.name);
             yield return new WaitForSeconds(2f);
-            gameManager.instance.cauldronMenuGood.SetActive(false);
+            gameManager.instance.HideTextBox();
+
         }
         else
         {
-            gameManager.instance.cauldronMenuBad.SetActive(true);
+            gameManager.instance.UpdateTextBox("You're missing some required items...");
             yield return new WaitForSeconds(2f);
-            gameManager.instance.cauldronMenuBad.SetActive(false);
+            gameManager.instance.HideTextBox();
+
         }
     }
-
 }
 

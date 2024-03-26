@@ -7,7 +7,7 @@ public class AudioManager : MonoBehaviour
     public static AudioManager instance;
 
     [SerializeField] AudioSource AS;
-    [SerializeField] AudioClip[] chestMusic;
+    [SerializeField] public AudioClip[] chestMusic;
     [SerializeField] AudioClip[] playerSteps;
     [SerializeField] AudioClip backgroundMusic;
     [SerializeField] AudioClip bonfireMusic;

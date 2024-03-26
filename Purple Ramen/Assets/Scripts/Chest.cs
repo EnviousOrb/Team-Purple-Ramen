@@ -5,28 +5,17 @@ using UnityEngine;
 public class Chest : MonoBehaviour
 {
     [SerializeField] List<ItemData> chestList; // List of possible items to be awarded from this chest
+    [SerializeField] AudioClip[] chestAudio; // Array of audio clips for chest interactions
     private Animator animate;
     private AudioSource AS;
-    public void Awake()
+    private ItemData randomItem;
+
+    private void Awake()
     {
         animate = GetComponent<Animator>();
         animate.SetBool("isInRange", false);
-        AS = gameObject.AddComponent<AudioSource>();
-        AS.clip = AudioManager.instance.PlayChestMusic();
-        Debug.Log(AS.clip == null ? "Chest music clip is null" : "Chest music clip is not null");
-        AS.loop = true;
-        AS.Play();
-    }
-    private void Update()
-    {
-        if (AS.isPlaying)
-        {
-            Debug.Log("Chest music is playing");
-        }
-        else
-        {
-            Debug.Log("Chest music is not playing");
-        }
+        AS = GetComponent<AudioSource>();
+        StartCoroutine(AudioLoop());
     }
 
     private void OnTriggerEnter(Collider other)
@@ -50,8 +39,24 @@ public class Chest : MonoBehaviour
     public void DeleteChest()
     {
         GiveItem();
-        AS.Stop();
+        for(int i = 0; i < chestList.Count; i++)
+        {
+            gameManager.instance.UpdateTextBox("You've recieved..." + randomItem.name);
+        }
         Destroy(gameObject); // Destroy the chest object after giving an item
+    }
+
+    private IEnumerator AudioLoop()
+    {
+        // Loop through chest audio clips
+        int clipIndex = 0;
+        while (true)
+        {
+            AS.clip = chestAudio[clipIndex];
+            AS.Play();
+            yield return new WaitForSeconds(chestAudio[clipIndex].length);
+            clipIndex = (clipIndex + 1) % chestAudio.Length;
+        }
     }
 
     public void GiveItem()
@@ -63,7 +68,7 @@ public class Chest : MonoBehaviour
             if (itemsNotOwned.Count > 0)
             {
                 // Select a random item from those the player does not have and add it to their inventory
-                ItemData randomItem = itemsNotOwned[Random.Range(0, itemsNotOwned.Count)];
+                randomItem = itemsNotOwned[Random.Range(0, itemsNotOwned.Count)];
                 Debug.Log($"Awarding item: {randomItem.name}"); // Confirm the awarded item
                 gameManager.instance.PS.GetItem(randomItem);
             }

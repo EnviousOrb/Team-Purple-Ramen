@@ -25,7 +25,7 @@ public class catScript : MonoBehaviour
             else
             {
                 // Player doesn't have the required item. Just show the regular cat menu.
-                gameManager.instance.catMenu.SetActive(true);
+                gameManager.instance.UpdateTextBox("Hiya Friend! There are 6 chest in this dungeon that contains ingredients for my favorite dish, gather them and bring them to the fire next to me! Then, bring back the deliiiicious meal to me! Nyaa~ :3");
             }
         }
     }
@@ -35,7 +35,7 @@ public class catScript : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             // You might want to deactivate the win menu here as well if you're using OnTriggerExit to close the catMenu.
-            gameManager.instance.catMenu.SetActive(false);
+            gameManager.instance.HideTextBox();
         }
     }
 }

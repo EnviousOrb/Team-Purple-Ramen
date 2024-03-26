@@ -15,40 +15,10 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuLose;
     [SerializeField] GameObject menuWin;
-    [SerializeField] public GameObject catMenu;
-    [SerializeField] public GameObject cauldronMenuGood;
-    [SerializeField] public GameObject cauldronMenuBad;
-    [SerializeField] public GameObject beanBox;
-    [SerializeField] public GameObject beefBox;
-    [SerializeField] public GameObject blueCheeseBox;
-    [SerializeField] public GameObject butterBox;
-    [SerializeField] public GameObject carrotBox;
-    [SerializeField] public GameObject cheeseBox;
-    [SerializeField] public GameObject chickenBox;
-    [SerializeField] public GameObject clamsBox;
-    [SerializeField] public GameObject crabBox;
-    [SerializeField] public GameObject eggsBox  ;
-    [SerializeField] public GameObject fishBox;
-    [SerializeField] public GameObject flourBox ;
-    [SerializeField] public GameObject garlicBox;
-    [SerializeField] public GameObject honeyBox ;
-    [SerializeField] public GameObject lobsterBox;
-    [SerializeField] public GameObject octopusBox;
-    [SerializeField] public GameObject oliveOilBox;
-    [SerializeField] public GameObject onionsBox;
-    [SerializeField] public GameObject oystersBox;
-    [SerializeField] public GameObject parsnipsBox;
-    [SerializeField] public GameObject potatoesBox;
-    [SerializeField] public GameObject riceBox;
-    [SerializeField] public GameObject saltBox;
-    [SerializeField] public GameObject shrimpBox;
-    [SerializeField] public GameObject sugarBox;
-    [SerializeField] public GameObject turnipBox;
-    [SerializeField] public GameObject vinegarBox;
-    [SerializeField] public GameObject whiteCheddarBox;
+    [SerializeField] public GameObject TextBox;
     public GameObject playerDamageEffect;
     public Image HPbar;
-    [SerializeField] TMP_Text countText;
+    [SerializeField] TMP_Text TextBoxText;
 
     public GameObject playerSpawnPos;
     public Image playerHPBar;
@@ -57,7 +27,6 @@ public class gameManager : MonoBehaviour
 
     public bool isPaused;
     float TimeScaleOrig;
-    int enemyCount;
 
     // Awake is called before Start
     void Awake()
@@ -81,6 +50,17 @@ public class gameManager : MonoBehaviour
         }
 
     }
+
+    public void UpdateTextBox(string newText)
+    {
+        TextBoxText.text = newText;
+        TextBox.SetActive(true);
+    }
+    public void HideTextBox()
+    {
+        TextBox.SetActive(false);
+    }
+
     public void stateWin()
     {
         menuActive = menuWin;
