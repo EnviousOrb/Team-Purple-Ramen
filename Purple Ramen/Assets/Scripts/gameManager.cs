@@ -16,8 +16,8 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject menuLose;
     [SerializeField] GameObject menuWin;
     [SerializeField] public GameObject catMenu;
-    [SerializeField] public GameObject chestMenuGood;
-    [SerializeField] public GameObject chestMenuBad;
+    [SerializeField] public GameObject BonfireGood;
+    [SerializeField] public GameObject BonfireBad;
     public GameObject playerDamageEffect;
     public Image HPbar;
     [SerializeField] TMP_Text countText;
