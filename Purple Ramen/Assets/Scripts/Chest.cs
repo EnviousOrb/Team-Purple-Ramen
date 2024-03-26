@@ -5,16 +5,28 @@ using UnityEngine;
 public class Chest : MonoBehaviour
 {
     [SerializeField] List<ItemData> chestList; // List of possible items to be awarded from this chest
-    [SerializeField] AudioClip[] chestAudio; // Array of audio clips for chest interactions
     private Animator animate;
     private AudioSource AS;
-
-    private void Awake()
+    public void Awake()
     {
         animate = GetComponent<Animator>();
         animate.SetBool("isInRange", false);
-        AS = GetComponent<AudioSource>();
-        StartCoroutine(AudioLoop());
+        AS = gameObject.AddComponent<AudioSource>();
+        AS.clip = AudioManager.instance.PlayChestMusic();
+        Debug.Log(AS.clip == null ? "Chest music clip is null" : "Chest music clip is not null");
+        AS.loop = true;
+        AS.Play();
+    }
+    private void Update()
+    {
+        if (AS.isPlaying)
+        {
+            Debug.Log("Chest music is playing");
+        }
+        else
+        {
+            Debug.Log("Chest music is not playing");
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -38,20 +50,8 @@ public class Chest : MonoBehaviour
     public void DeleteChest()
     {
         GiveItem();
+        AS.Stop();
         Destroy(gameObject); // Destroy the chest object after giving an item
-    }
-
-    private IEnumerator AudioLoop()
-    {
-        // Loop through chest audio clips
-        int clipIndex = 0;
-        while (true)
-        {
-            AS.clip = chestAudio[clipIndex];
-            AS.Play();
-            yield return new WaitForSeconds(chestAudio[clipIndex].length);
-            clipIndex = (clipIndex + 1) % chestAudio.Length;
-        }
     }
 
     public void GiveItem()
