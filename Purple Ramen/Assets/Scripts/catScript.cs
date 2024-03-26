@@ -16,7 +16,7 @@ public class catScript : MonoBehaviour
                 // Player has the required item. Trigger the win condition.
                 gameManager.instance.stateWin();
 
-                // Optionally, remove the item from the player's inventory
+                // Remove the item from the player's inventory
                 player.itemList.Remove(requiredItem);
 
                 // Update the inventory UI to reflect this change
