@@ -6,6 +6,13 @@ public class catScript : MonoBehaviour
 {
     [SerializeField] private ItemData requiredItem; // The item the cat wants
 
+    [HeaderAttribute("----- Audio Components -----")]
+    [SerializeField] AudioSource AS;
+    [SerializeField] AudioClip[] catSpeech;
+    [Range(0, 1)][SerializeField] float catSpeechVol;
+
+    bool isSpeaking;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -26,6 +33,7 @@ public class catScript : MonoBehaviour
             {
                 // Player doesn't have the required item. Just show the regular cat menu.
                 gameManager.instance.UpdateTextBox("Hiya Friend! There are 6 chest in this dungeon that contains ingredients for my favorite dish, gather them and bring them to the fire next to me! Then, bring back the deliiiicious meal to me! Nyaa~ :3");
+                StartCoroutine(CatSpeak());
             }
         }
     }
@@ -37,6 +45,14 @@ public class catScript : MonoBehaviour
             // You might want to deactivate the win menu here as well if you're using OnTriggerExit to close the catMenu.
             gameManager.instance.HideTextBox();
         }
+    }
+
+    IEnumerator CatSpeak()
+    {
+        isSpeaking = true;
+        AS.PlayOneShot(catSpeech[Random.Range(0, catSpeech.Length)], catSpeechVol);
+        yield return new WaitForSeconds(0.3f);
+        isSpeaking = false;
     }
 }
 
