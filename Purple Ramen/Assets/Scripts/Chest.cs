@@ -44,6 +44,7 @@ public class Chest : MonoBehaviour
 
     public void DeleteChest()
     {
+        gameManager.instance.HideTextBox();
         GiveItem();
         for(int i = 0; i < chestList.Count; i++)
         {
