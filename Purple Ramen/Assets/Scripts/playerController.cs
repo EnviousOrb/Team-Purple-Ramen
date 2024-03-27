@@ -130,6 +130,7 @@ public class playerController : MonoBehaviour, IDamage
         {
             jumpcount++;
             playerVel.y = jumpSpeed;
+            AS.PlayOneShot(playerJump[Random.Range(0, playerJump.Length)], playerJumpVol);
         }
 
         // Crouch functionality - reduces player height.
@@ -207,6 +208,8 @@ public class playerController : MonoBehaviour, IDamage
         HP -= amount; // Decrease player's health by the damage amount.
         StartCoroutine(flashdmgScreen()); // Flash damage effect on screen.
         updatePlayerUI(); // Update player's health UI.
+
+        AS.PlayOneShot(playerHurt[Random.Range(0, playerHurt.Length)], playerHurtVol);
 
         // Check for player death.
         if (HP <= 0)
