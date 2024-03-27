@@ -10,6 +10,7 @@ public class playerController : MonoBehaviour, IDamage
     [HeaderAttribute("----- Components -----")]
     [SerializeField] CharacterController controller; // The CharacterController component for moving the player.
     [SerializeField] weaponController weapon; // The current weapon controller.
+    [SerializeField] AudioSource AS; //The Audio Source component for the player
 
     [HeaderAttribute("----- Player Stats -----")]
     [Range(0, 10)][SerializeField] int HP; // The player's health points.
@@ -22,7 +23,6 @@ public class playerController : MonoBehaviour, IDamage
 
     [HeaderAttribute("----- Item Inventory -----")]
      public List<ItemData> itemList = new List<ItemData>(); // Player's inventory
-    //[SerializeField] public Image indicator; // An indicator to show the player the current selected item
 
     [HeaderAttribute("----- Weapon Components -----")]
     [SerializeField] Transform shootPos; // The position from which bullets are fired.
@@ -32,6 +32,14 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] int shootDamage;
     [SerializeField] int shootDistance;
     [SerializeField] float shootRate;
+
+    [HeaderAttribute("----- Audio Components -----")]
+    [SerializeField] AudioClip[] playerJump;
+    [Range(0, 1)][SerializeField] float playerJumpVol;
+    [SerializeField] AudioClip[] playerHurt;
+    [Range(0, 1)][SerializeField] float playerHurtVol;
+    [SerializeField] AudioClip[] playerSteps;
+    [Range(0, 1)][SerializeField] float playerStepsVol;
 
     // Private variables for internal state management
     int jumpcount; // Tracks the number of jumps performed consecutively.
@@ -45,6 +53,9 @@ public class playerController : MonoBehaviour, IDamage
     // bools
     bool isShooting; // Flag to indicate if the player is currently shooting.
     bool isMeleeing; // Flag to indicate if the player is currently meleeing.
+    bool isSprinting; //Flag to indicate that the player is currently sprinting.
+    bool playSteps;
+
 
     void Start()
     {
@@ -91,9 +102,16 @@ public class playerController : MonoBehaviour, IDamage
     {
         // Handle sprinting input and adjust speed accordingly.
         if (Input.GetButton("Fire3"))
+        {
             speed = originalSpeed * sprintMultiplier;
+            isSprinting = true;
+
+        }
         else
+        {
             speed = originalSpeed;
+            isSprinting = false;
+        }
         // Reset jump count and player velocity when grounded.
         if (controller.isGrounded)
         {
@@ -127,6 +145,24 @@ public class playerController : MonoBehaviour, IDamage
         // Apply gravity to the player's velocity and move the character controller accordingly.
         playerVel.y += gravity * Time.deltaTime;
         controller.Move(playerVel * Time.deltaTime);
+
+        if (controller.isGrounded && moveDir.normalized.magnitude > 0.3f && !playSteps)
+        {
+            StartCoroutine(PlaySteps());
+        }
+    }
+
+    IEnumerator PlaySteps()
+    {
+        playSteps = true;
+        AS.PlayOneShot(playerSteps[Random.Range(0, playerSteps.Length)], playerStepsVol);
+
+        if (!isSprinting)
+            yield return new WaitForSeconds(0.3f);
+        else
+            yield return new WaitForSeconds(0.3f);
+
+        playSteps = false;
     }
 
     IEnumerator shoot()
