@@ -11,6 +11,7 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] CharacterController controller; // The CharacterController component for moving the player.
     [SerializeField] weaponController weapon; // The current weapon controller.
     [SerializeField] AudioSource AS; //The Audio Source component for the player
+    [SerializeField] Animator anim;
 
     [HeaderAttribute("----- Player Stats -----")]
     [Range(0, 10)][SerializeField] int HP; // The player's health points.
@@ -54,6 +55,7 @@ public class playerController : MonoBehaviour, IDamage
     bool isShooting; // Flag to indicate if the player is currently shooting.
     bool isMeleeing; // Flag to indicate if the player is currently meleeing.
     bool isSprinting; //Flag to indicate that the player is currently sprinting.
+    bool isCrouching;
     bool playSteps;
 
 
@@ -105,7 +107,6 @@ public class playerController : MonoBehaviour, IDamage
         {
             speed = originalSpeed * sprintMultiplier;
             isSprinting = true;
-
         }
         else
         {
@@ -125,22 +126,30 @@ public class playerController : MonoBehaviour, IDamage
         // Apply movement.
         controller.Move(moveDir * speed * Time.deltaTime);
 
-        // Handle jumping logic.
+        // Animating idle to walk to run to sprint.
+        // This does work but best in 3rd person.
+        //anim.SetFloat("Speed", moveDir.magnitude);
+        //anim.SetBool("IsSprinting", isSprinting);
+
         if (Input.GetButtonDown("Jump") && jumpcount < jumps)
         {
             jumpcount++;
             playerVel.y = jumpSpeed;
             AS.PlayOneShot(playerJump[Random.Range(0, playerJump.Length)], playerJumpVol);
+            // Future proofing 3d person jump
+            //anim.SetTrigger("Jump");
         }
 
         // Crouch functionality - reduces player height.
         if (Input.GetButtonDown("Crouch"))
         {
             crouch();
+            //anim.SetBool("IsCrouching", true);
         }
         else if (Input.GetButtonUp("Crouch"))
         {
             unCrouch();
+            //anim.SetBool("IsCrouching", false);
         }
 
         // Apply gravity to the player's velocity and move the character controller accordingly.
