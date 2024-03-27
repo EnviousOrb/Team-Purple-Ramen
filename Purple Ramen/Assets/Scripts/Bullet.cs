@@ -23,15 +23,20 @@ public class Bullet : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // Ignore the collision if the other object's collider is marked as a trigger.
-        if (other.isTrigger || other.CompareTag("Enemy"))
+        if (other.isTrigger)
             return;
 
         // Attempts to get an IDamage interface from the collided object.
         IDamage dmg = other.GetComponent<IDamage>();
 
+
         // If the other object implements IDamage, it calls takeDamage() on it with this bullet's damage value.
+        Debug.Log(other.gameObject.name + " : None");
         if (dmg != null)
+        {
+            Debug.Log(other.gameObject.name + " : Has Damage");
             dmg.takeDamage(damage);
+        }
 
         // Destroys the bullet upon hitting something to simulate it being "spent".
         Destroy(gameObject);
