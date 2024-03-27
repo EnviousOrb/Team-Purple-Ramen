@@ -178,15 +178,21 @@ public class playerController : MonoBehaviour, IDamage
     IEnumerator shoot()
     {
         isShooting = true;
-        Instantiate(bullet, shootPos.position, Camera.main.transform.rotation);
+        anim.SetTrigger("Casting");
+        
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
+    }
+
+    public void FireBullet()
+    {
+        Instantiate(bullet, shootPos.position, Camera.main.transform.rotation);
     }
 
     IEnumerator melee()
     {
         isMeleeing = true;
-
+        anim.SetTrigger("Melee");
         RaycastHit hit;
         if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootDistance))
         {
