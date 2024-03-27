@@ -43,6 +43,10 @@ public class enemyAI : MonoBehaviour, IDamage
     float stoppingDistOrig; // Original stopping distance before any modifications.
     Vector3 startingPos; // Starting position for roaming.
 
+    [HeaderAttribute("-----The Stuffs-----")]
+    [SerializeField] int scoreValue;
+    public Spawner associatedSpawner;
+
     //Bools
     bool isShooting; // Tracks if the enemy is currently shooting.
     bool playerInRange; // Whether the player is within detection range.
@@ -110,6 +114,11 @@ public class enemyAI : MonoBehaviour, IDamage
         // Checks if health has dropped to 0 or below.
         if (HP <= 0)
         {
+            //Does something I think ??
+            if (associatedSpawner)
+                associatedSpawner.UpdateEnemies(-1);
+            //Does something else i guess??
+            gameManager.instance.playerScore += scoreValue;
             // Destroys the enemy game object.
             Destroy(gameObject);
         }

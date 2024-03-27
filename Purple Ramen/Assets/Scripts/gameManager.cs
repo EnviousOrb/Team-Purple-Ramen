@@ -24,6 +24,7 @@ public class gameManager : MonoBehaviour
     public Image playerHPBar;
     public GameObject player;
     public playerController PS;
+    public int playerScore;
 
     public bool isPaused;
     float TimeScaleOrig;
