@@ -97,7 +97,6 @@ public class enemyAI : MonoBehaviour, IDamage
         isShooting = true;
         animator.SetTrigger("Shoot"); // Triggers the shooting animation.
         Vector3 playerDirection = gameManager.instance.player.transform.position - transform.position;
-        playerDirection.y -= 1; // Adjusts bullet spawn height.
         Instantiate(bullet, shootPos.position, Quaternion.LookRotation(playerDirection)); // Spawns the bullet.
         yield return new WaitForSeconds(shootRate); // Waits before allowing next shot.
         isShooting = false;
