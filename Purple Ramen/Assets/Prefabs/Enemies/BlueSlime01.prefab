@@ -213,11 +213,13 @@ MonoBehaviour:
   animator: {fileID: 3901371793883687135}
   animSpeedTrans: 1
   headPos: {fileID: 8551014261762490935}
-  viewCone: 90
+  viewCone: 180
   faceTargetSpeed: 2
   animatedSpeedTrans: 1
-  roamDist: 10
-  roamPauseTime: 5
+  roamDist: 15
+  roamPauseTime: 2
+  scoreValue: 0
+  associatedSpawner: {fileID: 0}
 --- !u!195 &6759688695660923643
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -644,6 +646,10 @@ PrefabInstance:
     - target: {fileID: 5315876966903466340, guid: b215e90b8ee256947b63f0382537c9f5, type: 3}
       propertyPath: m_Name
       value: EnemyMarker
+      objectReference: {fileID: 0}
+    - target: {fileID: 5315876966903466340, guid: b215e90b8ee256947b63f0382537c9f5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5860143323592403306, guid: b215e90b8ee256947b63f0382537c9f5, type: 3}
       propertyPath: m_LocalPosition.x
