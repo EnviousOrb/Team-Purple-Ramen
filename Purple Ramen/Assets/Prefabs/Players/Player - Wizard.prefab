@@ -2709,9 +2709,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1281570812207396713}
+  - component: {fileID: 7558511888808795542}
   - component: {fileID: 8616411045489703483}
   - component: {fileID: 7841944145942648426}
   - component: {fileID: 1550671607420705973}
+  - component: {fileID: 1256910360309282310}
   m_Layer: 0
   m_Name: Melee Collider
   m_TagString: Untagged
@@ -2734,6 +2736,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5986447884767453007}
   m_LocalEulerAnglesHint: {x: -0.874, y: 6.102, z: 90.037}
+--- !u!114 &7558511888808795542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8607229709851632579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d133b2c96c78a2d439d1a6009845c467, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 1
 --- !u!33 &8616411045489703483
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -2807,6 +2822,33 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &1256910360309282310
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8607229709851632579}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &8723298665855551557
 GameObject:
   m_ObjectHideFlags: 0
@@ -3070,7 +3112,7 @@ MonoBehaviour:
   staffCollider: {fileID: 1550671607420705973}
   shootDamage: 1
   shootDistance: 50
-  shootRate: 0.5
+  shootRate: 0.75
 --- !u!143 &3590467474444880502
 CharacterController:
   m_ObjectHideFlags: 0
@@ -3325,6 +3367,10 @@ PrefabInstance:
     - target: {fileID: 6631525299320932444, guid: 1ffd7d709fd962b48954e9cb3f40324b, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6631525299320932444, guid: 1ffd7d709fd962b48954e9cb3f40324b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

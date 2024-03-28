@@ -13,7 +13,7 @@ public class playerController : MonoBehaviour, IDamage, ISlow
     [SerializeField] Animator anim;
 
     [HeaderAttribute("----- Player Stats -----")]
-    [Range(0, 10)][SerializeField] int HP; // The player's health points.
+    [Range(0, 20)][SerializeField] int HP; // The player's health points.
     [Range(1, 5)][SerializeField] float speed; // Movement speed of the player.
     [Range(2, 8)][SerializeField] float sprintMultiplier; // The multiplier to apply to speed when sprinting.
     [Range(1, 3)][SerializeField] int jumps; // The number of consecutive jumps the player can perform.
