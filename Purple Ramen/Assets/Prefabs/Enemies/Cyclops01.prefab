@@ -652,17 +652,19 @@ MonoBehaviour:
   HP: 8
   speed: 3
   bullet: {fileID: 6654342452342103052, guid: 981cb1a764e5eb346aa6494c88ad1c1f, type: 3}
-  shootRate: 3
   damageMat: {fileID: 2100000, guid: 61a868ed95d3914428f24f0450c95593, type: 2}
+  shootRate: 3
   stoppingDist: 30
   animator: {fileID: 8412765349578081158}
   animSpeedTrans: 1
   headPos: {fileID: 4382959890373614874}
-  viewCone: 90
+  viewCone: 180
   faceTargetSpeed: 2
   animatedSpeedTrans: 2
   roamDist: 17
   roamPauseTime: 5
+  scoreValue: 0
+  associatedSpawner: {fileID: 0}
 --- !u!195 &4855824986367475136
 NavMeshAgent:
   m_ObjectHideFlags: 0

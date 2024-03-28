@@ -162,8 +162,9 @@ public class enemyAI : MonoBehaviour, IDamage
         // Performs a raycast to check for line of sight to the player.
         if (Physics.Raycast(headPos.position, playerDir, out hit))
         {
+            Debug.DrawRay(headPos.position, playerDir, Color.red);
             // Checks if the raycast hit the player and the angle is within the view cone.
-            if (hit.collider.CompareTag("Player") && angleToPlayer <= viewCone)
+            if (hit.collider.CompareTag("Player") || angleToPlayer <= viewCone)
             {
                 agent.stoppingDistance = stoppingDistOrig; // Restores the original stopping distance.
                 agent.SetDestination(gameManager.instance.player.transform.position); // Moves towards the player.

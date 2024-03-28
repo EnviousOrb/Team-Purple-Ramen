@@ -67,6 +67,8 @@ public class gameManager : MonoBehaviour
         menuActive = menuWin;
         Pause();
         AudioManager.instance.stopAll();
+        AudioManager.instance.playSFX("Level Complete");
+        AudioManager.instance.stopAll();
     }
     public void statePaused()
     {

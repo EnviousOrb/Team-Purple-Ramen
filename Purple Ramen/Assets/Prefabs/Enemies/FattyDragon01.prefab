@@ -374,17 +374,19 @@ MonoBehaviour:
   HP: 7
   speed: 10
   bullet: {fileID: 7135714001530856501, guid: b179ba7001d400c4086e6c241141eb53, type: 3}
-  shootRate: 1
   damageMat: {fileID: 2100000, guid: 61a868ed95d3914428f24f0450c95593, type: 2}
+  shootRate: 1
   stoppingDist: 5
   animator: {fileID: 4732715823649715118}
   animSpeedTrans: 1
   headPos: {fileID: 2896562565683327381}
-  viewCone: 90
+  viewCone: 180
   faceTargetSpeed: 3
   animatedSpeedTrans: 2
   roamDist: 20
   roamPauseTime: 3
+  scoreValue: 0
+  associatedSpawner: {fileID: 0}
 --- !u!95 &4732715823649715118
 Animator:
   serializedVersion: 5

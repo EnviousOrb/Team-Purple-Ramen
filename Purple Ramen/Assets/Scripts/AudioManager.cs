@@ -6,8 +6,8 @@ using System;
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance;
-    public soundObject[] BGM, NpcSFX, PlayerSFX;
-    public AudioSource BGMSource, NPCSource, PlayerSource;
+    public soundObject[] BGM, SFX, NpcSFX, PlayerSFX;
+    public AudioSource BGMSource, SFXSource,NPCSource, PlayerSource;
 
 
     private void Awake()
@@ -51,6 +51,21 @@ public class AudioManager : MonoBehaviour
             PlayerSource.PlayOneShot(so.soundClip);
         }
     }
+
+    public void playSFX(string name)
+    {
+        soundObject so = Array.Find(SFX, x => x.name == name);
+
+        if (so == null)
+        {
+            Debug.Log("Sound Effect Not Found");
+        }
+        else
+        {
+            SFXSource.PlayOneShot(so.soundClip);
+        }
+    }
+
 
     public void playNpcSFX(string name)
     {
