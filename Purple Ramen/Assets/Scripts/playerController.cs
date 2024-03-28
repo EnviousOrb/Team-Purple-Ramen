@@ -27,8 +27,9 @@ public class playerController : MonoBehaviour, IDamage
     [HeaderAttribute("----- Weapon Components -----")]
     [SerializeField] Transform shootPos; // The position from which bullets are fired.
     [SerializeField] GameObject bullet; // The bullet prefab.
+    [SerializeField] Collider staffCollider;
 
-    [HeaderAttribute("----- Wizard Staff -----")]
+    [HeaderAttribute("----- Wizard Range Attack -----")]
     [SerializeField] int shootDamage;
     [SerializeField] int shootDistance;
     [SerializeField] float shootRate;
@@ -70,12 +71,13 @@ public class playerController : MonoBehaviour, IDamage
 
             //changeWeapon(); // Handle weapon switching.
             // Check for shooting input and current weapon type to trigger appropriate attack.
-            if (Input.GetButton("Shoot") && !isShooting && !isMeleeing)
+            //if (Input.GetButton("Shoot") && !isShooting && !isMeleeing)
+            if (Input.GetButton("Fire1") && !isShooting)
             {
                 StartCoroutine(shoot());
             }
 
-            if (Input.GetButton("Fire2") && !isMeleeing && !isShooting)
+            if (Input.GetButton("Fire2") && !isMeleeing)
             {
                 StartCoroutine(melee());
             }
@@ -132,16 +134,16 @@ public class playerController : MonoBehaviour, IDamage
         }
 
         // Crouch functionality - reduces player height.
-        if (Input.GetButtonDown("Crouch"))
-        {
-            crouch();
-            //anim.SetBool("IsCrouching", true);
-        }
-        else if (Input.GetButtonUp("Crouch"))
-        {
-            unCrouch();
-            //anim.SetBool("IsCrouching", false);
-        }
+        //if (Input.GetButtonDown("Crouch"))
+        //{
+        //    crouch();
+        //    //anim.SetBool("IsCrouching", true);
+        //}
+        //else if (Input.GetButtonUp("Crouch"))
+        //{
+        //    unCrouch();
+        //    //anim.SetBool("IsCrouching", false);
+        //}
 
         // Apply gravity to the player's velocity and move the character controller accordingly.
         playerVel.y += gravity * Time.deltaTime;
@@ -197,16 +199,25 @@ public class playerController : MonoBehaviour, IDamage
         Instantiate(bullet, shootPos.position, Camera.main.transform.rotation);
     }
 
+    public void startMeleeSwing() 
+    {
+        staffCollider.enabled = true;
+    }
+
+    public void exitMeleeSwing()
+    {
+        staffCollider.enabled = false;
+    }
+
     IEnumerator melee()
     {
         isMeleeing = true;
         anim.SetTrigger("Melee");
         RaycastHit hit;
-        if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootDistance))
-        {
-            Debug.Log(hit.collider.name);
-
-        }
+        //if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootDistance))
+        //{
+        //    Debug.Log(hit.collider.name);
+        //}
         yield return new WaitForSeconds(shootRate);
         isMeleeing = false;
     }
