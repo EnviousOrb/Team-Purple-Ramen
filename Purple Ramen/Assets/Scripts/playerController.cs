@@ -231,15 +231,13 @@ public class playerController : MonoBehaviour, IDamage, ISlow
         StartCoroutine(flashdmgScreen()); // Flash damage effect on screen.
         updatePlayerUI(); // Update player's health UI.
 
-        AudioManager.instance.playPlayerSFX("Damage SFX");
 
         // Check for player death.
-        Debug.Log("dies");
         if (HP <= 0)
         {
-            Debug.Log(HP);
             gameManager.instance.stateLose(); // Trigger game loss state.
         }
+        AudioManager.instance.playPlayerSFX("Damage SFX");
     }
 
     // Coroutine to flash the damage screen effect.
