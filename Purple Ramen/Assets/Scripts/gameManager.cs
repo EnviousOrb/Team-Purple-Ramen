@@ -66,6 +66,7 @@ public class gameManager : MonoBehaviour
     {
         menuActive = menuWin;
         Pause();
+        AudioManager.instance.stopAll();
     }
     public void statePaused()
     {
@@ -76,6 +77,7 @@ public class gameManager : MonoBehaviour
     {
         menuActive = menuLose;
         Pause();
+        AudioManager.instance.stopAll();
     }
     public void stateNormal()
     {

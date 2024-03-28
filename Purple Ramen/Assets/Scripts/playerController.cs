@@ -10,7 +10,6 @@ public class playerController : MonoBehaviour, IDamage
     [HeaderAttribute("----- Components -----")]
     [SerializeField] CharacterController controller; // The CharacterController component for moving the player.
     [SerializeField] weaponController weapon; // The current weapon controller.
-    [SerializeField] AudioSource AS; //The Audio Source component for the player
     [SerializeField] Animator anim;
 
     [HeaderAttribute("----- Player Stats -----")]
@@ -34,14 +33,6 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] int shootDistance;
     [SerializeField] float shootRate;
 
-    [HeaderAttribute("----- Audio Components -----")]
-    [SerializeField] AudioClip[] playerJump;
-    [Range(0, 1)][SerializeField] float playerJumpVol;
-    [SerializeField] AudioClip[] playerHurt;
-    [Range(0, 1)][SerializeField] float playerHurtVol;
-    [SerializeField] AudioClip[] playerSteps;
-    [Range(0, 1)][SerializeField] float playerStepsVol;
-
     // Private variables for internal state management
     int jumpcount; // Tracks the number of jumps performed consecutively.
     Vector3 moveDir; // The direction of movement.
@@ -57,7 +48,7 @@ public class playerController : MonoBehaviour, IDamage
     bool isSprinting; //Flag to indicate that the player is currently sprinting.
     bool isCrouching;
     bool playSteps;
-
+    bool isMoving;
 
     void Start()
     {
@@ -135,7 +126,7 @@ public class playerController : MonoBehaviour, IDamage
         {
             jumpcount++;
             playerVel.y = jumpSpeed;
-            AS.PlayOneShot(playerJump[Random.Range(0, playerJump.Length)], playerJumpVol);
+            AudioManager.instance.playPlayerSFX("Jump SFX");
             // Future proofing 3d person jump
             //anim.SetTrigger("Jump");
         }
@@ -165,13 +156,30 @@ public class playerController : MonoBehaviour, IDamage
     IEnumerator PlaySteps()
     {
         playSteps = true;
-        AS.PlayOneShot(playerSteps[Random.Range(0, playerSteps.Length)], playerStepsVol);
+        string[] footstepSounds = new string[]
+        {
+        "Footstep", "Footstep 1", "Footstep 2", "Footstep 3", "Footstep 4",
+        "Footstep 5", "Footstep 6", "Footstep 7", "Footstep 8", "Footstep 9",
+        "Footstep 10", "Footstep 11", "Footstep 12", "Footstep 13", "Footstep 14",
+        "Footstep 15", "Footstep 16", "Footstep 17", "Footstep 18", "Footstep 19",
+        "Footstep 20"
+        };
 
-        if (!isSprinting)
-            yield return new WaitForSeconds(0.3f);
-        else
-            yield return new WaitForSeconds(0.3f);
-
+        foreach (string footstepSound in footstepSounds)
+        {
+            if(moveDir.normalized.magnitude > 0.3f)
+            {
+                AudioManager.instance.playPlayerSFX(footstepSound);
+            }
+            else
+            {
+                AudioManager.instance.PlayerSource.Stop();
+            }
+            if (!isSprinting)
+                yield return new WaitForSeconds(.8f);
+            else
+                yield return new WaitForSeconds(0.3f);
+        }
         playSteps = false;
     }
 
@@ -210,7 +218,7 @@ public class playerController : MonoBehaviour, IDamage
         StartCoroutine(flashdmgScreen()); // Flash damage effect on screen.
         updatePlayerUI(); // Update player's health UI.
 
-        AS.PlayOneShot(playerHurt[Random.Range(0, playerHurt.Length)], playerHurtVol);
+        AudioManager.instance.playPlayerSFX("Damage SFX");
 
         // Check for player death.
         if (HP <= 0)

@@ -44,13 +44,13 @@ public class Chest : MonoBehaviour
 
     public void DeleteChest()
     {
-        gameManager.instance.HideTextBox();
         GiveItem();
-        for(int i = 0; i < chestList.Count; i++)
+        for (int i = 0; i < chestList.Count; i++)
         {
             gameManager.instance.UpdateTextBox("You've recieved..." + randomItem.name);
         }
         Destroy(gameObject); // Destroy the chest object after giving an item
+        gameManager.instance.HideTextBox();
     }
 
     private IEnumerator AudioLoop()

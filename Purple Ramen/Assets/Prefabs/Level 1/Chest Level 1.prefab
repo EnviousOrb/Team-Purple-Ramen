@@ -9815,7 +9815,7 @@ GameObject:
   - component: {fileID: 7195094352904387238}
   - component: {fileID: 3334914155704645497}
   - component: {fileID: 6356172316307767864}
-  - component: {fileID: 6257037832043792915}
+  - component: {fileID: 7326627049982731290}
   m_Layer: 0
   m_Name: Chest Level 1
   m_TagString: Untagged
@@ -9866,6 +9866,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: e1ad9803bb50ca4418093584404ca5e6, type: 3}
   - {fileID: 8300000, guid: d2400e0e202d38b459fc6737fda0d0cf, type: 3}
   chestLight: {fileID: 7333086915015461629}
+  AS: {fileID: 7326627049982731290}
 --- !u!95 &7195094352904387238
 Animator:
   serializedVersion: 5
@@ -9929,7 +9930,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 7.0461345, y: 2.711544, z: 5.214537}
   m_Center: {x: 0.047617916, y: 0.855772, z: -0.04458797}
---- !u!82 &6257037832043792915
+--- !u!82 &7326627049982731290
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9943,7 +9944,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

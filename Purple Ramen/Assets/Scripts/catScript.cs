@@ -5,12 +5,6 @@ using UnityEngine;
 public class catScript : MonoBehaviour
 {
     [SerializeField] private ItemData requiredItem; // The item the cat wants
-
-    [HeaderAttribute("----- Audio Components -----")]
-    [SerializeField] AudioSource AS;
-    [SerializeField] AudioClip[] catSpeech;
-    [Range(0, 1)][SerializeField] float catSpeechVol;
-
     bool isSpeaking;
 
     private void OnTriggerEnter(Collider other)
@@ -50,7 +44,9 @@ public class catScript : MonoBehaviour
     IEnumerator CatSpeak()
     {
         isSpeaking = true;
-        AS.PlayOneShot(catSpeech[Random.Range(0, catSpeech.Length)], catSpeechVol);
+        int randomIndex = UnityEngine.Random.Range(0, AudioManager.instance.NpcSFX.Length);
+        string randomSFXName = AudioManager.instance.NpcSFX[randomIndex].name;
+        AudioManager.instance.playNpcSFX(randomSFXName);
         yield return new WaitForSeconds(0.3f);
         isSpeaking = false;
     }

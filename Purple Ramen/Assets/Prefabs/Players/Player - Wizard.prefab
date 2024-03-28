@@ -2949,7 +2949,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 3590467474444880502}
   weapon: {fileID: 0}
-  AS: {fileID: 7530645113933781427}
   anim: {fileID: 2276185183078895382}
   HP: 10
   speed: 5
@@ -2963,18 +2962,6 @@ MonoBehaviour:
   shootDamage: 1
   shootDistance: 50
   shootRate: 0.5
-  playerJump:
-  - {fileID: 8300000, guid: 663454cfb394b994688a5e6afea1d8d8, type: 3}
-  playerJumpVol: 1
-  playerHurt:
-  - {fileID: 8300000, guid: 194df36f18e3ab04ab698920fec44600, type: 3}
-  playerHurtVol: 1
-  playerSteps:
-  - {fileID: 8300000, guid: 4544cd1f9b0d00a498e3602ecfffcacc, type: 3}
-  - {fileID: 8300000, guid: b8da35185c17df440a0d9e0309ac22a3, type: 3}
-  - {fileID: 8300000, guid: 9a7a2d7c3f0efa7408e14bd09744808d, type: 3}
-  - {fileID: 8300000, guid: 6154d2d90f91ac743a30a16a58f9fa32, type: 3}
-  playerStepsVol: 1
 --- !u!143 &3590467474444880502
 CharacterController:
   m_ObjectHideFlags: 0
@@ -3077,10 +3064,10 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
+  m_PlayOnAwake: 0
+  m_Volume: 0.25
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
