@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 // Controls the player's movements, interactions, and inventory management.
-public class playerController : MonoBehaviour, IDamage
+public class playerController : MonoBehaviour, IDamage, ISlow
 {
     [HeaderAttribute("----- Components -----")]
     [SerializeField] CharacterController controller; // The CharacterController component for moving the player.
@@ -50,6 +50,7 @@ public class playerController : MonoBehaviour, IDamage
     bool isCrouching;
     bool playSteps;
     bool isMoving;
+    bool isSlowed;
 
     void Start()
     {
@@ -87,6 +88,7 @@ public class playerController : MonoBehaviour, IDamage
     public void spawnPlayer()
     {
         HP = HPoriginal; // Reset player HP to original value.
+        speed = originalSpeed;
         updatePlayerUI(); // Update the player's UI elements.
         controller.enabled = false; // Temporarily disable the controller to move the player.
         transform.position = gameManager.instance.playerSpawnPos.transform.position; // Move player to spawn position.
@@ -96,12 +98,12 @@ public class playerController : MonoBehaviour, IDamage
     void movement()
     {
         // Handle sprinting input and adjust speed accordingly.
-        if (Input.GetButton("Fire3"))
+        if (Input.GetButton("Fire3") && !isSlowed)
         {
             speed = originalSpeed * sprintMultiplier;
             isSprinting = true;
         }
-        else
+        else if (!isSlowed)
         {
             speed = originalSpeed;
             isSprinting = false;
@@ -244,6 +246,27 @@ public class playerController : MonoBehaviour, IDamage
         gameManager.instance.playerDamageEffect.SetActive(true); // Show damage effect.
         yield return new WaitForSeconds(.1f); // Wait for a brief moment.
         gameManager.instance.playerDamageEffect.SetActive(false); // Hide damage effect.
+    }
+
+    public void getSlowed(float slowModifier, int slowLength)
+    {
+        Debug.Log("works?");
+        StartCoroutine(FlashSlow(slowLength));
+        StartCoroutine(Slow(slowModifier, slowLength));
+    }
+    IEnumerator FlashSlow(int slowLength)
+    {
+        gameManager.instance.playerSlowEffect.SetActive(true); 
+        yield return new WaitForSeconds(slowLength);
+        gameManager.instance.playerSlowEffect.SetActive(false);
+    }
+    IEnumerator Slow(float slowMod, int slowLength)
+    {
+        isSlowed = true;
+        speed = (float)originalSpeed * (float)slowMod;        
+        yield return new WaitForSeconds(slowLength);
+        speed = originalSpeed;
+        isSlowed = false;
     }
 
     // Updates player's health bar UI.

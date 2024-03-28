@@ -53,6 +53,9 @@ MonoBehaviour:
   damage: 5
   speed: 15
   lifespan: 3
+  speedMod: 0.7
+  slowLength: 2
+  self: {fileID: 0}
 --- !u!33 &3808436494783083762
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -249,7 +252,7 @@ TrailRenderer:
       atime6: 0
       atime7: 0
       m_Mode: 0
-      m_ColorSpace: 0
+      m_ColorSpace: -1
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
     numCornerVertices: 0

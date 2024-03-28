@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 // Controls enemy AI behavior, including movement, shooting, and interactions with the player.
-public class enemyAI : MonoBehaviour, IDamage
+public class enemyAI : MonoBehaviour, IDamage, ISlow
 {
     [HeaderAttribute("-----Components-----")]
     [SerializeField] Renderer model; // The enemy's visual model.
@@ -46,6 +46,7 @@ public class enemyAI : MonoBehaviour, IDamage
     [HeaderAttribute("-----The Stuffs-----")]
     [SerializeField] int scoreValue;
     public Spawner associatedSpawner;
+    int originalSpeed;
 
     //Bools
     bool isShooting; // Tracks if the enemy is currently shooting.
@@ -56,6 +57,7 @@ public class enemyAI : MonoBehaviour, IDamage
         originalMat = model.material; // Stores the original material.
         stoppingDistOrig = agent.stoppingDistance; // Stores the original stopping distance.
         agent.stoppingDistance = 0; // Resets stopping distance for roaming behavior.
+        originalSpeed = speed;
     }
 
     void Update()
@@ -99,8 +101,19 @@ public class enemyAI : MonoBehaviour, IDamage
         Vector3 playerDirection = gameManager.instance.player.transform.position - transform.position;
         playerDirection.y -= 1; // Adjusts bullet spawn height.
         Instantiate(bullet, shootPos.position, Quaternion.LookRotation(playerDirection)); // Spawns the bullet.
+        bullet.GetComponent<Bullet>().self = this.GetComponentInParent<CapsuleCollider>();
         yield return new WaitForSeconds(shootRate); // Waits before allowing next shot.
         isShooting = false;
+    }
+    public void getSlowed(float slowModifier, int slowLength)
+    {
+        StartCoroutine(Slow(slowModifier, slowLength));
+    }
+    IEnumerator Slow(float slowMod, int slowLength)
+    {
+        agent.speed = originalSpeed * slowMod;
+        yield return new WaitForSeconds(slowLength);
+        agent.speed = originalSpeed;
     }
 
     // Method called when the enemy takes damage.
@@ -185,7 +198,6 @@ public class enemyAI : MonoBehaviour, IDamage
         agent.stoppingDistance = 0; // Resets stopping distance if the player is not visible.
         return false; // Indicates that the player is not visible.
     }
-
     // Rotates the enemy to face the player.
     void faceTarget()
     {
