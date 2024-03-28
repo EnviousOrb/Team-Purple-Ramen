@@ -234,8 +234,10 @@ public class playerController : MonoBehaviour, IDamage, ISlow
         AudioManager.instance.playPlayerSFX("Damage SFX");
 
         // Check for player death.
+        Debug.Log("dies");
         if (HP <= 0)
         {
+            Debug.Log(HP);
             gameManager.instance.stateLose(); // Trigger game loss state.
         }
     }
@@ -250,7 +252,6 @@ public class playerController : MonoBehaviour, IDamage, ISlow
 
     public void getSlowed(float slowModifier, int slowLength)
     {
-        Debug.Log("works?");
         StartCoroutine(FlashSlow(slowLength));
         StartCoroutine(Slow(slowModifier, slowLength));
     }
