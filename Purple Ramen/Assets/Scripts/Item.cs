@@ -4,5 +4,11 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-    public ItemData itemData;
+    [SerializeField] ItemData ID;
+
+    private void OnTriggerEnter(Collider other)
+    {
+        gameManager.instance.PS.GetItem(ID);
+        Destroy(gameObject);
+    }
 }

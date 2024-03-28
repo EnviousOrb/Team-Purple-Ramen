@@ -15,18 +15,20 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuLose;
     [SerializeField] GameObject menuWin;
+    [SerializeField] public GameObject TextBox;
     public GameObject playerDamageEffect;
+    public GameObject playerSlowEffect;
     public Image HPbar;
-    [SerializeField] TMP_Text countText;
+    [SerializeField] TMP_Text TextBoxText;
 
-
+    public GameObject playerSpawnPos;
     public Image playerHPBar;
     public GameObject player;
     public playerController PS;
+    public int playerScore;
 
     public bool isPaused;
     float TimeScaleOrig;
-    int enemyCount;
 
     // Awake is called before Start
     void Awake()
@@ -35,6 +37,7 @@ public class gameManager : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         PS = player.GetComponent<playerController>();
         TimeScaleOrig = Time.timeScale;
+        playerSpawnPos = GameObject.FindWithTag("Player Spawn Pos");
     }
 
     // Update is called once per frame
@@ -49,10 +52,24 @@ public class gameManager : MonoBehaviour
         }
 
     }
+
+    public void UpdateTextBox(string newText)
+    {
+        TextBoxText.text = newText;
+        TextBox.SetActive(true);
+    }
+    public void HideTextBox()
+    {
+        TextBox.SetActive(false);
+    }
+
     public void stateWin()
     {
         menuActive = menuWin;
         Pause();
+        AudioManager.instance.stopAll();
+        AudioManager.instance.playSFX("Level Complete");
+        AudioManager.instance.stopAll();
     }
     public void statePaused()
     {
@@ -63,6 +80,7 @@ public class gameManager : MonoBehaviour
     {
         menuActive = menuLose;
         Pause();
+        AudioManager.instance.stopAll();
     }
     public void stateNormal()
     {
@@ -72,15 +90,6 @@ public class gameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         menuActive.SetActive(false);
         menuActive = null;
-    }
-    public void UpdateEnemyCount(int amount)
-    {
-        enemyCount += amount;
-        countText.text = enemyCount.ToString();
-        if (enemyCount == 0)
-        {
-            stateWin();
-        }
     }
     void Pause()
     {

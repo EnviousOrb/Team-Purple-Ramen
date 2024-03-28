@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using UnityEditor;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Item", menuName = "Scriptable Objects/Item")]
+[CreateAssetMenu(fileName = "NewItem", menuName = "Inventory/Item", order = 1)]
 public class ItemData : ScriptableObject
 {
-    [Header("Properties")]
-    public itemType itemType;
-    public Sprite itemSprite;
+    public string itemName; // Optional, for identification
+    public Sprite itemSprite; // The sprite to display in the UI
+    
 }
 
-public enum itemType {Apple, Banana, Carrot, Fish, Mushroom, Tomato, Watermelon};

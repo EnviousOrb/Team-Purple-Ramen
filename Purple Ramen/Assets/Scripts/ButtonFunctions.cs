@@ -14,6 +14,13 @@ public class ButtonFunctions : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         gameManager.instance.stateNormal();
     }
+
+    public void respawn()
+    {
+        gameManager.instance.stateNormal();
+        gameManager.instance.PS.spawnPlayer();
+    }
+
     public void quit()
     {
 #if UNITY_EDITOR
