@@ -16,7 +16,7 @@ public class meleeDamage : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // Ignore the collision if the other object's collider is marked as a trigger.
-        if (other.isTrigger)
+        if (other.isTrigger || other.CompareTag("Player"))
             return;
 
         // Attempts to get an IDamage interface from the collided object.
