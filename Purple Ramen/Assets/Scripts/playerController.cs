@@ -231,7 +231,6 @@ public class playerController : MonoBehaviour, IDamage, ISlow
         StartCoroutine(flashdmgScreen()); // Flash damage effect on screen.
         updatePlayerUI(); // Update player's health UI.
 
-
         // Check for player death.
         if (HP <= 0)
         {
