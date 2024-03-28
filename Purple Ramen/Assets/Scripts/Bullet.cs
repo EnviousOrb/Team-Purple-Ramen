@@ -24,7 +24,7 @@ public class Bullet : MonoBehaviour
     {
         // Ignore the collision if the other object's collider is marked as a trigger.
         if (other.isTrigger)
-            return;
+           return;
 
         // Attempts to get an IDamage interface from the collided object.
         IDamage dmg = other.GetComponent<IDamage>();
