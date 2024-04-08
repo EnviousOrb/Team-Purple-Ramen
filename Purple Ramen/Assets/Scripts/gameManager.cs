@@ -16,6 +16,7 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject menuLose;
     [SerializeField] GameObject menuWin;
     [SerializeField] public GameObject TextBox;
+    public GameObject checkpointMenu;
     public GameObject playerDamageEffect;
     public GameObject playerSlowEffect;
     public Image HPbar;

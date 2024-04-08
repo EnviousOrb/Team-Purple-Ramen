@@ -215,7 +215,7 @@ public class playerController : MonoBehaviour, IDamage, ISlow
     {
         isMeleeing = true;
         anim.SetTrigger("Melee");
-        RaycastHit hit;
+        //RaycastHit hit;
         //if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootDistance))
         //{
         //    Debug.Log(hit.collider.name);

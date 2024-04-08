@@ -100,7 +100,7 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow
         animator.SetTrigger("Shoot"); // Triggers the shooting animation.
         Vector3 playerDirection = gameManager.instance.player.transform.position - transform.position;
         Instantiate(bullet, shootPos.position, Quaternion.LookRotation(playerDirection)); // Spawns the bullet.
-        bullet.GetComponent<Bullet>().self = this.GetComponentInParent<CapsuleCollider>();
+        bullet.GetComponent<Bullet>().self = GetComponentInParent<CapsuleCollider>();
         yield return new WaitForSeconds(shootRate); // Waits before allowing next shot.
         isShooting = false;
     }
