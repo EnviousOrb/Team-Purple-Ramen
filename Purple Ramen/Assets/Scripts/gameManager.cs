@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using STMTools;
 
 public class gameManager : MonoBehaviour
 {
@@ -20,7 +20,7 @@ public class gameManager : MonoBehaviour
     public GameObject playerDamageEffect;
     public GameObject playerSlowEffect;
     public Image HPbar;
-    [SerializeField] TMP_Text TextBoxText;
+    [SerializeField] SuperTextMesh TextBoxText;
 
     public GameObject playerSpawnPos;
     public Image playerHPBar;

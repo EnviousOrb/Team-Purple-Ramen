@@ -1,14 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
+using System.Linq;
+using UnityEngine.UI;
+using STMTools;
 
 public class npcScript : MonoBehaviour
 {
-    [SerializeField] private ItemData requiredItem;
+    [SerializeField] private List<GameObject> requiredItemsGO;
+    [HeaderAttribute("---------ItemData List or GameObject List (Choose One!)-----------")]
+    [SerializeField] private List<ItemData> requiredItemsIT;
     [SerializeField] private ItemData rewardItem;
-    [SerializeField] private TextMeshPro questText;
-    [SerializeField] private TextMeshPro thankText;
+    [SerializeField] private SuperTextMesh questText;
+    [SerializeField] private SuperTextMesh thankText;
     [SerializeField] private GameObject gateToUnlock;
 
     bool isSpeaking;
@@ -18,17 +22,15 @@ public class npcScript : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerController player = other.GetComponent<playerController>();
-            if (player != null && player.itemList.Contains(requiredItem))
+
+            if (requiredItemsGO.All(item => item.activeInHierarchy))
             {
-                gameManager.instance.stateWin();
-
-                player.itemList.Remove(requiredItem);
-
                 player.itemList.Add(rewardItem);
 
                 UIManager.instance.UpdateInventoryUI(player.itemList);
 
                 gameManager.instance.UpdateTextBox(thankText.text);
+
                 StartCoroutine(NpcSpeak());
 
                 if (gateToUnlock != null)
