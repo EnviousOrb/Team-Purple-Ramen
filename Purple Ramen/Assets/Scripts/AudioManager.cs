@@ -20,7 +20,7 @@ public class AudioManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        playBGM("Thug's Hangout");
+        playBGM("The Farm Level");
     }
 
     public void playBGM(string name)

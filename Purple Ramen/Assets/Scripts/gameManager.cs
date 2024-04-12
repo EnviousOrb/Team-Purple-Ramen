@@ -56,6 +56,7 @@ public class gameManager : MonoBehaviour
 
     public void UpdateTextBox(string newText)
     {
+        TextBoxText.Rebuild();
         TextBoxText.text = newText;
         TextBox.SetActive(true);
     }
@@ -75,6 +76,7 @@ public class gameManager : MonoBehaviour
     public void statePaused()
     {
         menuActive = menuPause;
+        HideTextBox();
         Pause();
     }
     public void stateLose()

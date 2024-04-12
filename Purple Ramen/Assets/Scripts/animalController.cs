@@ -76,9 +76,9 @@ public class animalController : MonoBehaviour, IDamage
     IEnumerator RunRandomly()
     {
         float runTime = 2.0f;
-        float startTime = Time.time;
+        float startTime = Time.deltaTime;
 
-        while (Time.time - startTime < runTime)
+        while (Time.deltaTime - startTime < runTime)
         {
             Vector3 randomDirection = new(Random.Range(-1.0f, 1.0f), 0, Random.Range(-1.0f, 1.0f));
             agent.SetDestination(transform.position + randomDirection * roamDist);

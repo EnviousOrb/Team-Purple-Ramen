@@ -2,14 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-using UnityEngine.UI;
-using STMTools;
 
 public class npcScript : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> requiredItemsGO;
-    [HeaderAttribute("---------ItemData List or GameObject List (Choose One!)-----------")]
-    [SerializeField] private List<ItemData> requiredItemsIT;
+    [SerializeField] private List<GameObject> requiredItems;
     [SerializeField] private ItemData rewardItem;
     [SerializeField] private SuperTextMesh questText;
     [SerializeField] private SuperTextMesh thankText;
@@ -23,7 +19,7 @@ public class npcScript : MonoBehaviour
         {
             playerController player = other.GetComponent<playerController>();
 
-            if (requiredItemsGO.All(item => item.activeInHierarchy))
+            if (requiredItems.All(obj => obj.activeInHierarchy))
             {
                 player.itemList.Add(rewardItem);
 
