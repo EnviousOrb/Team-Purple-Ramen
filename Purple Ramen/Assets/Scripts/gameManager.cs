@@ -15,6 +15,7 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuLose;
     [SerializeField] GameObject menuWin;
+    [SerializeField] GameObject menuInv;
     [SerializeField] public GameObject TextBox;
     public GameObject checkpointMenu;
     public GameObject playerDamageEffect;
@@ -52,26 +53,43 @@ public class gameManager : MonoBehaviour
                 stateNormal();
         }
 
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            if(menuActive == null)
+                stateInv();
+            else if (menuActive == menuInv)
+                stateNormal();
+        }
     }
 
     public void UpdateTextBox(string newText)
     {
-        TextBoxText.Rebuild();
-        TextBoxText.text = newText;
+        if (TextBoxText.reading == true)
+        {
+            TextBoxText.Rebuild();
+        }
         TextBox.SetActive(true);
+        TextBoxText.text = newText;
     }
     public void HideTextBox()
     {
-        TextBox.SetActive(false);
+         TextBox.SetActive(false);
     }
 
     public void stateWin()
     {
         menuActive = menuWin;
+        HideTextBox();
         Pause();
         AudioManager.instance.stopAll();
         AudioManager.instance.playSFX("Level Complete");
         AudioManager.instance.stopAll();
+    }
+    public void stateInv()
+    {
+        menuActive = menuInv;
+        HideTextBox();
+        Pause();
     }
     public void statePaused()
     {
@@ -82,6 +100,7 @@ public class gameManager : MonoBehaviour
     public void stateLose()
     {
         menuActive = menuLose;
+        HideTextBox();
         Pause();
         AudioManager.instance.stopAll();
     }

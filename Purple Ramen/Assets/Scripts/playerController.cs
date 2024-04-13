@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -292,5 +293,7 @@ public class playerController : MonoBehaviour, IDamage, ISlow
 
         // Refresh the UI to reflect the new inventory state
         UIManager.instance.UpdateInventoryUI(itemList);
+
+        UIManager.instance.UpdateMainSlot(newItem);
     }
 }   
