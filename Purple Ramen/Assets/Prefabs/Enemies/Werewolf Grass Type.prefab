@@ -1017,11 +1017,11 @@ MonoBehaviour:
   agent: {fileID: 7706438468698545989}
   shootPos: {fileID: 2051113157338785188}
   HP: 12
-  speed: 6
+  speed: 3
   bullet: {fileID: 6437394925537091678, guid: 8c117779af4523844aad0b5f25097d70, type: 3}
   damageMat: {fileID: 2100000, guid: 61a868ed95d3914428f24f0450c95593, type: 2}
   shootRate: 1
-  stoppingDist: 2
+  stoppingDist: 5
   animator: {fileID: 4388499777772415858}
   animSpeedTrans: 1
   headPos: {fileID: 2609458817533515641}
@@ -1067,11 +1067,11 @@ NavMeshAgent:
   m_Acceleration: 11
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 2
+  m_StoppingDistance: 3
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 0
   m_AutoRepath: 1
-  m_Height: 2
+  m_Height: 2.5
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
@@ -1090,11 +1090,11 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 7
+  m_Radius: 15
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &4799585882578898476
 CapsuleCollider:
@@ -1118,7 +1118,7 @@ CapsuleCollider:
   m_Radius: 0.5
   m_Height: 1.5
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &4327441241327417518
 GameObject:
   m_ObjectHideFlags: 0

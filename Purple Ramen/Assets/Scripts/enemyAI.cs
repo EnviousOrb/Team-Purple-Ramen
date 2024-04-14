@@ -85,6 +85,8 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow
             yield return new WaitForSeconds(roamPauseTime); // Waits before choosing a new destination.
 
             Vector3 randomPos = Random.insideUnitSphere * roamDist + startingPos; // Chooses a new destination.
+            randomPos += startingPos;
+            
             NavMeshHit hit;
             NavMesh.SamplePosition(randomPos, out hit, roamDist, 1); // Tries to find a valid point on the NavMesh.
             agent.SetDestination(hit.position); // Sets the new destination.
