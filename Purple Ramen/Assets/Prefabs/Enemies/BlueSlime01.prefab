@@ -137,8 +137,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2890050583476706324}
-  - component: {fileID: 3901371793883687135}
   - component: {fileID: 1434483921631386451}
+  - component: {fileID: 3901371793883687135}
   - component: {fileID: 6759688695660923643}
   - component: {fileID: 4094401122470570986}
   - component: {fileID: 2076949602539769819}
@@ -168,27 +168,6 @@ Transform:
   - {fileID: 3201999240931451485}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &3901371793883687135
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2289054457825258935}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 65e1d61f7285458293848a22ca5f512f, type: 3}
-  m_Controller: {fileID: 9100000, guid: 6843926defe641e58b9e0ea8fdc4c9c5, type: 2}
-  m_CullingMode: 1
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &1434483921631386451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -220,6 +199,27 @@ MonoBehaviour:
   roamPauseTime: 2
   scoreValue: 0
   associatedSpawner: {fileID: 0}
+--- !u!95 &3901371793883687135
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2289054457825258935}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 65e1d61f7285458293848a22ca5f512f, type: 3}
+  m_Controller: {fileID: 9100000, guid: 6843926defe641e58b9e0ea8fdc4c9c5, type: 2}
+  m_CullingMode: 1
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!195 &6759688695660923643
 NavMeshAgent:
   m_ObjectHideFlags: 0

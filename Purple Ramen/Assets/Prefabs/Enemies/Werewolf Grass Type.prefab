@@ -972,7 +972,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3890572397516007303}
+  - component: {fileID: 4033889340799178130}
   - component: {fileID: 4388499777772415858}
+  - component: {fileID: 7706438468698545989}
+  - component: {fileID: 4109399214230920331}
+  - component: {fileID: 4799585882578898476}
   m_Layer: 0
   m_Name: Werewolf Grass Type
   m_TagString: Untagged
@@ -997,6 +1001,37 @@ Transform:
   - {fileID: 8080801643976997665}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4033889340799178130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4273688902249092217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3a6f4ab2f5b2e6499094e1aab46a5bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  model: {fileID: 2644370754493588809}
+  agent: {fileID: 7706438468698545989}
+  shootPos: {fileID: 2051113157338785188}
+  HP: 12
+  speed: 6
+  bullet: {fileID: 6437394925537091678, guid: 8c117779af4523844aad0b5f25097d70, type: 3}
+  damageMat: {fileID: 2100000, guid: 61a868ed95d3914428f24f0450c95593, type: 2}
+  shootRate: 1
+  stoppingDist: 2
+  animator: {fileID: 4388499777772415858}
+  animSpeedTrans: 1
+  headPos: {fileID: 2609458817533515641}
+  viewCone: 180
+  faceTargetSpeed: 2
+  animatedSpeedTrans: 1
+  roamDist: 25
+  roamPauseTime: 1
+  scoreValue: 0
+  associatedSpawner: {fileID: 0}
 --- !u!95 &4388499777772415858
 Animator:
   serializedVersion: 5
@@ -1018,6 +1053,72 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!195 &7706438468698545989
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4273688902249092217}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 5
+  m_Acceleration: 11
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 2
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 0
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!135 &4109399214230920331
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4273688902249092217}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 7
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!136 &4799585882578898476
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4273688902249092217}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1.5
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4327441241327417518
 GameObject:
   m_ObjectHideFlags: 0
