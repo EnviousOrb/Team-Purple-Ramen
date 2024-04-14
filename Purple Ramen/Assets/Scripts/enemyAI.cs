@@ -11,6 +11,7 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow
     [SerializeField] Renderer model; // The enemy's visual model.
     [SerializeField] NavMeshAgent agent; // Navigation component for AI movement.
     [SerializeField] Transform shootPos; // Position from which the enemy shoots.
+    [SerializeField] GameObject itemToDrop; //Optional. Drops an item from a pre-defined position after enemy dies
 
     [HeaderAttribute("-----Enemy Stats-----")]
     [SerializeField] int HP; // Enemy health points.
@@ -133,6 +134,12 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow
                 associatedSpawner.UpdateEnemies(-1);
             //Does something else i guess??
             gameManager.instance.playerScore += scoreValue;
+
+            if (itemToDrop != null)
+            {
+                itemToDrop.SetActive(true);
+            }
+
             // Destroys the enemy game object.
             Destroy(gameObject);
         }

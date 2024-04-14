@@ -25,6 +25,7 @@ public class animalController : MonoBehaviour, IDamage
 
     void Start()
     {
+        startingPos = transform.position;
         originalMat = model.material;
         stoppingDistOrig = agent.stoppingDistance;
         agent.stoppingDistance = 0;
@@ -33,10 +34,10 @@ public class animalController : MonoBehaviour, IDamage
 
     void Update()
     {
-        StartCoroutine(roam());
+        StartCoroutine(Roam());
     }
 
-    IEnumerator roam()
+    IEnumerator Roam()
     {
         if (agent.remainingDistance < 0.05f && !destinationChosen)
         {
@@ -55,7 +56,7 @@ public class animalController : MonoBehaviour, IDamage
     public void takeDamage(int amount)
     {
         HP -= amount;
-        StartCoroutine(flashRed());
+        StartCoroutine(FlashRed());
         StartCoroutine(RunRandomly());
 
         if (HP <= 0)
@@ -66,7 +67,7 @@ public class animalController : MonoBehaviour, IDamage
         }
     }
 
-    IEnumerator flashRed()
+    IEnumerator FlashRed()
     {
         model.material = damageMat;
         yield return new WaitForSeconds(0.1f);

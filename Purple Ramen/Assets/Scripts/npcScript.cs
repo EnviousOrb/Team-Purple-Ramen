@@ -10,8 +10,10 @@ public class npcScript : MonoBehaviour
     [SerializeField] private SuperTextMesh questText;
     [SerializeField] private SuperTextMesh thankText;
     [SerializeField] private GameObject gateToUnlock;
+    [SerializeField] private GameObject checkpointToUnlock;
 
     bool isSpeaking;
+    bool rewardGiven = false;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -21,8 +23,15 @@ public class npcScript : MonoBehaviour
 
             if (requiredItems.All(obj => obj.activeInHierarchy))
             {
-                player.itemList.Add(rewardItem);
-
+                if (!rewardGiven)
+                {
+                    player.itemList.Add(rewardItem);
+                    rewardGiven = true;
+                }
+                if(checkpointToUnlock != null)
+                {
+                    checkpointToUnlock.SetActive(true);
+                }
                 UIManager.instance.UpdateInventoryUI(player.itemList);
 
                 gameManager.instance.UpdateTextBox(thankText.text);
