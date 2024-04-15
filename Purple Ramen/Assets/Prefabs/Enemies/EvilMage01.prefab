@@ -614,8 +614,8 @@ GameObject:
   - component: {fileID: 8446238464630642690}
   - component: {fileID: 6417579501428815257}
   - component: {fileID: 5264015501902419934}
-  - component: {fileID: 2609623313673098609}
   - component: {fileID: 8424389117789810144}
+  - component: {fileID: 2609623313673098609}
   m_Layer: 0
   m_Name: EvilMage01
   m_TagString: Enemy
@@ -656,10 +656,10 @@ MonoBehaviour:
   agent: {fileID: 5264015501902419934}
   shootPos: {fileID: 2998330134539399819}
   HP: 5
-  speed: 5
+  speed: 2
   bullet: {fileID: 7135714001530856501, guid: 197a9dc5b7c7eb84a98e3a96ec525dee, type: 3}
-  shootRate: 2
   damageMat: {fileID: 2100000, guid: 61a868ed95d3914428f24f0450c95593, type: 2}
+  shootRate: 2
   stoppingDist: 10
   animator: {fileID: 6417579501428815257}
   animSpeedTrans: 1
@@ -669,6 +669,8 @@ MonoBehaviour:
   animatedSpeedTrans: 1
   roamDist: 15
   roamPauseTime: 3
+  scoreValue: 0
+  associatedSpawner: {fileID: 0}
 --- !u!95 &6417579501428815257
 Animator:
   serializedVersion: 5
@@ -712,6 +714,27 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!135 &8424389117789810144
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2737861739852807587}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 20
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &2609623313673098609
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -735,27 +758,6 @@ CapsuleCollider:
   m_Height: 1.5
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
---- !u!135 &8424389117789810144
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2737861739852807587}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 11.3
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2755715790291030808
 GameObject:
   m_ObjectHideFlags: 0

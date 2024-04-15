@@ -9,7 +9,6 @@ public class AudioManager : MonoBehaviour
     public soundObject[] BGM, SFX, NpcSFX, PlayerSFX;
     public AudioSource BGMSource, SFXSource,NPCSource, PlayerSource;
 
-
     private void Awake()
     {
         if (instance == null)
@@ -20,22 +19,38 @@ public class AudioManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        playBGM("Thug's Hangout");
+        playBGM("The Farm Level");
     }
-
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Main Area"))
+        {
+            BGMSource.Stop();
+            playBGM("The Farm Level");
+        }
+        else if(other.gameObject.CompareTag("Miniboss Area"))
+        {
+            BGMSource.Stop();
+            playBGM("The Beast of The Forest");
+        }
+    }
     public void playBGM(string name)
     {
         soundObject so = Array.Find(BGM, x => x.name == name);
+            if (so == null)
+            {
+                Debug.Log("Background Music Not Found");
+            }
+            else
+            {
+                if (BGMSource.isPlaying)
+                {
+                    BGMSource.Stop();
+                }
 
-        if (so == null)
-        {
-            Debug.Log("Background Music Not Found");
-        }
-        else
-        {
-            BGMSource.clip = so.soundClip;
-            BGMSource.Play();
-        }
+                BGMSource.clip = so.soundClip;
+                BGMSource.Play();
+            }
     }
 
     public void playPlayerSFX(string name)

@@ -9,6 +9,5 @@ public class ItemData : ScriptableObject
 {
     public string itemName; // Optional, for identification
     public Sprite itemSprite; // The sprite to display in the UI
-    
+    public string itemDescription; //The description for the item
 }
-

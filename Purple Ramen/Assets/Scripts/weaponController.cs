@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class weaponController : MonoBehaviour
 {
-    public WeaponData WD;
+    public staffElementalStats SES;
     public bool isAttacking = false;
 
     public IEnumerator SwordAttack()
     {
          isAttacking = true;
-         Animator Animate = WD.weaponModel.GetComponent<Animator>();
+         Animator Animate = SES.staffOrbModel.GetComponent<Animator>();
          Animate.SetTrigger("SwordAttack");
-         AudioSource AS = WD.weaponModel.GetComponent<AudioSource>();
-         AS.PlayOneShot(WD.AC);
-         yield return new WaitForSeconds(WD.cooldown);
+         AudioSource AS = SES.staffOrbModel.GetComponent<AudioSource>();
+         //AS.PlayOneShot(SES.AC);
+         yield return new WaitForSeconds(SES.spellCooldown);
          isAttacking = false;
     }
 
@@ -22,23 +22,23 @@ public class weaponController : MonoBehaviour
     {
         isAttacking = true;
         RaycastHit hit;
-        if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, WD.Range))
+        if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, SES.spellRange))
         {
             Debug.Log(hit.collider.name);
             IDamage dmg = hit.collider.GetComponent<IDamage>();
 
             if (hit.transform != transform && dmg != null)
             {
-                dmg.takeDamage(WD.Damage);
+                dmg.takeDamage(SES.spellDamage);
             }
         }
-        yield return new WaitForSeconds(WD.cooldown);
+        yield return new WaitForSeconds(SES.spellCooldown);
         isAttacking = false;
     }
-    public void SetWeapon(WeaponData newWeapon)
+    public void SetWeapon(staffElementalStats newStaff)
     {
-        WD = newWeapon;
-        WD.weaponModel.GetComponent<MeshFilter>().sharedMesh = newWeapon.weaponModel.GetComponent<MeshFilter>().sharedMesh;
-        WD.weaponModel.GetComponent<MeshRenderer>().sharedMaterial = newWeapon.weaponModel.GetComponent<MeshRenderer>().sharedMaterial;
+        SES = newStaff;
+        SES.staffOrbModel.GetComponent<MeshFilter>().sharedMesh = newStaff.staffOrbModel.GetComponent<MeshFilter>().sharedMesh;
+        SES.staffOrbModel.GetComponent<MeshRenderer>().sharedMaterial = newStaff.staffOrbModel.GetComponent<MeshRenderer>().sharedMaterial;
     }
 }

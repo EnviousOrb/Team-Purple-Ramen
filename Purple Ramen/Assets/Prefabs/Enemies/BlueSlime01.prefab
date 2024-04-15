@@ -137,8 +137,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2890050583476706324}
-  - component: {fileID: 3901371793883687135}
   - component: {fileID: 1434483921631386451}
+  - component: {fileID: 3901371793883687135}
   - component: {fileID: 6759688695660923643}
   - component: {fileID: 4094401122470570986}
   - component: {fileID: 2076949602539769819}
@@ -168,6 +168,37 @@ Transform:
   - {fileID: 3201999240931451485}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1434483921631386451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2289054457825258935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3a6f4ab2f5b2e6499094e1aab46a5bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  model: {fileID: 1722219407743029143}
+  agent: {fileID: 6759688695660923643}
+  shootPos: {fileID: 5176858663554489185}
+  HP: 5
+  speed: 4
+  bullet: {fileID: 6654342452342103052, guid: 981cb1a764e5eb346aa6494c88ad1c1f, type: 3}
+  damageMat: {fileID: 2100000, guid: 61a868ed95d3914428f24f0450c95593, type: 2}
+  shootRate: 1
+  stoppingDist: 5
+  animator: {fileID: 3901371793883687135}
+  animSpeedTrans: 1
+  headPos: {fileID: 8551014261762490935}
+  viewCone: 180
+  faceTargetSpeed: 2
+  animatedSpeedTrans: 1
+  roamDist: 15
+  roamPauseTime: 2
+  scoreValue: 0
+  associatedSpawner: {fileID: 0}
 --- !u!95 &3901371793883687135
 Animator:
   serializedVersion: 5
@@ -189,37 +220,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1434483921631386451
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2289054457825258935}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3a6f4ab2f5b2e6499094e1aab46a5bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  model: {fileID: 1722219407743029143}
-  agent: {fileID: 6759688695660923643}
-  shootPos: {fileID: 5176858663554489185}
-  HP: 5
-  speed: 5
-  bullet: {fileID: 6654342452342103052, guid: 981cb1a764e5eb346aa6494c88ad1c1f, type: 3}
-  damageMat: {fileID: 2100000, guid: 61a868ed95d3914428f24f0450c95593, type: 2}
-  shootRate: 1
-  stoppingDist: 30
-  animator: {fileID: 3901371793883687135}
-  animSpeedTrans: 1
-  headPos: {fileID: 8551014261762490935}
-  viewCone: 180
-  faceTargetSpeed: 2
-  animatedSpeedTrans: 1
-  roamDist: 15
-  roamPauseTime: 2
-  scoreValue: 0
-  associatedSpawner: {fileID: 0}
 --- !u!195 &6759688695660923643
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -234,7 +234,7 @@ NavMeshAgent:
   m_Acceleration: 10
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 10
+  m_StoppingDistance: 2.5
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 0
   m_AutoRepath: 1
@@ -261,7 +261,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 5
+  m_Radius: 15
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &2076949602539769819
 CapsuleCollider:

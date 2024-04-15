@@ -11,6 +11,7 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow
     [SerializeField] Renderer model; // The enemy's visual model.
     [SerializeField] NavMeshAgent agent; // Navigation component for AI movement.
     [SerializeField] Transform shootPos; // Position from which the enemy shoots.
+    [SerializeField] GameObject itemToDrop; //Optional. Drops an item from a pre-defined position after enemy dies
 
     [HeaderAttribute("-----Enemy Stats-----")]
     [SerializeField] int HP; // Enemy health points.
@@ -85,6 +86,8 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow
             yield return new WaitForSeconds(roamPauseTime); // Waits before choosing a new destination.
 
             Vector3 randomPos = Random.insideUnitSphere * roamDist + startingPos; // Chooses a new destination.
+            randomPos += startingPos;
+            
             NavMeshHit hit;
             NavMesh.SamplePosition(randomPos, out hit, roamDist, 1); // Tries to find a valid point on the NavMesh.
             agent.SetDestination(hit.position); // Sets the new destination.
@@ -131,6 +134,12 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow
                 associatedSpawner.UpdateEnemies(-1);
             //Does something else i guess??
             gameManager.instance.playerScore += scoreValue;
+
+            if (itemToDrop != null)
+            {
+                itemToDrop.SetActive(true);
+            }
+
             // Destroys the enemy game object.
             Destroy(gameObject);
         }

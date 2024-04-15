@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using STMTools;
 
 public class gameManager : MonoBehaviour
 {
@@ -15,12 +15,13 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuLose;
     [SerializeField] GameObject menuWin;
+    [SerializeField] GameObject menuInv;
     [SerializeField] public GameObject TextBox;
     public GameObject checkpointMenu;
     public GameObject playerDamageEffect;
     public GameObject playerSlowEffect;
     public Image HPbar;
-    [SerializeField] TMP_Text TextBoxText;
+    [SerializeField] SuperTextMesh TextBoxText;
 
     public GameObject playerSpawnPos;
     public Image playerHPBar;
@@ -52,34 +53,54 @@ public class gameManager : MonoBehaviour
                 stateNormal();
         }
 
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            if(menuActive == null)
+                stateInv();
+            else if (menuActive == menuInv)
+                stateNormal();
+        }
     }
 
     public void UpdateTextBox(string newText)
     {
-        TextBoxText.text = newText;
+        if (TextBoxText.reading == true)
+        {
+            TextBoxText.Rebuild();
+        }
         TextBox.SetActive(true);
+        TextBoxText.text = newText;
     }
     public void HideTextBox()
     {
-        TextBox.SetActive(false);
+         TextBox.SetActive(false);
     }
 
     public void stateWin()
     {
         menuActive = menuWin;
+        HideTextBox();
         Pause();
         AudioManager.instance.stopAll();
         AudioManager.instance.playSFX("Level Complete");
         AudioManager.instance.stopAll();
     }
+    public void stateInv()
+    {
+        menuActive = menuInv;
+        HideTextBox();
+        Pause();
+    }
     public void statePaused()
     {
         menuActive = menuPause;
+        HideTextBox();
         Pause();
     }
     public void stateLose()
     {
         menuActive = menuLose;
+        HideTextBox();
         Pause();
         AudioManager.instance.stopAll();
     }

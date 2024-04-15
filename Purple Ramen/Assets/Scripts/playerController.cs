@@ -1,38 +1,44 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 using UnityEngine.UI;
 
-// Controls the player's movements, interactions, and inventory management.
+//////////////////////////////////////////////////////////////////////////////
+// Controls the player's movements, interactions, and inventory management. //
+//////////////////////////////////////////////////////////////////////////////
+
 public class playerController : MonoBehaviour, IDamage, ISlow
 {
     [HeaderAttribute("----- Components -----")]
-    [SerializeField] CharacterController controller; // The CharacterController component for moving the player.
-    [SerializeField] weaponController weapon; // The current weapon controller.
+    [SerializeField] CharacterController controller;    // The CharacterController component for moving the player.
+    [SerializeField] weaponController weapon;           // The current weapon controller.
     [SerializeField] Animator anim;
 
     [HeaderAttribute("----- Player Stats -----")]
-    [Range(0, 20)][SerializeField] int HP; // The player's health points.
-    [Range(1, 5)][SerializeField] float speed; // Movement speed of the player.
+    [Range(0, 20)][SerializeField] int HP;              // The player's health points.
+    [Range(1, 5)][SerializeField] float speed;          // Movement speed of the player.
     [Range(2, 8)][SerializeField] float sprintMultiplier; // The multiplier to apply to speed when sprinting.
-    [Range(1, 3)][SerializeField] int jumps; // The number of consecutive jumps the player can perform.
-    [Range(5, 25)][SerializeField] int jumpSpeed; // The vertical speed of the player's jump.
-    [Range(-15, -35)][SerializeField] int gravity; // The gravity affecting the player.
+    [Range(1, 3)][SerializeField] int jumps;            // The number of consecutive jumps the player can perform.
+    [Range(5, 25)][SerializeField] int jumpSpeed;       // The vertical speed of the player's jump.
+    [Range(-15, -35)][SerializeField] int gravity;      // The gravity affecting the player.
     
 
     [HeaderAttribute("----- Item Inventory -----")]
      public List<ItemData> itemList = new List<ItemData>(); // Player's inventory
 
     [HeaderAttribute("----- Weapon Components -----")]
-    [SerializeField] Transform shootPos; // The position from which bullets are fired.
-    [SerializeField] GameObject bullet; // The bullet prefab.
+    [SerializeField] Transform shootPos;        // The position from which projectiles are fired.
+    [SerializeField] GameObject bullet;         // The projectile prefab.
     [SerializeField] Collider staffCollider;
 
     [HeaderAttribute("----- Wizard Range Attack -----")]
-    [SerializeField] int shootDamage;
-    [SerializeField] int shootDistance;
-    [SerializeField] float shootRate;
+    [SerializeField] List<staffElementalStats> staffList;   // Inventory to hold all aquired staves.
+    [SerializeField] GameObject staffOrbModel;  // The staff orb container. 
+    [SerializeField] int shootDamage;           // Default Shoot Damage to be overwritten by the staff stats.
+    [SerializeField] int shootDistance;         // Default Shoot Distance to be overwritten.
+    [SerializeField] float shootRate;           // Default Shoot Rate to be overwritten.
 
     // Private variables for internal state management
     int jumpcount; // Tracks the number of jumps performed consecutively.
@@ -82,6 +88,20 @@ public class playerController : MonoBehaviour, IDamage, ISlow
             {
                 StartCoroutine(melee());
             }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Main Area"))
+        {
+            AudioManager.instance.BGMSource.Stop();
+            AudioManager.instance.playBGM("The Farm Level");
+        }
+        else if (other.gameObject.CompareTag("Miniboss Area"))
+        {
+            AudioManager.instance.BGMSource.Stop();
+            AudioManager.instance.playBGM("The Beast of The Forest");
         }
     }
 
@@ -292,5 +312,7 @@ public class playerController : MonoBehaviour, IDamage, ISlow
 
         // Refresh the UI to reflect the new inventory state
         UIManager.instance.UpdateInventoryUI(itemList);
+
+        UIManager.instance.UpdateMainSlot(newItem);
     }
 }   
