@@ -994,7 +994,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6767430074910377976}
@@ -1016,6 +1016,7 @@ MonoBehaviour:
   model: {fileID: 2644370754493588809}
   agent: {fileID: 7706438468698545989}
   shootPos: {fileID: 2051113157338785188}
+  itemToDrop: {fileID: 0}
   HP: 12
   speed: 3
   bullet: {fileID: 6437394925537091678, guid: 8c117779af4523844aad0b5f25097d70, type: 3}
