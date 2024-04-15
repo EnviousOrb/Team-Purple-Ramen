@@ -41,19 +41,19 @@ public class playerController : MonoBehaviour, IDamage, ISlow
     [SerializeField] float shootRate;           // Default Shoot Rate to be overwritten.
 
     // Private variables for internal state management
-    int jumpcount; // Tracks the number of jumps performed consecutively.
-    Vector3 moveDir; // The direction of movement.
-    Vector3 playerVel; // The player's current velocity.
-    float originalSpeed; // The original speed of the player, for restoring after sprinting.
-    int HPoriginal; // The original health points of the player, for UI updates.
-    int selectedItem; // The index of the currently selected item.
-    int rayDistance; // Distance for the raycast debug line.
+    int jumpcount;          // Tracks the number of jumps performed consecutively.
+    Vector3 moveDir;        // The direction of movement.
+    Vector3 playerVel;      // The player's current velocity.
+    float originalSpeed;    // The original speed of the player, for restoring after sprinting.
+    int HPoriginal;         // The original health points of the player, for UI updates.
+    int selectedItem;       // The index of the currently selected item.
+    int rayDistance;        // Distance for the raycast debug line.
 
     // bools
-    bool isShooting; // Flag to indicate if the player is currently shooting.
-    bool isMeleeing; // Flag to indicate if the player is currently meleeing.
-    bool isSprinting; //Flag to indicate that the player is currently sprinting.
-    bool isCrouching;
+    bool isShooting;    // Flag to indicate if the player is currently shooting.
+    bool isMeleeing;    // Flag to indicate if the player is currently meleeing.
+    bool isSprinting;   // Flag to indicate that the player is currently sprinting.
+    bool isCrouching;   
     bool playSteps;
     bool isMoving;
     bool isSlowed;
