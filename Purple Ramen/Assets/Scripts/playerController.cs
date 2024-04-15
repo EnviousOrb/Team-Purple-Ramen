@@ -91,6 +91,20 @@ public class playerController : MonoBehaviour, IDamage, ISlow
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Main Area"))
+        {
+            AudioManager.instance.BGMSource.Stop();
+            AudioManager.instance.playBGM("The Farm Level");
+        }
+        else if (other.gameObject.CompareTag("Miniboss Area"))
+        {
+            AudioManager.instance.BGMSource.Stop();
+            AudioManager.instance.playBGM("The Beast of The Forest");
+        }
+    }
+
     public void spawnPlayer()
     {
         HP = HPoriginal; // Reset player HP to original value.
