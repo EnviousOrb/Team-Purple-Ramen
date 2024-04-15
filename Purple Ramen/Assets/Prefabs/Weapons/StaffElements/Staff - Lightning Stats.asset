@@ -10,9 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fcb94ca9e3a24654a90f1f5f2fbee3e5, type: 3}
-  m_Name: Grass Spell Stats
+  m_Name: Staff - Lightning Stats
   m_EditorClassIdentifier: 
-  spellDamage: 0
-  spellRange: 0
-  spellCooldown: 0
-  staffOrbModel: {fileID: 0}
+  spellDamage: 1
+  spellRange: 50
+  spellCooldown: 0.5
+  staffOrbModel: {fileID: 2711195535153780955, guid: 79ee7fa3eaf553e4db93498004d4aed1, type: 3}
+  onHitEffect: {fileID: 0}
+  onCastEffect: {fileID: 0}
+  spellSound: {fileID: 0}
+  shootSoundVol: 0

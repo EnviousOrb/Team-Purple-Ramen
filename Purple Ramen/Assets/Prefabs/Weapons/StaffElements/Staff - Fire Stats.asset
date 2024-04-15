@@ -10,9 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fcb94ca9e3a24654a90f1f5f2fbee3e5, type: 3}
-  m_Name: Water Spell Stats
+  m_Name: Staff - Fire Stats
   m_EditorClassIdentifier: 
-  spellDamage: 0
-  spellRange: 0
-  spellCooldown: 0
-  staffOrbModel: {fileID: 0}
+  spellDamage: 1
+  spellRange: 50
+  spellCooldown: 0.5
+  staffOrbModel: {fileID: 8437412520783286786, guid: 4d1282c9907a4c14b9e5a8b9385c2b9e, type: 3}
+  onHitEffect: {fileID: 0}
+  onCastEffect: {fileID: 0}
+  spellSound: {fileID: 0}
+  shootSoundVol: 0
