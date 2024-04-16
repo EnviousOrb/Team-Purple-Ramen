@@ -40,6 +40,7 @@ public class gameManager : MonoBehaviour
         PS = player.GetComponent<playerController>();
         TimeScaleOrig = Time.timeScale;
         playerSpawnPos = GameObject.FindWithTag("Player Spawn Pos");
+        DontDestroyOnLoad(gameObject);
     }
 
     // Update is called once per frame
