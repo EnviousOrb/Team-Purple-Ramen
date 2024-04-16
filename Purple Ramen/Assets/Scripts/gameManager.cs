@@ -20,6 +20,8 @@ public class gameManager : MonoBehaviour
     public GameObject checkpointMenu;
     public GameObject playerDamageEffect;
     public GameObject playerSlowEffect;
+    public GameObject playerHealEffect;
+    public GameObject playerManaEffect;
     public Image HPbar;
     [SerializeField] SuperTextMesh TextBoxText;
 
