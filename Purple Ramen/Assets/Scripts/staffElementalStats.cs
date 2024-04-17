@@ -15,7 +15,7 @@ public class staffElementalStats : ScriptableObject
     // Stats will be editable like a serialized field
     public int spellDamage;
     public int spellRange;
-    public float spellCooldown;
+    public float spellCastRate;
     
     // Objects to attach to staff
     public GameObject staffOrbModel;

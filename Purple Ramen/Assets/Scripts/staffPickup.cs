@@ -16,7 +16,11 @@ public class staffPickup : MonoBehaviour
     // Update is called once per frame
     private void OnTriggerEnter(Collider other)
     {
-
-        Destroy(gameObject);
+        if (other.CompareTag("Player"))
+        {
+            gameManager.instance.PS.getStaffStats(staff);
+            Destroy(gameObject);
+        }
+        
     }
 }

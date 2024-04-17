@@ -14,7 +14,7 @@ public class weaponController : MonoBehaviour
          Animate.SetTrigger("SwordAttack");
          AudioSource AS = SES.staffOrbModel.GetComponent<AudioSource>();
          //AS.PlayOneShot(SES.AC);
-         yield return new WaitForSeconds(SES.spellCooldown);
+         yield return new WaitForSeconds(SES.spellCastRate);
          isAttacking = false;
     }
 
@@ -32,7 +32,7 @@ public class weaponController : MonoBehaviour
                 dmg.takeDamage(SES.spellDamage);
             }
         }
-        yield return new WaitForSeconds(SES.spellCooldown);
+        yield return new WaitForSeconds(SES.spellCastRate);
         isAttacking = false;
     }
     public void SetWeapon(staffElementalStats newStaff)
