@@ -44,8 +44,10 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow
     float stoppingDistOrig; // Original stopping distance before any modifications.
     Vector3 startingPos; // Starting position for roaming.
 
-    [HeaderAttribute("-----The Stuffs-----")]
+    [HeaderAttribute("-----The Stuffs-----")] //Joseph's section, plz no comments ;-;
     [SerializeField] int scoreValue;
+    [SerializeField] GameObject[] drops;
+    [SerializeField] int dropRolls;
     public Spawner associatedSpawner;
     int originalSpeed;
 
@@ -87,7 +89,7 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow
 
             Vector3 randomPos = Random.insideUnitSphere * roamDist + startingPos; // Chooses a new destination.
             randomPos += startingPos;
-            
+
             NavMeshHit hit;
             NavMesh.SamplePosition(randomPos, out hit, roamDist, 1); // Tries to find a valid point on the NavMesh.
             agent.SetDestination(hit.position); // Sets the new destination.
@@ -107,17 +109,6 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow
         yield return new WaitForSeconds(shootRate); // Waits before allowing next shot.
         isShooting = false;
     }
-    public void getSlowed(float slowModifier, int slowLength)
-    {
-        StartCoroutine(Slow(slowModifier, slowLength));
-    }
-    IEnumerator Slow(float slowMod, int slowLength)
-    {
-        agent.speed = originalSpeed * slowMod;
-        yield return new WaitForSeconds(slowLength);
-        agent.speed = originalSpeed;
-    }
-
     // Method called when the enemy takes damage.
     public void takeDamage(int amount)
     {
@@ -139,7 +130,7 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow
             {
                 itemToDrop.SetActive(true);
             }
-
+            RollForDrops();
             // Destroys the enemy game object.
             Destroy(gameObject);
         }
@@ -211,5 +202,30 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow
     {
         Quaternion targetRotation = Quaternion.LookRotation(new Vector3(playerDir.x, 0, playerDir.z)); // Calculates the rotation needed to face the player.
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * faceTargetSpeed); // Smoothly rotates towards the player.
+    }
+
+
+
+
+
+
+    // JOSEPH'S SECTION \/ \/ \/ \/ PLZ DO NOT COMMENT BELOW THIS LINE I BEG OF THEE 
+    public void getSlowed(float slowModifier, int slowLength)
+    {
+        StartCoroutine(Slow(slowModifier, slowLength));
+    }
+    IEnumerator Slow(float slowMod, int slowLength)
+    {
+        agent.speed = originalSpeed * slowMod;
+        yield return new WaitForSeconds(slowLength);
+        agent.speed = originalSpeed;
+    }
+    public void RollForDrops()
+    {
+        for (int i = 0; i < dropRolls; i++)
+        {
+            int arrayPOS = Random.Range(0, drops.Length);
+            Instantiate(drops[arrayPOS], transform.position, transform.rotation);
+        }
     }
 }

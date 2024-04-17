@@ -371,6 +371,7 @@ MonoBehaviour:
   model: {fileID: 7302841563069267238}
   agent: {fileID: 8945729454938839408}
   shootPos: {fileID: 6758683794606196198}
+  itemToDrop: {fileID: 0}
   HP: 7
   speed: 10
   bullet: {fileID: 7135714001530856501, guid: b179ba7001d400c4086e6c241141eb53, type: 3}
@@ -386,6 +387,10 @@ MonoBehaviour:
   roamDist: 20
   roamPauseTime: 3
   scoreValue: 0
+  drops:
+  - {fileID: 175361008080907375, guid: d760e180baadc6e4186f206b7d511d74, type: 3}
+  - {fileID: 175361008080907375, guid: 09d7e5a70be5b4944a25279f23828592, type: 3}
+  dropRolls: 3
   associatedSpawner: {fileID: 0}
 --- !u!95 &4732715823649715118
 Animator:

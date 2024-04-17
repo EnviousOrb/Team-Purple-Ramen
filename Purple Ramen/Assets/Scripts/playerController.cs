@@ -9,7 +9,7 @@ using UnityEngine.UI;
 // Controls the player's movements, interactions, and inventory management. //
 //////////////////////////////////////////////////////////////////////////////
 
-public class playerController : MonoBehaviour, IDamage, ISlow
+public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
 {
     [HeaderAttribute("----- Components -----")]
     [SerializeField] CharacterController controller;    // The CharacterController component for moving the player.
@@ -56,6 +56,10 @@ public class playerController : MonoBehaviour, IDamage, ISlow
     bool isCrouching;   
     bool playSteps;
     bool isMoving;
+
+
+    [HeaderAttribute("----- TheStuffs -----")]
+    int mana;
     bool isSlowed;
 
 
@@ -66,6 +70,7 @@ public class playerController : MonoBehaviour, IDamage, ISlow
         sceneInfo = gameManager.instance.sceneInfo;
         LoadPlayer();
         updatePlayerUI(); // Update the UI elements based on current stats.
+        spawnPlayer();
     }
 
     void Update()
@@ -270,26 +275,6 @@ public class playerController : MonoBehaviour, IDamage, ISlow
         gameManager.instance.playerDamageEffect.SetActive(false); // Hide damage effect.
     }
 
-    public void getSlowed(float slowModifier, int slowLength)
-    {
-        StartCoroutine(FlashSlow(slowLength));
-        StartCoroutine(Slow(slowModifier, slowLength));
-    }
-    IEnumerator FlashSlow(int slowLength)
-    {
-        gameManager.instance.playerSlowEffect.SetActive(true); 
-        yield return new WaitForSeconds(slowLength);
-        gameManager.instance.playerSlowEffect.SetActive(false);
-    }
-    IEnumerator Slow(float slowMod, int slowLength)
-    {
-        isSlowed = true;
-        speed = (float)originalSpeed * (float)slowMod;        
-        yield return new WaitForSeconds(slowLength);
-        speed = originalSpeed;
-        isSlowed = false;
-    }
-
     // Updates player's health bar UI.
     void updatePlayerUI()
     {
@@ -318,6 +303,64 @@ public class playerController : MonoBehaviour, IDamage, ISlow
 
         UIManager.instance.UpdateMainSlot(newItem);
     }
+
+
+
+
+
+
+
+    // JOSEPH'S SECTION \/ \/ \/ \/ PLZ DO NOT COMMENT BELOW THIS LINE I BEG OF THEE 
+
+    public void getSlowed(float slowModifier, int slowLength)
+    {
+        StartCoroutine(FlashSlow(slowLength));
+        StartCoroutine(Slow(slowModifier, slowLength));
+        //add slow sound effect here?
+    }
+    public void GetHealed(int amount)
+    {
+        HP += amount;
+        if (HP < HPoriginal)
+            HP = HPoriginal;
+        StartCoroutine(FlashHeal());
+        updatePlayerUI();
+        //add heal sound effect here?
+    }
+    public void GetMana(int amount)
+    {
+        mana += amount;
+        StartCoroutine(FlashMana());
+        updatePlayerUI();
+        //add mana sound effect here?
+    }
+    IEnumerator FlashHeal()
+    {
+        gameManager.instance.playerHealEffect.SetActive(true);
+        yield return new WaitForSeconds(.1f);
+        gameManager.instance.playerHealEffect.SetActive(false);
+    }
+    IEnumerator FlashMana()
+    {
+        gameManager.instance.playerManaEffect.SetActive(true);
+        yield return new WaitForSeconds(.1f);
+        gameManager.instance.playerManaEffect.SetActive(false);
+    }
+    IEnumerator FlashSlow(int slowLength)
+    {
+        gameManager.instance.playerSlowEffect.SetActive(true);
+        yield return new WaitForSeconds(slowLength);
+        gameManager.instance.playerSlowEffect.SetActive(false);
+    }
+    IEnumerator Slow(float slowMod, int slowLength)
+    {
+        isSlowed = true;
+        speed = (float)originalSpeed * (float)slowMod;
+        yield return new WaitForSeconds(slowLength);
+        speed = originalSpeed;
+        isSlowed = false;
+    }
+}
 
    public void SavePlayer()
     {
