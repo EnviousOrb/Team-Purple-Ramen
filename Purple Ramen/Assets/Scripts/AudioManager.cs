@@ -19,19 +19,19 @@ public class AudioManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        playBGM(BGM[1].name);
+        playBGM(BGM[1].soundName);
     }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Main Area"))
         {
             BGMSource.Stop();
-            playBGM(BGM[1].name);
+            playBGM(BGM[1].soundName);
         }
         else if(other.gameObject.CompareTag("Miniboss Area"))
         {
             BGMSource.Stop();
-            playBGM(BGM[1].name);
+            playBGM(BGM[2].soundName);
         }
     }
 

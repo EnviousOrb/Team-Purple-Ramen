@@ -85,7 +85,7 @@ public class MinibossAI : MonoBehaviour, IDamage
             StartCoroutine(Roam()); // Starts roaming if player is not in range.
         }
 
-        System.Random rand = new System.Random();
+        System.Random rand = new();
         int action = rand.Next(4);
 
         switch (action) 
@@ -99,7 +99,7 @@ public class MinibossAI : MonoBehaviour, IDamage
             case 1:
                 if (canShoot)
                 {
-
+                    StartCoroutine(Shoot());
                 }
                 break;
             case 2:
