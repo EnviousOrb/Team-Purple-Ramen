@@ -34,6 +34,14 @@ public class AudioManager : MonoBehaviour
             playBGM("The Beast of The Forest");
         }
     }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.gameObject.CompareTag("Miniboss Area"))
+        {
+            Destroy(other.gameObject);
+        }
+    }
     public void playBGM(string name)
     {
         soundObject so = Array.Find(BGM, x => x.name == name);

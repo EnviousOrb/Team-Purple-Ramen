@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-
 public class UIManager : MonoBehaviour
 {
+    public Dictionary<int, ItemData> reservedSpots4Items = new();
+    [SerializeField] public List<ItemData> Weapons;
     [SerializeField] public List<Image> inventoryUISlotLocation = new(); // UI images for inventory slots.
     [SerializeField] private Image mainSlotImage; // UI image for the main slot.
     [SerializeField] private SuperTextMesh descriptionText;
@@ -25,6 +27,14 @@ public class UIManager : MonoBehaviour
         {
             instance = this;
         }
+        for (var i = 0; i < Weapons.Count; i++)
+        {
+            reservedSpots4Items.Add(1, Weapons[i]);
+            reservedSpots4Items.Add(2, Weapons[i]);
+            reservedSpots4Items.Add(3, Weapons[i]);
+            reservedSpots4Items.Add(4, Weapons[i]);
+            reservedSpots4Items.Add(5, Weapons[i]);
+        }
     }
 
     public void UpdateMainSlot(ItemData item)
@@ -35,26 +45,77 @@ public class UIManager : MonoBehaviour
 
     public void UpdateInventoryUI(List<ItemData> itemList)
     {
-
-        for (int i = 0; i < inventoryUISlotLocation.Count; i++)
+        //clears any previous items from the inventory UI (this will probably be used when transitioning from level to hub)
+        foreach (var slot in inventoryUISlotLocation)
         {
-            if (i < itemList.Count)
-            {
-                ItemData currentItem = itemList[i];
-                inventoryUISlotLocation[i].sprite = itemList[i].itemSprite;
-                inventoryUISlotLocation[i].enabled = true;
+            slot.sprite = null;
+            slot.enabled = false;
+        }
 
-                Button slotButton = inventoryUISlotLocation[i].GetComponent<Button>();
-                if (slotButton != null)
+        //Creates a copy of the list to track items that don't have a spot assigned to them
+        List<ItemData> remainingItems = new List<ItemData>(itemList);
+        //Assigns items to their reserved spot, if they have one
+        foreach (var reservedSpot in reservedSpots4Items)
+        {
+            //Get item to go in spot
+            ItemData reservedItem = reservedSpot.Value;
+            //check if item is on reserved list
+            if (remainingItems.Contains(reservedItem))
+            {
+                //go through motions of assigning item
+                inventoryUISlotLocation[reservedSpot.Key].sprite = reservedItem.itemSprite;
+                inventoryUISlotLocation[reservedSpot.Key].enabled = true;
+
+                //updates the onClick event
+                if (inventoryUISlotLocation[reservedSpot.Key].TryGetComponent<Button>(out var slotButton))
                 {
                     slotButton.onClick.RemoveAllListeners();
-
-                    slotButton.onClick.AddListener(() => UpdateMainSlot(currentItem));
+                    slotButton.onClick.AddListener(() => UpdateMainSlot(reservedItem));
                 }
+                //remove item from list
+                remainingItems.Remove(reservedItem);
             }
-            else if (i < inventoryUISlotLocation.Count)
+        }
+
+        //assign rest of items to generic slots
+        foreach (ItemData item in remainingItems)
+        {
+            //Find first available slot
+            int slotIndex = inventoryUISlotLocation.FindIndex(slot => slot.sprite == null);
+
+            //check if spot was found and is a valid index
+            if (slotIndex != -1 && slotIndex < inventoryUISlotLocation.Count)
             {
-                inventoryUISlotLocation[i].enabled = false;
+                //if it is, then go through motions
+                inventoryUISlotLocation[slotIndex].sprite = item.itemSprite;
+                inventoryUISlotLocation[slotIndex].enabled = true;
+
+                //update the onClick event like before
+                if (inventoryUISlotLocation[slotIndex].TryGetComponent<Button>(out var slotButton))
+                {
+                    slotButton.onClick.RemoveAllListeners();
+                    slotButton.onClick.AddListener(() => UpdateMainSlot(item));
+                }
+
+                //This whole section is purely for debugging, it allows the user to delete an item
+                //with the right click button
+                EventTrigger trigger = inventoryUISlotLocation[slotIndex].gameObject.AddComponent<EventTrigger>();
+                EventTrigger.Entry entry = new()
+                {
+                    eventID = EventTriggerType.PointerClick
+                };
+                entry.callback.AddListener((eventData) => {
+                    var pointerData = (PointerEventData)eventData;
+                    if (pointerData.button == PointerEventData.InputButton.Right)
+                    {
+                        inventoryUISlotLocation[slotIndex].sprite = null;
+                        inventoryUISlotLocation[slotIndex].enabled = false;
+                        slotButton.onClick.RemoveAllListeners();
+                        slotButton.onClick.AddListener(() => UpdateMainSlot(null));
+
+                    }
+                });
+                trigger.triggers.Add(entry);
             }
         }
     }
