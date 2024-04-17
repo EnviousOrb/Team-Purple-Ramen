@@ -21,6 +21,7 @@ public class gameManager : MonoBehaviour
     public GameObject playerDamageEffect;
     public GameObject playerSlowEffect;
     public Image HPbar;
+    [SerializeField] public SceneInfo sceneInfo;
     [SerializeField] SuperTextMesh TextBoxText;
 
     public GameObject playerSpawnPos;
@@ -35,6 +36,7 @@ public class gameManager : MonoBehaviour
     // Awake is called before Start
     void Awake()
     {
+
         instance = this;
         player = GameObject.FindWithTag("Player");
         PS = player.GetComponent<playerController>();

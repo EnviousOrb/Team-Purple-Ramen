@@ -15,10 +15,10 @@ public class playerController : MonoBehaviour, IDamage, ISlow
     [SerializeField] CharacterController controller;    // The CharacterController component for moving the player.
     [SerializeField] weaponController weapon;           // The current weapon controller.
     [SerializeField] Animator anim;
-
+    [SerializeField] SceneInfo sceneInfo;
     [HeaderAttribute("----- Player Stats -----")]
-    [Range(0, 20)][SerializeField] int HP;              // The player's health points.
-    [Range(1, 5)][SerializeField] float speed;          // Movement speed of the player.
+     [Range(0, 20)][SerializeField] public int HP;              // The player's health points.
+    [Range(1, 5)][SerializeField] public float speed;          // Movement speed of the player.
     [Range(2, 8)][SerializeField] float sprintMultiplier; // The multiplier to apply to speed when sprinting.
     [Range(1, 3)][SerializeField] int jumps;            // The number of consecutive jumps the player can perform.
     [Range(5, 25)][SerializeField] int jumpSpeed;       // The vertical speed of the player's jump.
@@ -44,8 +44,8 @@ public class playerController : MonoBehaviour, IDamage, ISlow
     int jumpcount;          // Tracks the number of jumps performed consecutively.
     Vector3 moveDir;        // The direction of movement.
     Vector3 playerVel;      // The player's current velocity.
-    float originalSpeed;    // The original speed of the player, for restoring after sprinting.
-    int HPoriginal;         // The original health points of the player, for UI updates.
+   public float originalSpeed;    // The original speed of the player, for restoring after sprinting.
+    public int HPoriginal;         // The original health points of the player, for UI updates.
     int selectedItem;       // The index of the currently selected item.
     int rayDistance;        // Distance for the raycast debug line.
 
@@ -58,10 +58,13 @@ public class playerController : MonoBehaviour, IDamage, ISlow
     bool isMoving;
     bool isSlowed;
 
+
+    
     void Start()
     {
-        originalSpeed = speed; // Store the original speed.
-        HPoriginal = HP; // Store the original HP for UI calculations.
+        originalSpeed = sceneInfo.speed;
+        sceneInfo = gameManager.instance.sceneInfo;
+        LoadPlayer();
         updatePlayerUI(); // Update the UI elements based on current stats.
     }
 
@@ -290,7 +293,7 @@ public class playerController : MonoBehaviour, IDamage, ISlow
     // Updates player's health bar UI.
     void updatePlayerUI()
     {
-        gameManager.instance.HPbar.fillAmount = (float)HP / HPoriginal; // Set health bar based on current health.
+        gameManager.instance.HPbar.fillAmount = (float)HP/ sceneInfo.HPorig; // Set health bar based on current health.
     }
 
     // Reduces the player's height for crouching.
@@ -314,5 +317,19 @@ public class playerController : MonoBehaviour, IDamage, ISlow
         UIManager.instance.UpdateInventoryUI(itemList);
 
         UIManager.instance.UpdateMainSlot(newItem);
+    }
+
+   public void SavePlayer()
+    {
+        gameManager.instance.sceneInfo.HP = HP;
+        gameManager.instance.sceneInfo.speed = speed;
+    }
+
+    public void LoadPlayer()
+    {
+        HP = gameManager.instance.sceneInfo.HP;
+        speed = gameManager.instance.sceneInfo.speed;
+        
+        
     }
 }   
