@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
-using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -34,7 +33,7 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
     [SerializeField] Collider staffCollider;
 
     [HeaderAttribute("----- Wizard Range Attack -----")]
-    [SerializeField] List<staffElementalStats> staffList;   // Inventory to hold all aquired staves.
+    [SerializeField] List<staffElementalStats> staffList = new List<staffElementalStats>();   // Inventory to hold all aquired staves.
     [SerializeField] GameObject staffOrbModel;  // The staff orb container. 
     [SerializeField] int shootDamage;           // Default Shoot Damage to be overwritten by the staff stats.
     [SerializeField] int shootDistance;         // Default Shoot Distance to be overwritten.
@@ -301,12 +300,6 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
         UIManager.instance.UpdateMainSlot(newItem);
     }
 
-
-
-
-
-
-
     // JOSEPH'S SECTION \/ \/ \/ \/ PLZ DO NOT COMMENT BELOW THIS LINE I BEG OF THEE 
 
     public void getSlowed(float slowModifier, int slowLength)
@@ -369,6 +362,19 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
         sceneInfo.HP = HP;
         sceneInfo.speed = speed;
     }
-}
 
- 
+    public void getStaffStats(staffElementalStats staff)
+    {
+        staffList.Add(staff);
+
+        // Update Stats to the stats of the current selected staff.
+        shootDamage = staff.spellDamage;
+        shootDistance = staff.spellRange;
+        shootRate = staff.spellCastRate;
+
+        staffOrbModel.GetComponent<MeshFilter>().sharedMesh = staff.staffOrbModel.GetComponent<MeshFilter>().sharedMesh;
+        staffOrbModel.GetComponent<MeshRenderer>().sharedMaterial = staff.staffOrbModel.GetComponent<MeshRenderer>().sharedMaterial;
+
+    }
+
+} 
