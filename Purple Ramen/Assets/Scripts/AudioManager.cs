@@ -19,19 +19,19 @@ public class AudioManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        playBGM("The Farm Level");
+        playBGM(BGM[1].name);
     }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Main Area"))
         {
             BGMSource.Stop();
-            playBGM("The Farm Level");
+            playBGM(BGM[1].name);
         }
         else if(other.gameObject.CompareTag("Miniboss Area"))
         {
             BGMSource.Stop();
-            playBGM("The Beast of The Forest");
+            playBGM(BGM[1].name);
         }
     }
 
