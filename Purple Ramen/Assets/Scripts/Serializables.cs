@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Serializables 
 {
+    
     public float HP;
     public float Ammo;
     public float XP;

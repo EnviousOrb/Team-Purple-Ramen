@@ -15,7 +15,7 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
     [SerializeField] CharacterController controller;    // The CharacterController component for moving the player.
     [SerializeField] weaponController weapon;           // The current weapon controller.
     [SerializeField] Animator anim;
-
+    [SerializeField] SceneInfo sceneInfo;
     [HeaderAttribute("----- Player Stats -----")]
     [Range(0, 20)][SerializeField] int HP;              // The player's health points.
     [Range(1, 5)][SerializeField] float speed;          // Movement speed of the player.
@@ -358,16 +358,16 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
         isSlowed = false;
     }
 
-    public void LoadPLayer()
+    public void LoadPlayer()
     {
-        HP=SceneInfo.Instance.HP;
-        speed = SceneInfo.Instance.speed;
+        HP=sceneInfo.HP;
+        speed = sceneInfo.speed;
     }
 
     public void SavePlayer()
     {
-        SceneInfo.Instance.HP = HP;
-        SceneInfo.Instance.speed = speed;
+        sceneInfo.HP = HP;
+        sceneInfo.speed = speed;
     }
 }
 
