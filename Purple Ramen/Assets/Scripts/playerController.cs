@@ -15,10 +15,10 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
     [SerializeField] CharacterController controller;    // The CharacterController component for moving the player.
     [SerializeField] weaponController weapon;           // The current weapon controller.
     [SerializeField] Animator anim;
-    [SerializeField] SceneInfo sceneInfo;
+
     [HeaderAttribute("----- Player Stats -----")]
-     [Range(0, 20)][SerializeField] public int HP;              // The player's health points.
-    [Range(1, 5)][SerializeField] public float speed;          // Movement speed of the player.
+    [Range(0, 20)][SerializeField] int HP;              // The player's health points.
+    [Range(1, 5)][SerializeField] float speed;          // Movement speed of the player.
     [Range(2, 8)][SerializeField] float sprintMultiplier; // The multiplier to apply to speed when sprinting.
     [Range(1, 3)][SerializeField] int jumps;            // The number of consecutive jumps the player can perform.
     [Range(5, 25)][SerializeField] int jumpSpeed;       // The vertical speed of the player's jump.
@@ -44,8 +44,8 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
     int jumpcount;          // Tracks the number of jumps performed consecutively.
     Vector3 moveDir;        // The direction of movement.
     Vector3 playerVel;      // The player's current velocity.
-   public float originalSpeed;    // The original speed of the player, for restoring after sprinting.
-    public int HPoriginal;         // The original health points of the player, for UI updates.
+    float originalSpeed;    // The original speed of the player, for restoring after sprinting.
+    int HPoriginal;         // The original health points of the player, for UI updates.
     int selectedItem;       // The index of the currently selected item.
     int rayDistance;        // Distance for the raycast debug line.
 
@@ -62,13 +62,10 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
     int mana;
     bool isSlowed;
 
-
-    
     void Start()
     {
-        originalSpeed = sceneInfo.speed;
-        sceneInfo = gameManager.instance.sceneInfo;
-        LoadPlayer();
+        originalSpeed = speed; // Store the original speed.
+        HPoriginal = HP; // Store the original HP for UI calculations.
         updatePlayerUI(); // Update the UI elements based on current stats.
         spawnPlayer();
     }
@@ -360,19 +357,18 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
         speed = originalSpeed;
         isSlowed = false;
     }
+
+    public void LoadPLayer()
+    {
+        HP=SceneInfo.Instance.HP;
+        speed = SceneInfo.Instance.speed;
+    }
+
+    public void SavePlayer()
+    {
+        SceneInfo.Instance.HP = HP;
+        SceneInfo.Instance.speed = speed;
+    }
 }
 
-   public void SavePlayer()
-    {
-        gameManager.instance.sceneInfo.HP = HP;
-        gameManager.instance.sceneInfo.speed = speed;
-    }
-
-    public void LoadPlayer()
-    {
-        HP = gameManager.instance.sceneInfo.HP;
-        speed = gameManager.instance.sceneInfo.speed;
-        
-        
-    }
-}   
+ 
