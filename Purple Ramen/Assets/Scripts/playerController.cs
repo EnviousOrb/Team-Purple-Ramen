@@ -100,12 +100,12 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
         if (other.gameObject.CompareTag("Main Area"))
         {
             AudioManager.instance.BGMSource.Stop();
-            AudioManager.instance.playBGM("The Farm Level");
+            AudioManager.instance.playBGM(AudioManager.instance.BGM[0].soundName);
         }
         else if (other.gameObject.CompareTag("Miniboss Area"))
         {
             AudioManager.instance.BGMSource.Stop();
-            AudioManager.instance.playBGM("The Beast of The Forest");
+            AudioManager.instance.playBGM(AudioManager.instance.BGM[1].soundName);
         }
     }
 
@@ -154,7 +154,7 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
         {
             jumpcount++;
             playerVel.y = jumpSpeed;
-            AudioManager.instance.playPlayerSFX("Jump SFX");
+            AudioManager.instance.playPlayerSFX(AudioManager.instance.PlayerSFX[22].soundName);
             // Future proofing 3d person jump
             //anim.SetTrigger("Jump");
         }

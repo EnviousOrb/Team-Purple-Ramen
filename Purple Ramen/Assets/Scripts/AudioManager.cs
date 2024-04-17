@@ -7,6 +7,8 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance;
     public soundObject[] BGM, SFX, NpcSFX, PlayerSFX;
+    public float fadeDuration;
+    public float fadeVolume;
     public AudioSource BGMSource, SFXSource,NPCSource, PlayerSource;
 
     private void Awake()
@@ -25,12 +27,12 @@ public class AudioManager : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Main Area"))
         {
-            BGMSource.Stop();
+            StartCoroutine(FadeAway(BGMSource, fadeDuration, fadeVolume));
             playBGM(BGM[1].soundName);
         }
         else if(other.gameObject.CompareTag("Miniboss Area"))
         {
-            BGMSource.Stop();
+            StartCoroutine(FadeAway(BGMSource, fadeDuration, fadeVolume));
             playBGM(BGM[2].soundName);
         }
     }
@@ -42,6 +44,20 @@ public class AudioManager : MonoBehaviour
             Destroy(other.gameObject);
         }
     }
+
+    IEnumerator FadeAway(AudioSource AS, float duration, float targetVolume)
+    {
+        float currentTime = 0;
+        float start = AS.volume;
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+            AS.volume = Mathf.Lerp(start,targetVolume,currentTime / duration);
+            yield return null;
+        }
+        yield break;
+    }
+
     public void playBGM(string name)
     {
         soundObject so = Array.Find(BGM, x => x.name == name);
