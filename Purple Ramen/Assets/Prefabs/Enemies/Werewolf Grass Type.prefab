@@ -979,7 +979,7 @@ GameObject:
   - component: {fileID: 4799585882578898476}
   m_Layer: 0
   m_Name: Werewolf Grass Type
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1018,10 +1018,10 @@ MonoBehaviour:
   agent: {fileID: 7706438468698545989}
   shootPos: {fileID: 2051113157338785188}
   itemToDrop: {fileID: 0}
+  weaponCollider: {fileID: 1445022482788713418}
   hpBar: {fileID: 0}
   HP: 20
   speed: 5
-  mbName: The Beast of The Forest
   bullet: {fileID: 6437394925537091678, guid: 8c117779af4523844aad0b5f25097d70, type: 3}
   damageMat: {fileID: 2100000, guid: 61a868ed95d3914428f24f0450c95593, type: 2}
   shootRate: 10
@@ -1034,10 +1034,19 @@ MonoBehaviour:
   animatedSpeedTrans: 1
   roamDist: 25
   roamPauseTime: 1
-  canSummon: 0
-  canLeap: 0
+  canSummon: 1
+  canDash: 0
   canMeleeAttack: 0
-  canShoot: 0
+  canShoot: 1
+  dashCooldown: 3
+  dashSpeed: 10
+  dashDistance: 20
+  jumpForce: 10
+  enemyToSummon: {fileID: 2393452914690260300, guid: c6b595e8e88010c4a9bbeca2d16f7741, type: 3}
+  maxEnemiesSpawn: 5
+  minibossPOS: {fileID: 3890572397516007303}
+  spawnRate: 5
+  spawnRange: 3
 --- !u!95 &4388499777772415858
 Animator:
   serializedVersion: 5
@@ -1648,6 +1657,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2744193111367340609}
+  - component: {fileID: 4350597448494787305}
+  - component: {fileID: 1445022482788713418}
   m_Layer: 0
   m_Name: Blade02_R
   m_TagString: Untagged
@@ -1663,13 +1674,47 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6372792717064260962}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.49900934, y: 0.25289553, z: 0.7393477, w: 0.37469786}
-  m_LocalPosition: {x: -0.6573444, y: 4.973799e-16, z: -9.947598e-16}
+  m_LocalRotation: {x: -0.5270891, y: 0.18746649, z: 0.685768, w: 0.46557033}
+  m_LocalPosition: {x: -0.64, y: 0.034, z: -0.043}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2370343440937914714}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -48.41, y: -55.7, z: 138.376}
+--- !u!114 &4350597448494787305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6372792717064260962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cff79d5f9dbb0e4ba48f71b7332ccf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meleeStrength: 10
+--- !u!65 &1445022482788713418
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6372792717064260962}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.19927694, y: 0.95681167, z: 0.5448603}
+  m_Center: {x: -0.07602567, y: -0.021592753, z: -0.22756867}
 --- !u!1 &6432890690666473752
 GameObject:
   m_ObjectHideFlags: 0

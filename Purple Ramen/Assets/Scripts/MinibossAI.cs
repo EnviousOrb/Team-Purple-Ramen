@@ -12,6 +12,7 @@ public class MinibossAI : MonoBehaviour, IDamage
     [SerializeField] NavMeshAgent agent; // Navigation component for AI movement.
     [SerializeField] Transform shootPos; // Optional. The place where the Miniboss shoots from
     [SerializeField] GameObject itemToDrop; //Optional. Drops an item from a pre-defined position after enemy dies
+    [SerializeField] Collider weaponCollider;
     public Image hpBar; // The physical representation of the miniboss' healthbar
 
     [HeaderAttribute("-----Miniboss Stats-----")]
@@ -81,7 +82,6 @@ public class MinibossAI : MonoBehaviour, IDamage
         agent.stoppingDistance = 0; // Resets stopping distance for roaming behavior.
         originalSpeed = speed;
         ogHealth = HP;
-        rb = GetComponent<Rigidbody>();
     }
 
     void Update()
@@ -106,25 +106,25 @@ public class MinibossAI : MonoBehaviour, IDamage
 
         switch (action)
         {
-            case 1:
+            case 0:
                 if (canDash && !isDashing)
                 {
                     StartCoroutine(Dash());
                 }
                 break;
-            case 2:
+            case 1:
                 if (canShoot && !isShooting)
                 {
                     StartCoroutine(Shoot());
                 }
                 break;
-            case 3:
+            case 2:
                 if (canMeleeAttack && !isMelee)
                 {
                     StartCoroutine(MeleeAttack());
                 }
                 break;
-            case 4:
+            case 3:
                 if (canSummon && !isSummoning)
                 {
                     StartCoroutine(Summoning());
@@ -192,7 +192,9 @@ public class MinibossAI : MonoBehaviour, IDamage
     IEnumerator MeleeAttack()
     {
         isMelee = true;
+        weaponCollider.enabled = true;
         yield return new WaitForSeconds(shootRate);
+        weaponCollider.enabled = false;
         isMelee = false;
     }
 
