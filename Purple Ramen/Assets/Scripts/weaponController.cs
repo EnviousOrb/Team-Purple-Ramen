@@ -10,9 +10,9 @@ public class weaponController : MonoBehaviour
     public IEnumerator SwordAttack()
     {
          isAttacking = true;
-         Animator Animate = SES.staffOrbModel.GetComponent<Animator>();
+         Animator Animate = SES.staffOrbModelPrefab.GetComponent<Animator>();
          Animate.SetTrigger("SwordAttack");
-         AudioSource AS = SES.staffOrbModel.GetComponent<AudioSource>();
+         AudioSource AS = SES.staffOrbModelPrefab.GetComponent<AudioSource>();
          //AS.PlayOneShot(SES.AC);
          yield return new WaitForSeconds(SES.spellCastRate);
          isAttacking = false;
@@ -38,7 +38,7 @@ public class weaponController : MonoBehaviour
     public void SetWeapon(staffElementalStats newStaff)
     {
         SES = newStaff;
-        SES.staffOrbModel.GetComponent<MeshFilter>().sharedMesh = newStaff.staffOrbModel.GetComponent<MeshFilter>().sharedMesh;
-        SES.staffOrbModel.GetComponent<MeshRenderer>().sharedMaterial = newStaff.staffOrbModel.GetComponent<MeshRenderer>().sharedMaterial;
+        SES.staffOrbModelPrefab.GetComponent<MeshFilter>().sharedMesh = newStaff.staffOrbModelPrefab.GetComponent<MeshFilter>().sharedMesh;
+        SES.staffOrbModelPrefab.GetComponent<MeshRenderer>().sharedMaterial = newStaff.staffOrbModelPrefab.GetComponent<MeshRenderer>().sharedMaterial;
     }
 }

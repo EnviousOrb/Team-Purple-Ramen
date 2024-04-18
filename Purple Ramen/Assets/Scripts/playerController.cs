@@ -374,9 +374,6 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
         shootDistance = staff.spellRange;
         shootRate = staff.spellCastRate;
 
-        staffOrbModel.GetComponent<MeshFilter>().sharedMesh = staff.staffOrbModel.GetComponent<MeshFilter>().sharedMesh;
-        staffOrbModel.GetComponent<MeshRenderer>().sharedMaterial = staff.staffOrbModel.GetComponent<MeshRenderer>().sharedMaterial;
-
     }
 
     void selectStaff()
@@ -400,8 +397,15 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
         shootDistance = staffList[selectedStaff].spellRange;
         shootRate = staffList[selectedStaff].spellCastRate;
 
-        staffOrbModel.GetComponent<MeshFilter>().sharedMesh = staffList[selectedStaff].staffOrbModel.GetComponent<MeshFilter>().sharedMesh;
-        staffOrbModel.GetComponent<MeshRenderer>().sharedMaterial = staffList[selectedStaff].staffOrbModel.GetComponent<MeshRenderer>().sharedMaterial;
+        if (staffOrbModel.transform.childCount > 0)
+        {
+            Destroy(staffOrbModel.transform.GetChild(0).gameObject);
+        }
+
+        GameObject newOrb = Instantiate(staffList[selectedStaff].staffOrbModelPrefab, staffOrbModel.transform);
+        newOrb.transform.localPosition = Vector3.zero;
+        newOrb.SetActive(true);
+
     }
 
 } 

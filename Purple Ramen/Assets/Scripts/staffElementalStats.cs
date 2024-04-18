@@ -18,7 +18,9 @@ public class staffElementalStats : ScriptableObject
     public float spellCastRate;
     
     // Objects to attach to staff
-    public GameObject staffOrbModel;
+    public GameObject staffOrbModelPrefab;
+
+
     public ParticleSystem onHitEffect;
     public ParticleSystem onCastEffect;
     public AudioClip spellSound;
