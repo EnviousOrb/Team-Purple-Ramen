@@ -53,6 +53,9 @@ MonoBehaviour:
   damage: 1
   speed: 25
   lifespan: 1
+  speedMod: 0
+  slowLength: 0
+  self: {fileID: 0}
 --- !u!33 &2642934259883040549
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -171,7 +174,7 @@ TrailRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d05b616cb08ad314d9fb686441e89edf, type: 2}
+  - {fileID: 2100000, guid: 5df1798577322a84bb63bf687f1e8590, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

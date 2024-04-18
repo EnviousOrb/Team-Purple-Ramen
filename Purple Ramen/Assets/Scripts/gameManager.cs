@@ -27,7 +27,6 @@ public class gameManager : MonoBehaviour
     [SerializeField] SuperTextMesh TextBoxText;
 
     public GameObject playerSpawnPos;
-    public Image playerHPBar;
     public GameObject player;
     public playerController PS;
     public int playerScore;
@@ -87,7 +86,7 @@ public class gameManager : MonoBehaviour
         HideTextBox();
         Pause();
         AudioManager.instance.stopAll();
-        AudioManager.instance.playSFX("Level Complete");
+        AudioManager.instance.playSFX(AudioManager.instance.SFX[0].soundName);
         AudioManager.instance.stopAll();
     }
     public void stateInv()

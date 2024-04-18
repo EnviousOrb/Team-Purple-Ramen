@@ -29,11 +29,11 @@ public class UIManager : MonoBehaviour
         }
         for (var i = 0; i < Weapons.Count; i++)
         {
-            reservedSpots4Items.Add(1, Weapons[i]);
+            /*reservedSpots4Items.Add(1, Weapons[i]);
             reservedSpots4Items.Add(2, Weapons[i]);
             reservedSpots4Items.Add(3, Weapons[i]);
             reservedSpots4Items.Add(4, Weapons[i]);
-            reservedSpots4Items.Add(5, Weapons[i]);
+            reservedSpots4Items.Add(5, Weapons[i]);*/
         }
     }
 

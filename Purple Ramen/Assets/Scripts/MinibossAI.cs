@@ -17,7 +17,6 @@ public class MinibossAI : MonoBehaviour, IDamage
     [HeaderAttribute("-----Miniboss Stats-----")]
     [SerializeField] int HP; // health points.
     [SerializeField] int speed; // Movement speed.
-    [SerializeField] string mbName; // Name of miniboss
 
     [HeaderAttribute("-----Shooting Stats-----")]
     [SerializeField] GameObject bullet; // Bullet prefab for shooting.
@@ -47,16 +46,33 @@ public class MinibossAI : MonoBehaviour, IDamage
 
     [HeaderAttribute("-----Miniboss Abilities-----")]
     [SerializeField] bool canSummon;
-    [SerializeField] bool canLeap;
+    [SerializeField] bool canDash;
     [SerializeField] bool canMeleeAttack;
     [SerializeField] bool canShoot;
 
+    [HeaderAttribute("-----Miniboss Abilities Stats-----")]
+    [SerializeField] float dashCooldown; //cooldown for dash
+    [SerializeField] float dashSpeed; //how fast the enemy dashes
+    [SerializeField] float dashDistance; //how far for dash trigger
+    [SerializeField] float jumpForce; //How strong the enemy jumps (no relation to the Jump Force game)
+    [SerializeField] GameObject enemyToSummon; //what the miniboss summons
+    [SerializeField] int maxEnemiesSpawn; //The max amount of enemies the miniboss can spawn
+    [SerializeField] Transform minibossPOS; //The position of where the enemy is 
+    [SerializeField] float spawnRate; //The rate at which enemies appear
+    [SerializeField] float spawnRange; //The range of how far the enemies can spawn
+
+    private Rigidbody rb;
+    int enemiesInScene;
     int originalSpeed;
     int ogHealth;
 
     //Bools
     bool isShooting; // Tracks if the enemy is currently shooting.
     bool playerInRange; // Whether the player is within detection range.
+    bool isDashing;
+    bool isMelee;
+    bool isSummoning;
+    bool isJumping;
 
     void Start()
     {
@@ -65,13 +81,13 @@ public class MinibossAI : MonoBehaviour, IDamage
         agent.stoppingDistance = 0; // Resets stopping distance for roaming behavior.
         originalSpeed = speed;
         ogHealth = HP;
-        mbName = minibossName.text;
+        rb = GetComponent<Rigidbody>();
     }
 
     void Update()
     {
         float animSpeed = agent.velocity.normalized.magnitude; // Calculates speed for animation.
-        animator.SetFloat("Speed", Mathf.Lerp(animator.GetFloat("Speed"), animSpeed, Time.deltaTime * animSpeedTrans)); // Smoothly transitions animation speed.
+        animator.SetFloat(originalSpeed, Mathf.Lerp(animator.GetFloat(originalSpeed), animSpeed, Time.deltaTime * animSpeedTrans)); // Smoothly transitions animation speed.
 
         hpBar.fillAmount = (float)HP / ogHealth;
 
@@ -88,30 +104,30 @@ public class MinibossAI : MonoBehaviour, IDamage
         System.Random rand = new();
         int action = rand.Next(4);
 
-        switch (action) 
+        switch (action)
         {
-            case 0:
-                if (canLeap)
+            case 1:
+                if (canDash && !isDashing)
                 {
-
+                    StartCoroutine(Dash());
                 }
                 break;
-            case 1:
-                if (canShoot)
+            case 2:
+                if (canShoot && !isShooting)
                 {
                     StartCoroutine(Shoot());
                 }
                 break;
-            case 2:
-                if (canMeleeAttack)
+            case 3:
+                if (canMeleeAttack && !isMelee)
                 {
-
+                    StartCoroutine(MeleeAttack());
                 }
                 break;
-            case 3:
-                if (canSummon)
+            case 4:
+                if (canSummon && !isSummoning)
                 {
-
+                    StartCoroutine(Summoning());
                 }
                 break;
             default:
@@ -129,7 +145,7 @@ public class MinibossAI : MonoBehaviour, IDamage
 
             Vector3 randomPos = Random.insideUnitSphere * roamDist + startingPos; // Chooses a new destination.
             randomPos += startingPos;
-            
+
             NavMeshHit hit;
             NavMesh.SamplePosition(randomPos, out hit, roamDist, 1); // Tries to find a valid point on the NavMesh.
             agent.SetDestination(hit.position); // Sets the new destination.
@@ -138,16 +154,69 @@ public class MinibossAI : MonoBehaviour, IDamage
         }
     }
 
+    IEnumerator Dash()
+    {
+        isDashing = true;
+        float distanceToPlayer = Vector3.Distance(transform.position, gameManager.instance.PS.transform.position);
+        if (distanceToPlayer < dashDistance && !isJumping)
+        {
+            rb.AddForce(-playerDir * jumpForce, ForceMode.Impulse);
+            isJumping = true;
+            isDashing = false;
+        }
+        else if(distanceToPlayer > dashDistance && isJumping)
+        {
+            rb.velocity = playerDir * dashSpeed;
+            isJumping = false;
+            isDashing = true;
+        }
+        yield return new WaitForSeconds(dashCooldown);
+        isDashing = false;
+    }
+
     // Coroutine for shooting at the player.
     IEnumerator Shoot()
     {
-        isShooting = true;
-        animator.SetTrigger("Shoot"); // Triggers the shooting animation.
-        Vector3 playerDirection = gameManager.instance.player.transform.position - transform.position;
-        Instantiate(bullet, shootPos.position, Quaternion.LookRotation(playerDirection)); // Spawns the bullet.
-        bullet.GetComponent<Bullet>().self = GetComponentInParent<CapsuleCollider>();
-        yield return new WaitForSeconds(shootRate); // Waits before allowing next shot.
-        isShooting = false;
+        if (shootPos != null)
+        {
+            isShooting = true;
+            animator.SetTrigger("Shoot"); // Triggers the shooting animation.
+            Vector3 playerDirection = gameManager.instance.player.transform.position - transform.position;
+            Instantiate(bullet, shootPos.position, Quaternion.LookRotation(playerDirection)); // Spawns the bullet.
+            bullet.GetComponent<Bullet>().self = GetComponentInParent<CapsuleCollider>();
+            yield return new WaitForSeconds(shootRate); // Waits before allowing next shot.
+            isShooting = false;
+        }
+    }
+
+    IEnumerator MeleeAttack()
+    {
+        isMelee = true;
+        yield return new WaitForSeconds(shootRate);
+        isMelee = false;
+    }
+
+    IEnumerator Summoning()
+    {
+        isSummoning = true;
+        if (enemiesInScene < maxEnemiesSpawn)
+        {
+            Vector3 randomOffset = Random.insideUnitSphere * spawnRange;
+            Vector3 spawnPOS = minibossPOS.position + randomOffset;
+            randomOffset.y = minibossPOS.position.y;
+            Instantiate(enemyToSummon, spawnPOS, Quaternion.identity);
+            enemiesInScene++;
+        }
+        yield return new WaitForSeconds(spawnRate);
+        isSummoning = false;
+    }
+
+    public void MinionDeath()
+    {
+        if (enemiesInScene > 0)
+        {
+            enemiesInScene--;
+        }
     }
 
     // Method called when the enemy takes damage.
