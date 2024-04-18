@@ -132,6 +132,12 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow
             }
             RollForDrops();
             // Destroys the enemy game object.
+
+            MinibossAI minibossAI = FindObjectOfType<MinibossAI>();
+            if(minibossAI != null)
+            {
+                minibossAI.MinionDeath();
+            }
             Destroy(gameObject);
         }
     }
