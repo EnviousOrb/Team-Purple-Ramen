@@ -9,11 +9,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 701965697339673439}
+  - component: {fileID: -5997371636032906390}
   - component: {fileID: 556881996651188373}
   - component: {fileID: 6845366758714483327}
   - component: {fileID: 3320885417279777310}
+  - component: {fileID: 281984330444473924}
   m_Layer: 0
-  m_Name: Staff - Grass
+  m_Name: Staff - Explosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34,6 +36,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-5997371636032906390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2711195535153780955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d3474c301f9959439a9b621e2204256, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  staff: {fileID: 11400000, guid: 59a7e87d6cd9fcf4d8452c4d11ddff69, type: 2}
 --- !u!33 &556881996651188373
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -146,3 +161,24 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!135 &281984330444473924
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2711195535153780955}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}

@@ -2471,6 +2471,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8102624940177304157, guid: bc31370304ee39047a4727c0608e4327, type: 3}
+      propertyPath: shootRate
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8102624940177304157, guid: bc31370304ee39047a4727c0608e4327, type: 3}
+      propertyPath: shootDamage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8102624940177304157, guid: bc31370304ee39047a4727c0608e4327, type: 3}
+      propertyPath: shootDistance
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8814838866759011298, guid: bc31370304ee39047a4727c0608e4327, type: 3}
       propertyPath: m_Name
       value: Player - Wizard
@@ -8068,6 +8080,67 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35431a3d7c47cd341894b217bb78dad6, type: 3}
+--- !u!1001 &1960739158
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 701965697339673439, guid: fb11b7b109772b448a08b82ba29e6ec5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 19.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 701965697339673439, guid: fb11b7b109772b448a08b82ba29e6ec5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 701965697339673439, guid: fb11b7b109772b448a08b82ba29e6ec5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -4.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 701965697339673439, guid: fb11b7b109772b448a08b82ba29e6ec5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 701965697339673439, guid: fb11b7b109772b448a08b82ba29e6ec5, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 701965697339673439, guid: fb11b7b109772b448a08b82ba29e6ec5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 701965697339673439, guid: fb11b7b109772b448a08b82ba29e6ec5, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 701965697339673439, guid: fb11b7b109772b448a08b82ba29e6ec5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 701965697339673439, guid: fb11b7b109772b448a08b82ba29e6ec5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 701965697339673439, guid: fb11b7b109772b448a08b82ba29e6ec5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2711195535153780955, guid: fb11b7b109772b448a08b82ba29e6ec5, type: 3}
+      propertyPath: m_Name
+      value: Staff - Water
+      objectReference: {fileID: 0}
+    - target: {fileID: 3320885417279777310, guid: fb11b7b109772b448a08b82ba29e6ec5, type: 3}
+      propertyPath: m_Range
+      value: 13.528553
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: fb11b7b109772b448a08b82ba29e6ec5, type: 3}
 --- !u!4 &1961010069 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2467365406639488917, guid: 35431a3d7c47cd341894b217bb78dad6, type: 3}
@@ -9223,3 +9296,4 @@ SceneRoots:
   - {fileID: 533088891}
   - {fileID: 952114148}
   - {fileID: 1250762270}
+  - {fileID: 1960739158}
