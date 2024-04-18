@@ -120,11 +120,6 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void toggleBGM()
-    {
-        BGMSource.mute = !BGMSource.mute;
-    }
-
     public void stopAll()
     {
         BGMSource.Stop();
@@ -132,18 +127,34 @@ public class AudioManager : MonoBehaviour
         NPCSource.Stop();
     }
 
-    /*public void toggleSFX()
+    public void toggleBGM()
     {
-        sfxSource.mute = !sfxSource.mute;
-    }*/
+        BGMSource.mute = !BGMSource.mute;
+    }
+
+    public void toggleSFX()
+    {
+        SFXSource.mute = !SFXSource.mute;
+        PlayerSource.mute = !PlayerSource.mute;
+    }
+
+    public void toggleNPC()
+    {
+        NPCSource.mute = !NPCSource.mute;
+    }
 
     public void bgmVolume(float volume)
     {
         BGMSource.volume = volume;
     }
 
-    /*public void sfxVolume(float volume)
+    public void sfxVolume(float volume)
     {
-        sfxSource.volume = volume;
-    }*/
+        SFXSource.volume = volume;
+        PlayerSource.volume = volume;
+    }
+    public void NPCVolume(float volume)
+    {
+        NPCSource.volume = volume;
+    }
 }

@@ -16,6 +16,7 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject menuLose;
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuInv;
+    [SerializeField] GameObject menuSettings;
     [SerializeField] public GameObject TextBox;
     public GameObject checkpointMenu;
     public GameObject playerDamageEffect;
@@ -98,6 +99,13 @@ public class gameManager : MonoBehaviour
     public void statePaused()
     {
         menuActive = menuPause;
+        HideTextBox();
+        Pause();
+    }
+    public void stateSettings()
+    {
+        menuActive = menuSettings;
+        menuPause.SetActive(false);
         HideTextBox();
         Pause();
     }

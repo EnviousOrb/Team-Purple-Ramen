@@ -13,7 +13,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] public List<Image> inventoryUISlotLocation = new(); // UI images for inventory slots.
     [SerializeField] private Image mainSlotImage; // UI image for the main slot.
     [SerializeField] private SuperTextMesh descriptionText;
-    public Slider bgmSlider /*sfxSlider*/;
+    public Slider bgmSlider, sfxSlider, npcSlider;
 
     public static UIManager instance;
 
@@ -125,19 +125,29 @@ public class UIManager : MonoBehaviour
         AudioManager.instance.toggleBGM();
     }
 
-    /*public void toggleSFX()
+    public void toggleSFX()
     {
         AudioManager.instance.toggleSFX();
-    }*/
+    }
+
+    public void toggleNPC()
+    {
+        AudioManager.instance.toggleNPC();
+    }
 
     public void BGMVolume()
     {
         AudioManager.instance.bgmVolume(bgmSlider.value);
     }
 
-    /*public void SFXVolume()
+    public void SFXVolume()
     {
         AudioManager.instance.bgmVolume(sfxSlider.value);
-    }*/
+    }
+
+    public void NPCVolume()
+    {
+        AudioManager.instance.NPCVolume(npcSlider.value);
+    }
 }
 

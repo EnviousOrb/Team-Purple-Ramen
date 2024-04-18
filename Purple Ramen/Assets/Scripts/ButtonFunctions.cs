@@ -28,4 +28,9 @@ public class ButtonFunctions : MonoBehaviour
 #endif
         Application.Quit();
     }
+
+    public void settings()
+    {
+        gameManager.instance.stateSettings();
+    }
 }
