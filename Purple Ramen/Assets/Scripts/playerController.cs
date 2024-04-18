@@ -97,6 +97,16 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
             {
                 StartCoroutine(melee());
             }
+
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                Debug.Log("Backward Press Detected");
+                Debug.Log("Orb Position on S Press: " + staffOrbModel.transform.position);
+                Debug.Log("Orb Active State: " + staffOrbModel.activeSelf);
+                Debug.Log("Orb Local Position: " + staffOrbModel.transform.localPosition);
+                Debug.Log("Orb World Position: " + staffOrbModel.transform.position);
+                Debug.Log("Is Orb Visible?: " + staffOrbModel.GetComponent<Renderer>().isVisible);
+            }
         }
     }
 
