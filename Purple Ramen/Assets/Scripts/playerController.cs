@@ -47,6 +47,7 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
     int HPoriginal;         // The original health points of the player, for UI updates.
     int selectedItem;       // The index of the currently selected item.
     int rayDistance;        // Distance for the raycast debug line.
+    int selectedStaff;
 
     // bools
     bool isShooting;    // Flag to indicate if the player is currently shooting.
@@ -78,6 +79,7 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
             // Draw a debug ray in the editor to visualize aiming or looking direction.
             Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * rayDistance, Color.green);
 #endif
+            selectStaff();
             movement(); // Handle player movement.
 
             //changeWeapon(); // Handle weapon switching.
@@ -375,6 +377,31 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
         staffOrbModel.GetComponent<MeshFilter>().sharedMesh = staff.staffOrbModel.GetComponent<MeshFilter>().sharedMesh;
         staffOrbModel.GetComponent<MeshRenderer>().sharedMaterial = staff.staffOrbModel.GetComponent<MeshRenderer>().sharedMaterial;
 
+    }
+
+    void selectStaff()
+    {
+        if(Input.GetAxis("Mouse ScrollWheel") > 0 && selectedStaff < staffList.Count - 1)
+        {
+            selectedStaff++;
+            changeStaff();
+        }
+
+        if (Input.GetAxis("Mouse ScrollWheel") < 0 && selectedStaff > 0)
+        {
+            selectedStaff--;
+            changeStaff();
+        }
+    }
+
+    void changeStaff()
+    {
+        shootDamage = staffList[selectedStaff].spellDamage;
+        shootDistance = staffList[selectedStaff].spellRange;
+        shootRate = staffList[selectedStaff].spellCastRate;
+
+        staffOrbModel.GetComponent<MeshFilter>().sharedMesh = staffList[selectedStaff].staffOrbModel.GetComponent<MeshFilter>().sharedMesh;
+        staffOrbModel.GetComponent<MeshRenderer>().sharedMaterial = staffList[selectedStaff].staffOrbModel.GetComponent<MeshRenderer>().sharedMaterial;
     }
 
 } 
