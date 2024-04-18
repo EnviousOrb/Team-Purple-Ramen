@@ -71,6 +71,7 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
         updatePlayerUI(); // Update the UI elements based on current stats.
         spawnPlayer();
         EquipDefaultStaff();
+
     }
 
     void Update()
@@ -96,16 +97,6 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
             if (Input.GetButton("Fire2") && !isMeleeing)
             {
                 StartCoroutine(melee());
-            }
-
-            if (Input.GetKeyDown(KeyCode.S))
-            {
-                Debug.Log("Backward Press Detected");
-                Debug.Log("Orb Position on S Press: " + staffOrbModel.transform.position);
-                Debug.Log("Orb Active State: " + staffOrbModel.activeSelf);
-                Debug.Log("Orb Local Position: " + staffOrbModel.transform.localPosition);
-                Debug.Log("Orb World Position: " + staffOrbModel.transform.position);
-                Debug.Log("Is Orb Visible?: " + staffOrbModel.GetComponent<Renderer>().isVisible);
             }
         }
     }
@@ -418,6 +409,7 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
         destoryStaffModelPrefab();
 
         GameObject newOrb = Instantiate(staffList[selectedStaff].staffOrbModelPrefab, staffOrbModel.transform);
+        
         newOrb.transform.localPosition = Vector3.zero;
         newOrb.SetActive(true);
 
