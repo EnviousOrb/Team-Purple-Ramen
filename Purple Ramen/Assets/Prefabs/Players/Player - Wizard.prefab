@@ -3089,11 +3089,13 @@ MonoBehaviour:
   shootPos: {fileID: 1205770621155341287}
   bullet: {fileID: 6654342452342103052, guid: 1ce4f9da15f3a2f46966864f96a6ac62, type: 3}
   staffCollider: {fileID: 1550671607420705973}
+  defaultStaffOrbPrefab: {fileID: 2711195535153780955, guid: fb11b7b109772b448a08b82ba29e6ec5, type: 3}
+  defaultStaffStats: {fileID: 11400000, guid: bda45e667c093024cbc8cd8f45874648, type: 2}
   staffList: []
   staffOrbModel: {fileID: 7023054896164586701}
-  shootDamage: 1
-  shootDistance: 50
-  shootRate: 0.75
+  shootDamage: 0
+  shootDistance: 0
+  shootRate: 0
 --- !u!143 &3590467474444880502
 CharacterController:
   m_ObjectHideFlags: 0

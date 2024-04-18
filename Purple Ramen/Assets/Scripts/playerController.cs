@@ -33,6 +33,8 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
     [SerializeField] Collider staffCollider;
 
     [HeaderAttribute("----- Wizard Range Attack -----")]
+    [SerializeField] private GameObject defaultStaffOrbPrefab;
+    [SerializeField] staffElementalStats defaultStaffStats;
     [SerializeField] List<staffElementalStats> staffList = new List<staffElementalStats>();   // Inventory to hold all aquired staves.
     [SerializeField] GameObject staffOrbModel;  // The staff orb container. 
     [SerializeField] int shootDamage;           // Default Shoot Damage to be overwritten by the staff stats.
@@ -68,6 +70,7 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
         HPoriginal = HP; // Store the original HP for UI calculations.
         updatePlayerUI(); // Update the UI elements based on current stats.
         spawnPlayer();
+        EquipDefaultStaff();
     }
 
     void Update()
@@ -374,6 +377,11 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
         shootDistance = staff.spellRange;
         shootRate = staff.spellCastRate;
 
+        if (staffList.Count == 1)
+        {
+            selectedStaff = 0;
+            changeStaff();
+        }
     }
 
     void selectStaff()
@@ -397,15 +405,39 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
         shootDistance = staffList[selectedStaff].spellRange;
         shootRate = staffList[selectedStaff].spellCastRate;
 
-        if (staffOrbModel.transform.childCount > 0)
-        {
-            Destroy(staffOrbModel.transform.GetChild(0).gameObject);
-        }
+        destoryStaffModelPrefab();
 
         GameObject newOrb = Instantiate(staffList[selectedStaff].staffOrbModelPrefab, staffOrbModel.transform);
         newOrb.transform.localPosition = Vector3.zero;
         newOrb.SetActive(true);
 
+    }
+
+    private void EquipDefaultStaff()
+    {
+        if (defaultStaffOrbPrefab != null)
+        {
+            destoryStaffModelPrefab();
+
+            GameObject orbInstance = Instantiate(defaultStaffOrbPrefab, staffOrbModel.transform);
+            orbInstance.transform.localPosition = Vector3.zero;
+
+            staffElementalStats defaultStats = defaultStaffStats;
+            if (defaultStats != null)
+            {
+                staffList.Add(defaultStats);
+                selectedStaff = staffList.IndexOf(defaultStats);
+                changeStaff();
+            }
+        }
+    }
+
+    private void destoryStaffModelPrefab()
+    {
+        if (staffOrbModel.transform.childCount > 0)
+        {
+            Destroy(staffOrbModel.transform.GetChild(0).gameObject);
+        }
     }
 
 } 
