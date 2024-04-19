@@ -238,7 +238,9 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
         if (staffList[selectedStaff].onCastEffect != null)
         {
             Quaternion correctRotation = Quaternion.Euler(0, 270, 0);
-            Instantiate(staffList[selectedStaff].onCastEffect, shootAniPos.position, Camera.main.transform.rotation * correctRotation);
+            GameObject effectInstance = Instantiate(staffList[selectedStaff].onCastEffect.gameObject, shootAniPos.position, Camera.main.transform.rotation * correctRotation);
+            effectInstance.transform.SetParent(shootAniPos);
+            effectInstance.transform.localPosition = Vector3.zero;
         }
     }
 
