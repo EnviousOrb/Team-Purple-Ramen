@@ -24,9 +24,8 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
     [Range(5, 25)][SerializeField] int jumpSpeed;       // The vertical speed of the player's jump.
     [Range(-15, -35)][SerializeField] int gravity;      // The gravity affecting the player.
     
-
     [HeaderAttribute("----- Item Inventory -----")]
-     public List<ItemData> itemList = new List<ItemData>(); // Player's inventory
+     public List<IInventory> itemList = new List<IInventory>(); // Player's inventory
 
     [HeaderAttribute("----- Weapon Components -----")]
     [SerializeField] Transform shootPos;                // The position from which projectiles are fired.
@@ -238,9 +237,7 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
         if (staffList[selectedStaff].onCastEffect != null)
         {
             Quaternion correctRotation = Quaternion.Euler(0, 270, 0);
-            GameObject effectInstance = Instantiate(staffList[selectedStaff].onCastEffect.gameObject, shootAniPos.position, Camera.main.transform.rotation * correctRotation);
-            effectInstance.transform.SetParent(shootAniPos);
-            effectInstance.transform.localPosition = Vector3.zero;
+            Instantiate(staffList[selectedStaff].onCastEffect, shootAniPos.position, Camera.main.transform.rotation * correctRotation);
         }
     }
 
@@ -308,7 +305,7 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
         controller.height *= 2;
     }
 
-    public void GetItem(ItemData newItem)
+    public void GetItem(IInventory newItem)
     {
         // Add the new item to the inventory
         itemList.Add(newItem);
@@ -385,6 +382,7 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
     public void getStaffStats(staffElementalStats staff)
     {
         staffList.Add(staff);
+        GetItem(staff);
 
         // Update Stats to the stats of the current selected staff.
         shootDamage = staff.spellDamage;

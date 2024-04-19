@@ -10,8 +10,20 @@ using UnityEngine;
 // Creats a quick create under the drop down menu in Unity.
 // Will be under Asset > Create > Scriptable Object > Staff and will name the object Element Spell Stats.
 [CreateAssetMenu(fileName = "Element Spell Stats", menuName = "Scriptable Objects/Staff")]
-public class staffElementalStats : ScriptableObject
+public class staffElementalStats : ScriptableObject, IInventory
 {
+    public Sprite InventorySprite
+    {
+        get { return itemSprite; }
+        set { itemSprite = value; }
+    }
+
+    public string InventoryText
+    {
+        get { return itemDescription; }
+        set { itemDescription = value; }
+    }
+
     // Stats will be editable like a serialized field
     public int spellDamage;
     public int spellRange;
