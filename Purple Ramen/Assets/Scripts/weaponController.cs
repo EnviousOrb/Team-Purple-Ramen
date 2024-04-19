@@ -29,7 +29,7 @@ public class weaponController : MonoBehaviour
 
             if (hit.transform != transform && dmg != null)
             {
-                dmg.takeDamage(SES.spellDamage);
+                dmg.takeDamage(SES.spellDamage, 0);
             }
         }
         yield return new WaitForSeconds(SES.spellCooldown);

@@ -7,7 +7,7 @@ public class cropScript : MonoBehaviour, IDamage
     [SerializeField] GameObject itemToPopup;
     int HP = 1;
 
-    public void takeDamage(int amount)
+    public void takeDamage(int amount, int type)
     {
         HP -= amount;
 

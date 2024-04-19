@@ -35,7 +35,7 @@ public class playerStaffProjectile : MonoBehaviour
         if (dmg != null)
         {
             Debug.Log(other.gameObject.name + " : Has Damage");
-            dmg.takeDamage(damage);
+            dmg.takeDamage(damage, 0);
         }
 
         // Destroys the bullet upon hitting something to simulate it being "spent".

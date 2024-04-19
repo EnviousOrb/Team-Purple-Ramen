@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IDamage
+public interface IBurn
 {
-    void takeDamage(int amount);
+    void GetBurnt(int duration);
 }
+

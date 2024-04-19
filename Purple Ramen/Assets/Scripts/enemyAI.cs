@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 // Controls enemy AI behavior, including movement, shooting, and interactions with the player.
-public class enemyAI : MonoBehaviour, IDamage, ISlow
+public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
 {
     [HeaderAttribute("-----Components-----")]
     [SerializeField] Renderer model; // The enemy's visual model.
@@ -46,8 +46,14 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow
 
     [HeaderAttribute("-----The Stuffs-----")] //Joseph's section, plz no comments ;-;
     [SerializeField] int scoreValue;
+    [SerializeField] int enemyType;//1 = water, 2 = fire, 3 = lightning, 4 = plant
     [SerializeField] GameObject[] drops;
     [SerializeField] int dropRolls;
+    [SerializeField] Material paralysisMat;
+    [SerializeField] GameObject rootEffect;
+    bool paralyzed;
+    bool burning;
+    bool dotCD;
     public Spawner associatedSpawner;
     int originalSpeed;
 
@@ -65,18 +71,25 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow
 
     void Update()
     {
-        float animSpeed = agent.velocity.normalized.magnitude; // Calculates speed for animation.
-        animator.SetFloat("Speed", Mathf.Lerp(animator.GetFloat("Speed"), animSpeed, Time.deltaTime * animSpeedTrans)); // Smoothly transitions animation speed.
+        if (paralyzed && model.material == originalMat)
+            model.material = paralysisMat;
+        else if (!paralyzed)
+        {
+            float animSpeed = agent.velocity.normalized.magnitude; // Calculates speed for animation.
+            animator.SetFloat("Speed", Mathf.Lerp(animator.GetFloat("Speed"), animSpeed, Time.deltaTime * animSpeedTrans)); // Smoothly transitions animation speed.
 
-        // Determines behavior based on player visibility and range.
-        if (playerInRange && !canSeePlayer())
-        {
-            StartCoroutine(roam()); // Starts roaming if player is out of sight but in range.
+            // Determines behavior based on player visibility and range.
+            if (playerInRange && !canSeePlayer())
+            {
+                StartCoroutine(roam()); // Starts roaming if player is out of sight but in range.
+            }
+            else if (!playerInRange)
+            {
+                StartCoroutine(roam()); // Starts roaming if player is not in range.
+            }
         }
-        else if (!playerInRange)
-        {
-            StartCoroutine(roam()); // Starts roaming if player is not in range.
-        }
+        if (burning && !dotCD)
+            StartCoroutine(BurnTick());
     }
 
     // Coroutine for roaming when the player is not detected.
@@ -109,29 +122,96 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow
         yield return new WaitForSeconds(shootRate); // Waits before allowing next shot.
         isShooting = false;
     }
-    // Method called when the enemy takes damage.
-    public void takeDamage(int amount)
+    public void takeDamage(int amount, int type)
     {
-        HP -= amount; // Reduces health by the damage amount.
-        StartCoroutine(flashRed()); // Flashes red to indicate damaged.
-        // Directs the enemy to move towards the player's position upon taking damage.
-        agent.SetDestination(gameManager.instance.player.transform.position);
+        //1 = water, 2 = fire, 3 = lightning, 4 = plant
+        switch (enemyType)
+        {
+            case 1:
+                switch (type)
+                {
+                    case 1:
+                        HP -= amount;
+                        break;
+                    case 2:
+                        HP -= amount / 2;
+                        break;
+                    case 3:
+                        HP -= amount * 2;
+                        break;
+                    case 4:
+                        HP -= amount;
+                        break;
+                }
+                break;
+            case 2:
+                switch (type)
+                {
+                    case 1:
+                        HP -= amount * 2;
+                        break;
+                    case 2:
+                        HP -= amount;
+                        break;
+                    case 3:
+                        HP -= amount;
+                        break;
+                    case 4:
+                        HP -= amount / 2;
+                        break;
+                }
+                break;
+            case 3:
+                switch (type)
+                {
+                    case 1:
+                        HP -= amount / 2;
+                        break;
+                    case 2:
+                        HP -= amount;
+                        break;
+                    case 3:
+                        HP -= amount;
+                        break;
+                    case 4:
+                        HP -= amount * 2;
+                        break;
+                }
+                break;
+            case 4:
+                switch (type)
+                {
+                    case 1:
+                        HP -= amount;
+                        break;
+                    case 2:
+                        HP -= amount * 2;
+                        break;
+                    case 3:
+                        HP -= amount / 2;
+                        break;
+                    case 4:
+                        HP -= amount;
+                        break;
+                }
+                break;
+            default:
+                HP -= amount;
+                break;
+        }
 
-        // Checks if health has dropped to 0 or below.
+        StartCoroutine(flashRed());
+        agent.SetDestination(gameManager.instance.player.transform.position);
         if (HP <= 0)
         {
-            //Does something I think ??
             if (associatedSpawner)
                 associatedSpawner.UpdateEnemies(-1);
-            //Does something else i guess??
             gameManager.instance.playerScore += scoreValue;
-
             if (itemToDrop != null)
             {
                 itemToDrop.SetActive(true);
             }
             RollForDrops();
-            // Destroys the enemy game object.
             Destroy(gameObject);
         }
     }
@@ -210,15 +290,17 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow
 
 
     // JOSEPH'S SECTION \/ \/ \/ \/ PLZ DO NOT COMMENT BELOW THIS LINE I BEG OF THEE 
-    public void getSlowed(float slowModifier, int slowLength)
+    public void GetSlowed(float slowModifier, int slowLength)
     {
         StartCoroutine(Slow(slowModifier, slowLength));
     }
-    IEnumerator Slow(float slowMod, int slowLength)
+    public void GetParalyzed(float duration)
     {
-        agent.speed = originalSpeed * slowMod;
-        yield return new WaitForSeconds(slowLength);
-        agent.speed = originalSpeed;
+        StartCoroutine(Paralyzed(duration));
+    }
+    public void GetBurnt(int duration)
+    {
+        StartCoroutine(Burn(duration));
     }
     public void RollForDrops()
     {
@@ -227,5 +309,33 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow
             int arrayPOS = Random.Range(0, drops.Length);
             Instantiate(drops[arrayPOS], transform.position, transform.rotation);
         }
+    }
+    IEnumerator Slow(float slowMod, int slowLength)
+    {
+        agent.speed = originalSpeed * slowMod;
+        rootEffect.SetActive(true);
+        yield return new WaitForSeconds(slowLength);
+        rootEffect.SetActive(false);
+        agent.speed = originalSpeed;
+    }
+    IEnumerator Paralyzed(float duration)
+    {
+        paralyzed = true;
+        yield return new WaitForSeconds(duration);
+        model.material = originalMat;
+        paralyzed = false;
+    }
+    IEnumerator Burn(int duration)
+    {
+        burning = true;
+        yield return new WaitForSeconds(duration);
+        burning = false;
+    }
+    IEnumerator BurnTick()
+    {
+        dotCD = true;
+        yield return new WaitForSeconds(.4f);
+        takeDamage(2, 2);
+        dotCD = false;
     }
 }
