@@ -16,7 +16,11 @@ public class staffElementalStats : ScriptableObject
     public int spellDamage;
     public int spellRange;
     public float spellCastRate;
-    
+
+    public string itemName; 
+    public Sprite itemSprite; 
+    public string itemDescription;
+
     // Objects to attach to staff
     public GameObject staffOrbModelPrefab;
     public GameObject projectilePrefab;
