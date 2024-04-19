@@ -221,7 +221,13 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
     {
         isShooting = true;
         anim.SetTrigger("Casting");
-        
+
+        if (staffList[selectedStaff].projectilePrefab != null)
+        {
+            GameObject projectile = Instantiate(staffList[selectedStaff].projectilePrefab,
+                shootPos.position,Quaternion.LookRotation(shootPos.forward));
+        }
+
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
     }
