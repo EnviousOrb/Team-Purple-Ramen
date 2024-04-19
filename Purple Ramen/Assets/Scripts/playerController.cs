@@ -296,7 +296,7 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
     // Updates player's health bar UI.
     void updatePlayerUI()
     {
-        gameManager.instance.HPbar.fillAmount = (float)HP/ sceneInfo.HPorig; // Set health bar based on current health.
+        gameManager.instance.HPbar.fillAmount = (float)HP / sceneInfo.HPorig; // Set health bar based on current health.
     }
 
     // Reduces the player's height for crouching.
