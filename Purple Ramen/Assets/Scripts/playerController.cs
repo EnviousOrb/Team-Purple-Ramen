@@ -29,7 +29,7 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
 
     [HeaderAttribute("----- Weapon Components -----")]
     [SerializeField] Transform shootPos;        // The position from which projectiles are fired.
-    [SerializeField] GameObject bullet;         // The projectile prefab.
+    //[SerializeField] GameObject bullet;         // The projectile prefab.
     [SerializeField] Collider staffCollider;
 
     [HeaderAttribute("----- Wizard Range Attack -----")]
@@ -86,9 +86,6 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
             selectStaff();
             movement(); // Handle player movement.
 
-            //changeWeapon(); // Handle weapon switching.
-            // Check for shooting input and current weapon type to trigger appropriate attack.
-            //if (Input.GetButton("Shoot") && !isShooting && !isMeleeing)
             if (Input.GetButton("Fire1") && !isShooting)
             {
                 StartCoroutine(shoot());
@@ -221,20 +218,17 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
     {
         isShooting = true;
         anim.SetTrigger("Casting");
-
-        if (staffList[selectedStaff].projectilePrefab != null)
-        {
-            GameObject projectile = Instantiate(staffList[selectedStaff].projectilePrefab,
-                shootPos.position,Quaternion.LookRotation(shootPos.forward));
-        }
-
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
     }
 
     public void FireBullet()
     {
-        Instantiate(bullet, shootPos.position, Camera.main.transform.rotation);
+        if (staffList[selectedStaff].projectilePrefab != null)
+        {
+            GameObject projectile = Instantiate(staffList[selectedStaff].projectilePrefab, 
+                shootPos.position, Camera.main.transform.rotation);
+        }
     }
 
     public void startMeleeSwing() 
