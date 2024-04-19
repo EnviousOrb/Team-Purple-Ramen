@@ -222,7 +222,7 @@ public class MinibossAI : MonoBehaviour, IDamage
     }
 
     // Method called when the enemy takes damage.
-    public void takeDamage(int amount)
+    public void takeDamage(int amount, int type)
     {
         HP -= amount; // Reduces health by the damage amount.
         StartCoroutine(FlashRed()); // Flashes red to indicate damaged.
