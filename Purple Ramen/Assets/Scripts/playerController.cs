@@ -231,6 +231,15 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
         }
     }
 
+    public void SpellCastingCircleEndOfStaff()
+    {
+        if (staffList[selectedStaff].onCastEffect != null)
+        {
+            Quaternion correctRotation = Quaternion.Euler(0, 270, 0); 
+            Instantiate(staffList[selectedStaff].onCastEffect, shootPos.position, Camera.main.transform.rotation * correctRotation);
+        }
+    }
+
     public void startMeleeSwing() 
     {
         staffCollider.enabled = true;
