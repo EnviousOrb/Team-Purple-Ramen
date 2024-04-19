@@ -1154,6 +1154,37 @@ Transform:
   - {fileID: 3438548886997765926}
   m_Father: {fileID: 5945419405109675805}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3947569446774208001
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4945113524238460269}
+  m_Layer: 0
+  m_Name: Casting Ani Pos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4945113524238460269
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3947569446774208001}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.0566512, y: 0.008256297, z: -0.98429173, w: -0.16700988}
+  m_LocalPosition: {x: 0.2, y: -0.076, z: 3.6}
+  m_LocalScale: {x: 1.4500002, y: 1.4500002, z: 1.4500002}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7119601191833930384}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3959599960931215101
 GameObject:
   m_ObjectHideFlags: 0
@@ -1186,6 +1217,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1205770621155341287}
+  - {fileID: 4978193508712809604}
   - {fileID: 1281570812207396713}
   - {fileID: 3281787916256228577}
   m_Father: {fileID: 8382479312849649401}
@@ -2678,6 +2710,37 @@ Transform:
   - {fileID: 6239555793706904370}
   m_Father: {fileID: 3483489270913438053}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8476937059107790210
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4978193508712809604}
+  m_Layer: 0
+  m_Name: Casting Ani Pos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4978193508712809604
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8476937059107790210}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.011949249, y: 0.29657754, z: 0.46762115}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5986447884767453007}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8607229709851632579
 GameObject:
   m_ObjectHideFlags: 0
@@ -2858,7 +2921,8 @@ Transform:
   m_LocalPosition: {x: -0, y: 1.25, z: 0.132}
   m_LocalScale: {x: 0.68965507, y: 0.68965507, z: 0.68965507}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 4945113524238460269}
   m_Father: {fileID: 3967926121136473641}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1132570594572477671
@@ -3087,7 +3151,7 @@ MonoBehaviour:
   gravity: -25
   itemList: []
   shootPos: {fileID: 1205770621155341287}
-  bullet: {fileID: 6654342452342103052, guid: 1ce4f9da15f3a2f46966864f96a6ac62, type: 3}
+  shootAniPos: {fileID: 4945113524238460269}
   staffCollider: {fileID: 1550671607420705973}
   defaultStaffOrbPrefab: {fileID: 2711195535153780955, guid: fb11b7b109772b448a08b82ba29e6ec5, type: 3}
   defaultStaffStats: {fileID: 11400000, guid: bda45e667c093024cbc8cd8f45874648, type: 2}

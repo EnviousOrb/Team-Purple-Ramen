@@ -15,6 +15,7 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
     [SerializeField] weaponController weapon;           // The current weapon controller.
     [SerializeField] Animator anim;
     [SerializeField] SceneInfo sceneInfo;
+
     [HeaderAttribute("----- Player Stats -----")]
     [Range(0, 20)][SerializeField] int HP;              // The player's health points.
     [Range(1, 5)][SerializeField] float speed;          // Movement speed of the player.
@@ -28,8 +29,9 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
      public List<ItemData> itemList = new List<ItemData>(); // Player's inventory
 
     [HeaderAttribute("----- Weapon Components -----")]
-    [SerializeField] Transform shootPos;        // The position from which projectiles are fired.
-    //[SerializeField] GameObject bullet;         // The projectile prefab.
+    [SerializeField] Transform shootPos;                // The position from which projectiles are fired.
+    //[SerializeField] GameObject bullet;               // The projectile prefab.
+    [SerializeField] Transform shootAniPos;             // The position the spell effect happens that makes the projectile appear.
     [SerializeField] Collider staffCollider;
 
     [HeaderAttribute("----- Wizard Range Attack -----")]
@@ -235,8 +237,8 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
     {
         if (staffList[selectedStaff].onCastEffect != null)
         {
-            Quaternion correctRotation = Quaternion.Euler(0, 270, 0); 
-            Instantiate(staffList[selectedStaff].onCastEffect, shootPos.position, Camera.main.transform.rotation * correctRotation);
+            Quaternion correctRotation = Quaternion.Euler(0, 270, 0);
+            Instantiate(staffList[selectedStaff].onCastEffect, shootAniPos.position, Camera.main.transform.rotation * correctRotation);
         }
     }
 
