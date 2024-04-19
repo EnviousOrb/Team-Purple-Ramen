@@ -40,6 +40,7 @@ public class Chest : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             animate.SetBool("isInRange", false);
+            gameManager.instance.HideTextBox();
         }
     }
 
@@ -47,7 +48,6 @@ public class Chest : MonoBehaviour
     {
         GiveReward();
         Destroy(gameObject); // Destroy the chest object after giving an item
-        gameManager.instance.HideTextBox();
     }
 
     private IEnumerator AudioLoop()
