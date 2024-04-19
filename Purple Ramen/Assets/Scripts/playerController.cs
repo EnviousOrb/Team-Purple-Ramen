@@ -22,8 +22,9 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
     [Range(2, 8)][SerializeField] float sprintMultiplier; // The multiplier to apply to speed when sprinting.
     [Range(1, 3)][SerializeField] int jumps;            // The number of consecutive jumps the player can perform.
     [Range(5, 25)][SerializeField] int jumpSpeed;       // The vertical speed of the player's jump.
-    [Range(-15, -35)][SerializeField] int gravity;      // The gravity affecting the player.
-    
+    [Range(-15, -35)][SerializeField] int gravity;// The gravity affecting the player.
+    [Range(0, 1)][SerializeField] float iFrameDuration;
+
     [HeaderAttribute("----- Item Inventory -----")]
      public List<IInventory> itemList = new List<IInventory>(); // Player's inventory
 
@@ -51,6 +52,7 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
     int selectedItem;       // The index of the currently selected item.
     int rayDistance;        // Distance for the raycast debug line.
     int selectedStaff;
+    private Collider characterCollider;
 
     // bools
     bool isShooting;    // Flag to indicate if the player is currently shooting.
@@ -59,7 +61,6 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
     bool isCrouching;   
     bool playSteps;
     bool isMoving;
-
 
     [HeaderAttribute("----- TheStuffs -----")]
     int mana;
@@ -72,6 +73,7 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
         updatePlayerUI(); // Update the UI elements based on current stats.
         spawnPlayer();
         EquipDefaultStaff();
+        characterCollider = GetComponent<CapsuleCollider>();
 
     }
 
@@ -272,6 +274,7 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
     {
         HP -= amount; // Decrease player's health by the damage amount.
         StartCoroutine(flashdmgScreen()); // Flash damage effect on screen.
+        StartCoroutine(IFrames());
         updatePlayerUI(); // Update player's health UI.
 
         // Check for player death.
@@ -306,6 +309,13 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
     void unCrouch()
     {
         controller.height *= 2;
+    }
+
+    IEnumerator IFrames()
+    {
+        characterCollider.enabled = false;
+        yield return new WaitForSeconds(iFrameDuration);
+        characterCollider.enabled = true;
     }
 
     public void GetItem(IInventory newItem)
