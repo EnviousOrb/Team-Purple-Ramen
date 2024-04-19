@@ -19,7 +19,7 @@ public class staffElementalStats : ScriptableObject
     
     // Objects to attach to staff
     public GameObject staffOrbModelPrefab;
-
+    public GameObject projectilePrefab;
 
     public ParticleSystem onHitEffect;
     public ParticleSystem onCastEffect;
