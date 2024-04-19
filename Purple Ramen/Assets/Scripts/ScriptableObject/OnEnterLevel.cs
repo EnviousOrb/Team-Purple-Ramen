@@ -25,7 +25,7 @@ public class OnEnterLevel : MonoBehaviour
     {
 
        GameObject target = sceneInfo.isNextScene ? gameObject : exit;
-       
+        
        
     }
 }

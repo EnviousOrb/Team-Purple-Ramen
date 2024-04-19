@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
-using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,6 +14,7 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
     [SerializeField] CharacterController controller;    // The CharacterController component for moving the player.
     [SerializeField] weaponController weapon;           // The current weapon controller.
     [SerializeField] Animator anim;
+    [SerializeField] SceneInfo sceneInfo;
 
     [HeaderAttribute("----- Player Stats -----")]
     [Range(0, 20)][SerializeField] int HP;              // The player's health points.
@@ -22,19 +22,22 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
     [Range(2, 8)][SerializeField] float sprintMultiplier; // The multiplier to apply to speed when sprinting.
     [Range(1, 3)][SerializeField] int jumps;            // The number of consecutive jumps the player can perform.
     [Range(5, 25)][SerializeField] int jumpSpeed;       // The vertical speed of the player's jump.
-    [Range(-15, -35)][SerializeField] int gravity;      // The gravity affecting the player.
-    
+    [Range(-15, -35)][SerializeField] int gravity;// The gravity affecting the player.
+    [Range(0, 1)][SerializeField] float iFrameDuration;
 
     [HeaderAttribute("----- Item Inventory -----")]
-     public List<ItemData> itemList = new List<ItemData>(); // Player's inventory
+     public List<IInventory> itemList = new List<IInventory>(); // Player's inventory
 
     [HeaderAttribute("----- Weapon Components -----")]
-    [SerializeField] Transform shootPos;        // The position from which projectiles are fired.
-    [SerializeField] GameObject bullet;         // The projectile prefab.
+    [SerializeField] Transform shootPos;                // The position from which projectiles are fired.
+    //[SerializeField] GameObject bullet;               // The projectile prefab.
+    [SerializeField] Transform shootAniPos;             // The position the spell effect happens that makes the projectile appear.
     [SerializeField] Collider staffCollider;
 
     [HeaderAttribute("----- Wizard Range Attack -----")]
-    [SerializeField] List<staffElementalStats> staffList;   // Inventory to hold all aquired staves.
+    [SerializeField] private GameObject defaultStaffOrbPrefab;
+    [SerializeField] staffElementalStats defaultStaffStats;
+    [SerializeField] List<staffElementalStats> staffList = new List<staffElementalStats>();   // Inventory to hold all aquired staves.
     [SerializeField] GameObject staffOrbModel;  // The staff orb container. 
     [SerializeField] int shootDamage;           // Default Shoot Damage to be overwritten by the staff stats.
     [SerializeField] int shootDistance;         // Default Shoot Distance to be overwritten.
@@ -48,6 +51,8 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
     int HPoriginal;         // The original health points of the player, for UI updates.
     int selectedItem;       // The index of the currently selected item.
     int rayDistance;        // Distance for the raycast debug line.
+    int selectedStaff;
+    private Collider characterCollider;
 
     // bools
     bool isShooting;    // Flag to indicate if the player is currently shooting.
@@ -56,7 +61,6 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
     bool isCrouching;   
     bool playSteps;
     bool isMoving;
-
 
     [HeaderAttribute("----- TheStuffs -----")]
     int mana;
@@ -68,6 +72,9 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
         HPoriginal = HP; // Store the original HP for UI calculations.
         updatePlayerUI(); // Update the UI elements based on current stats.
         spawnPlayer();
+        EquipDefaultStaff();
+        characterCollider = GetComponent<CapsuleCollider>();
+
     }
 
     void Update()
@@ -79,12 +86,10 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
             // Draw a debug ray in the editor to visualize aiming or looking direction.
             Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * rayDistance, Color.green);
 #endif
+            selectStaff();
             movement(); // Handle player movement.
 
-            //changeWeapon(); // Handle weapon switching.
-            // Check for shooting input and current weapon type to trigger appropriate attack.
-            //if (Input.GetButton("Shoot") && !isShooting && !isMeleeing)
-            if (Input.GetButton("Fire1") && !isShooting)
+            if (Input.GetButton("Fire1") && !isShooting && staffList.Count > 0)
             {
                 StartCoroutine(shoot());
             }
@@ -101,12 +106,12 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
         if (other.gameObject.CompareTag("Main Area"))
         {
             AudioManager.instance.BGMSource.Stop();
-            AudioManager.instance.playBGM("The Farm Level");
+            AudioManager.instance.playBGM(AudioManager.instance.BGM[0].soundName);
         }
         else if (other.gameObject.CompareTag("Miniboss Area"))
         {
             AudioManager.instance.BGMSource.Stop();
-            AudioManager.instance.playBGM("The Beast of The Forest");
+            AudioManager.instance.playBGM(AudioManager.instance.BGM[1].soundName);
         }
     }
 
@@ -155,7 +160,7 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
         {
             jumpcount++;
             playerVel.y = jumpSpeed;
-            AudioManager.instance.playPlayerSFX("Jump SFX");
+            AudioManager.instance.playPlayerSFX(AudioManager.instance.PlayerSFX[22].soundName);
             // Future proofing 3d person jump
             //anim.SetTrigger("Jump");
         }
@@ -216,14 +221,29 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
     {
         isShooting = true;
         anim.SetTrigger("Casting");
-        
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
     }
 
     public void FireBullet()
     {
-        Instantiate(bullet, shootPos.position, Camera.main.transform.rotation);
+        if (staffList[selectedStaff].projectilePrefab != null)
+        {
+            GameObject projectile = Instantiate(staffList[selectedStaff].projectilePrefab, 
+                shootPos.position, Camera.main.transform.rotation);
+        }
+    }
+
+    public void SpellCastingCircleEndOfStaff()
+    {
+        if (staffList[selectedStaff].onCastEffect != null)
+        {
+            Quaternion correctRotation = Quaternion.Euler(0, 270, 0);
+            GameObject effectInstance = Instantiate(staffList[selectedStaff].onCastEffect.gameObject, shootAniPos.position, Camera.main.transform.rotation * correctRotation);
+            effectInstance.transform.SetParent(shootAniPos);
+            effectInstance.transform.localPosition = Vector3.zero;
+
+        }
     }
 
     public void startMeleeSwing() 
@@ -254,6 +274,7 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
     {
         HP -= amount; // Decrease player's health by the damage amount.
         StartCoroutine(flashdmgScreen()); // Flash damage effect on screen.
+        StartCoroutine(IFrames());
         updatePlayerUI(); // Update player's health UI.
 
         // Check for player death.
@@ -275,7 +296,7 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
     // Updates player's health bar UI.
     void updatePlayerUI()
     {
-        gameManager.instance.HPbar.fillAmount = (float)HP / HPoriginal; // Set health bar based on current health.
+        gameManager.instance.HPbar.fillAmount = (float)HP/ sceneInfo.HPorig; // Set health bar based on current health.
     }
 
     // Reduces the player's height for crouching.
@@ -290,7 +311,14 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
         controller.height *= 2;
     }
 
-    public void GetItem(ItemData newItem)
+    IEnumerator IFrames()
+    {
+        characterCollider.enabled = false;
+        yield return new WaitForSeconds(iFrameDuration);
+        characterCollider.enabled = true;
+    }
+
+    public void GetItem(IInventory newItem)
     {
         // Add the new item to the inventory
         itemList.Add(newItem);
@@ -300,12 +328,6 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
 
         UIManager.instance.UpdateMainSlot(newItem);
     }
-
-
-
-
-
-
 
     // JOSEPH'S SECTION \/ \/ \/ \/ PLZ DO NOT COMMENT BELOW THIS LINE I BEG OF THEE 
 
@@ -357,4 +379,91 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
         speed = originalSpeed;
         isSlowed = false;
     }
-}
+
+    public void LoadPlayer()
+    {
+        HP=sceneInfo.HP;
+        speed = sceneInfo.speed;
+    }
+
+    public void SavePlayer()
+    {
+        sceneInfo.HP = HP;
+        sceneInfo.speed = speed;
+    }
+
+    public void getStaffStats(staffElementalStats staff)
+    {
+        staffList.Add(staff);
+        GetItem(staff);
+
+        // Update Stats to the stats of the current selected staff.
+        shootDamage = staff.spellDamage;
+        shootDistance = staff.spellRange;
+        shootRate = staff.spellCastRate;
+
+        if (staffList.Count == 1)
+        {
+            selectedStaff = 0;
+            changeStaff();
+        }
+    }
+
+    void selectStaff()
+    {
+        if(Input.GetAxis("Mouse ScrollWheel") > 0 && selectedStaff < staffList.Count - 1)
+        {
+            selectedStaff++;
+            changeStaff();
+        }
+
+        if (Input.GetAxis("Mouse ScrollWheel") < 0 && selectedStaff > 0)
+        {
+            selectedStaff--;
+            changeStaff();
+        }
+    }
+
+    void changeStaff()
+    {
+        shootDamage = staffList[selectedStaff].spellDamage;
+        shootDistance = staffList[selectedStaff].spellRange;
+        shootRate = staffList[selectedStaff].spellCastRate;
+
+        destoryStaffModelPrefab();
+
+        GameObject newOrb = Instantiate(staffList[selectedStaff].staffOrbModelPrefab, staffOrbModel.transform);
+        
+        newOrb.transform.localPosition = Vector3.zero;
+        newOrb.SetActive(true);
+
+    }
+
+    private void EquipDefaultStaff()
+    {
+        if (defaultStaffOrbPrefab != null)
+        {
+            destoryStaffModelPrefab();
+
+            GameObject orbInstance = Instantiate(defaultStaffOrbPrefab, staffOrbModel.transform);
+            orbInstance.transform.localPosition = Vector3.zero;
+
+            staffElementalStats defaultStats = defaultStaffStats;
+            if (defaultStats != null)
+            {
+                staffList.Add(defaultStats);
+                selectedStaff = staffList.IndexOf(defaultStats);
+                changeStaff();
+            }
+        }
+    }
+
+    private void destoryStaffModelPrefab()
+    {
+        if (staffOrbModel.transform.childCount > 0)
+        {
+            Destroy(staffOrbModel.transform.GetChild(0).gameObject);
+        }
+    }
+
+} 

@@ -16,6 +16,7 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject menuLose;
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuInv;
+    [SerializeField] GameObject menuSettings;
     [SerializeField] public GameObject TextBox;
     public GameObject checkpointMenu;
     public GameObject playerDamageEffect;
@@ -23,10 +24,10 @@ public class gameManager : MonoBehaviour
     public GameObject playerHealEffect;
     public GameObject playerManaEffect;
     public Image HPbar;
+    [SerializeField] public SceneInfo sceneInfo;
     [SerializeField] SuperTextMesh TextBoxText;
 
     public GameObject playerSpawnPos;
-    public Image playerHPBar;
     public GameObject player;
     public playerController PS;
     public int playerScore;
@@ -37,6 +38,7 @@ public class gameManager : MonoBehaviour
     // Awake is called before Start
     void Awake()
     {
+
         instance = this;
         player = GameObject.FindWithTag("Player");
         PS = player.GetComponent<playerController>();
@@ -85,7 +87,7 @@ public class gameManager : MonoBehaviour
         HideTextBox();
         Pause();
         AudioManager.instance.stopAll();
-        AudioManager.instance.playSFX("Level Complete");
+        AudioManager.instance.playSFX(AudioManager.instance.SFX[0].soundName);
         AudioManager.instance.stopAll();
     }
     public void stateInv()
@@ -97,6 +99,13 @@ public class gameManager : MonoBehaviour
     public void statePaused()
     {
         menuActive = menuPause;
+        HideTextBox();
+        Pause();
+    }
+    public void stateSettings()
+    {
+        menuActive = menuSettings;
+        menuPause.SetActive(false);
         HideTextBox();
         Pause();
     }

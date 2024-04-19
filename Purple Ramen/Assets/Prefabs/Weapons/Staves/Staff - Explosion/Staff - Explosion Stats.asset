@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcb94ca9e3a24654a90f1f5f2fbee3e5, type: 3}
+  m_Name: Staff - Explosion Stats
+  m_EditorClassIdentifier: 
+  spellDamage: 5
+  spellRange: 50
+  spellCastRate: 0.2
+  itemName: 
+  itemSprite: {fileID: 21300000, guid: a05ef857497280d418f36288732e176c, type: 3}
+  itemDescription: 'Explosion Staff: Warning! Will cause paralysis if used incorrectly'
+  staffOrbModelPrefab: {fileID: 2711195535153780955, guid: 494d649dd63725042b2fcf3c8203e14e, type: 3}
+  projectilePrefab: {fileID: 6654342452342103052, guid: 981cb1a764e5eb346aa6494c88ad1c1f, type: 3}
+  onHitEffect: {fileID: 0}
+  onCastEffect: {fileID: 0}
+  spellSound: {fileID: 0}
+  shootSoundVol: 0

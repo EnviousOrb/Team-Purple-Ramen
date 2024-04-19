@@ -461,7 +461,7 @@ GameObject:
   - component: {fileID: 1972397175628683503}
   m_Layer: 0
   m_Name: MonsterPlantPBRDefault
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -499,6 +499,7 @@ MonoBehaviour:
   model: {fileID: 2826967494785493667}
   agent: {fileID: -9079345966721718098}
   shootPos: {fileID: 8310393614356543680}
+  itemToDrop: {fileID: 0}
   HP: 8
   speed: 3
   bullet: {fileID: 6654342452342103052, guid: 981cb1a764e5eb346aa6494c88ad1c1f, type: 3}
@@ -514,6 +515,8 @@ MonoBehaviour:
   roamDist: 17
   roamPauseTime: 2
   scoreValue: 0
+  drops: []
+  dropRolls: 0
   associatedSpawner: {fileID: 0}
 --- !u!95 &6960733536806643975
 Animator:
