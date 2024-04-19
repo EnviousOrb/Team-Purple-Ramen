@@ -37,9 +37,9 @@ public class staffElementalStats : ScriptableObject, IInventory
     public GameObject staffOrbModelPrefab;
     public GameObject projectilePrefab;
 
-    public ParticleSystem onHitEffect;
+    //public ParticleSystem onHitEffect;
     public ParticleSystem onCastEffect;
-    public AudioClip spellSound;
-    [Range(0,1)]public float shootSoundVol;
+    //public AudioClip spellSound;
+    //[Range(0,1)]public float shootSoundVol;
     
 }
