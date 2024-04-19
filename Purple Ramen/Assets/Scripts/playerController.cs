@@ -86,7 +86,7 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
             selectStaff();
             movement(); // Handle player movement.
 
-            if (Input.GetButton("Fire1") && !isShooting)
+            if (Input.GetButton("Fire1") && !isShooting && staffList.Count > 0)
             {
                 StartCoroutine(shoot());
             }
