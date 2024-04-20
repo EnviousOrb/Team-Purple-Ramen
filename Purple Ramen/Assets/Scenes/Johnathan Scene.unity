@@ -351,6 +351,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc31370304ee39047a4727c0608e4327, type: 3}
+--- !u!82 &1066807153 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 7530645113933781427, guid: bc31370304ee39047a4727c0608e4327, type: 3}
+  m_PrefabInstance: {fileID: 1064809855}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1389103374
 GameObject:
   m_ObjectHideFlags: 0
@@ -453,6 +458,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1118616861777338557, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
+      propertyPath: PlayerSource
+      value: 
+      objectReference: {fileID: 1066807153}
     - target: {fileID: 2681700440528555825, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
       propertyPath: m_Name
       value: UI
