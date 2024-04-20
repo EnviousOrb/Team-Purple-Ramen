@@ -26,7 +26,7 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
     [Range(0, 1)][SerializeField] float iFrameDuration;
 
     [HeaderAttribute("----- Item Inventory -----")]
-    public List<IInventory> itemList = new List<IInventory>(); // Player's inventory
+     public List<IInventory> itemList = new List<IInventory>(); // Player's inventory
 
     [HeaderAttribute("----- Weapon Components -----")]
     [SerializeField] Transform shootPos;                // The position from which projectiles are fired.
@@ -58,7 +58,7 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
     bool isShooting;    // Flag to indicate if the player is currently shooting.
     bool isMeleeing;    // Flag to indicate if the player is currently meleeing.
     bool isSprinting;   // Flag to indicate that the player is currently sprinting.
-    bool isCrouching;
+    bool isCrouching;   
     bool playSteps;
     bool isMoving;
 
@@ -201,7 +201,7 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
 
         foreach (string footstepSound in footstepSounds)
         {
-            if (moveDir.normalized.magnitude > 0.3f)
+            if(moveDir.normalized.magnitude > 0.3f)
             {
                 AudioManager.instance.playPlayerSFX(footstepSound);
             }
@@ -229,7 +229,7 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
     {
         if (staffList[selectedStaff].projectilePrefab != null)
         {
-            GameObject projectile = Instantiate(staffList[selectedStaff].projectilePrefab,
+            GameObject projectile = Instantiate(staffList[selectedStaff].projectilePrefab, 
                 shootPos.position, Camera.main.transform.rotation);
         }
     }
@@ -246,7 +246,7 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
         }
     }
 
-    public void startMeleeSwing()
+    public void startMeleeSwing() 
     {
         staffCollider.enabled = true;
     }
@@ -384,7 +384,7 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
 
     public void LoadPlayer()
     {
-        HP = sceneInfo.HP;
+        HP=sceneInfo.HP;
         speed = sceneInfo.speed;
     }
 
@@ -413,20 +413,17 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
 
     void selectStaff()
     {
-        if (Input.GetAxis("Mouse ScrollWheel") > 0 && selectedStaff < staffList.Count - 1)
+        if(Input.GetAxis("Mouse ScrollWheel") > 0 && selectedStaff < staffList.Count - 1)
         {
-            UIManager.instance.hotbarWeapon.SetActive(true);
             selectedStaff++;
             changeStaff();
         }
 
         if (Input.GetAxis("Mouse ScrollWheel") < 0 && selectedStaff > 0)
         {
-            UIManager.instance.hotbarWeapon.SetActive(true);
             selectedStaff--;
             changeStaff();
         }
-        UIManager.instance.hotbarWeapon.SetActive(false);
     }
 
     void changeStaff()
@@ -438,7 +435,7 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
         destoryStaffModelPrefab();
 
         GameObject newOrb = Instantiate(staffList[selectedStaff].staffOrbModelPrefab, staffOrbModel.transform);
-
+        
         newOrb.transform.localPosition = Vector3.zero;
         newOrb.SetActive(true);
 
@@ -471,4 +468,4 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
         }
     }
 
-}
+} 
