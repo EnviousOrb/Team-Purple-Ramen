@@ -75,6 +75,7 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
             model.material = paralysisMat;
         else if (!paralyzed)
         {
+            animator.SetBool("Aggro", true);
             float animSpeed = agent.velocity.normalized.magnitude; // Calculates speed for animation.
             animator.SetFloat("Speed", Mathf.Lerp(animator.GetFloat("Speed"), animSpeed, Time.deltaTime * animSpeedTrans)); // Smoothly transitions animation speed.
 
@@ -82,10 +83,12 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
             if (playerInRange && !canSeePlayer())
             {
                 StartCoroutine(roam()); // Starts roaming if player is out of sight but in range.
+                animator.SetBool("Aggro", false);
             }
             else if (!playerInRange)
             {
                 StartCoroutine(roam()); // Starts roaming if player is not in range.
+                animator.SetBool("Aggro", false);
             }
         }
         if (burning && !dotCD)
