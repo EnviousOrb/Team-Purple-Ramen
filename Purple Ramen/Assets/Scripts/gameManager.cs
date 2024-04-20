@@ -73,6 +73,15 @@ public class gameManager : MonoBehaviour
         {
             UIManager.instance.hotbarWeapon.SetActive(false);
         }
+        
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            PS.crouch();
+        }
+        else if (Input.GetKeyUp(KeyCode.LeftControl))
+        {
+            PS.unCrouch();
+        }
     }
 
     public void UpdateTextBox(string newText)

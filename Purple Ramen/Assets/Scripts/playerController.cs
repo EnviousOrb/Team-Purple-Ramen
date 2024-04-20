@@ -18,6 +18,7 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
 
     [HeaderAttribute("----- Player Stats -----")]
     [Range(0, 20)][SerializeField] int HP;              // The player's health points.
+    [Range(0, 20)][SerializeField] int mana;
     [Range(1, 5)][SerializeField] float speed;          // Movement speed of the player.
     [Range(2, 8)][SerializeField] float sprintMultiplier; // The multiplier to apply to speed when sprinting.
     [Range(1, 3)][SerializeField] int jumps;            // The number of consecutive jumps the player can perform.
@@ -49,6 +50,7 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
     Vector3 playerVel;      // The player's current velocity.
     float originalSpeed;    // The original speed of the player, for restoring after sprinting.
     int HPoriginal;         // The original health points of the player, for UI updates.
+    int Manaoriginal;
     int selectedItem;       // The index of the currently selected item.
     int rayDistance;        // Distance for the raycast debug line.
     int selectedStaff;
@@ -63,7 +65,6 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
     bool isMoving;
 
     [HeaderAttribute("----- TheStuffs -----")]
-    int mana;
     bool isSlowed;
     bool iFrames;
 
@@ -71,6 +72,7 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
     {
         originalSpeed = speed; // Store the original speed.
         HPoriginal = HP; // Store the original HP for UI calculations.
+        Manaoriginal = mana;
         updatePlayerUI(); // Update the UI elements based on current stats.
         spawnPlayer();
         EquipDefaultStaff();
@@ -118,6 +120,7 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
     public void spawnPlayer()
     {
         HP = HPoriginal; // Reset player HP to original value.
+        mana = Manaoriginal;
         speed = originalSpeed;
         updatePlayerUI(); // Update the player's UI elements.
         controller.enabled = false; // Temporarily disable the controller to move the player.
@@ -301,13 +304,13 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
     }
 
     // Reduces the player's height for crouching.
-    void crouch()
+    public void crouch()
     {
         controller.height /= 2;
     }
 
     // Resets the player's height after crouching.
-    void unCrouch()
+    public void unCrouch()
     {
         controller.height *= 2;
     }
