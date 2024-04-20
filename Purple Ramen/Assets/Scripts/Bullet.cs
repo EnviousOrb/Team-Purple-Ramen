@@ -42,14 +42,14 @@ public class Bullet : MonoBehaviour
         ISlow slow = other.GetComponent<ISlow>();
         if (slow != null)
         {
-            slow.getSlowed(speedMod, slowLength);
+            slow.GetSlowed(speedMod, slowLength);
         }
 
         // If the other object implements IDamage, it calls takeDamage() on it with this bullet's damage value.
         Debug.Log(other.gameObject.name + " : None");
         if (dmg != null)
         {
-            dmg.takeDamage(damage);
+            dmg.takeDamage(damage, 0);
         }
 
 

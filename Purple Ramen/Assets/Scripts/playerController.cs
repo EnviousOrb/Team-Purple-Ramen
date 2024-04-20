@@ -270,7 +270,7 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
     }
 
     // Implements IDamage interface's takeDamage method.
-    public void takeDamage(int amount)
+    public void takeDamage(int amount, int type)
     {
         HP -= amount; // Decrease player's health by the damage amount.
         StartCoroutine(flashdmgScreen()); // Flash damage effect on screen.
@@ -296,7 +296,7 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
     // Updates player's health bar UI.
     void updatePlayerUI()
     {
-        gameManager.instance.HPbar.fillAmount = (float)HP/ sceneInfo.HPorig; // Set health bar based on current health.
+        gameManager.instance.HPbar.fillAmount = (float)HP / sceneInfo.HPorig; // Set health bar based on current health.
     }
 
     // Reduces the player's height for crouching.
@@ -331,7 +331,7 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
 
     // JOSEPH'S SECTION \/ \/ \/ \/ PLZ DO NOT COMMENT BELOW THIS LINE I BEG OF THEE 
 
-    public void getSlowed(float slowModifier, int slowLength)
+    public void GetSlowed(float slowModifier, int slowLength)
     {
         StartCoroutine(FlashSlow(slowLength));
         StartCoroutine(Slow(slowModifier, slowLength));

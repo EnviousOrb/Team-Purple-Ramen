@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface ISlow
 {
-    void getSlowed(float slowModifier, int slowLength);
+    void GetSlowed(float slowModifier, int slowLength);
 }

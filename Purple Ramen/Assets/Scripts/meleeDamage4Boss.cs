@@ -14,7 +14,7 @@ public class meleeDamage4Boss : MonoBehaviour
 
         if (dmg != null)
         {
-            dmg.takeDamage(meleeStrength);
+            dmg.takeDamage(meleeStrength, 0);
         }
     }
 }

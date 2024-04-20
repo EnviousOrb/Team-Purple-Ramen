@@ -53,7 +53,7 @@ public class animalController : MonoBehaviour, IDamage
         }
     }
 
-    public void takeDamage(int amount)
+    public void takeDamage(int amount, int type)
     {
         HP -= amount;
         StartCoroutine(FlashRed());
