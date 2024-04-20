@@ -64,17 +64,27 @@ public class gameManager : MonoBehaviour
             else if (menuActive == menuInv)
                 stateNormal();
         }
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            UIManager.instance.hotbarWeapon.SetActive(true);
+        }
+        else if (Input.GetKeyUp(KeyCode.Q))
+        {
+            UIManager.instance.hotbarWeapon.SetActive(false);
+        }
     }
 
     public void UpdateTextBox(string newText)
     {
+        StopCoroutine(SuperHideTextBox(20));
         if (TextBoxText.reading == true)
         {
             TextBoxText.Rebuild();
         }
         TextBox.SetActive(true);
         TextBoxText.text = newText;
-        StartCoroutine(SuperHideTextBox(5));
+        StartCoroutine(SuperHideTextBox(20));
     }
     public void HideTextBox()
     {
