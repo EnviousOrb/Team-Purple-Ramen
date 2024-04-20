@@ -39,7 +39,7 @@ public class staffElementalStats : ScriptableObject, IInventory
 
     //public ParticleSystem onHitEffect;
     public ParticleSystem onCastEffect;
-    //public AudioClip spellSound;
-    //[Range(0,1)]public float shootSoundVol;
+    public AudioClip staffEquipSound;
+    [Range(0,1)]public float equipSoundVol;
     
 }

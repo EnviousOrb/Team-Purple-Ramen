@@ -439,7 +439,9 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
         destoryStaffModelPrefab();
 
         GameObject newOrb = Instantiate(staffList[selectedStaff].staffOrbModelPrefab, staffOrbModel.transform);
+
         
+
         newOrb.transform.localPosition = Vector3.zero;
         newOrb.SetActive(true);
 
@@ -455,6 +457,7 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
             orbInstance.transform.localPosition = Vector3.zero;
 
             staffElementalStats defaultStats = defaultStaffStats;
+
             if (defaultStats != null)
             {
                 staffList.Add(defaultStats);
