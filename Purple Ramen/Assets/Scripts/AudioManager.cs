@@ -22,6 +22,7 @@ public class AudioManager : MonoBehaviour
             Destroy(gameObject);
         }
         playBGM(BGM[1].soundName);
+        PlayerSource = GameObject.FindWithTag("Player").GetComponent<AudioSource>();
     }
     private void OnTriggerEnter(Collider other)
     {
