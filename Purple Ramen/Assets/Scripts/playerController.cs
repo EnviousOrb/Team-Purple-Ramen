@@ -438,15 +438,12 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
 
         destoryStaffModelPrefab();
 
+        AudioManager.instance.SFXSource.PlayOneShot(gameManager.instance.PS.staffList[gameManager.instance.PS.selectedStaff].staffEquipSound);
+
         GameObject newOrb = Instantiate(staffList[selectedStaff].staffOrbModelPrefab, staffOrbModel.transform);
-
-        AudioManager.instance.playSFX(staffList[selectedStaff].staffEquipSound.name);
-
-        Debug.Log(staffList[selectedStaff].staffEquipSound.name);
 
         newOrb.transform.localPosition = Vector3.zero;
         newOrb.SetActive(true);
-
     }
 
     private void EquipDefaultStaff()
