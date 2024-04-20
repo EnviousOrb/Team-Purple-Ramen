@@ -12,6 +12,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] public List<Image> inventoryUISlotLocation = new(); // UI images for inventory slots.
     [SerializeField] public List<Image> weaponHotbar = new();
     [SerializeField] public GameObject hotbarWeapon;
+    [SerializeField] public staffElementalStats weapon;
     [SerializeField] private Image mainSlotImage; // UI image for the main slot.
     [SerializeField] private SuperTextMesh descriptionText;
     public Slider bgmSlider, sfxSlider, npcSlider;
@@ -28,6 +29,7 @@ public class UIManager : MonoBehaviour
         {
             instance = this;
         }
+        UpdateInventoryUI(weapon);
     }
 
     public void UpdateMainSlot(IInventory item)
@@ -53,6 +55,34 @@ public class UIManager : MonoBehaviour
             weaponHotbar[i].enabled = true;
         }
     }
+
+    public void UpdateInventoryUI(IInventory item)
+    {
+        //clears any previous items from the inventory UI (this will probably be used when transitioning from level to hub)
+        foreach (var slot in inventoryUISlotLocation)
+        {
+            slot.sprite = null;
+            slot.enabled = false;
+        }
+
+        if (item is staffElementalStats)
+        {
+            reservedSpots4Staffs[1] = item;
+
+            inventoryUISlotLocation[1].sprite = item.InventorySprite;
+            inventoryUISlotLocation[1].enabled = true;
+
+            if (inventoryUISlotLocation[1].TryGetComponent<Button>(out var slotButton))
+            {
+                slotButton.onClick.RemoveAllListeners();
+                slotButton.onClick.AddListener(() => UpdateMainSlot(item));
+            }
+
+            UpdateWeaponHotbar(new List<IInventory> { item });
+        }
+    }
+
+
     public void UpdateInventoryUI(List<IInventory> itemList)
     {
         //clears any previous items from the inventory UI (this will probably be used when transitioning from level to hub)
