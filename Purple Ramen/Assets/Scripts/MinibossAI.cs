@@ -87,7 +87,7 @@ public class MinibossAI : MonoBehaviour, IDamage
     void Update()
     {
         float animSpeed = agent.velocity.normalized.magnitude; // Calculates speed for animation.
-        animator.SetFloat(originalSpeed, Mathf.Lerp(animator.GetFloat(originalSpeed), animSpeed, Time.deltaTime * animSpeedTrans)); // Smoothly transitions animation speed.
+        animator.SetFloat("Speed", Mathf.Lerp(animator.GetFloat("Speed"), animSpeed, Time.deltaTime * animSpeedTrans)); // Smoothly transitions animation speed.
 
         hpBar.fillAmount = (float)HP / ogHealth;
 
