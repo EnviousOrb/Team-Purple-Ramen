@@ -12,7 +12,7 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
 {
     [HeaderAttribute("----- Components -----")]
     [SerializeField] CharacterController controller;    // The CharacterController component for moving the player.
-    [SerializeField] weaponController weapon;           // The current weapon controller.
+    //[SerializeField] weaponController weapon;           // The current weapon controller.
     [SerializeField] Animator anim;
     [SerializeField] SceneInfo sceneInfo;
 
@@ -81,21 +81,22 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
 
     void Update()
     {
-        if (!gameManager.instance.isPaused) // Check if the game is not paused.
+        if (!gameManager.instance.isPaused) // If the game is not paused.
         {
-            //selectItem(); // Handle item selection.
 #if UNITY_EDITOR
-            // Draw a debug ray in the editor to visualize aiming or looking direction.
+            // Draw a debug ray in the editor to visualize aiming or looking direction and make it green.
             Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * rayDistance, Color.green);
 #endif
-            selectStaff();
-            movement(); // Handle player movement.
+            selectStaff(); // Call the method to cycle through staff weapons.
+            movement(); // Call the method to handle player movement.
 
+            // On Left Mouse click start shoot coroutine. Check that you're not already shooting and that you have at least 1 staff in inventory.
             if (Input.GetButton("Fire1") && !isShooting && staffList.Count > 0)
             {
                 StartCoroutine(shoot());
             }
 
+            // On Right Mouse button click start melee coroutine. Check that you're not already meleeing.
             if (Input.GetButton("Fire2") && !isMeleeing)
             {
                 StartCoroutine(melee());
