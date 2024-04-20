@@ -38,7 +38,6 @@ public class gameManager : MonoBehaviour
     // Awake is called before Start
     void Awake()
     {
-
         instance = this;
         player = GameObject.FindWithTag("Player");
         PS = player.GetComponent<playerController>();
