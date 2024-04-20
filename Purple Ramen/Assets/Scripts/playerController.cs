@@ -65,6 +65,7 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
     [HeaderAttribute("----- TheStuffs -----")]
     int mana;
     bool isSlowed;
+    bool iFrames;
 
     void Start()
     {
@@ -271,17 +272,18 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
     // Implements IDamage interface's takeDamage method.
     public void takeDamage(int amount, int type)
     {
-        HP -= amount; // Decrease player's health by the damage amount.
-        StartCoroutine(flashdmgScreen()); // Flash damage effect on screen.
-        StartCoroutine(IFrames());
-        updatePlayerUI(); // Update player's health UI.
-
-        // Check for player death.
-        if (HP <= 0)
+        if (!iFrames)
         {
-            gameManager.instance.stateLose(); // Trigger game loss state.
+            HP -= amount; // Decrease player's health by the damage amount.
+            StartCoroutine(flashdmgScreen()); // Flash damage effect on screen.
+            StartCoroutine(IFrames());
+            updatePlayerUI(); // Update player's health UI.
+
+            // Check for player death.
+            if (HP <= 0)
+                gameManager.instance.stateLose(); // Trigger game loss state.
+            AudioManager.instance.playPlayerSFX("Damage SFX");
         }
-        AudioManager.instance.playPlayerSFX("Damage SFX");
     }
 
     // Coroutine to flash the damage screen effect.
@@ -295,7 +297,7 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
     // Updates player's health bar UI.
     void updatePlayerUI()
     {
-        gameManager.instance.HPbar.fillAmount = (float)HP / sceneInfo.HPorig; // Set health bar based on current health.
+        gameManager.instance.HPbar.fillAmount = (float)HP / HPoriginal; // Set health bar based on current health.
     }
 
     // Reduces the player's height for crouching.
@@ -312,9 +314,9 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
 
     IEnumerator IFrames()
     {
-        characterCollider.enabled = false;
+        iFrames = true;
         yield return new WaitForSeconds(iFrameDuration);
-        characterCollider.enabled = true;
+        iFrames = false;
     }
 
     public void GetItem(IInventory newItem)
@@ -378,6 +380,7 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
         speed = originalSpeed;
         isSlowed = false;
     }
+    // END OF JOSEPH'S SECTION   /\ /\ /\ /\ /\ /\ 
 
     public void LoadPlayer()
     {

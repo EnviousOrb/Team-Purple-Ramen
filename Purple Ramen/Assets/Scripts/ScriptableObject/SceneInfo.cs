@@ -6,7 +6,7 @@ using UnityEngine;
 public class SceneInfo : ScriptableObject
 {
 
-    public static SceneInfo Instance;
+    public static SceneInfo instance;
 
     public int HP;
     public int HPorig;
@@ -16,15 +16,15 @@ public class SceneInfo : ScriptableObject
     private void Awake()
     {
 
-        Instance = this;
-        if (Instance == null)
+        instance = this;
+        if (instance == null)
         {
-            DontDestroyOnLoad(Instance);
-            Instance = this;
+            DontDestroyOnLoad(instance);
+            instance = this;
         }
-        else if (Instance != this)
+        else if (instance != this)
         {
-            Destroy(Instance);
+            Destroy(instance);
         }
         gameManager.instance.PS.LoadPlayer();
         
