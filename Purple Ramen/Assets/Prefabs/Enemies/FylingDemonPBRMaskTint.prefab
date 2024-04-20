@@ -1248,7 +1248,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2.5291, y: 2.5291, z: 2.5291}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2620438297315033315}
@@ -1270,6 +1270,7 @@ MonoBehaviour:
   model: {fileID: 2821059264314442631}
   agent: {fileID: 7987530509579168974}
   shootPos: {fileID: 8823932511007744795}
+  itemToDrop: {fileID: 0}
   HP: 20
   speed: 3
   bullet: {fileID: 7135714001530856501, guid: 197a9dc5b7c7eb84a98e3a96ec525dee, type: 3}
@@ -1285,6 +1286,11 @@ MonoBehaviour:
   roamDist: 50
   roamPauseTime: 2
   scoreValue: 0
+  enemyType: 0
+  drops: []
+  dropRolls: 0
+  paralysisMat: {fileID: 0}
+  rootEffect: {fileID: 0}
   associatedSpawner: {fileID: 0}
 --- !u!95 &4214560777692720753
 Animator:
