@@ -74,10 +74,17 @@ public class gameManager : MonoBehaviour
         }
         TextBox.SetActive(true);
         TextBoxText.text = newText;
+        StartCoroutine(SuperHideTextBox(5));
     }
     public void HideTextBox()
     {
          TextBox.SetActive(false);
+    }
+
+    public IEnumerator SuperHideTextBox(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        HideTextBox();
     }
 
     public void stateWin()

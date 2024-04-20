@@ -40,7 +40,6 @@ public class Chest : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             animate.SetBool("isInRange", false);
-            gameManager.instance.HideTextBox();
         }
     }
 
