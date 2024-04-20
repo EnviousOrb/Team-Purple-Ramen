@@ -440,7 +440,9 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
 
         GameObject newOrb = Instantiate(staffList[selectedStaff].staffOrbModelPrefab, staffOrbModel.transform);
 
-        
+        AudioManager.instance.playSFX(staffList[selectedStaff].staffEquipSound.name);
+
+        Debug.Log(staffList[selectedStaff].staffEquipSound.name);
 
         newOrb.transform.localPosition = Vector3.zero;
         newOrb.SetActive(true);
