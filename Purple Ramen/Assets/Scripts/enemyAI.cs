@@ -77,8 +77,7 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
 
     void Update()
     {
-        if (!animator.GetBool("Dead"))  // Ensure dead enemies are not dead.
-        {
+        
         if (paralyzed && model.material == originalMat)
             model.material = paralysisMat;
         else if (!paralyzed)
@@ -101,7 +100,6 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
         }
         if (burning && !dotCD)
             StartCoroutine(BurnTick());
-        }
     }
 
     // Coroutine for roaming when the player is not detected.
@@ -239,6 +237,8 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
         agent.SetDestination(gameManager.instance.player.transform.position);
         if (HP <= 0)
         {
+            agent.acceleration = 0;
+            agent.velocity = Vector3.zero;
             if (associatedSpawner)
                 associatedSpawner.UpdateEnemies(-1);
             gameManager.instance.playerScore += scoreValue;
@@ -368,11 +368,14 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
     }
     IEnumerator Slow(float slowMod, int slowLength)
     {
-        agent.speed = originalSpeed * slowMod;
-        rootEffect.SetActive(true);
-        yield return new WaitForSeconds(slowLength);
-        rootEffect.SetActive(false);
-        agent.speed = originalSpeed;
+        if(rootEffect != null)
+        {
+            agent.speed = originalSpeed * slowMod;
+            rootEffect.SetActive(true);
+            yield return new WaitForSeconds(slowLength);
+            rootEffect.SetActive(false);
+            agent.speed = originalSpeed;
+        }
     }
     IEnumerator Paralyzed(float duration)
     {

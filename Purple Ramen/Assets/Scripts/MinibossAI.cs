@@ -234,11 +234,12 @@ public class MinibossAI : MonoBehaviour, IDamage
         // Checks if health has dropped to 0 or below.
         if (HP <= 0)
         {
+            agent.acceleration = 0;
+            agent.velocity = Vector3.zero;
             if (itemToDrop != null)
             {
                 itemToDrop.SetActive(true);
             }
-            stoppingDist = 100;
             animator.SetBool("Death", true);
             StartCoroutine(DeathAnimate());
             hpBar.gameObject.SetActive(false);
