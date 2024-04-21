@@ -85,6 +85,7 @@ public class MinibossAI : MonoBehaviour, IDamage
         agent.stoppingDistance = 0; // Resets stopping distance for roaming behavior.
         originalSpeed = speed;
         ogHealth = HP;
+        rand = new();
     }
 
     void Update()
@@ -106,6 +107,7 @@ public class MinibossAI : MonoBehaviour, IDamage
             animator.SetBool("playerInRange", false);
             StartCoroutine(Roam()); // Starts roaming if player is not in range.
         }
+        action = rand.Next(4);
     }
 
     // Coroutine for roaming when the player is not detected.
