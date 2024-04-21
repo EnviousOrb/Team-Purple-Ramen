@@ -102,12 +102,16 @@ public class MinibossAI : MonoBehaviour, IDamage
             animator.SetBool("playerInRange", false);
             StartCoroutine(Roam()); // Starts roaming if player is out of sight but in range.
         }
+        else if(playerInRange && canSeePlayer())
+        {
+            action = rand.Next(4);
+            MinibossAttack(action);
+        }
         else if (!playerInRange)
         {
             animator.SetBool("playerInRange", false);
             StartCoroutine(Roam()); // Starts roaming if player is not in range.
         }
-        action = rand.Next(4);
     }
 
     // Coroutine for roaming when the player is not detected.
@@ -166,19 +170,7 @@ public class MinibossAI : MonoBehaviour, IDamage
     public void Dash()
     {
         isDashing = true;
-        float distanceToPlayer = Vector3.Distance(transform.position, gameManager.instance.PS.transform.position);
-        if (distanceToPlayer < dashDistance && !isJumping)
-        {
-            rb.AddForce(-playerDir * jumpForce, ForceMode.Impulse);
-            isJumping = true;
-            isDashing = false;
-        }
-        else if(distanceToPlayer > dashDistance && isJumping)
-        {
-            rb.velocity = playerDir * dashSpeed;
-            isJumping = false;
-            isDashing = true;
-        }
+        animator.SetTrigger("Dash");
         isDashing = false;
     }
 
@@ -204,15 +196,17 @@ public class MinibossAI : MonoBehaviour, IDamage
 
     public void Summoning()
     {
-        isSummoning = true;
         if (enemiesInScene < maxEnemiesSpawn)
         {
+            isSummoning = true;
+            animator.SetBool("Summon", true);
             Vector3 randomOffset = Random.insideUnitSphere * spawnRange;
             Vector3 spawnPOS = minibossPOS.position + randomOffset;
             randomOffset.y = minibossPOS.position.y;
             Instantiate(enemyToSummon, spawnPOS, Quaternion.identity);
             enemiesInScene++;
         }
+        animator.SetBool("Summon", false);
         isSummoning = false;
     }
 
