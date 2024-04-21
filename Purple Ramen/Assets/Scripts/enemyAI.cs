@@ -23,7 +23,6 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
     [SerializeField] float shootRate; // Rate at which the enemy shoots.
     [SerializeField] int stoppingDist; // Minimum distance to stop from the player.
     [SerializeField] float shootAniDelay; // Delay for the bullet based the enemy animation.
-    [SerializeField] float deathAniDelay;
     Material originalMat; // The original material of the enemy model.
 
     [HeaderAttribute("-----Animation-----")]
@@ -53,10 +52,10 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
     [SerializeField] int dropRolls;
     [SerializeField] Material paralysisMat;
     [SerializeField] GameObject rootEffect;
-    [SerializeField] ParticleSystem particleCrit;
+    /*[SerializeField] ParticleSystem particleCrit;
     [SerializeField] ParticleSystem particleWeak;
     [SerializeField] ParticleSystem particleNormal;
-    ParticleSystem activeParticle;
+    ParticleSystem activeParticle;*/
     bool paralyzed;
     bool burning;
     bool dotCD;
@@ -73,35 +72,35 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
         stoppingDistOrig = agent.stoppingDistance; // Stores the original stopping distance.
         agent.stoppingDistance = 0; // Resets stopping distance for roaming behavior.
         originalSpeed = speed;
-        activeParticle = particleNormal;
+        //activeParticle = particleNormal;
     }
 
     void Update()
     {
         if (!animator.GetBool("Dead"))  // Ensure dead enemies are not dead.
         {
-            if (paralyzed && model.material == originalMat)
-                model.material = paralysisMat;
-            else if (!paralyzed)
-            {
-                animator.SetBool("Aggro", true);
-                float animSpeed = agent.velocity.normalized.magnitude; // Calculates speed for animation.
-                animator.SetFloat("Speed", Mathf.Lerp(animator.GetFloat("Speed"), animSpeed, Time.deltaTime * animSpeedTrans)); // Smoothly transitions animation speed.
+        if (paralyzed && model.material == originalMat)
+            model.material = paralysisMat;
+        else if (!paralyzed)
+        {
+            animator.SetBool("Aggro", true);
+            float animSpeed = agent.velocity.normalized.magnitude; // Calculates speed for animation.
+            animator.SetFloat("Speed", Mathf.Lerp(animator.GetFloat("Speed"), animSpeed, Time.deltaTime * animSpeedTrans)); // Smoothly transitions animation speed.
 
-                // Determines behavior based on player visibility and range.
-                if (playerInRange && !canSeePlayer())
-                {
-                    StartCoroutine(roam()); // Starts roaming if player is out of sight but in range.
-                    animator.SetBool("Aggro", false);
-                }
-                else if (!playerInRange)
-                {
-                    StartCoroutine(roam()); // Starts roaming if player is not in range.
-                    animator.SetBool("Aggro", false);
-                }
+            // Determines behavior based on player visibility and range.
+            if (playerInRange && !canSeePlayer())
+            {
+                StartCoroutine(roam()); // Starts roaming if player is out of sight but in range.
+                animator.SetBool("Aggro", false);
             }
-            if (burning && !dotCD)
-                StartCoroutine(BurnTick());
+            else if (!playerInRange)
+            {
+                StartCoroutine(roam()); // Starts roaming if player is not in range.
+                animator.SetBool("Aggro", false);
+            }
+        }
+        if (burning && !dotCD)
+            StartCoroutine(BurnTick());
         }
     }
 
@@ -136,6 +135,7 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
         GameObject projectile = Instantiate(bullet, shootPos.position, Quaternion.LookRotation(playerDirection));
 
         yield return new WaitForSeconds(shootRate - shootAniDelay);
+        yield return new WaitForSeconds(shootRate); // Waits before allowing next shot.
         isShooting = false;
     }
 
@@ -149,19 +149,19 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
                 {
                     case 1:
                         HP -= amount;
-                        activeParticle = particleNormal;
+                        //activeParticle = particleNormal;
                         break;
                     case 2:
                         HP -= amount / 2;
-                        activeParticle = particleWeak;
+                        //activeParticle = particleWeak;
                         break;
                     case 3:
                         HP -= amount * 2;
-                        activeParticle = particleCrit;
+                        //activeParticle = particleCrit;
                         break;
                     case 4:
                         HP -= amount;
-                        activeParticle = particleNormal;
+                        //activeParticle = particleNormal;
                         break;
                 }
                 break;
@@ -170,19 +170,19 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
                 {
                     case 1:
                         HP -= amount * 2;
-                        activeParticle = particleCrit;
+                        //activeParticle = particleCrit;
                         break;
                     case 2:
                         HP -= amount;
-                        activeParticle = particleNormal;
+                        //activeParticle = particleNormal;
                         break;
                     case 3:
                         HP -= amount;
-                        activeParticle = particleNormal;
+                        //activeParticle = particleNormal;
                         break;
                     case 4:
                         HP -= amount / 2;
-                        activeParticle = particleWeak;
+                        //activeParticle = particleWeak;
                         break;
                 }
                 break;
@@ -191,19 +191,19 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
                 {
                     case 1:
                         HP -= amount / 2;
-                        activeParticle = particleWeak;
+                        //activeParticle = particleWeak;
                         break;
                     case 2:
                         HP -= amount;
-                        activeParticle = particleNormal;
+                        //activeParticle = particleNormal;
                         break;
                     case 3:
                         HP -= amount;
-                        activeParticle = particleNormal;
+                       //activeParticle = particleNormal;
                         break;
                     case 4:
                         HP -= amount * 2;
-                        activeParticle = particleCrit;
+                        //activeParticle = particleCrit;
                         break;
                 }
                 break;
@@ -212,28 +212,27 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
                 {
                     case 1:
                         HP -= amount;
-                        activeParticle = particleNormal;
+                        //activeParticle = particleCrit;
                         break;
                     case 2:
                         HP -= amount * 2;
-                        activeParticle = particleCrit;
+                        //activeParticle = particleCrit;
                         break;
                     case 3:
                         HP -= amount / 2;
-                        activeParticle = particleWeak;
+                        //activeParticle = particleCrit;
                         break;
                     case 4:
                         HP -= amount;
-                        activeParticle = particleNormal;
+                        //activeParticle = particleCrit;
                         break;
                 }
                 break;
             default:
                 HP -= amount;
-                activeParticle = particleNormal;
                 break;
         }
-        activeParticle.Play();
+        //activeParticle.Play();
         animator.SetTrigger("TakesDamage");
 
         StartCoroutine(flashRed());
@@ -262,8 +261,8 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
     IEnumerator enemyDeath()
     {
         yield return new WaitForSeconds(8);
-        Destroy(gameObject);
-    }
+            Destroy(gameObject);
+        }
 
     public void EnemiesCelebrate()
     {
@@ -271,7 +270,7 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
         {
             animator.SetTrigger("PlayerIsDead");
         }
-    }   
+    }
 
     // Coroutine to visually indicate damage by changing the enemy's color.
     IEnumerator flashRed()
