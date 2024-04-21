@@ -81,7 +81,7 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
             model.material = paralysisMat;
         else if (!paralyzed)
         {
-            //animator.SetBool("Aggro", true);
+            animator.SetBool("Aggro", true);
             float animSpeed = agent.velocity.normalized.magnitude; // Calculates speed for animation.
             animator.SetFloat("Speed", Mathf.Lerp(animator.GetFloat("Speed"), animSpeed, Time.deltaTime * animSpeedTrans)); // Smoothly transitions animation speed.
 
@@ -231,7 +231,7 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
                 break;
         }
         activeParticle.Play();
-        animator.SetTrigger("TakesDamage");
+        //animator.SetTrigger("TakesDamage");
 
         StartCoroutine(flashRed());
         agent.SetDestination(gameManager.instance.player.transform.position);
