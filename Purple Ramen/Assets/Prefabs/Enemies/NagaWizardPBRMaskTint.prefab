@@ -628,7 +628,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9ac568da7528418fafca2a9973f3b34e, type: 2}
+  - {fileID: 2100000, guid: e038ff1792ae48a1a72872f8a91b3707, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2370,12 +2370,14 @@ MonoBehaviour:
   model: {fileID: 7561648235343051972}
   agent: {fileID: 4540104689732251616}
   shootPos: {fileID: 3063480822140032869}
+  itemToDrop: {fileID: 0}
   HP: 20
   speed: 2
   bullet: {fileID: 6654342452342103052, guid: 981cb1a764e5eb346aa6494c88ad1c1f, type: 3}
   damageMat: {fileID: 2100000, guid: 61a868ed95d3914428f24f0450c95593, type: 2}
   shootRate: 2
   stoppingDist: 10
+  shootAniDelay: 0
   animator: {fileID: 6176710172087369268}
   animSpeedTrans: 1
   headPos: {fileID: 5313288169958701758}
@@ -2385,6 +2387,11 @@ MonoBehaviour:
   roamDist: 20
   roamPauseTime: 3
   scoreValue: 0
+  enemyType: 0
+  drops: []
+  dropRolls: 0
+  paralysisMat: {fileID: 0}
+  rootEffect: {fileID: 0}
   associatedSpawner: {fileID: 0}
 --- !u!95 &6176710172087369268
 Animator:
