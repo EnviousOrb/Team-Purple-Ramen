@@ -23,6 +23,7 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
     [SerializeField] float shootRate; // Rate at which the enemy shoots.
     [SerializeField] int stoppingDist; // Minimum distance to stop from the player.
     [SerializeField] float shootAniDelay; // Delay for the bullet based the enemy animation.
+    [SerializeField] float deathAniDelay;
     Material originalMat; // The original material of the enemy model.
 
     [HeaderAttribute("-----Animation-----")]
@@ -77,28 +78,31 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
 
     void Update()
     {
-        if (paralyzed && model.material == originalMat)
-            model.material = paralysisMat;
-        else if (!paralyzed)
+        if (!animator.GetBool("Dead"))  // Ensure dead enemies are not dead.
         {
-            animator.SetBool("Aggro", true);
-            float animSpeed = agent.velocity.normalized.magnitude; // Calculates speed for animation.
-            animator.SetFloat("Speed", Mathf.Lerp(animator.GetFloat("Speed"), animSpeed, Time.deltaTime * animSpeedTrans)); // Smoothly transitions animation speed.
+            if (paralyzed && model.material == originalMat)
+                model.material = paralysisMat;
+            else if (!paralyzed)
+            {
+                animator.SetBool("Aggro", true);
+                float animSpeed = agent.velocity.normalized.magnitude; // Calculates speed for animation.
+                animator.SetFloat("Speed", Mathf.Lerp(animator.GetFloat("Speed"), animSpeed, Time.deltaTime * animSpeedTrans)); // Smoothly transitions animation speed.
 
-            // Determines behavior based on player visibility and range.
-            if (playerInRange && !canSeePlayer())
-            {
-                StartCoroutine(roam()); // Starts roaming if player is out of sight but in range.
-                animator.SetBool("Aggro", false);
+                // Determines behavior based on player visibility and range.
+                if (playerInRange && !canSeePlayer())
+                {
+                    StartCoroutine(roam()); // Starts roaming if player is out of sight but in range.
+                    animator.SetBool("Aggro", false);
+                }
+                else if (!playerInRange)
+                {
+                    StartCoroutine(roam()); // Starts roaming if player is not in range.
+                    animator.SetBool("Aggro", false);
+                }
             }
-            else if (!playerInRange)
-            {
-                StartCoroutine(roam()); // Starts roaming if player is not in range.
-                animator.SetBool("Aggro", false);
-            }
+            if (burning && !dotCD)
+                StartCoroutine(BurnTick());
         }
-        if (burning && !dotCD)
-            StartCoroutine(BurnTick());
     }
 
     // Coroutine for roaming when the player is not detected.
@@ -132,7 +136,6 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
         GameObject projectile = Instantiate(bullet, shootPos.position, Quaternion.LookRotation(playerDirection));
 
         yield return new WaitForSeconds(shootRate - shootAniDelay);
-        yield return new WaitForSeconds(shootRate); // Waits before allowing next shot.
         isShooting = false;
     }
 
@@ -231,7 +234,7 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
                 break;
         }
         activeParticle.Play();
-        //animator.SetTrigger("TakesDamage");
+        animator.SetTrigger("TakesDamage");
 
         StartCoroutine(flashRed());
         agent.SetDestination(gameManager.instance.player.transform.position);
@@ -251,9 +254,24 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
             {
                 minibossAI.MinionDeath();
             }
-            Destroy(gameObject);
+            animator.SetBool("Dead", true);
+            StartCoroutine(enemyDeath());
         }
     }
+
+    IEnumerator enemyDeath()
+    {
+        yield return new WaitForSeconds(8);
+        Destroy(gameObject);
+    }
+
+    public void EnemiesCelebrate()
+    {
+        if (!animator.GetBool("Dead"))  // Ensure dead enemies do not celebrate
+        {
+            animator.SetTrigger("PlayerIsDead");
+        }
+    }   
 
     // Coroutine to visually indicate damage by changing the enemy's color.
     IEnumerator flashRed()

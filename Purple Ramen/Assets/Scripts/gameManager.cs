@@ -139,6 +139,7 @@ public class gameManager : MonoBehaviour
         menuActive = menuLose;
         HideTextBox();
         Pause();
+        NotifyEnemiesPlayerDied();
         AudioManager.instance.stopAll();
     }
     public void stateNormal()
@@ -157,5 +158,13 @@ public class gameManager : MonoBehaviour
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         menuActive.SetActive(true);
+    }
+
+    public void NotifyEnemiesPlayerDied()
+    {
+        foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("Enemy"))
+        {
+            enemy.GetComponent<enemyAI>()?.EnemiesCelebrate();
+        }
     }
 }
