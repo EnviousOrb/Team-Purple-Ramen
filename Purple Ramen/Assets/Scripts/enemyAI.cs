@@ -51,6 +51,10 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
     [SerializeField] int dropRolls;
     [SerializeField] Material paralysisMat;
     [SerializeField] GameObject rootEffect;
+    [SerializeField] ParticleSystem particleCrit;
+    [SerializeField] ParticleSystem particleWeak;
+    [SerializeField] ParticleSystem particleNormal;
+    ParticleSystem activeParticle;
     bool paralyzed;
     bool burning;
     bool dotCD;
@@ -75,7 +79,7 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
             model.material = paralysisMat;
         else if (!paralyzed)
         {
-            animator.SetBool("Aggro", true);
+            //animator.SetBool("Aggro", true);
             float animSpeed = agent.velocity.normalized.magnitude; // Calculates speed for animation.
             animator.SetFloat("Speed", Mathf.Lerp(animator.GetFloat("Speed"), animSpeed, Time.deltaTime * animSpeedTrans)); // Smoothly transitions animation speed.
 
@@ -135,15 +139,19 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
                 {
                     case 1:
                         HP -= amount;
+                        activeParticle = particleNormal;
                         break;
                     case 2:
                         HP -= amount / 2;
+                        activeParticle = particleWeak;
                         break;
                     case 3:
                         HP -= amount * 2;
+                        activeParticle = particleCrit;
                         break;
                     case 4:
                         HP -= amount;
+                        activeParticle = particleNormal;
                         break;
                 }
                 break;
@@ -152,15 +160,19 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
                 {
                     case 1:
                         HP -= amount * 2;
+                        activeParticle = particleCrit;
                         break;
                     case 2:
                         HP -= amount;
+                        activeParticle = particleNormal;
                         break;
                     case 3:
                         HP -= amount;
+                        activeParticle = particleNormal;
                         break;
                     case 4:
                         HP -= amount / 2;
+                        activeParticle = particleWeak;
                         break;
                 }
                 break;
@@ -169,15 +181,19 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
                 {
                     case 1:
                         HP -= amount / 2;
+                        activeParticle = particleWeak;
                         break;
                     case 2:
                         HP -= amount;
+                        activeParticle = particleNormal;
                         break;
                     case 3:
                         HP -= amount;
+                        activeParticle = particleNormal;
                         break;
                     case 4:
                         HP -= amount * 2;
+                        activeParticle = particleCrit;
                         break;
                 }
                 break;
@@ -186,15 +202,19 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
                 {
                     case 1:
                         HP -= amount;
+                        activeParticle = particleNormal;
                         break;
                     case 2:
                         HP -= amount * 2;
+                        activeParticle = particleCrit;
                         break;
                     case 3:
                         HP -= amount / 2;
+                        activeParticle = particleWeak;
                         break;
                     case 4:
                         HP -= amount;
+                        activeParticle = particleNormal;
                         break;
                 }
                 break;
@@ -202,6 +222,7 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
                 HP -= amount;
                 break;
         }
+        activeParticle.Play();
 
         StartCoroutine(flashRed());
         agent.SetDestination(gameManager.instance.player.transform.position);
@@ -217,7 +238,7 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
             RollForDrops();
 
             MinibossAI minibossAI = FindObjectOfType<MinibossAI>();
-            if(minibossAI != null)
+            if (minibossAI != null)
             {
                 minibossAI.MinionDeath();
             }
