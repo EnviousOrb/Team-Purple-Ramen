@@ -22,6 +22,7 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
     [SerializeField] Material damageMat; // Material to indicate the enemy has taken damage.
     [SerializeField] float shootRate; // Rate at which the enemy shoots.
     [SerializeField] int stoppingDist; // Minimum distance to stop from the player.
+    [SerializeField] float shootAniDelay; // Delay for the bullet based the enemy animation.
     Material originalMat; // The original material of the enemy model.
 
     [HeaderAttribute("-----Animation-----")]
@@ -122,13 +123,18 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
     IEnumerator shoot()
     {
         isShooting = true;
-        animator.SetTrigger("Shoot"); // Triggers the shooting animation.
-        Vector3 playerDirection = gameManager.instance.player.transform.position - transform.position;
-        Instantiate(bullet, shootPos.position, Quaternion.LookRotation(playerDirection)); // Spawns the bullet.
         bullet.GetComponent<Bullet>().self = GetComponentInParent<CapsuleCollider>();
+        animator.SetTrigger("Shoot"); // Triggers the shooting animation.
+        yield return new WaitForSeconds(shootAniDelay);
+        
+        Vector3 playerDirection = gameManager.instance.player.transform.position - transform.position;
+        GameObject projectile = Instantiate(bullet, shootPos.position, Quaternion.LookRotation(playerDirection));
+
+        yield return new WaitForSeconds(shootRate - shootAniDelay);
         yield return new WaitForSeconds(shootRate); // Waits before allowing next shot.
         isShooting = false;
     }
+
     public void takeDamage(int amount, int type)
     {
         //1 = water, 2 = fire, 3 = lightning, 4 = plant
@@ -220,6 +226,7 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
                 break;
             default:
                 HP -= amount;
+                animator.SetTrigger("TakesDamage");
                 break;
         }
         activeParticle.Play();
