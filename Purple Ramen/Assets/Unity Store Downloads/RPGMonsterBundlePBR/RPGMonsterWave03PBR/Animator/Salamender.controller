@@ -466,10 +466,10 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: -5012233485412843910}
-    m_Position: {x: 420, y: 120, z: 0}
+    m_Position: {x: 290, y: 110, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -944311962230005783}
-    m_Position: {x: 420, y: 30, z: 0}
+    m_Position: {x: 290, y: 20, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -586,7 +586,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Salamander_GetHit
+  m_Name: Salamander Take Damage
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -901,7 +901,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Salamander_Die
+  m_Name: Salamander Die
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
