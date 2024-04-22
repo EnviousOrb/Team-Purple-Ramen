@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: f9363bafd8503444f9a83f9a55dc9ef8, type: 2}
 --- !u!1001 &150826649
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -258,6 +258,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: Hub Area
+  Loadingscreen: {fileID: 0}
+  loadingTimer: 0
   isNextScene: 1
   sceneInfo: {fileID: 11400000, guid: e9b35b64eab44834da85e8f354f6af30, type: 2}
 --- !u!1001 &731399245
@@ -319,6 +321,10 @@ PrefabInstance:
     - target: {fileID: 9163603172430416668, guid: d65890ac9c49be94bacb019ceb52bbc6, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 9163603172430416668, guid: d65890ac9c49be94bacb019ceb52bbc6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
