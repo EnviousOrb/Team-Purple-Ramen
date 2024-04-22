@@ -38,7 +38,7 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
     [HeaderAttribute("----- Wizard Range Attack -----")]
     [SerializeField] private GameObject defaultStaffOrbPrefab;
     [SerializeField] staffElementalStats defaultStaffStats;
-    [SerializeField] List<staffElementalStats> staffList = new List<staffElementalStats>();   // Inventory to hold all aquired staves.
+    [SerializeField]public List<staffElementalStats> staffList = new List<staffElementalStats>();   // Inventory to hold all aquired staves.
     [SerializeField] GameObject staffOrbModel;  // The staff orb container. 
     [SerializeField] int shootDamage;           // Default Shoot Damage to be overwritten by the staff stats.
     [SerializeField] int shootDistance;         // Default Shoot Distance to be overwritten.
@@ -388,14 +388,13 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
 
     public void LoadPlayer()
     {
-        HP=sceneInfo.HP;
-        speed = sceneInfo.speed;
+      staffList= sceneInfo.staffList;
     }
 
     public void SavePlayer()
     {
-        sceneInfo.HP = HP;
-        sceneInfo.speed = speed;
+        sceneInfo.staffList=staffList;
+       
     }
 
     public void getStaffStats(staffElementalStats staff)
