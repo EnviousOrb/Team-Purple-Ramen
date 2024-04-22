@@ -391,12 +391,12 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
 
     public void LoadPlayer()
     {
-      staffList= sceneInfo.staffList;
+      //staffList= sceneInfo.staffList;
     }
 
     public void SavePlayer()
     {
-        sceneInfo.staffList=staffList;
+        //sceneInfo.staffList=staffList;
        
     }
 

@@ -9,7 +9,7 @@ public class SceneInfo : ScriptableObject
 
     public static SceneInfo instance;
 
-   public List<staffElementalStats> staffList;
+   //public List<staffElementalStats> staffList;
 
     private void Awake()
     {
@@ -26,7 +26,7 @@ public class SceneInfo : ScriptableObject
         }
         gameManager.instance.PS.LoadPlayer();
         
-        staffList= gameManager.instance.PS.staffList;
+        //staffList= gameManager.instance.PS.staffList;
     }
 
   
