@@ -27,7 +27,9 @@ public class OnExitLevel : MonoBehaviour
         {
             gameManager.instance.PS.SavePlayer();
             sceneInfo.isNextScene = isNextScene;
+            StartCoroutine(Loading());
             SceneManager.LoadScene(sceneName);
+            StopCoroutine(Loading());
         }
     }
     IEnumerator Loading()
