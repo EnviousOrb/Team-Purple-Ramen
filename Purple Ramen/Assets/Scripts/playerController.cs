@@ -283,9 +283,12 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
             StartCoroutine(IFrames());
             updatePlayerUI(); // Update player's health UI.
 
-            // Check for player death.
+
             if (HP <= 0)
-                gameManager.instance.stateLose(); // Trigger game loss state.
+            {
+                gameManager.instance.stateLose();
+                controller.enabled = false;
+            }
             AudioManager.instance.playPlayerSFX("Damage SFX");
         }
     }

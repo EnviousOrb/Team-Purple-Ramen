@@ -147,7 +147,9 @@ public class gameManager : MonoBehaviour
     {
         menuActive = menuLose;
         HideTextBox();
-        Pause();
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        menuActive.SetActive(true);
         NotifyEnemiesPlayerDied();
         AudioManager.instance.stopAll();
     }
