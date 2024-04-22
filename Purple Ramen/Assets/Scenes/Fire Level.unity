@@ -180,6 +180,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 54cd83de81f0aca448176b3ef5162322, type: 3}
+--- !u!1 &230107181 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2366004603302663533, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
+  m_PrefabInstance: {fileID: 1337136810}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &616472951
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -228,6 +233,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3016460091956150047, guid: aef59d99afdca0b46b475d99dff063eb, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4497834514724535739, guid: aef59d99afdca0b46b475d99dff063eb, type: 3}
       propertyPath: m_Name
       value: Door 1
@@ -258,8 +267,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: Hub Area
-  Loadingscreen: {fileID: 0}
-  loadingTimer: 0
+  Loadingscreen: {fileID: 230107181}
+  loadingTimer: 5
   isNextScene: 1
   sceneInfo: {fileID: 11400000, guid: e9b35b64eab44834da85e8f354f6af30, type: 2}
 --- !u!1001 &731399245
