@@ -6,8 +6,7 @@ using System.Linq;
 public class npcScript : MonoBehaviour
 {
     [SerializeField] private List<GameObject> requiredItems;
-    [SerializeField] private List<staffElementalStats> requiredItemsInventory;
-    [SerializeField] private IInventory rewardItem;
+    [SerializeField] private ItemData rewardItem;
     [SerializeField] private SuperTextMesh questText;
     [SerializeField] private SuperTextMesh thankText;
     [SerializeField] private GameObject gateToUnlock;
@@ -21,32 +20,8 @@ public class npcScript : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerController player = other.GetComponent<playerController>();
-            if(requiredItems != null)
-            {
-                if (requiredItems.All(obj => obj.activeInHierarchy))
-                {
-                    if (!rewardGiven)
-                    {
-                        player.itemList.Add(rewardItem);
-                        rewardGiven = true;
-                    }
-                    if (checkpointToUnlock != null)
-                    {
-                        checkpointToUnlock.SetActive(true);
-                    }
-                    UIManager.instance.UpdateInventoryUI(player.itemList);
 
-                    gameManager.instance.UpdateTextBox(thankText.text);
-
-                    StartCoroutine(NpcSpeak());
-
-                    if (gateToUnlock != null)
-                    {
-                        gateToUnlock.SetActive(false);
-                    }
-                }
-            }
-            else if (requiredItemsInventory.All(inv => inv.InventorySprite))
+            if (requiredItems.All(obj => obj.activeInHierarchy))
             {
                 if (!rewardGiven)
                 {
