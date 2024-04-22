@@ -22,7 +22,7 @@ public class AudioManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        playBGM(BGM[1].soundName);
+        playBGM(BGM[0].soundName);
         PlayerSource = GameObject.FindWithTag("Player").GetComponent<AudioSource>();
     }
     private void OnTriggerEnter(Collider other)
