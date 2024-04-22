@@ -272,8 +272,8 @@ public class MinibossAI : MonoBehaviour, IDamage
         if (other.CompareTag("Player"))
         {
             playerInRange = true; // Marks that the player is in range.
-            hpBar.gameObject.SetActive(true);
-            minibossName.gameObject.SetActive(true);
+            //hpBar.gameObject.SetActive(true);
+            //minibossName.gameObject.SetActive(true);
             rand = new();
             action = rand.Next(4);
             MinibossAttack(action);
