@@ -14635,7 +14635,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3341299287826401419}
-  - component: {fileID: 8295045737362755800}
+  - component: {fileID: 745827330305001843}
   - component: {fileID: 8295045737362755801}
   - component: {fileID: 8295045737362755802}
   - component: {fileID: 8295045737362755805}
@@ -14665,7 +14665,7 @@ Transform:
   - {fileID: 8330670083983992597}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8295045737362755800
+--- !u!114 &745827330305001843
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -14674,10 +14674,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1319398647745027786}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87747a1254ff6804f99e93fa4b1d450b, type: 3}
+  m_Script: {fileID: 11500000, guid: 2822de997e915634fb0336636729e89c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FX_Hit: {fileID: 0}
+  rb: {fileID: 8295045737362755802}
+  type: 3
+  damage: 4
+  speed: 20
+  effectDuration: 1
+  effectStrength: 0
+  lifetime: 5
 --- !u!135 &8295045737362755801
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -14721,11 +14727,11 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
 --- !u!198 &8295045737362755805
 ParticleSystem:
   m_ObjectHideFlags: 0

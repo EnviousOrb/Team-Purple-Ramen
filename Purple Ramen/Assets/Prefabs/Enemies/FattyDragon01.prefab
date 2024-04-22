@@ -399,6 +399,9 @@ MonoBehaviour:
   dropRolls: 3
   paralysisMat: {fileID: 2100000, guid: 91f88aab6563f6b40908c28e8758cb87, type: 2}
   rootEffect: {fileID: 8100678192781633772}
+  particleCrit: {fileID: 0}
+  particleWeak: {fileID: 0}
+  particleNormal: {fileID: 0}
   associatedSpawner: {fileID: 0}
 --- !u!95 &4732715823649715118
 Animator:
@@ -2176,7 +2179,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8583376091671984210, guid: 285a42c216cc87b4b8a69f5c8d89f88e, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
