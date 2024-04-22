@@ -17,7 +17,7 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject menuLose;
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuInv;
-    [SerializeField] public GameObject menuSettings;
+    [SerializeField] GameObject menuSettings;
     [SerializeField] GameObject creditsPanel;
     [SerializeField] public GameObject TextBox;
     public GameObject checkpointMenu;
@@ -48,10 +48,6 @@ public class gameManager : MonoBehaviour
         TimeScaleOrig = Time.timeScale;
         playerSpawnPos = GameObject.FindWithTag("Player Spawn Pos");
         DontDestroyOnLoad(gameObject);
-    }
-
-    private void Start()
-    {
     }
 
     // Update is called once per frame
@@ -85,7 +81,7 @@ public class gameManager : MonoBehaviour
         {
             UIManager.instance.hotbarWeapon.SetActive(false);
         }
-        
+
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
             PS.crouch();
@@ -107,7 +103,6 @@ public class gameManager : MonoBehaviour
         TextBoxText.text = newText;
         StartCoroutine(SuperHideTextBox(20));
     }
-
     public void HideTextBox()
     {
         TextBox.SetActive(false);
@@ -128,31 +123,26 @@ public class gameManager : MonoBehaviour
         AudioManager.instance.playSFX(AudioManager.instance.SFX[0].soundName);
         AudioManager.instance.stopAll();
     }
-
     public void stateInv()
     {
         menuActive = menuInv;
         HideTextBox();
         Pause();
     }
-
     public void statePaused()
     {
         menuActive = menuPause;
         HideTextBox();
         Pause();
     }
-
     public void stateSettings()
     {
         previousMenu = menuActive;
         menuActive = menuSettings;
         menuSettings.SetActive(true);
-        SetCursorState(true, CursorLockMode.None);
         HideTextBox();
+        Pause();
     }
-
-
     public void stateLose()
     {
         menuActive = menuLose;
@@ -161,7 +151,6 @@ public class gameManager : MonoBehaviour
         NotifyEnemiesPlayerDied();
         AudioManager.instance.stopAll();
     }
-
     public void stateNormal()
     {
         isPaused = false;
@@ -170,9 +159,7 @@ public class gameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         menuActive.SetActive(false);
         menuActive = null;
-        previousMenu = null;
     }
-
     void Pause()
     {
         isPaused = true;
@@ -180,12 +167,6 @@ public class gameManager : MonoBehaviour
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         menuActive.SetActive(true);
-    }
-
-    public void SetCursorState(bool visible, CursorLockMode lockMode)
-    {
-        Cursor.visible = visible;
-        Cursor.lockState = lockMode;
     }
 
     public void ShowCredits()
@@ -204,12 +185,47 @@ public class gameManager : MonoBehaviour
         menuActive = menuMain;
         Pause();
     }
-
     public void NotifyEnemiesPlayerDied()
     {
         foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("Enemy"))
         {
             enemy.GetComponent<enemyAI>()?.EnemiesCelebrate();
         }
+    }
+
+    public void resume()
+    {
+        gameManager.instance.stateNormal();
+    }
+    public void restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        gameManager.instance.stateNormal();
+    }
+    public void exitSettings()
+    {
+        gameManager.instance.stateSettings();
+    }
+    public void respawn()
+    {
+        gameManager.instance.stateNormal();
+        gameManager.instance.PS.spawnPlayer();
+    }
+
+    public void quit()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#endif
+        Application.Quit();
+    }
+
+    public void showCredits()
+    {
+        gameManager.instance.ShowCredits();
+    }
+    public void settings()
+    {
+        gameManager.instance.stateSettings();
     }
 }

@@ -16,7 +16,7 @@ public class ButtonFunctions : MonoBehaviour
     }
     public void exitSettings()
     {
-        gameManager.instance.menuSettings.SetActive(false);
+        gameManager.instance.stateSettings();
     }
     public void respawn()
     {
@@ -36,7 +36,6 @@ public class ButtonFunctions : MonoBehaviour
     {
         gameManager.instance.ShowCredits();
     }
-
     public void settings()
     {
         gameManager.instance.stateSettings();
