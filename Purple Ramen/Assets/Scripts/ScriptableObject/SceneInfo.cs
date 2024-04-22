@@ -29,15 +29,7 @@ public class SceneInfo : ScriptableObject
         staffList= gameManager.instance.PS.staffList;
     }
 
-   void  OnTriggerEnter(Collider other)
-    {
-        if(other.CompareTag("Player"))
-        {
-           
-
-        }
-       
-    }
+  
 
 
 
