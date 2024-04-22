@@ -12,11 +12,13 @@ public class gameManager : MonoBehaviour
     public static gameManager instance;
 
     [SerializeField] GameObject menuActive;
+    [SerializeField] GameObject menuMain;
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuLose;
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuInv;
-    [SerializeField] GameObject menuSettings;
+    [SerializeField] public GameObject menuSettings;
+    [SerializeField] GameObject creditsPanel;
     [SerializeField] public GameObject TextBox;
     public GameObject checkpointMenu;
     public GameObject playerDamageEffect;
@@ -35,6 +37,8 @@ public class gameManager : MonoBehaviour
     public bool isPaused;
     float TimeScaleOrig;
 
+    private GameObject previousMenu;
+
     // Awake is called before Start
     void Awake()
     {
@@ -46,6 +50,10 @@ public class gameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    private void Start()
+    {
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -55,11 +63,15 @@ public class gameManager : MonoBehaviour
                 statePaused();
             else if (menuActive == menuPause)
                 stateNormal();
+            else if (menuActive == menuMain)
+            {
+                Cursor.lockState = CursorLockMode.None;
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.I))
         {
-            if(menuActive == null)
+            if (menuActive == null)
                 stateInv();
             else if (menuActive == menuInv)
                 stateNormal();
@@ -95,9 +107,10 @@ public class gameManager : MonoBehaviour
         TextBoxText.text = newText;
         StartCoroutine(SuperHideTextBox(20));
     }
+
     public void HideTextBox()
     {
-         TextBox.SetActive(false);
+        TextBox.SetActive(false);
     }
 
     public IEnumerator SuperHideTextBox(float delay)
@@ -115,25 +128,31 @@ public class gameManager : MonoBehaviour
         AudioManager.instance.playSFX(AudioManager.instance.SFX[0].soundName);
         AudioManager.instance.stopAll();
     }
+
     public void stateInv()
     {
         menuActive = menuInv;
         HideTextBox();
         Pause();
     }
+
     public void statePaused()
     {
         menuActive = menuPause;
         HideTextBox();
         Pause();
     }
+
     public void stateSettings()
     {
+        previousMenu = menuActive;
         menuActive = menuSettings;
-        menuPause.SetActive(false);
+        menuSettings.SetActive(true);
+        SetCursorState(true, CursorLockMode.None);
         HideTextBox();
-        Pause();
     }
+
+
     public void stateLose()
     {
         menuActive = menuLose;
@@ -142,6 +161,7 @@ public class gameManager : MonoBehaviour
         NotifyEnemiesPlayerDied();
         AudioManager.instance.stopAll();
     }
+
     public void stateNormal()
     {
         isPaused = false;
@@ -150,7 +170,9 @@ public class gameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         menuActive.SetActive(false);
         menuActive = null;
+        previousMenu = null;
     }
+
     void Pause()
     {
         isPaused = true;
@@ -158,6 +180,29 @@ public class gameManager : MonoBehaviour
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         menuActive.SetActive(true);
+    }
+
+    public void SetCursorState(bool visible, CursorLockMode lockMode)
+    {
+        Cursor.visible = visible;
+        Cursor.lockState = lockMode;
+    }
+
+    public void ShowCredits()
+    {
+        creditsPanel.SetActive(true);
+    }
+
+    public void HideCredits()
+    {
+        creditsPanel.SetActive(false);
+        ShowMainMenu();
+    }
+
+    public void ShowMainMenu()
+    {
+        menuActive = menuMain;
+        Pause();
     }
 
     public void NotifyEnemiesPlayerDied()
