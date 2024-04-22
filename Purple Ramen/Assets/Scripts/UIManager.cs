@@ -137,26 +137,6 @@ public class UIManager : MonoBehaviour
                     slotButton.onClick.RemoveAllListeners();
                     slotButton.onClick.AddListener(() => UpdateMainSlot(item));
                 }
-
-                //This whole section is purely for debugging, it allows the user to delete an item
-                //with the right click button
-                EventTrigger trigger = inventoryUISlotLocation[slotIndex].gameObject.AddComponent<EventTrigger>();
-                EventTrigger.Entry entry = new()
-                {
-                    eventID = EventTriggerType.PointerClick
-                };
-                entry.callback.AddListener((eventData) => {
-                    var pointerData = (PointerEventData)eventData;
-                    if (pointerData.button == PointerEventData.InputButton.Right)
-                    {
-                        inventoryUISlotLocation[slotIndex].sprite = null;
-                        inventoryUISlotLocation[slotIndex].enabled = false;
-                        slotButton.onClick.RemoveAllListeners();
-                        slotButton.onClick.AddListener(() => UpdateMainSlot(null));
-
-                    }
-                });
-                trigger.triggers.Add(entry);
             }
         }
     }
