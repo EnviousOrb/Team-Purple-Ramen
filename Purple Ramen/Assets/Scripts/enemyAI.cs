@@ -60,6 +60,7 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
     bool paralyzed;
     bool burning;
     bool dotCD;
+    bool isDead;
     public Spawner associatedSpawner;
     int originalSpeed;
 
@@ -78,29 +79,31 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
 
     void Update()
     {
-        
-        if (paralyzed && model.material == originalMat)
-            model.material = paralysisMat;
-        else if (!paralyzed)
+        if (!isDead)
         {
-            //animator.SetBool("Aggro", true);
-            float animSpeed = agent.velocity.normalized.magnitude; // Calculates speed for animation.
-            animator.SetFloat("Speed", Mathf.Lerp(animator.GetFloat("Speed"), animSpeed, Time.deltaTime * animSpeedTrans)); // Smoothly transitions animation speed.
+            if (paralyzed && model.material == originalMat)
+                model.material = paralysisMat;
+            else if (!paralyzed)
+            {
+                animator.SetBool("Aggro", true);
+                float animSpeed = agent.velocity.normalized.magnitude; // Calculates speed for animation.
+                animator.SetFloat("Speed", Mathf.Lerp(animator.GetFloat("Speed"), animSpeed, Time.deltaTime * animSpeedTrans)); // Smoothly transitions animation speed.
 
-            // Determines behavior based on player visibility and range.
-            if (playerInRange && !canSeePlayer())
-            {
-                StartCoroutine(roam()); // Starts roaming if player is out of sight but in range.
-                //animator.SetBool("Aggro", false);
+                // Determines behavior based on player visibility and range.
+                if (playerInRange && !canSeePlayer())
+                {
+                    StartCoroutine(roam()); // Starts roaming if player is out of sight but in range.
+                    animator.SetBool("Aggro", false);
+                }
+                else if (!playerInRange)
+                {
+                    StartCoroutine(roam()); // Starts roaming if player is not in range.
+                    animator.SetBool("Aggro", false);
+                }
             }
-            else if (!playerInRange)
-            {
-                StartCoroutine(roam()); // Starts roaming if player is not in range.
-                //animator.SetBool("Aggro", false);
-            }
+            if (burning && !dotCD)
+                StartCoroutine(BurnTick());
         }
-        if (burning && !dotCD)
-            StartCoroutine(BurnTick());
     }
 
     // Coroutine for roaming when the player is not detected.
@@ -129,7 +132,7 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
         bullet.GetComponent<Bullet>().self = GetComponentInParent<CapsuleCollider>();
         animator.SetTrigger("Shoot"); // Triggers the shooting animation.
         yield return new WaitForSeconds(shootAniDelay);
-        
+
         Vector3 playerDirection = gameManager.instance.player.transform.position - transform.position;
         GameObject projectile = Instantiate(bullet, shootPos.position, Quaternion.LookRotation(playerDirection));
 
@@ -239,6 +242,7 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
         agent.SetDestination(gameManager.instance.player.transform.position);
         if (HP <= 0)
         {
+            isDead = true;
             agent.acceleration = 0;
             agent.velocity = Vector3.zero;
             if (associatedSpawner)
@@ -255,7 +259,6 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
             {
                 minibossAI.MinionDeath();
             }
-            animator.SetBool("Dead", true);
             StartCoroutine(enemyDeath());
         }
     }
@@ -263,8 +266,8 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
     IEnumerator enemyDeath()
     {
         yield return new WaitForSeconds(8);
-            Destroy(gameObject);
-        }
+        Destroy(gameObject);
+    }
 
     public void EnemiesCelebrate()
     {

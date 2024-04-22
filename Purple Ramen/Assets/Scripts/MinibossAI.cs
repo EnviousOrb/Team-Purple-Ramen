@@ -77,6 +77,7 @@ public class MinibossAI : MonoBehaviour, IDamage
     bool isMelee;
     bool isSummoning;
     bool isJumping;
+    bool isDead;
 
     void Start()
     {
@@ -90,27 +91,30 @@ public class MinibossAI : MonoBehaviour, IDamage
 
     void Update()
     {
-        float animSpeed = agent.velocity.normalized.magnitude; // Calculates speed for animation.
-        animator.SetFloat("Speed", Mathf.Lerp(animator.GetFloat("Speed"), animSpeed, Time.deltaTime * animSpeedTrans)); // Smoothly transitions animation speed.
+        if (!isDead)
+        {
+            float animSpeed = agent.velocity.normalized.magnitude; // Calculates speed for animation.
+            animator.SetFloat("Speed", Mathf.Lerp(animator.GetFloat("Speed"), animSpeed, Time.deltaTime * animSpeedTrans)); // Smoothly transitions animation speed.
 
-        hpBar.fillAmount = (float)HP / ogHealth;
+            hpBar.fillAmount = (float)HP / ogHealth;
 
-        animator.SetBool("playerInRange", true);
-        // Determines behavior based on player visibility and range.
-        if (playerInRange && !canSeePlayer())
-        {
-            animator.SetBool("playerInRange", false);
-            StartCoroutine(Roam()); // Starts roaming if player is out of sight but in range.
-        }
-        else if(playerInRange && canSeePlayer())
-        {
-            action = rand.Next(4);
-            MinibossAttack(action);
-        }
-        else if (!playerInRange)
-        {
-            animator.SetBool("playerInRange", false);
-            StartCoroutine(Roam()); // Starts roaming if player is not in range.
+            animator.SetBool("playerInRange", true);
+            // Determines behavior based on player visibility and range.
+            if (playerInRange && !canSeePlayer())
+            {
+                animator.SetBool("playerInRange", false);
+                StartCoroutine(Roam()); // Starts roaming if player is out of sight but in range.
+            }
+            else if (playerInRange && canSeePlayer())
+            {
+                action = rand.Next(4);
+                MinibossAttack(action);
+            }
+            else if (!playerInRange)
+            {
+                animator.SetBool("playerInRange", false);
+                StartCoroutine(Roam()); // Starts roaming if player is not in range.
+            }
         }
     }
 
@@ -230,6 +234,7 @@ public class MinibossAI : MonoBehaviour, IDamage
         // Checks if health has dropped to 0 or below.
         if (HP <= 0)
         {
+            isDead = true;
             agent.acceleration = 0;
             agent.velocity = Vector3.zero;
             if (itemToDrop != null)
@@ -268,7 +273,7 @@ public class MinibossAI : MonoBehaviour, IDamage
     }
     // Detects when the player enters the enemy's detection range.
     private void OnTriggerEnter(Collider other)
-    { 
+    {
         if (other.CompareTag("Player"))
         {
             playerInRange = true; // Marks that the player is in range.
