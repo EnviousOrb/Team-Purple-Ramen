@@ -34,6 +34,8 @@ public class Bullet : MonoBehaviour
             return;
         if (self != null)
         {
+            Debug.Log(other + "other");
+            Debug.Log(self + "self");
             if (other == self)
                 return;
         }

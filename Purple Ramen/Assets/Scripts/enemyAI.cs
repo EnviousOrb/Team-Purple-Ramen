@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
@@ -81,7 +82,7 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
             model.material = paralysisMat;
         else if (!paralyzed)
         {
-            animator.SetBool("Aggro", true);
+            //animator.SetBool("Aggro", true);
             float animSpeed = agent.velocity.normalized.magnitude; // Calculates speed for animation.
             animator.SetFloat("Speed", Mathf.Lerp(animator.GetFloat("Speed"), animSpeed, Time.deltaTime * animSpeedTrans)); // Smoothly transitions animation speed.
 
@@ -89,12 +90,12 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
             if (playerInRange && !canSeePlayer())
             {
                 StartCoroutine(roam()); // Starts roaming if player is out of sight but in range.
-                animator.SetBool("Aggro", false);
+                //animator.SetBool("Aggro", false);
             }
             else if (!playerInRange)
             {
                 StartCoroutine(roam()); // Starts roaming if player is not in range.
-                animator.SetBool("Aggro", false);
+                //animator.SetBool("Aggro", false);
             }
         }
         if (burning && !dotCD)
@@ -138,6 +139,7 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
 
     public void takeDamage(int amount, int type)
     {
+        Debug.Log("TakeDamageStart");
         //1 = water, 2 = fire, 3 = lightning, 4 = plant
         switch (enemyType)
         {
@@ -253,6 +255,7 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
             }
             Destroy(gameObject);
         }
+        Debug.Log("End take damage");
     }
 
     // Coroutine to visually indicate damage by changing the enemy's color.
