@@ -5,6 +5,10 @@ using UnityEngine;
 public class catScript : MonoBehaviour
 {
     [SerializeField] private ItemData requiredItem; // The item the cat wants
+    [SerializeField] public GameObject GateToUnlock;
+    [SerializeField] public GameObject WallToUnlock;
+    [SerializeField] private SuperTextMesh questText;
+    [SerializeField] private SuperTextMesh thankText;
     bool isSpeaking;
 
     private void OnTriggerEnter(Collider other)
@@ -22,11 +26,16 @@ public class catScript : MonoBehaviour
 
                 // Update the inventory UI to reflect this change
                 UIManager.instance.UpdateInventoryUI(player.itemList);
+
+                GateToUnlock.SetActive(true);
+                WallToUnlock.SetActive(false);
+                gameManager.instance.UpdateTextBox(thankText.text);
+
             }
             else
             {
                 // Player doesn't have the required item. Just show the regular cat menu.
-                gameManager.instance.UpdateTextBox("Hiya Friend! There are 6 chest in this dungeon that contains ingredients for my favorite dish, gather them and bring them to the fire next to me! Then, bring back the deliiiicious meal to me! Nyaa~ :3");
+                gameManager.instance.UpdateTextBox(questText.text);
                 StartCoroutine(CatSpeak());
             }
         }

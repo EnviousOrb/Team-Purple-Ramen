@@ -5,12 +5,13 @@ using UnityEngine;
 using UnityEngine.AI;
 
 // Controls enemy AI behavior, including movement, shooting, and interactions with the player.
-public class enemyAI : MonoBehaviour, IDamage, ISlow
+public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
 {
     [HeaderAttribute("-----Components-----")]
     [SerializeField] Renderer model; // The enemy's visual model.
     [SerializeField] NavMeshAgent agent; // Navigation component for AI movement.
     [SerializeField] Transform shootPos; // Position from which the enemy shoots.
+    [SerializeField] GameObject itemToDrop; //Optional. Drops an item from a pre-defined position after enemy dies
 
     [HeaderAttribute("-----Enemy Stats-----")]
     [SerializeField] int HP; // Enemy health points.
@@ -21,6 +22,7 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow
     [SerializeField] Material damageMat; // Material to indicate the enemy has taken damage.
     [SerializeField] float shootRate; // Rate at which the enemy shoots.
     [SerializeField] int stoppingDist; // Minimum distance to stop from the player.
+    [SerializeField] float shootAniDelay; // Delay for the bullet based the enemy animation.
     Material originalMat; // The original material of the enemy model.
 
     [HeaderAttribute("-----Animation-----")]
@@ -43,8 +45,20 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow
     float stoppingDistOrig; // Original stopping distance before any modifications.
     Vector3 startingPos; // Starting position for roaming.
 
-    [HeaderAttribute("-----The Stuffs-----")]
+    [HeaderAttribute("-----The Stuffs-----")] //Joseph's section, plz no comments ;-;
     [SerializeField] int scoreValue;
+    [SerializeField] int enemyType;//1 = water, 2 = fire, 3 = lightning, 4 = plant
+    [SerializeField] GameObject[] drops;
+    [SerializeField] int dropRolls;
+    [SerializeField] Material paralysisMat;
+    [SerializeField] GameObject rootEffect;
+    /*[SerializeField] ParticleSystem particleCrit;
+    [SerializeField] ParticleSystem particleWeak;
+    [SerializeField] ParticleSystem particleNormal;
+    ParticleSystem activeParticle;*/
+    bool paralyzed;
+    bool burning;
+    bool dotCD;
     public Spawner associatedSpawner;
     int originalSpeed;
 
@@ -58,22 +72,34 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow
         stoppingDistOrig = agent.stoppingDistance; // Stores the original stopping distance.
         agent.stoppingDistance = 0; // Resets stopping distance for roaming behavior.
         originalSpeed = speed;
+        //activeParticle = particleNormal;
     }
 
     void Update()
     {
-        float animSpeed = agent.velocity.normalized.magnitude; // Calculates speed for animation.
-        animator.SetFloat("Speed", Mathf.Lerp(animator.GetFloat("Speed"), animSpeed, Time.deltaTime * animSpeedTrans)); // Smoothly transitions animation speed.
+        
+        if (paralyzed && model.material == originalMat)
+            model.material = paralysisMat;
+        else if (!paralyzed)
+        {
+            animator.SetBool("Aggro", true);
+            float animSpeed = agent.velocity.normalized.magnitude; // Calculates speed for animation.
+            animator.SetFloat("Speed", Mathf.Lerp(animator.GetFloat("Speed"), animSpeed, Time.deltaTime * animSpeedTrans)); // Smoothly transitions animation speed.
 
-        // Determines behavior based on player visibility and range.
-        if (playerInRange && !canSeePlayer())
-        {
-            StartCoroutine(roam()); // Starts roaming if player is out of sight but in range.
+            // Determines behavior based on player visibility and range.
+            if (playerInRange && !canSeePlayer())
+            {
+                StartCoroutine(roam()); // Starts roaming if player is out of sight but in range.
+                animator.SetBool("Aggro", false);
+            }
+            else if (!playerInRange)
+            {
+                StartCoroutine(roam()); // Starts roaming if player is not in range.
+                animator.SetBool("Aggro", false);
+            }
         }
-        else if (!playerInRange)
-        {
-            StartCoroutine(roam()); // Starts roaming if player is not in range.
-        }
+        if (burning && !dotCD)
+            StartCoroutine(BurnTick());
     }
 
     // Coroutine for roaming when the player is not detected.
@@ -85,6 +111,8 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow
             yield return new WaitForSeconds(roamPauseTime); // Waits before choosing a new destination.
 
             Vector3 randomPos = Random.insideUnitSphere * roamDist + startingPos; // Chooses a new destination.
+            randomPos += startingPos;
+
             NavMeshHit hit;
             NavMesh.SamplePosition(randomPos, out hit, roamDist, 1); // Tries to find a valid point on the NavMesh.
             agent.SetDestination(hit.position); // Sets the new destination.
@@ -97,42 +125,150 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow
     IEnumerator shoot()
     {
         isShooting = true;
-        animator.SetTrigger("Shoot"); // Triggers the shooting animation.
-        Vector3 playerDirection = gameManager.instance.player.transform.position - transform.position;
-        Instantiate(bullet, shootPos.position, Quaternion.LookRotation(playerDirection)); // Spawns the bullet.
         bullet.GetComponent<Bullet>().self = GetComponentInParent<CapsuleCollider>();
+        animator.SetTrigger("Shoot"); // Triggers the shooting animation.
+        yield return new WaitForSeconds(shootAniDelay);
+        
+        Vector3 playerDirection = gameManager.instance.player.transform.position - transform.position;
+        GameObject projectile = Instantiate(bullet, shootPos.position, Quaternion.LookRotation(playerDirection));
+
+        yield return new WaitForSeconds(shootRate - shootAniDelay);
         yield return new WaitForSeconds(shootRate); // Waits before allowing next shot.
         isShooting = false;
     }
-    public void getSlowed(float slowModifier, int slowLength)
-    {
-        StartCoroutine(Slow(slowModifier, slowLength));
-    }
-    IEnumerator Slow(float slowMod, int slowLength)
-    {
-        agent.speed = originalSpeed * slowMod;
-        yield return new WaitForSeconds(slowLength);
-        agent.speed = originalSpeed;
-    }
 
-    // Method called when the enemy takes damage.
-    public void takeDamage(int amount)
+    public void takeDamage(int amount, int type)
     {
-        HP -= amount; // Reduces health by the damage amount.
-        StartCoroutine(flashRed()); // Flashes red to indicate damaged.
-        // Directs the enemy to move towards the player's position upon taking damage.
+        //1 = water, 2 = fire, 3 = lightning, 4 = plant
+        switch (enemyType)
+        {
+            case 1:
+                switch (type)
+                {
+                    case 1:
+                        HP -= amount;
+                        //activeParticle = particleNormal;
+                        break;
+                    case 2:
+                        HP -= amount / 2;
+                        //activeParticle = particleWeak;
+                        break;
+                    case 3:
+                        HP -= amount * 2;
+                        //activeParticle = particleCrit;
+                        break;
+                    case 4:
+                        HP -= amount;
+                        //activeParticle = particleNormal;
+                        break;
+                }
+                break;
+            case 2:
+                switch (type)
+                {
+                    case 1:
+                        HP -= amount * 2;
+                        //activeParticle = particleCrit;
+                        break;
+                    case 2:
+                        HP -= amount;
+                        //activeParticle = particleNormal;
+                        break;
+                    case 3:
+                        HP -= amount;
+                        //activeParticle = particleNormal;
+                        break;
+                    case 4:
+                        HP -= amount / 2;
+                        //activeParticle = particleWeak;
+                        break;
+                }
+                break;
+            case 3:
+                switch (type)
+                {
+                    case 1:
+                        HP -= amount / 2;
+                        //activeParticle = particleWeak;
+                        break;
+                    case 2:
+                        HP -= amount;
+                        //activeParticle = particleNormal;
+                        break;
+                    case 3:
+                        HP -= amount;
+                       //activeParticle = particleNormal;
+                        break;
+                    case 4:
+                        HP -= amount * 2;
+                        //activeParticle = particleCrit;
+                        break;
+                }
+                break;
+            case 4:
+                switch (type)
+                {
+                    case 1:
+                        HP -= amount;
+                        //activeParticle = particleCrit;
+                        break;
+                    case 2:
+                        HP -= amount * 2;
+                        //activeParticle = particleCrit;
+                        break;
+                    case 3:
+                        HP -= amount / 2;
+                        //activeParticle = particleCrit;
+                        break;
+                    case 4:
+                        HP -= amount;
+                        //activeParticle = particleCrit;
+                        break;
+                }
+                break;
+            default:
+                HP -= amount;
+                break;
+        }
+        //activeParticle.Play();
+        animator.SetTrigger("TakesDamage");
+
+        StartCoroutine(flashRed());
         agent.SetDestination(gameManager.instance.player.transform.position);
-
-        // Checks if health has dropped to 0 or below.
         if (HP <= 0)
         {
-            //Does something I think ??
+            agent.acceleration = 0;
+            agent.velocity = Vector3.zero;
             if (associatedSpawner)
                 associatedSpawner.UpdateEnemies(-1);
-            //Does something else i guess??
             gameManager.instance.playerScore += scoreValue;
-            // Destroys the enemy game object.
+            if (itemToDrop != null)
+            {
+                itemToDrop.SetActive(true);
+            }
+            RollForDrops();
+
+            MinibossAI minibossAI = FindObjectOfType<MinibossAI>();
+            if (minibossAI != null)
+            {
+                minibossAI.MinionDeath();
+            }
+            animator.SetBool("Dead", true);
+            StartCoroutine(enemyDeath());
+        }
+    }
+
+    IEnumerator enemyDeath()
+    {
+        yield return new WaitForSeconds(8);
             Destroy(gameObject);
+        }
+
+    public void EnemiesCelebrate()
+    {
+        if (!animator.GetBool("Dead"))  // Ensure dead enemies do not celebrate
+        {
+            animator.SetTrigger("PlayerIsDead");
         }
     }
 
@@ -202,5 +338,63 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow
     {
         Quaternion targetRotation = Quaternion.LookRotation(new Vector3(playerDir.x, 0, playerDir.z)); // Calculates the rotation needed to face the player.
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * faceTargetSpeed); // Smoothly rotates towards the player.
+    }
+
+
+
+
+
+
+    // JOSEPH'S SECTION \/ \/ \/ \/ PLZ DO NOT COMMENT BELOW THIS LINE I BEG OF THEE 
+    public void GetSlowed(float slowModifier, int slowLength)
+    {
+        StartCoroutine(Slow(slowModifier, slowLength));
+    }
+    public void GetParalyzed(float duration)
+    {
+        StartCoroutine(Paralyzed(duration));
+    }
+    public void GetBurnt(int duration)
+    {
+        StartCoroutine(Burn(duration));
+    }
+    public void RollForDrops()
+    {
+        for (int i = 0; i < dropRolls; i++)
+        {
+            int arrayPOS = Random.Range(0, drops.Length);
+            Instantiate(drops[arrayPOS], transform.position, transform.rotation);
+        }
+    }
+    IEnumerator Slow(float slowMod, int slowLength)
+    {
+        if(rootEffect != null)
+        {
+            agent.speed = originalSpeed * slowMod;
+            rootEffect.SetActive(true);
+            yield return new WaitForSeconds(slowLength);
+            rootEffect.SetActive(false);
+            agent.speed = originalSpeed;
+        }
+    }
+    IEnumerator Paralyzed(float duration)
+    {
+        paralyzed = true;
+        yield return new WaitForSeconds(duration);
+        model.material = originalMat;
+        paralyzed = false;
+    }
+    IEnumerator Burn(int duration)
+    {
+        burning = true;
+        yield return new WaitForSeconds(duration);
+        burning = false;
+    }
+    IEnumerator BurnTick()
+    {
+        dotCD = true;
+        yield return new WaitForSeconds(.4f);
+        takeDamage(2, 2);
+        dotCD = false;
     }
 }

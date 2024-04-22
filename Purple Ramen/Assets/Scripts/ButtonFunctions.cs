@@ -14,7 +14,10 @@ public class ButtonFunctions : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         gameManager.instance.stateNormal();
     }
-
+    public void exitSettings()
+    {
+        gameManager.instance.stateSettings();
+    }
     public void respawn()
     {
         gameManager.instance.stateNormal();
@@ -27,5 +30,14 @@ public class ButtonFunctions : MonoBehaviour
         UnityEditor.EditorApplication.isPlaying = false;
 #endif
         Application.Quit();
+    }
+
+    public void showCredits()
+    {
+        gameManager.instance.ShowCredits();
+    }
+    public void settings()
+    {
+        gameManager.instance.stateSettings();
     }
 }

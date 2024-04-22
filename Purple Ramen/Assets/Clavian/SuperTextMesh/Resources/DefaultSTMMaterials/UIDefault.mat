@@ -1,0 +1,253 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UIDefault
+  m_Shader: {fileID: 4800000, guid: 495fd89eae4f4a06a795625b3bc194e5, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords:
+  - _ANIMATEDECALEMISSIONONOFF_ON
+  - _CUSTOMWIND_ON
+  - _DECALEMISSIONONOFF_ON
+  - _EMISSION
+  - _SNOWNOISEONOFF_ON
+  - _TRANSLUCENCYONOFF_ON
+  - _WORLDOBJECTGRADIENT_ON
+  m_LightmapFlags: 1
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: 3000
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _Albedo:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BASETEXTURE:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BaseTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DecalsTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Emission:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Mask01:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Mask02:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Mask03:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MaskTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicSmoothness:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SecondTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ThirdTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TopProjectionTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord2:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - PixelSnap: 0
+    - _ANIMATEDECALEMISSIONONOFF: 1
+    - _ANIMATEOREEMISSIONONOFF: 0
+    - _Blend: 0.05
+    - _BumpScale: 1
+    - _CUSTOMCOLORSTINTING: 0
+    - _CUSTOMFLOWERSCOLOR: 0
+    - _CUSTOMWIND: 1
+    - _Color01Power: 1
+    - _Color02Power: 1
+    - _Color03Power: 1
+    - _Color04Power: 1
+    - _Color05Power: 1
+    - _Color06Power: 1
+    - _Color07Power: 1
+    - _Color08Power: 1
+    - _Color09Power: 1
+    - _ColorMask: 15
+    - _CullMode: 0
+    - _Cutoff: 0.0001
+    - _DECALEMISSIONONOFF: 1
+    - _DECALSONOFF: 0
+    - _DETAILTEXTUREONOFF: 0
+    - _DecalEmissionIntensity: 4
+    - _DetailNormalMapScale: 1
+    - _DetailTextureTiling: 0.5
+    - _DstBlend: 0
+    - _GRADIENTONOFF: 0
+    - _GlossMapScale: 1
+    - _Glossiness: 0.5
+    - _GlossyReflections: 1
+    - _Gradient: 1
+    - _GradientPower: 1
+    - _GradientPower1: 1
+    - _LeavesThickness: 0.5
+    - _MaskClipValue: 0.5
+    - _MaskComp: 8
+    - _MaskMode: 0
+    - _MaskOp: 0
+    - _Metallic: 0
+    - _Mode: 0
+    - _OREEMISSIONONOFF: 0
+    - _OcclusionStrength: 1
+    - _OreEmissionIntensity: 1
+    - _OutlineDensity: 8
+    - _OutlineWidth: 1.34
+    - _Parallax: 0.02
+    - _ReadMask: 255
+    - _SDFCutoff: 0.5
+    - _SDFMode: 0
+    - _SNOWONOFF: 0
+    - _ShadowAngle: 135
+    - _ShadowCutoff: 0.5
+    - _ShadowDistance: 5.33
+    - _Smoothness: 0.2
+    - _SmoothnessTextureChannel: 0
+    - _SnowAmount: 1
+    - _SnowCoverage: 0.46
+    - _SnowFade: 0.32
+    - _SnowGradient: 0.83
+    - _SnowNoiseContrast: 0.002
+    - _SnowNoiseOnOff: 1
+    - _SnowNoiseScale: 87.23351
+    - _SpecularHighlights: 1
+    - _SquareOutline: 0
+    - _SrcBlend: 1
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _TOPPROJECTIONONOFF: 0
+    - _TRANSLUCENCYONOFF: 1
+    - _TopProjectionTextureCoverage: 1
+    - _TopProjectionTextureTiling: 0.5
+    - _TransAmbient: 0.2
+    - _TransDirect: 1
+    - _TransNormalDistortion: 0.1
+    - _TransScattering: 2
+    - _TransShadow: 0.9
+    - _Translucency: 1
+    - _UVSec: 0
+    - _UseUIAlphaClip: 0
+    - _Vector3Dropshadow: 0
+    - _WINDMASKONOFF: 0
+    - _WindDensity: 3.3
+    - _WindMovement: 0.5
+    - _WindStrength: 0.3
+    - _WorldObjectGradient: 1
+    - _WriteMask: 255
+    - _ZTestMode: 2
+    - _ZWrite: 1
+    - __dirty: 1
+    m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color01: {r: 0.7205882, g: 0.08477508, b: 0.08477508, a: 0}
+    - _Color02: {r: 0.02649222, g: 0.3602941, b: 0.09785674, a: 0}
+    - _Color03: {r: 0.07628676, g: 0.2567445, b: 0.6102941, a: 0}
+    - _Color04: {r: 1, g: 0.6729082, b: 0, a: 0}
+    - _Color05: {r: 0.3161438, g: 0.08018869, b: 1, a: 0}
+    - _Color06: {r: 0.829558, g: 0.2311321, b: 1, a: 0}
+    - _Color07: {r: 0.5660378, g: 0.23073, b: 0.03470988, a: 0}
+    - _Color08: {r: 0.3584906, g: 0.3584906, b: 0.3584906, a: 0}
+    - _Color09: {r: 0.9622642, g: 0.6942402, b: 0.521983, a: 0}
+    - _DecakEmissionColor: {r: 1, g: 0.9248579, b: 0, a: 0}
+    - _DecalsColor: {r: 0, g: 0, b: 0, a: 0}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _EmissionPower: {r: 0, g: 0, b: 0, a: 0}
+    - _FLOWERSCOLOR: {r: 1, g: 0, b: 0, a: 0}
+    - _GroundColor: {r: 0.08490568, g: 0.05234205, b: 0.04846032, a: 1}
+    - _OreColor: {r: 1, g: 0.9248579, b: 0, a: 0}
+    - _OreEmissionColor: {r: 1, g: 0.9248579, b: 0, a: 0}
+    - _OutlineColor: {r: 1, g: 1, b: 1, a: 1}
+    - _ShadowAngle3: {r: 1, g: -1, b: 0, a: 1}
+    - _ShadowColor: {r: 1, g: 0, b: 0, a: 1}
+    - _SnowDirection: {r: 0.1, g: 1, b: 0.1, a: 0}
+    - _TopColor: {r: 0.4811321, g: 0.4036026, b: 0.2382966, a: 1}
+    - _Vector1: {r: 0, g: 1, b: 0, a: 0}
+  m_BuildTextureStacks: []

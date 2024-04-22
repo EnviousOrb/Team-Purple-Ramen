@@ -4,80 +4,99 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-// Controls the player's movements, interactions, and inventory management.
-public class playerController : MonoBehaviour, IDamage, ISlow
+//////////////////////////////////////////////////////////////////////////////
+// Controls the player's movements, interactions, and inventory management. //
+//////////////////////////////////////////////////////////////////////////////
+
+public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
 {
     [HeaderAttribute("----- Components -----")]
-    [SerializeField] CharacterController controller; // The CharacterController component for moving the player.
-    [SerializeField] weaponController weapon; // The current weapon controller.
+    [SerializeField] CharacterController controller;    // The CharacterController component for moving the player.
+    //[SerializeField] weaponController weapon;           // The current weapon controller.
     [SerializeField] Animator anim;
+    [SerializeField] SceneInfo sceneInfo;
 
     [HeaderAttribute("----- Player Stats -----")]
-    [Range(0, 20)][SerializeField] int HP; // The player's health points.
-    [Range(1, 5)][SerializeField] float speed; // Movement speed of the player.
+    [Range(0, 20)][SerializeField] int HP;              // The player's health points.
+    [Range(0, 20)][SerializeField] int mana;
+    [Range(1, 5)][SerializeField] float speed;          // Movement speed of the player.
     [Range(2, 8)][SerializeField] float sprintMultiplier; // The multiplier to apply to speed when sprinting.
-    [Range(1, 3)][SerializeField] int jumps; // The number of consecutive jumps the player can perform.
-    [Range(5, 25)][SerializeField] int jumpSpeed; // The vertical speed of the player's jump.
-    [Range(-15, -35)][SerializeField] int gravity; // The gravity affecting the player.
-    
+    [Range(1, 3)][SerializeField] int jumps;            // The number of consecutive jumps the player can perform.
+    [Range(5, 25)][SerializeField] int jumpSpeed;       // The vertical speed of the player's jump.
+    [Range(-15, -35)][SerializeField] int gravity;// The gravity affecting the player.
+    [Range(0, 1)][SerializeField] float iFrameDuration;
 
     [HeaderAttribute("----- Item Inventory -----")]
-     public List<ItemData> itemList = new List<ItemData>(); // Player's inventory
+     public List<IInventory> itemList = new List<IInventory>(); // Player's inventory
 
     [HeaderAttribute("----- Weapon Components -----")]
-    [SerializeField] Transform shootPos; // The position from which bullets are fired.
-    [SerializeField] GameObject bullet; // The bullet prefab.
+    [SerializeField] Transform shootPos;                // The position from which projectiles are fired.
+    //[SerializeField] GameObject bullet;               // The projectile prefab.
+    [SerializeField] Transform shootAniPos;             // The position the spell effect happens that makes the projectile appear.
     [SerializeField] Collider staffCollider;
 
     [HeaderAttribute("----- Wizard Range Attack -----")]
-    [SerializeField] int shootDamage;
-    [SerializeField] int shootDistance;
-    [SerializeField] float shootRate;
+    [SerializeField] private GameObject defaultStaffOrbPrefab;
+    [SerializeField] staffElementalStats defaultStaffStats;
+    [SerializeField] List<staffElementalStats> staffList = new List<staffElementalStats>();   // Inventory to hold all aquired staves.
+    [SerializeField] GameObject staffOrbModel;  // The staff orb container. 
+    [SerializeField] int shootDamage;           // Default Shoot Damage to be overwritten by the staff stats.
+    [SerializeField] int shootDistance;         // Default Shoot Distance to be overwritten.
+    [SerializeField] float shootRate;           // Default Shoot Rate to be overwritten.
 
     // Private variables for internal state management
-    int jumpcount; // Tracks the number of jumps performed consecutively.
-    Vector3 moveDir; // The direction of movement.
-    Vector3 playerVel; // The player's current velocity.
-    float originalSpeed; // The original speed of the player, for restoring after sprinting.
-    int HPoriginal; // The original health points of the player, for UI updates.
-    int selectedItem; // The index of the currently selected item.
-    int rayDistance; // Distance for the raycast debug line.
+    int jumpcount;          // Tracks the number of jumps performed consecutively.
+    Vector3 moveDir;        // The direction of movement.
+    Vector3 playerVel;      // The player's current velocity.
+    float originalSpeed;    // The original speed of the player, for restoring after sprinting.
+    int HPoriginal;         // The original health points of the player, for UI updates.
+    int Manaoriginal;
+    int selectedItem;       // The index of the currently selected item.
+    int rayDistance;        // Distance for the raycast debug line.
+    int selectedStaff;
+    private Collider characterCollider;
 
     // bools
-    bool isShooting; // Flag to indicate if the player is currently shooting.
-    bool isMeleeing; // Flag to indicate if the player is currently meleeing.
-    bool isSprinting; //Flag to indicate that the player is currently sprinting.
-    bool isCrouching;
+    bool isShooting;    // Flag to indicate if the player is currently shooting.
+    bool isMeleeing;    // Flag to indicate if the player is currently meleeing.
+    bool isSprinting;   // Flag to indicate that the player is currently sprinting.
+    bool isCrouching;   
     bool playSteps;
     bool isMoving;
+
+    [HeaderAttribute("----- TheStuffs -----")]
     bool isSlowed;
+    bool iFrames;
 
     void Start()
     {
         originalSpeed = speed; // Store the original speed.
         HPoriginal = HP; // Store the original HP for UI calculations.
+        Manaoriginal = mana;
         updatePlayerUI(); // Update the UI elements based on current stats.
+        spawnPlayer();
+        EquipDefaultStaff();
+        characterCollider = GetComponent<CapsuleCollider>();
     }
 
     void Update()
     {
-        if (!gameManager.instance.isPaused) // Check if the game is not paused.
+        if (!gameManager.instance.isPaused) // If the game is not paused.
         {
-            //selectItem(); // Handle item selection.
 #if UNITY_EDITOR
-            // Draw a debug ray in the editor to visualize aiming or looking direction.
+            // Draw a debug ray in the editor to visualize aiming or looking direction and make it green.
             Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * rayDistance, Color.green);
 #endif
-            movement(); // Handle player movement.
+            selectStaff(); // Call the method to cycle through staff weapons.
+            movement(); // Call the method to handle player movement.
 
-            //changeWeapon(); // Handle weapon switching.
-            // Check for shooting input and current weapon type to trigger appropriate attack.
-            //if (Input.GetButton("Shoot") && !isShooting && !isMeleeing)
-            if (Input.GetButton("Fire1") && !isShooting)
+            // On Left Mouse click start shoot coroutine. Check that you're not already shooting and that you have at least 1 staff in inventory.
+            if (Input.GetButton("Fire1") && !isShooting && staffList.Count > 0)
             {
                 StartCoroutine(shoot());
             }
 
+            // On Right Mouse button click start melee coroutine. Check that you're not already meleeing.
             if (Input.GetButton("Fire2") && !isMeleeing)
             {
                 StartCoroutine(melee());
@@ -85,9 +104,24 @@ public class playerController : MonoBehaviour, IDamage, ISlow
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Main Area"))
+        {
+            AudioManager.instance.BGMSource.Stop();
+            AudioManager.instance.playBGM(AudioManager.instance.BGM[0].soundName);
+        }
+        else if (other.gameObject.CompareTag("Miniboss Area"))
+        {
+            AudioManager.instance.BGMSource.Stop();
+            AudioManager.instance.playBGM(AudioManager.instance.BGM[1].soundName);
+        }
+    }
+
     public void spawnPlayer()
     {
         HP = HPoriginal; // Reset player HP to original value.
+        mana = Manaoriginal;
         speed = originalSpeed;
         updatePlayerUI(); // Update the player's UI elements.
         controller.enabled = false; // Temporarily disable the controller to move the player.
@@ -130,7 +164,7 @@ public class playerController : MonoBehaviour, IDamage, ISlow
         {
             jumpcount++;
             playerVel.y = jumpSpeed;
-            AudioManager.instance.playPlayerSFX("Jump SFX");
+            AudioManager.instance.playPlayerSFX(AudioManager.instance.PlayerSFX[22].soundName);
             // Future proofing 3d person jump
             //anim.SetTrigger("Jump");
         }
@@ -191,14 +225,29 @@ public class playerController : MonoBehaviour, IDamage, ISlow
     {
         isShooting = true;
         anim.SetTrigger("Casting");
-        
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
     }
 
     public void FireBullet()
     {
-        Instantiate(bullet, shootPos.position, Camera.main.transform.rotation);
+        if (staffList[selectedStaff].projectilePrefab != null)
+        {
+            GameObject projectile = Instantiate(staffList[selectedStaff].projectilePrefab, 
+                shootPos.position, Camera.main.transform.rotation);
+        }
+    }
+
+    public void SpellCastingCircleEndOfStaff()
+    {
+        if (staffList[selectedStaff].onCastEffect != null)
+        {
+            Quaternion correctRotation = Quaternion.Euler(0, 270, 0);
+            GameObject effectInstance = Instantiate(staffList[selectedStaff].onCastEffect.gameObject, shootAniPos.position, Camera.main.transform.rotation * correctRotation);
+            effectInstance.transform.SetParent(shootAniPos);
+            effectInstance.transform.localPosition = Vector3.zero;
+
+        }
     }
 
     public void startMeleeSwing() 
@@ -225,18 +274,20 @@ public class playerController : MonoBehaviour, IDamage, ISlow
     }
 
     // Implements IDamage interface's takeDamage method.
-    public void takeDamage(int amount)
+    public void takeDamage(int amount, int type)
     {
-        HP -= amount; // Decrease player's health by the damage amount.
-        StartCoroutine(flashdmgScreen()); // Flash damage effect on screen.
-        updatePlayerUI(); // Update player's health UI.
-
-        // Check for player death.
-        if (HP <= 0)
+        if (!iFrames)
         {
-            gameManager.instance.stateLose(); // Trigger game loss state.
+            HP -= amount; // Decrease player's health by the damage amount.
+            StartCoroutine(flashdmgScreen()); // Flash damage effect on screen.
+            StartCoroutine(IFrames());
+            updatePlayerUI(); // Update player's health UI.
+
+            // Check for player death.
+            if (HP <= 0)
+                gameManager.instance.stateLose(); // Trigger game loss state.
+            AudioManager.instance.playPlayerSFX("Damage SFX");
         }
-        AudioManager.instance.playPlayerSFX("Damage SFX");
     }
 
     // Coroutine to flash the damage screen effect.
@@ -247,26 +298,6 @@ public class playerController : MonoBehaviour, IDamage, ISlow
         gameManager.instance.playerDamageEffect.SetActive(false); // Hide damage effect.
     }
 
-    public void getSlowed(float slowModifier, int slowLength)
-    {
-        StartCoroutine(FlashSlow(slowLength));
-        StartCoroutine(Slow(slowModifier, slowLength));
-    }
-    IEnumerator FlashSlow(int slowLength)
-    {
-        gameManager.instance.playerSlowEffect.SetActive(true); 
-        yield return new WaitForSeconds(slowLength);
-        gameManager.instance.playerSlowEffect.SetActive(false);
-    }
-    IEnumerator Slow(float slowMod, int slowLength)
-    {
-        isSlowed = true;
-        speed = (float)originalSpeed * (float)slowMod;        
-        yield return new WaitForSeconds(slowLength);
-        speed = originalSpeed;
-        isSlowed = false;
-    }
-
     // Updates player's health bar UI.
     void updatePlayerUI()
     {
@@ -274,23 +305,173 @@ public class playerController : MonoBehaviour, IDamage, ISlow
     }
 
     // Reduces the player's height for crouching.
-    void crouch()
+    public void crouch()
     {
         controller.height /= 2;
     }
 
     // Resets the player's height after crouching.
-    void unCrouch()
+    public void unCrouch()
     {
         controller.height *= 2;
     }
 
-    public void GetItem(ItemData newItem)
+    IEnumerator IFrames()
+    {
+        iFrames = true;
+        yield return new WaitForSeconds(iFrameDuration);
+        iFrames = false;
+    }
+
+    public void GetItem(IInventory newItem)
     {
         // Add the new item to the inventory
         itemList.Add(newItem);
 
         // Refresh the UI to reflect the new inventory state
         UIManager.instance.UpdateInventoryUI(itemList);
+
+        UIManager.instance.UpdateMainSlot(newItem);
     }
-}   
+
+    // JOSEPH'S SECTION \/ \/ \/ \/ PLZ DO NOT COMMENT BELOW THIS LINE I BEG OF THEE 
+
+    public void GetSlowed(float slowModifier, int slowLength)
+    {
+        StartCoroutine(FlashSlow(slowLength));
+        StartCoroutine(Slow(slowModifier, slowLength));
+        //add slow sound effect here?
+    }
+    public void GetHealed(int amount)
+    {
+        HP += amount;
+        if (HP < HPoriginal)
+            HP = HPoriginal;
+        StartCoroutine(FlashHeal());
+        updatePlayerUI();
+        //add heal sound effect here?
+    }
+    public void GetMana(int amount)
+    {
+        mana += amount;
+        StartCoroutine(FlashMana());
+        updatePlayerUI();
+        //add mana sound effect here?
+    }
+    IEnumerator FlashHeal()
+    {
+        gameManager.instance.playerHealEffect.SetActive(true);
+        yield return new WaitForSeconds(.1f);
+        gameManager.instance.playerHealEffect.SetActive(false);
+    }
+    IEnumerator FlashMana()
+    {
+        gameManager.instance.playerManaEffect.SetActive(true);
+        yield return new WaitForSeconds(.1f);
+        gameManager.instance.playerManaEffect.SetActive(false);
+    }
+    IEnumerator FlashSlow(int slowLength)
+    {
+        gameManager.instance.playerSlowEffect.SetActive(true);
+        yield return new WaitForSeconds(slowLength);
+        gameManager.instance.playerSlowEffect.SetActive(false);
+    }
+    IEnumerator Slow(float slowMod, int slowLength)
+    {
+        isSlowed = true;
+        speed = (float)originalSpeed * (float)slowMod;
+        yield return new WaitForSeconds(slowLength);
+        speed = originalSpeed;
+        isSlowed = false;
+    }
+    // END OF JOSEPH'S SECTION   /\ /\ /\ /\ /\ /\ 
+
+    public void LoadPlayer()
+    {
+        HP=sceneInfo.HP;
+        speed = sceneInfo.speed;
+    }
+
+    public void SavePlayer()
+    {
+        sceneInfo.HP = HP;
+        sceneInfo.speed = speed;
+    }
+
+    public void getStaffStats(staffElementalStats staff)
+    {
+        staffList.Add(staff);
+        GetItem(staff);
+
+        // Update Stats to the stats of the current selected staff.
+        shootDamage = staff.spellDamage;
+        shootDistance = staff.spellRange;
+        shootRate = staff.spellCastRate;
+
+        if (staffList.Count == 1)
+        {
+            selectedStaff = 0;
+            changeStaff();
+        }
+    }
+
+    void selectStaff()
+    {
+        if(Input.GetAxis("Mouse ScrollWheel") > 0 && selectedStaff < staffList.Count - 1)
+        {
+            selectedStaff++;
+            changeStaff();
+        }
+
+        if (Input.GetAxis("Mouse ScrollWheel") < 0 && selectedStaff > 0)
+        {
+            selectedStaff--;
+            changeStaff();
+        }
+    }
+
+    void changeStaff()
+    {
+        shootDamage = staffList[selectedStaff].spellDamage;
+        shootDistance = staffList[selectedStaff].spellRange;
+        shootRate = staffList[selectedStaff].spellCastRate;
+
+        destoryStaffModelPrefab();
+
+        AudioManager.instance.SFXSource.PlayOneShot(gameManager.instance.PS.staffList[gameManager.instance.PS.selectedStaff].staffEquipSound);
+
+        GameObject newOrb = Instantiate(staffList[selectedStaff].staffOrbModelPrefab, staffOrbModel.transform);
+
+        newOrb.transform.localPosition = Vector3.zero;
+        newOrb.SetActive(true);
+    }
+
+    private void EquipDefaultStaff()
+    {
+        if (defaultStaffOrbPrefab != null)
+        {
+            destoryStaffModelPrefab();
+
+            GameObject orbInstance = Instantiate(defaultStaffOrbPrefab, staffOrbModel.transform);
+            orbInstance.transform.localPosition = Vector3.zero;
+
+            staffElementalStats defaultStats = defaultStaffStats;
+
+            if (defaultStats != null)
+            {
+                staffList.Add(defaultStats);
+                selectedStaff = staffList.IndexOf(defaultStats);
+                changeStaff();
+            }
+        }
+    }
+
+    private void destoryStaffModelPrefab()
+    {
+        if (staffOrbModel.transform.childCount > 0)
+        {
+            Destroy(staffOrbModel.transform.GetChild(0).gameObject);
+        }
+    }
+
+} 

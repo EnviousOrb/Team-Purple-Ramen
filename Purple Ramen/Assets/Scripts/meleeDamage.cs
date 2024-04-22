@@ -28,7 +28,7 @@ public class meleeDamage : MonoBehaviour
         if (dmg != null)
         {
             Debug.Log(other.gameObject.name + " : Has Damage");
-            dmg.takeDamage(damage);
+            dmg.takeDamage(damage, 0);
         }
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
 
@@ -13,6 +14,7 @@ public class Bullet : MonoBehaviour
     [SerializeField] float speedMod;
     [SerializeField] int slowLength;
     public CapsuleCollider self;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,20 +38,22 @@ public class Bullet : MonoBehaviour
             if (other == self)
                 return;
         }
+
         // Attempts to get an IDamage interface from the collided object.
         IDamage dmg = other.GetComponent<IDamage>();
 
         ISlow slow = other.GetComponent<ISlow>();
         if (slow != null)
         {
-            slow.getSlowed(speedMod, slowLength);
+            slow.GetSlowed(speedMod, slowLength);
         }
 
         // If the other object implements IDamage, it calls takeDamage() on it with this bullet's damage value.
         Debug.Log(other.gameObject.name + " : None");
+
         if (dmg != null)
         {
-            dmg.takeDamage(damage);
+            dmg.takeDamage(damage, 0);
         }
 
 
