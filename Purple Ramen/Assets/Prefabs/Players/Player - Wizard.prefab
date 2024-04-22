@@ -649,7 +649,7 @@ Transform:
   m_GameObject: {fileID: 2351975334958177840}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 61.6, z: 0}
+  m_LocalPosition: {x: 0, y: 25.689655, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2971,7 +2971,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 810aa18acab0fbf46854eb1ff9dd5378, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensitivity: 350
+  sensitivity: 200
   topClamp: 90
   botClamp: -90
 --- !u!20 &718080605865625637
@@ -3251,11 +3251,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 3590467474444880502}
-  weapon: {fileID: 0}
   anim: {fileID: 2276185183078895382}
   sceneInfo: {fileID: 11400000, guid: e9b35b64eab44834da85e8f354f6af30, type: 2}
   HP: 10
-  mana: 20
+  mana: 10
   speed: 5
   sprintMultiplier: 3
   jumps: 1

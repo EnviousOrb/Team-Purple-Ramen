@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.AI;
+using Unity.VisualScripting;
 
 public class MinibossAI : MonoBehaviour, IDamage
 {
@@ -63,9 +64,11 @@ public class MinibossAI : MonoBehaviour, IDamage
     [SerializeField] float spawnRange; //The range of how far the enemies can spawn
 
     private Rigidbody rb;
+    System.Random rand;
     int enemiesInScene;
     int originalSpeed;
     int ogHealth;
+    int action;
 
     //Bools
     bool isShooting; // Tracks if the enemy is currently shooting.
@@ -82,6 +85,7 @@ public class MinibossAI : MonoBehaviour, IDamage
         agent.stoppingDistance = 0; // Resets stopping distance for roaming behavior.
         originalSpeed = speed;
         ogHealth = HP;
+        rand = new();
     }
 
     void Update()
@@ -91,47 +95,22 @@ public class MinibossAI : MonoBehaviour, IDamage
 
         hpBar.fillAmount = (float)HP / ogHealth;
 
+        animator.SetBool("playerInRange", true);
         // Determines behavior based on player visibility and range.
         if (playerInRange && !canSeePlayer())
         {
+            animator.SetBool("playerInRange", false);
             StartCoroutine(Roam()); // Starts roaming if player is out of sight but in range.
+        }
+        else if(playerInRange && canSeePlayer())
+        {
+            action = rand.Next(4);
+            MinibossAttack(action);
         }
         else if (!playerInRange)
         {
+            animator.SetBool("playerInRange", false);
             StartCoroutine(Roam()); // Starts roaming if player is not in range.
-        }
-
-        System.Random rand = new();
-        int action = rand.Next(4);
-
-        switch (action)
-        {
-            case 0:
-                if (canDash && !isDashing)
-                {
-                    StartCoroutine(Dash());
-                }
-                break;
-            case 1:
-                if (canShoot && !isShooting)
-                {
-                    StartCoroutine(Shoot());
-                }
-                break;
-            case 2:
-                if (canMeleeAttack && !isMelee)
-                {
-                    StartCoroutine(MeleeAttack());
-                }
-                break;
-            case 3:
-                if (canSummon && !isSummoning)
-                {
-                    StartCoroutine(Summoning());
-                }
-                break;
-            default:
-                break;
         }
     }
 
@@ -154,28 +133,48 @@ public class MinibossAI : MonoBehaviour, IDamage
         }
     }
 
-    IEnumerator Dash()
+
+    public void MinibossAttack(int action)
+    {
+        switch (action)
+        {
+            case 0:
+                if (canDash && !isDashing)
+                {
+                    Dash();
+                }
+                break;
+            case 1:
+                if (canShoot && !isShooting)
+                {
+                    Shoot();
+                }
+                break;
+            case 2:
+                if (canMeleeAttack && !isMelee)
+                {
+                    MeleeAttack();
+                }
+                break;
+            case 3:
+                if (canSummon && !isSummoning)
+                {
+                    Summoning();
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void Dash()
     {
         isDashing = true;
-        float distanceToPlayer = Vector3.Distance(transform.position, gameManager.instance.PS.transform.position);
-        if (distanceToPlayer < dashDistance && !isJumping)
-        {
-            rb.AddForce(-playerDir * jumpForce, ForceMode.Impulse);
-            isJumping = true;
-            isDashing = false;
-        }
-        else if(distanceToPlayer > dashDistance && isJumping)
-        {
-            rb.velocity = playerDir * dashSpeed;
-            isJumping = false;
-            isDashing = true;
-        }
-        yield return new WaitForSeconds(dashCooldown);
+        animator.SetTrigger("Dash");
         isDashing = false;
     }
 
-    // Coroutine for shooting at the player.
-    IEnumerator Shoot()
+    public void Shoot()
     {
         if (shootPos != null)
         {
@@ -184,32 +183,30 @@ public class MinibossAI : MonoBehaviour, IDamage
             Vector3 playerDirection = gameManager.instance.player.transform.position - transform.position;
             Instantiate(bullet, shootPos.position, Quaternion.LookRotation(playerDirection)); // Spawns the bullet.
             bullet.GetComponent<Bullet>().self = GetComponentInParent<CapsuleCollider>();
-            yield return new WaitForSeconds(shootRate); // Waits before allowing next shot.
             isShooting = false;
         }
     }
 
-    IEnumerator MeleeAttack()
+    public void MeleeAttack()
     {
         isMelee = true;
-        weaponCollider.enabled = true;
-        yield return new WaitForSeconds(shootRate);
-        weaponCollider.enabled = false;
+        animator.SetTrigger("Melee");
         isMelee = false;
     }
 
-    IEnumerator Summoning()
+    public void Summoning()
     {
-        isSummoning = true;
         if (enemiesInScene < maxEnemiesSpawn)
         {
+            isSummoning = true;
+            animator.SetBool("Summon", true);
             Vector3 randomOffset = Random.insideUnitSphere * spawnRange;
             Vector3 spawnPOS = minibossPOS.position + randomOffset;
             randomOffset.y = minibossPOS.position.y;
             Instantiate(enemyToSummon, spawnPOS, Quaternion.identity);
             enemiesInScene++;
         }
-        yield return new WaitForSeconds(spawnRate);
+        animator.SetBool("Summon", false);
         isSummoning = false;
     }
 
@@ -226,22 +223,30 @@ public class MinibossAI : MonoBehaviour, IDamage
     {
         HP -= amount; // Reduces health by the damage amount.
         StartCoroutine(FlashRed()); // Flashes red to indicate damaged.
+        animator.SetTrigger("takeDamage");
         // Directs the enemy to move towards the player's position upon taking damage.
         agent.SetDestination(gameManager.instance.player.transform.position);
 
         // Checks if health has dropped to 0 or below.
         if (HP <= 0)
         {
+            agent.acceleration = 0;
+            agent.velocity = Vector3.zero;
             if (itemToDrop != null)
             {
                 itemToDrop.SetActive(true);
             }
-
-            // Destroys the enemy game object.
-            Destroy(gameObject);
+            animator.SetBool("Death", true);
+            StartCoroutine(DeathAnimate());
             hpBar.gameObject.SetActive(false);
             minibossName.gameObject.SetActive(false);
         }
+    }
+
+    IEnumerator DeathAnimate()
+    {
+        yield return new WaitForSeconds(5);
+        Destroy(gameObject);
     }
 
     // Coroutine to visually indicate damage by changing the enemy's color.
@@ -252,14 +257,26 @@ public class MinibossAI : MonoBehaviour, IDamage
         model.material = originalMat; // Restores the original material.
     }
 
+    public void WeaponOn()
+    {
+        weaponCollider.enabled = true;
+    }
+
+    public void WeaponOff()
+    {
+        weaponCollider.enabled = false;
+    }
     // Detects when the player enters the enemy's detection range.
     private void OnTriggerEnter(Collider other)
-    {
+    { 
         if (other.CompareTag("Player"))
         {
             playerInRange = true; // Marks that the player is in range.
             hpBar.gameObject.SetActive(true);
             minibossName.gameObject.SetActive(true);
+            rand = new();
+            action = rand.Next(4);
+            MinibossAttack(action);
         }
     }
 

@@ -28,7 +28,7 @@ public class npcScript : MonoBehaviour
                     player.itemList.Add(rewardItem);
                     rewardGiven = true;
                 }
-                if(checkpointToUnlock != null)
+                if (checkpointToUnlock != null)
                 {
                     checkpointToUnlock.SetActive(true);
                 }

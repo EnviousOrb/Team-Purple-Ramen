@@ -53,10 +53,10 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
     [SerializeField] int dropRolls;
     [SerializeField] Material paralysisMat;
     [SerializeField] GameObject rootEffect;
-    [SerializeField] ParticleSystem particleCrit;
+    /*[SerializeField] ParticleSystem particleCrit;
     [SerializeField] ParticleSystem particleWeak;
     [SerializeField] ParticleSystem particleNormal;
-    ParticleSystem activeParticle;
+    ParticleSystem activeParticle;*/
     bool paralyzed;
     bool burning;
     bool dotCD;
@@ -73,11 +73,12 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
         stoppingDistOrig = agent.stoppingDistance; // Stores the original stopping distance.
         agent.stoppingDistance = 0; // Resets stopping distance for roaming behavior.
         originalSpeed = speed;
-        activeParticle = particleNormal;
+        //activeParticle = particleNormal;
     }
 
     void Update()
     {
+        
         if (paralyzed && model.material == originalMat)
             model.material = paralysisMat;
         else if (!paralyzed)
@@ -148,19 +149,19 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
                 {
                     case 1:
                         HP -= amount;
-                        activeParticle = particleNormal;
+                        //activeParticle = particleNormal;
                         break;
                     case 2:
                         HP -= amount / 2;
-                        activeParticle = particleWeak;
+                        //activeParticle = particleWeak;
                         break;
                     case 3:
                         HP -= amount * 2;
-                        activeParticle = particleCrit;
+                        //activeParticle = particleCrit;
                         break;
                     case 4:
                         HP -= amount;
-                        activeParticle = particleNormal;
+                        //activeParticle = particleNormal;
                         break;
                 }
                 break;
@@ -169,19 +170,19 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
                 {
                     case 1:
                         HP -= amount * 2;
-                        activeParticle = particleCrit;
+                        //activeParticle = particleCrit;
                         break;
                     case 2:
                         HP -= amount;
-                        activeParticle = particleNormal;
+                        //activeParticle = particleNormal;
                         break;
                     case 3:
                         HP -= amount;
-                        activeParticle = particleNormal;
+                        //activeParticle = particleNormal;
                         break;
                     case 4:
                         HP -= amount / 2;
-                        activeParticle = particleWeak;
+                        //activeParticle = particleWeak;
                         break;
                 }
                 break;
@@ -190,19 +191,19 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
                 {
                     case 1:
                         HP -= amount / 2;
-                        activeParticle = particleWeak;
+                        //activeParticle = particleWeak;
                         break;
                     case 2:
                         HP -= amount;
-                        activeParticle = particleNormal;
+                        //activeParticle = particleNormal;
                         break;
                     case 3:
                         HP -= amount;
-                        activeParticle = particleNormal;
+                       //activeParticle = particleNormal;
                         break;
                     case 4:
                         HP -= amount * 2;
-                        activeParticle = particleCrit;
+                        //activeParticle = particleCrit;
                         break;
                 }
                 break;
@@ -211,34 +212,35 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
                 {
                     case 1:
                         HP -= amount;
-                        activeParticle = particleNormal;
+                        //activeParticle = particleCrit;
                         break;
                     case 2:
                         HP -= amount * 2;
-                        activeParticle = particleCrit;
+                        //activeParticle = particleCrit;
                         break;
                     case 3:
                         HP -= amount / 2;
-                        activeParticle = particleWeak;
+                        //activeParticle = particleCrit;
                         break;
                     case 4:
                         HP -= amount;
-                        activeParticle = particleNormal;
+                        //activeParticle = particleCrit;
                         break;
                 }
                 break;
             default:
                 HP -= amount;
-                activeParticle = particleNormal;
                 break;
         }
-        activeParticle.Play();
-        //animator.SetTrigger("TakesDamage");
+        //activeParticle.Play();
+        animator.SetTrigger("TakesDamage");
 
         StartCoroutine(flashRed());
         agent.SetDestination(gameManager.instance.player.transform.position);
         if (HP <= 0)
         {
+            agent.acceleration = 0;
+            agent.velocity = Vector3.zero;
             if (associatedSpawner)
                 associatedSpawner.UpdateEnemies(-1);
             gameManager.instance.playerScore += scoreValue;
@@ -253,9 +255,23 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
             {
                 minibossAI.MinionDeath();
             }
+            animator.SetBool("Dead", true);
+            StartCoroutine(enemyDeath());
+        }
+    }
+
+    IEnumerator enemyDeath()
+    {
+        yield return new WaitForSeconds(8);
             Destroy(gameObject);
         }
-        Debug.Log("End take damage");
+
+    public void EnemiesCelebrate()
+    {
+        if (!animator.GetBool("Dead"))  // Ensure dead enemies do not celebrate
+        {
+            animator.SetTrigger("PlayerIsDead");
+        }
     }
 
     // Coroutine to visually indicate damage by changing the enemy's color.

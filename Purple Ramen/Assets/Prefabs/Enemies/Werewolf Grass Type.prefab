@@ -1027,7 +1027,7 @@ MonoBehaviour:
   shootRate: 10
   stoppingDist: 5
   animator: {fileID: 4388499777772415858}
-  animSpeedTrans: 0
+  animSpeedTrans: 1
   headPos: {fileID: 2609458817533515641}
   viewCone: 180
   faceTargetSpeed: 2
@@ -1037,7 +1037,7 @@ MonoBehaviour:
   canSummon: 1
   canDash: 0
   canMeleeAttack: 1
-  canShoot: 1
+  canShoot: 0
   dashCooldown: 3
   dashSpeed: 10
   dashDistance: 20
@@ -1045,7 +1045,7 @@ MonoBehaviour:
   enemyToSummon: {fileID: 2393452914690260300, guid: c6b595e8e88010c4a9bbeca2d16f7741, type: 3}
   maxEnemiesSpawn: 5
   minibossPOS: {fileID: 3890572397516007303}
-  spawnRate: 5
+  spawnRate: 1
   spawnRange: 3
 --- !u!95 &4388499777772415858
 Animator:
