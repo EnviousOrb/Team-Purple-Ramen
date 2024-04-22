@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -8,10 +9,7 @@ public class SceneInfo : ScriptableObject
 
     public static SceneInfo instance;
 
-    public int HP;
-    public int HPorig;
-    public float speed;
-
+   public List<staffElementalStats> staffList;
 
     private void Awake()
     {
@@ -28,18 +26,10 @@ public class SceneInfo : ScriptableObject
         }
         gameManager.instance.PS.LoadPlayer();
         
-
+        staffList= gameManager.instance.PS.staffList;
     }
 
-   void  OnTriggerEnter(Collider other)
-    {
-        if(other.CompareTag("Player"))
-        {
-           
-
-        }
-       
-    }
+  
 
 
 
