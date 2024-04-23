@@ -47,9 +47,9 @@ public class WaveManager : MonoBehaviour
             yield return new WaitForSeconds(spawnRate);
         }
 
-        yield return new WaitForSeconds(timeBetweenWaves);
+       
 
-        waveInProgress = false;
+       
         if(waveNumber<5 &&waveInProgress==false)
         {
             startWave();
