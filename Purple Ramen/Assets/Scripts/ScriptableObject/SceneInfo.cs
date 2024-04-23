@@ -6,10 +6,10 @@ using UnityEngine;
 [CreateAssetMenu(fileName ="SceneInfo", menuName = "Persistence")]
 public class SceneInfo : ScriptableObject
 {
-
+    //SceneInfo functions like a Staff Manager
     public static SceneInfo instance;
 
-   //public List<staffElementalStats> staffList;
+   public List<staffElementalStats> staffList= new List<staffElementalStats>();
 
     private void Awake()
     {
@@ -31,10 +31,13 @@ public class SceneInfo : ScriptableObject
 
   
 
+    public void AddStaff(staffElementalStats staff)
+    {
+        staffList.Add(staff);
+    }
 
 
-
-
+    
 
     public bool isNextScene = true;
 }

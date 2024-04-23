@@ -38,7 +38,7 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
     [HeaderAttribute("----- Wizard Range Attack -----")]
     [SerializeField] private GameObject defaultStaffOrbPrefab;
     [SerializeField] staffElementalStats defaultStaffStats;
-    [SerializeField]public List<staffElementalStats> staffList = new List<staffElementalStats>();   // Inventory to hold all aquired staves.
+   // [SerializeField]public List<staffElementalStats> staffList = new List<staffElementalStats>();   // Inventory to hold all aquired staves.
     [SerializeField] GameObject staffOrbModel;  // The staff orb container. 
     [SerializeField] int shootDamage;           // Default Shoot Damage to be overwritten by the staff stats.
     [SerializeField] int shootDistance;         // Default Shoot Distance to be overwritten.
@@ -91,7 +91,7 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
             movement(); // Call the method to handle player movement.
 
             // On Left Mouse click start shoot coroutine. Check that you're not already shooting and that you have at least 1 staff in inventory.
-            if (Input.GetButton("Fire1") && !isShooting && staffList.Count > 0)
+            if (Input.GetButton("Fire1") && !isShooting && sceneInfo.staffList.Count > 0)
             {
                 StartCoroutine(shoot());
             }
@@ -231,19 +231,19 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
 
     public void FireBullet()
     {
-        if (staffList[selectedStaff].projectilePrefab != null)
+        if (sceneInfo.staffList[selectedStaff].projectilePrefab != null)
         {
-            GameObject projectile = Instantiate(staffList[selectedStaff].projectilePrefab, 
+            GameObject projectile = Instantiate(sceneInfo.staffList[selectedStaff].projectilePrefab, 
                 shootPos.position, Camera.main.transform.rotation);
         }
     }
 
     public void SpellCastingCircleEndOfStaff()
     {
-        if (staffList[selectedStaff].onCastEffect != null)
+        if (sceneInfo.staffList[selectedStaff].onCastEffect != null)
         {
             Quaternion correctRotation = Quaternion.Euler(0, 270, 0);
-            GameObject effectInstance = Instantiate(staffList[selectedStaff].onCastEffect.gameObject, shootAniPos.position, Camera.main.transform.rotation * correctRotation);
+            GameObject effectInstance = Instantiate(sceneInfo.staffList[selectedStaff].onCastEffect.gameObject, shootAniPos.position, Camera.main.transform.rotation * correctRotation);
             effectInstance.transform.SetParent(shootAniPos);
             effectInstance.transform.localPosition = Vector3.zero;
 
@@ -402,7 +402,8 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
 
     public void getStaffStats(staffElementalStats staff)
     {
-        staffList.Add(staff);
+        sceneInfo.staffList.Add(staff);
+       // staffList.Add(staff);
         GetItem(staff);
 
         // Update Stats to the stats of the current selected staff.
@@ -410,7 +411,7 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
         shootDistance = staff.spellRange;
         shootRate = staff.spellCastRate;
 
-        if (staffList.Count == 1)
+        if (sceneInfo.staffList.Count == 1)
         {
             selectedStaff = 0;
             changeStaff();
@@ -419,7 +420,7 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
 
     void selectStaff()
     {
-        if(Input.GetAxis("Mouse ScrollWheel") > 0 && selectedStaff < staffList.Count - 1)
+        if(Input.GetAxis("Mouse ScrollWheel") > 0 && selectedStaff < sceneInfo.staffList.Count - 1)
         {
             selectedStaff++;
             changeStaff();
@@ -434,15 +435,15 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
 
     void changeStaff()
     {
-        shootDamage = staffList[selectedStaff].spellDamage;
-        shootDistance = staffList[selectedStaff].spellRange;
-        shootRate = staffList[selectedStaff].spellCastRate;
+        shootDamage = sceneInfo.staffList[selectedStaff].spellDamage;
+        shootDistance = sceneInfo.staffList[selectedStaff].spellRange;
+        shootRate = sceneInfo.staffList[selectedStaff].spellCastRate;
 
         destoryStaffModelPrefab();
 
-        AudioManager.instance.SFXSource.PlayOneShot(gameManager.instance.PS.staffList[gameManager.instance.PS.selectedStaff].staffEquipSound);
+        AudioManager.instance.SFXSource.PlayOneShot(sceneInfo.staffList[gameManager.instance.PS.selectedStaff].staffEquipSound);
 
-        GameObject newOrb = Instantiate(staffList[selectedStaff].staffOrbModelPrefab, staffOrbModel.transform);
+        GameObject newOrb = Instantiate(sceneInfo.staffList[selectedStaff].staffOrbModelPrefab, staffOrbModel.transform);
 
         newOrb.transform.localPosition = Vector3.zero;
         newOrb.SetActive(true);
@@ -461,8 +462,8 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
 
             if (defaultStats != null)
             {
-                staffList.Add(defaultStats);
-                selectedStaff = staffList.IndexOf(defaultStats);
+                sceneInfo.staffList.Add(defaultStats);
+                selectedStaff = sceneInfo.staffList.IndexOf(defaultStats);
                 changeStaff();
             }
         }
