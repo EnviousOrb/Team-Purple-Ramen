@@ -46,7 +46,7 @@ public class UIManager : MonoBehaviour
 
         List<IInventory> weaponItems = weaponList.Where(item => item is staffElementalStats).ToList();
 
-        for(int i = 0; i < Math.Min(weaponItems.Count, weaponHotbar.Count); i++)
+        for(int i = 1; i < Math.Min(weaponItems.Count, weaponHotbar.Count); i++)
         {
             IInventory currentWeapon = weaponItems[i];
 
@@ -66,12 +66,12 @@ public class UIManager : MonoBehaviour
 
         if (item is staffElementalStats)
         {
-            reservedSpots4Staffs[1] = item;
+            reservedSpots4Staffs[0] = item;
 
-            inventoryUISlotLocation[1].sprite = item.InventorySprite;
-            inventoryUISlotLocation[1].enabled = true;
+            inventoryUISlotLocation[0].sprite = item.InventorySprite;
+            inventoryUISlotLocation[0].enabled = true;
 
-            if (inventoryUISlotLocation[1].TryGetComponent<Button>(out var slotButton))
+            if (inventoryUISlotLocation[0].TryGetComponent<Button>(out var slotButton))
             {
                 slotButton.onClick.RemoveAllListeners();
                 slotButton.onClick.AddListener(() => UpdateMainSlot(item));
@@ -84,19 +84,12 @@ public class UIManager : MonoBehaviour
 
     public void UpdateInventoryUI(List<IInventory> itemList)
     {
-        //clears any previous items from the inventory UI (this will probably be used when transitioning from level to hub)
-        foreach (var slot in inventoryUISlotLocation)
-        {
-            slot.sprite = null;
-            slot.enabled = false;
-        }
-
         //Creates a copy of the list to track items that don't have a spot assigned to them
         List<IInventory> remainingItems = new(itemList);
 
         int maxIndex = Math.Min(5, itemList.Count);
 
-        for (int i = 0; i < maxIndex; i++)
+        for (int i = 1; i < maxIndex; i++)
         {
             if (itemList[i] is staffElementalStats)
             {
@@ -112,8 +105,6 @@ public class UIManager : MonoBehaviour
                     slotButton.onClick.RemoveAllListeners();
                     slotButton.onClick.AddListener(() => UpdateMainSlot(currentItem));
                 }
-
-                UpdateWeaponHotbar(itemList);
             }
         }
 
@@ -138,16 +129,6 @@ public class UIManager : MonoBehaviour
                 }
             }
         }
-    }
-
-    public void ReserveSpot(int slotIndex, IInventory item)
-    {
-        if (reservedSpots4Staffs.ContainsKey(slotIndex))
-        {
-            Debug.LogError("Slot is already reserved!");
-            return;
-        }
-        reservedSpots4Staffs[slotIndex] = item;
     }
 
     public void toggleBGM()

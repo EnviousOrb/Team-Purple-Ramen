@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using STMTools;
+using JetBrains.Annotations;
 
 public class gameManager : MonoBehaviour
 {
@@ -53,6 +54,10 @@ public class gameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (TextBoxText.reading == false)
+        {
+            StartCoroutine(SuperHideTextBox(8));
+        }
         if (Input.GetButtonDown("Cancel"))
         {
             if (menuActive == null)
@@ -94,14 +99,12 @@ public class gameManager : MonoBehaviour
 
     public void UpdateTextBox(string newText)
     {
-        StopCoroutine(SuperHideTextBox(20));
         if (TextBoxText.reading == true)
         {
             TextBoxText.Rebuild();
         }
         TextBox.SetActive(true);
         TextBoxText.text = newText;
-        StartCoroutine(SuperHideTextBox(8));
     }
     public void HideTextBox()
     {
@@ -206,7 +209,7 @@ public class gameManager : MonoBehaviour
     }
     public void exitSettings()
     {
-        gameManager.instance.stateSettings();
+        gameManager.instance.menuSettings.SetActive(false);
     }
     public void respawn()
     {
