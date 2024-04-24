@@ -151,19 +151,19 @@ public class MinibossAI : MonoBehaviour, IDamage
             case 1:
                 if (canShoot && !isShooting)
                 {
-                    Shoot();
+                    StartCoroutine(Shoot());
                 }
                 break;
             case 2:
                 if (canMeleeAttack && !isMelee)
                 {
-                    MeleeAttack();
+                    StartCoroutine(MeleeAttack());
                 }
                 break;
             case 3:
                 if (canSummon && !isSummoning)
                 {
-                    Summoning();
+                    StartCoroutine(Summoning());
                 }
                 break;
             default:
@@ -175,41 +175,48 @@ public class MinibossAI : MonoBehaviour, IDamage
     {
         isDashing = true;
         animator.SetTrigger("Dash");
+        AudioManager.instance.playBossSFX(AudioManager.instance.BossSFX[0].soundName);
         isDashing = false;
     }
 
-    public void Shoot()
+    IEnumerator Shoot()
     {
         if (shootPos != null)
         {
             isShooting = true;
             animator.SetTrigger("Shoot"); // Triggers the shooting animation.
+            AudioManager.instance.playBossSFX(AudioManager.instance.BossSFX[1].soundName);
             Vector3 playerDirection = gameManager.instance.player.transform.position - transform.position;
             Instantiate(bullet, shootPos.position, Quaternion.LookRotation(playerDirection)); // Spawns the bullet.
             bullet.GetComponent<Bullet>().self = GetComponentInParent<CapsuleCollider>();
+            yield return new WaitForSeconds(shootRate);
             isShooting = false;
         }
     }
 
-    public void MeleeAttack()
+    IEnumerator MeleeAttack()
     {
         isMelee = true;
         animator.SetTrigger("Melee");
+        yield return new WaitForSeconds(shootRate);
+        AudioManager.instance.playBossSFX(AudioManager.instance.BossSFX[2].soundName);
         isMelee = false;
     }
 
-    public void Summoning()
+    IEnumerator Summoning()
     {
         if (enemiesInScene < maxEnemiesSpawn)
         {
             isSummoning = true;
             animator.SetBool("Summon", true);
+            AudioManager.instance.playBossSFX(AudioManager.instance.BossSFX[3].soundName);
             Vector3 randomOffset = Random.insideUnitSphere * spawnRange;
             Vector3 spawnPOS = minibossPOS.position + randomOffset;
             randomOffset.y = minibossPOS.position.y;
             Instantiate(enemyToSummon, spawnPOS, Quaternion.identity);
             enemiesInScene++;
         }
+        yield return new WaitForSeconds(spawnRate);
         animator.SetBool("Summon", false);
         isSummoning = false;
     }
@@ -228,6 +235,7 @@ public class MinibossAI : MonoBehaviour, IDamage
         HP -= amount; // Reduces health by the damage amount.
         StartCoroutine(FlashRed()); // Flashes red to indicate damaged.
         animator.SetTrigger("takeDamage");
+        AudioManager.instance.playBossSFX(AudioManager.instance.BossSFX[4].soundName);
         // Directs the enemy to move towards the player's position upon taking damage.
         agent.SetDestination(gameManager.instance.player.transform.position);
 

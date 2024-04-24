@@ -1197,6 +1197,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1309905299}
   m_LocalEulerAnglesHint: {x: 0, y: 273.318, z: 0}
+--- !u!1 &423066886 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8181893369802180346, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
+  m_PrefabInstance: {fileID: 1959223859}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &429316154
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1327,11 +1332,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
---- !u!1 &451298482 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2366004603302663533, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
-  m_PrefabInstance: {fileID: 1959223859}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &452206523 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1448653227136698331, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
@@ -3564,7 +3564,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: Hub Area
-  Loadingscreen: {fileID: 451298482}
+  Loadingscreen: {fileID: 423066886}
   loadingTimer: 5
   isNextScene: 1
   sceneInfo: {fileID: 11400000, guid: e9b35b64eab44834da85e8f354f6af30, type: 2}
@@ -4626,9 +4626,33 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1118616861777338557, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
+      propertyPath: BossSFX.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1118616861777338557, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
+      propertyPath: BossSFX.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: c94ca5c613f83b542a41e16e49a1d56a, type: 2}
+    - target: {fileID: 1118616861777338557, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
+      propertyPath: BossSFX.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: f84aeb059edd7434bbee91fb7cbb685b, type: 2}
+    - target: {fileID: 1118616861777338557, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
+      propertyPath: BossSFX.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 18ac14d22e343f246b991b28c5281201, type: 2}
+    - target: {fileID: 1118616861777338557, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
+      propertyPath: BossSFX.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: 76761add95db37247ad386db26ec54e8, type: 2}
     - target: {fileID: 2681700440528555825, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
       propertyPath: m_Name
       value: UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 3886933930385285250, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
+      propertyPath: m_CullTransparentMesh
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4208994448801702038, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
       propertyPath: _text
@@ -4950,7 +4974,7 @@ MonoBehaviour:
   spawnLocs:
   - {fileID: 1525193798}
   - {fileID: 291228843}
-  miniBoss: {fileID: 0}
+  miniBoss: {fileID: 8819722108260078762, guid: de2d30c724369404597a98d89da6e94c, type: 3}
   timeBetweenWaves: 10
   spawnRate: 1
 --- !u!1 &2056125160

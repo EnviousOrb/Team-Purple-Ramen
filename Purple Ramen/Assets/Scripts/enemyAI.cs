@@ -68,8 +68,14 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
     bool isShooting; // Tracks if the enemy is currently shooting.
     bool playerInRange; // Whether the player is within detection range.
 
+    //Optional Wave-based components
+    private WaveManager waveManager;
+
+
+
     void Start()
     {
+        waveManager = FindObjectOfType<WaveManager>();
         originalMat = model.material; // Stores the original material.
         stoppingDistOrig = agent.stoppingDistance; // Stores the original stopping distance.
         agent.stoppingDistance = 0; // Resets stopping distance for roaming behavior.
@@ -103,6 +109,14 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
             }
             if (burning && !dotCD)
                 StartCoroutine(BurnTick());
+        }
+    }
+
+    void OnDestroy()
+    {
+        if(waveManager!= null)
+        {
+            waveManager.enemyDefeated();
         }
     }
 
