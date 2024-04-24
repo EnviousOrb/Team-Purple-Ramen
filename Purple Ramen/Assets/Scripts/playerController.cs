@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using Unity.VisualScripting.Antlr3.Runtime.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -63,6 +64,7 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
     bool isCrouching;   
     bool playSteps;
     bool isMoving;
+    bool defaultStaffIsEquiped;
 
     [HeaderAttribute("----- TheStuffs -----")]
     bool isSlowed;
@@ -452,7 +454,9 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
 
     private void EquipDefaultStaff()
     {
-        if (defaultStaffOrbPrefab != null)
+        defaultStaffIsEquiped = sceneInfo.staffList.Exists(staff => staff == defaultStaffStats);
+
+        if (!defaultStaffIsEquiped && defaultStaffOrbPrefab != null)
         {
             destoryStaffModelPrefab();
 
@@ -468,6 +472,7 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
                 changeStaff();
             }
         }
+        defaultStaffIsEquiped = true;
     }
 
     private void destoryStaffModelPrefab()
