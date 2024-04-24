@@ -10518,6 +10518,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 317276462}
   m_Mesh: {fileID: -7498089018462061277, guid: 0587319bdb6644a46bf5b29dc10d61ce, type: 3}
+--- !u!1 &318646911 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5478317941108307477, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
+  m_PrefabInstance: {fileID: 3250570019212339410}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &324961425
 GameObject:
   m_ObjectHideFlags: 0
@@ -57717,13 +57722,29 @@ PrefabInstance:
       propertyPath: m_Name
       value: Werewolf Grass Type
       objectReference: {fileID: 0}
+    - target: {fileID: 4273688902249092217, guid: 07ddb53afdae74d428acbd66c6784bf2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4273688902249092217, guid: 07ddb53afdae74d428acbd66c6784bf2, type: 3}
+      propertyPath: m_TagString
+      value: Boss
+      objectReference: {fileID: 0}
     - target: {fileID: 7413336417966480280, guid: 07ddb53afdae74d428acbd66c6784bf2, type: 3}
       propertyPath: hpBar
       value: 
       objectReference: {fileID: 1037511416}
     - target: {fileID: 7413336417966480280, guid: 07ddb53afdae74d428acbd66c6784bf2, type: 3}
+      propertyPath: bullet
+      value: 
+      objectReference: {fileID: 1483174815389054247, guid: 7593ffafd6dd6b04d9aaa47320086438, type: 3}
+    - target: {fileID: 7413336417966480280, guid: 07ddb53afdae74d428acbd66c6784bf2, type: 3}
+      propertyPath: canShoot
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7413336417966480280, guid: 07ddb53afdae74d428acbd66c6784bf2, type: 3}
       propertyPath: shootRate
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7413336417966480280, guid: 07ddb53afdae74d428acbd66c6784bf2, type: 3}
       propertyPath: itemToDrop
@@ -57733,6 +57754,14 @@ PrefabInstance:
       propertyPath: minibossName
       value: 
       objectReference: {fileID: 1704678509}
+    - target: {fileID: 7413336417966480280, guid: 07ddb53afdae74d428acbd66c6784bf2, type: 3}
+      propertyPath: stoppingDist
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7413336417966480280, guid: 07ddb53afdae74d428acbd66c6784bf2, type: 3}
+      propertyPath: canMeleeAttack
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -77432,6 +77461,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 284598987879312577, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 284598987879312577, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 284598987879312577, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 284598987879312577, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -881
+      objectReference: {fileID: 0}
+    - target: {fileID: 284598987879312577, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -554
+      objectReference: {fileID: 0}
     - target: {fileID: 1118616861777338557, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
       propertyPath: NPCSource
       value: 
@@ -77464,6 +77513,10 @@ PrefabInstance:
       propertyPath: BossSFX.Array.data[4]
       value: 
       objectReference: {fileID: 11400000, guid: 8461ef9a93b31cc4f88bee634087f50a, type: 2}
+    - target: {fileID: 1470905606194189809, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -421
+      objectReference: {fileID: 0}
     - target: {fileID: 2338217616605863084, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -77471,6 +77524,18 @@ PrefabInstance:
     - target: {fileID: 2681700440528555825, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
       propertyPath: m_Name
       value: UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 3394662866326879439, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5478317941108307477, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6516667426220124201, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7206692720888251142, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
       propertyPath: m_Pivot.x
@@ -77552,6 +77617,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7697213241785103489, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8579977695836797058, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -77560,6 +77629,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: gameManager, Assembly-CSharp
       objectReference: {fileID: 0}
+    - target: {fileID: 8669131866018396485, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
+      propertyPath: hotbarWeapon
+      value: 
+      objectReference: {fileID: 318646911}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
