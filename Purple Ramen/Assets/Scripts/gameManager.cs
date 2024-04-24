@@ -40,7 +40,10 @@ public class gameManager : MonoBehaviour
 
     private GameObject previousMenu;
 
-    // Awake is called before Start
+    //testing variable
+    public bool playerDead;
+
+
     void Awake()
     {
         instance = this;
@@ -149,6 +152,7 @@ public class gameManager : MonoBehaviour
         HideTextBox();
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+        playerDead = true;
         menuActive.SetActive(true);
         NotifyEnemiesPlayerDied();
         AudioManager.instance.stopAll();

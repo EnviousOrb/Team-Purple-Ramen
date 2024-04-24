@@ -323,10 +323,8 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
                 agent.SetDestination(gameManager.instance.player.transform.position); // Moves towards the player.
 
                 // Initiates shooting if not already doing so.
-                if (!isShooting)
-                {
+                if (!isShooting && !gameManager.instance.playerDead)
                     StartCoroutine(shoot());
-                }
                 // Rotates to face the player if within stopping distance.
                 if (agent.remainingDistance <= agent.stoppingDistance)
                 {

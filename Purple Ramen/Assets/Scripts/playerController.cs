@@ -81,7 +81,7 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
 
     void Update()
     {
-        if (!gameManager.instance.isPaused) // If the game is not paused.
+        if (!gameManager.instance.isPaused && !gameManager.instance.playerDead) // If the game is not paused.
         {
 #if UNITY_EDITOR
             // Draw a debug ray in the editor to visualize aiming or looking direction and make it green.
@@ -127,6 +127,7 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
         controller.enabled = false; // Temporarily disable the controller to move the player.
         transform.position = gameManager.instance.playerSpawnPos.transform.position; // Move player to spawn position.
         controller.enabled = true; // Re-enable the controller.
+        gameManager.instance.playerDead = false;
     }
 
     void movement()
