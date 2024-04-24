@@ -6048,6 +6048,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1470905606194189809}
   - component: {fileID: 5051829441974419732}
+  - component: {fileID: 7581921548394812868}
   m_Layer: 5
   m_Name: TextBox
   m_TagString: Untagged
@@ -6073,7 +6074,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -13, y: -427}
+  m_AnchoredPosition: {x: -13, y: -319}
   m_SizeDelta: {x: 500, y: 160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5051829441974419732
@@ -6084,6 +6085,102 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3394662866326879439}
   m_CullTransparentMesh: 1
+--- !u!82 &7581921548394812868
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3394662866326879439}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &3415604964088978958
 GameObject:
   m_ObjectHideFlags: 0
@@ -6672,7 +6769,7 @@ MonoBehaviour:
   showEventFoldout: 0
   showBetaFoldout: 0
   info:
-  - pos: {x: -80.875, y: 9, z: 0}
+  - pos: {x: -54.875, y: 9, z: 0}
     offset: {x: 0, y: 0, z: 0}
     lineSpacing: 1
     isEndOfParagraph: 0
@@ -6693,7 +6790,7 @@ MonoBehaviour:
     delayData: {fileID: 0}
     waveData: {fileID: 0}
     jitterData: {fileID: 0}
-    readDelay: 0.1
+    readDelay: 0.05
     audioClipData: {fileID: 0}
     stopPreviousSound: 1
     pitchMode: 0
@@ -6709,18 +6806,18 @@ MonoBehaviour:
     soundClipData: {fileID: 0}
     IdxIdentifier: 0
     InfoInUse: 0
-    chMinX: 4
-    chMaxX: 42
+    chMinX: 0
+    chMaxX: 32
     chMinY: -1
-    chMaxY: 46
+    chMaxY: 39
     chSize: 64
     submeshChange: 0
     invoked: 1
-  - pos: {x: -69.375, y: 9, z: 0}
+  - pos: {x: -46.375, y: 9, z: 0}
     offset: {x: 0, y: 0, z: 0}
     lineSpacing: 1
     isEndOfParagraph: 0
-    readTime: 0.1
+    readTime: 0.05
     unreadTime: 0
     line: 0
     rawIndex: 1
@@ -6737,7 +6834,7 @@ MonoBehaviour:
     delayData: {fileID: 0}
     waveData: {fileID: 0}
     jitterData: {fileID: 0}
-    readDelay: 0.1
+    readDelay: 0.05
     audioClipData: {fileID: 0}
     stopPreviousSound: 1
     pitchMode: 0
@@ -6753,18 +6850,18 @@ MonoBehaviour:
     soundClipData: {fileID: 0}
     IdxIdentifier: 0
     InfoInUse: 0
-    chMinX: 3
-    chMaxX: 43
-    chMinY: -2
-    chMaxY: 46
+    chMinX: 0
+    chMaxX: 28
+    chMinY: -1
+    chMaxY: 39
     chSize: 64
     submeshChange: 0
     invoked: 1
-  - pos: {x: -57.875, y: 9, z: 0}
+  - pos: {x: -38.875, y: 9, z: 0}
     offset: {x: 0, y: 0, z: 0}
     lineSpacing: 1
     isEndOfParagraph: 0
-    readTime: 0.2
+    readTime: 0.1
     unreadTime: 0
     line: 0
     rawIndex: 2
@@ -6781,7 +6878,7 @@ MonoBehaviour:
     delayData: {fileID: 0}
     waveData: {fileID: 0}
     jitterData: {fileID: 0}
-    readDelay: 0.1
+    readDelay: 0.05
     audioClipData: {fileID: 0}
     stopPreviousSound: 1
     pitchMode: 0
@@ -6797,18 +6894,18 @@ MonoBehaviour:
     soundClipData: {fileID: 0}
     IdxIdentifier: 0
     InfoInUse: 0
-    chMinX: 4
-    chMaxX: 35
+    chMinX: 0
+    chMaxX: 22
     chMinY: -1
-    chMaxY: 46
+    chMaxY: 39
     chSize: 64
     submeshChange: 0
     invoked: 1
-  - pos: {x: -48.875, y: 9, z: 0}
+  - pos: {x: -32.875, y: 9, z: 0}
     offset: {x: 0, y: 0, z: 0}
     lineSpacing: 1
     isEndOfParagraph: 0
-    readTime: 0.3
+    readTime: 0.15
     unreadTime: 0
     line: 0
     rawIndex: 3
@@ -6825,7 +6922,7 @@ MonoBehaviour:
     delayData: {fileID: 0}
     waveData: {fileID: 0}
     jitterData: {fileID: 0}
-    readDelay: 0.1
+    readDelay: 0.05
     audioClipData: {fileID: 0}
     stopPreviousSound: 1
     pitchMode: 0
@@ -6841,18 +6938,18 @@ MonoBehaviour:
     soundClipData: {fileID: 0}
     IdxIdentifier: 0
     InfoInUse: 0
-    chMinX: 4
-    chMaxX: 35
+    chMinX: 0
+    chMaxX: 22
     chMinY: -1
-    chMaxY: 46
+    chMaxY: 39
     chSize: 64
     submeshChange: 0
     invoked: 1
-  - pos: {x: -39.875, y: 9, z: 0}
+  - pos: {x: -26.875, y: 9, z: 0}
     offset: {x: 0, y: 0, z: 0}
     lineSpacing: 1
     isEndOfParagraph: 0
-    readTime: 0.4
+    readTime: 0.2
     unreadTime: 0
     line: 0
     rawIndex: 4
@@ -6869,7 +6966,7 @@ MonoBehaviour:
     delayData: {fileID: 0}
     waveData: {fileID: 0}
     jitterData: {fileID: 0}
-    readDelay: 0.1
+    readDelay: 0.05
     audioClipData: {fileID: 0}
     stopPreviousSound: 1
     pitchMode: 0
@@ -6892,11 +6989,11 @@ MonoBehaviour:
     chSize: 64
     submeshChange: 0
     invoked: 1
-  - pos: {x: -35.375, y: 9, z: 0}
+  - pos: {x: -23.625, y: 9, z: 0}
     offset: {x: 0, y: 0, z: 0}
     lineSpacing: 1
     isEndOfParagraph: 0
-    readTime: 0.5
+    readTime: 0.25
     unreadTime: 0
     line: 0
     rawIndex: 5
@@ -6913,7 +7010,7 @@ MonoBehaviour:
     delayData: {fileID: 0}
     waveData: {fileID: 0}
     jitterData: {fileID: 0}
-    readDelay: 0.1
+    readDelay: 0.05
     audioClipData: {fileID: 0}
     stopPreviousSound: 1
     pitchMode: 0
@@ -6929,18 +7026,18 @@ MonoBehaviour:
     soundClipData: {fileID: 0}
     IdxIdentifier: 0
     InfoInUse: 0
-    chMinX: 4
-    chMaxX: 42
+    chMinX: 0
+    chMaxX: 32
     chMinY: -1
-    chMaxY: 46
+    chMaxY: 39
     chSize: 64
     submeshChange: 0
     invoked: 1
-  - pos: {x: -23.875, y: 9, z: 0}
+  - pos: {x: -15.125, y: 9, z: 0}
     offset: {x: 0, y: 0, z: 0}
     lineSpacing: 1
     isEndOfParagraph: 0
-    readTime: 0.6
+    readTime: 0.3
     unreadTime: 0
     line: 0
     rawIndex: 6
@@ -6957,7 +7054,7 @@ MonoBehaviour:
     delayData: {fileID: 0}
     waveData: {fileID: 0}
     jitterData: {fileID: 0}
-    readDelay: 0.1
+    readDelay: 0.05
     audioClipData: {fileID: 0}
     stopPreviousSound: 1
     pitchMode: 0
@@ -6973,18 +7070,18 @@ MonoBehaviour:
     soundClipData: {fileID: 0}
     IdxIdentifier: 0
     InfoInUse: 0
-    chMinX: 2
-    chMaxX: 48
-    chMinY: -2
-    chMaxY: 46
+    chMinX: 0
+    chMaxX: 28
+    chMinY: -1
+    chMaxY: 39
     chSize: 64
     submeshChange: 0
     invoked: 1
-  - pos: {x: -11.375, y: 9, z: 0}
+  - pos: {x: -7.625, y: 9, z: 0}
     offset: {x: 0, y: 0, z: 0}
     lineSpacing: 1
     isEndOfParagraph: 0
-    readTime: 0.70000005
+    readTime: 0.35000002
     unreadTime: 0
     line: 0
     rawIndex: 7
@@ -7001,7 +7098,95 @@ MonoBehaviour:
     delayData: {fileID: 0}
     waveData: {fileID: 0}
     jitterData: {fileID: 0}
-    readDelay: 0.1
+    readDelay: 0.05
+    audioClipData: {fileID: 0}
+    stopPreviousSound: 1
+    pitchMode: 0
+    overridePitch: 1
+    minPitch: 0.9
+    maxPitch: 1.2
+    speedReadPitch: 0
+    fontData: {fileID: 0}
+    quadData: {fileID: 0}
+    isQuad: 0
+    quadIndex: -1
+    materialData: {fileID: 0}
+    soundClipData: {fileID: 0}
+    IdxIdentifier: 0
+    InfoInUse: 0
+    chMinX: 0
+    chMaxX: 26
+    chMinY: -1
+    chMaxY: 39
+    chSize: 64
+    submeshChange: 0
+    invoked: 1
+  - pos: {x: -0.625, y: 9, z: 0}
+    offset: {x: 0, y: 0, z: 0}
+    lineSpacing: 1
+    isEndOfParagraph: 0
+    readTime: 0.40000004
+    unreadTime: 0
+    line: 0
+    rawIndex: 8
+    indent: 0
+    drawAnimData: {fileID: 11400000, guid: 79b3a58975db94dc0878c84bf4315875, type: 2}
+    size: {x: 16, y: 16}
+    alignment: 1
+    drawOrder: 0
+    ev: []
+    ev2: []
+    colorData: {fileID: 0}
+    gradientData: {fileID: 0}
+    textureData: {fileID: 0}
+    delayData: {fileID: 0}
+    waveData: {fileID: 0}
+    jitterData: {fileID: 0}
+    readDelay: 0.05
+    audioClipData: {fileID: 0}
+    stopPreviousSound: 1
+    pitchMode: 0
+    overridePitch: 1
+    minPitch: 0.9
+    maxPitch: 1.2
+    speedReadPitch: 0
+    fontData: {fileID: 0}
+    quadData: {fileID: 0}
+    isQuad: 0
+    quadIndex: -1
+    materialData: {fileID: 0}
+    soundClipData: {fileID: 0}
+    IdxIdentifier: 0
+    InfoInUse: 0
+    chMinX: -1
+    chMaxX: 1
+    chMinY: -1
+    chMaxY: 1
+    chSize: 64
+    submeshChange: 0
+    invoked: 1
+  - pos: {x: 2.625, y: 9, z: 0}
+    offset: {x: 0, y: 0, z: 0}
+    lineSpacing: 1
+    isEndOfParagraph: 0
+    readTime: 0.45000005
+    unreadTime: 0
+    line: 0
+    rawIndex: 9
+    indent: 0
+    drawAnimData: {fileID: 11400000, guid: 79b3a58975db94dc0878c84bf4315875, type: 2}
+    size: {x: 16, y: 16}
+    alignment: 1
+    drawOrder: 0
+    ev: []
+    ev2: []
+    colorData: {fileID: 0}
+    gradientData: {fileID: 0}
+    textureData: {fileID: 0}
+    delayData: {fileID: 0}
+    waveData: {fileID: 0}
+    jitterData: {fileID: 0}
+    readDelay: 0.05
     audioClipData: {fileID: 0}
     stopPreviousSound: 1
     pitchMode: 0
@@ -7020,103 +7205,15 @@ MonoBehaviour:
     chMinX: 0
     chMaxX: 39
     chMinY: -1
-    chMaxY: 46
+    chMaxY: 39
     chSize: 64
     submeshChange: 0
     invoked: 1
-  - pos: {x: -1.625, y: 9, z: 0}
+  - pos: {x: 12.875, y: 9, z: 0}
     offset: {x: 0, y: 0, z: 0}
     lineSpacing: 1
     isEndOfParagraph: 0
-    readTime: 0.8000001
-    unreadTime: 0
-    line: 0
-    rawIndex: 8
-    indent: 0
-    drawAnimData: {fileID: 11400000, guid: 79b3a58975db94dc0878c84bf4315875, type: 2}
-    size: {x: 16, y: 16}
-    alignment: 1
-    drawOrder: 0
-    ev: []
-    ev2: []
-    colorData: {fileID: 0}
-    gradientData: {fileID: 0}
-    textureData: {fileID: 0}
-    delayData: {fileID: 0}
-    waveData: {fileID: 0}
-    jitterData: {fileID: 0}
-    readDelay: 0.1
-    audioClipData: {fileID: 0}
-    stopPreviousSound: 1
-    pitchMode: 0
-    overridePitch: 1
-    minPitch: 0.9
-    maxPitch: 1.2
-    speedReadPitch: 0
-    fontData: {fileID: 0}
-    quadData: {fileID: 0}
-    isQuad: 0
-    quadIndex: -1
-    materialData: {fileID: 0}
-    soundClipData: {fileID: 0}
-    IdxIdentifier: 0
-    InfoInUse: 0
-    chMinX: -1
-    chMaxX: 1
-    chMinY: -1
-    chMaxY: 1
-    chSize: 64
-    submeshChange: 0
-    invoked: 1
-  - pos: {x: 2.875, y: 9, z: 0}
-    offset: {x: 0, y: 0, z: 0}
-    lineSpacing: 1
-    isEndOfParagraph: 0
-    readTime: 0.9000001
-    unreadTime: 0
-    line: 0
-    rawIndex: 9
-    indent: 0
-    drawAnimData: {fileID: 11400000, guid: 79b3a58975db94dc0878c84bf4315875, type: 2}
-    size: {x: 16, y: 16}
-    alignment: 1
-    drawOrder: 0
-    ev: []
-    ev2: []
-    colorData: {fileID: 0}
-    gradientData: {fileID: 0}
-    textureData: {fileID: 0}
-    delayData: {fileID: 0}
-    waveData: {fileID: 0}
-    jitterData: {fileID: 0}
-    readDelay: 0.1
-    audioClipData: {fileID: 0}
-    stopPreviousSound: 1
-    pitchMode: 0
-    overridePitch: 1
-    minPitch: 0.9
-    maxPitch: 1.2
-    speedReadPitch: 0
-    fontData: {fileID: 0}
-    quadData: {fileID: 0}
-    isQuad: 0
-    quadIndex: -1
-    materialData: {fileID: 0}
-    soundClipData: {fileID: 0}
-    IdxIdentifier: 0
-    InfoInUse: 0
-    chMinX: 4
-    chMaxX: 50
-    chMinY: -1
-    chMaxY: 46
-    chSize: 64
-    submeshChange: 0
-    invoked: 1
-  - pos: {x: 16.125, y: 9, z: 0}
-    offset: {x: 0, y: 0, z: 0}
-    lineSpacing: 1
-    isEndOfParagraph: 0
-    readTime: 1.0000001
+    readTime: 0.50000006
     unreadTime: 0
     line: 0
     rawIndex: 10
@@ -7133,7 +7230,7 @@ MonoBehaviour:
     delayData: {fileID: 0}
     waveData: {fileID: 0}
     jitterData: {fileID: 0}
-    readDelay: 0.1
+    readDelay: 0.05
     audioClipData: {fileID: 0}
     stopPreviousSound: 1
     pitchMode: 0
@@ -7149,18 +7246,18 @@ MonoBehaviour:
     soundClipData: {fileID: 0}
     IdxIdentifier: 0
     InfoInUse: 0
-    chMinX: 2
-    chMaxX: 48
-    chMinY: -2
-    chMaxY: 46
+    chMinX: 0
+    chMaxX: 28
+    chMinY: -1
+    chMaxY: 39
     chSize: 64
     submeshChange: 0
     invoked: 1
-  - pos: {x: 28.625, y: 9, z: 0}
+  - pos: {x: 20.375, y: 9, z: 0}
     offset: {x: 0, y: 0, z: 0}
     lineSpacing: 1
     isEndOfParagraph: 0
-    readTime: 1.1000001
+    readTime: 0.5500001
     unreadTime: 0
     line: 0
     rawIndex: 11
@@ -7177,7 +7274,7 @@ MonoBehaviour:
     delayData: {fileID: 0}
     waveData: {fileID: 0}
     jitterData: {fileID: 0}
-    readDelay: 0.1
+    readDelay: 0.05
     audioClipData: {fileID: 0}
     stopPreviousSound: 1
     pitchMode: 0
@@ -7193,18 +7290,18 @@ MonoBehaviour:
     soundClipData: {fileID: 0}
     IdxIdentifier: 0
     InfoInUse: 0
-    chMinX: 4
-    chMaxX: 45
+    chMinX: 0
+    chMaxX: 28
     chMinY: -1
-    chMaxY: 46
+    chMaxY: 39
     chSize: 64
     submeshChange: 0
     invoked: 1
-  - pos: {x: 40.125, y: 9, z: 0}
+  - pos: {x: 27.875, y: 9, z: 0}
     offset: {x: 0, y: 0, z: 0}
     lineSpacing: 1
     isEndOfParagraph: 0
-    readTime: 1.2000002
+    readTime: 0.6000001
     unreadTime: 0
     line: 0
     rawIndex: 12
@@ -7221,7 +7318,7 @@ MonoBehaviour:
     delayData: {fileID: 0}
     waveData: {fileID: 0}
     jitterData: {fileID: 0}
-    readDelay: 0.1
+    readDelay: 0.05
     audioClipData: {fileID: 0}
     stopPreviousSound: 1
     pitchMode: 0
@@ -7237,18 +7334,18 @@ MonoBehaviour:
     soundClipData: {fileID: 0}
     IdxIdentifier: 0
     InfoInUse: 0
-    chMinX: 4
-    chMaxX: 13
+    chMinX: 0
+    chMaxX: 11
     chMinY: -1
-    chMaxY: 46
+    chMaxY: 39
     chSize: 64
     submeshChange: 0
     invoked: 1
-  - pos: {x: 44.625, y: 9, z: 0}
+  - pos: {x: 31.125, y: 9, z: 0}
     offset: {x: 0, y: 0, z: 0}
     lineSpacing: 1
     isEndOfParagraph: 0
-    readTime: 1.3000002
+    readTime: 0.6500001
     unreadTime: 0
     line: 0
     rawIndex: 13
@@ -7265,7 +7362,7 @@ MonoBehaviour:
     delayData: {fileID: 0}
     waveData: {fileID: 0}
     jitterData: {fileID: 0}
-    readDelay: 0.1
+    readDelay: 0.05
     audioClipData: {fileID: 0}
     stopPreviousSound: 1
     pitchMode: 0
@@ -7281,18 +7378,18 @@ MonoBehaviour:
     soundClipData: {fileID: 0}
     IdxIdentifier: 0
     InfoInUse: 0
-    chMinX: 4
-    chMaxX: 38
+    chMinX: 0
+    chMaxX: 26
     chMinY: -1
-    chMaxY: 46
+    chMaxY: 39
     chSize: 64
     submeshChange: 0
     invoked: 1
-  - pos: {x: 54.375, y: 9, z: 0}
+  - pos: {x: 37.625, y: 9, z: 0}
     offset: {x: 0, y: 0, z: 0}
     lineSpacing: 1
     isEndOfParagraph: 0
-    readTime: 1.4000002
+    readTime: 0.7000001
     unreadTime: 0
     line: 0
     rawIndex: 14
@@ -7309,7 +7406,7 @@ MonoBehaviour:
     delayData: {fileID: 0}
     waveData: {fileID: 0}
     jitterData: {fileID: 0}
-    readDelay: 0.1
+    readDelay: 0.05
     audioClipData: {fileID: 0}
     stopPreviousSound: 1
     pitchMode: 0
@@ -7325,18 +7422,18 @@ MonoBehaviour:
     soundClipData: {fileID: 0}
     IdxIdentifier: 0
     InfoInUse: 0
-    chMinX: 4
-    chMaxX: 13
+    chMinX: 0
+    chMaxX: 11
     chMinY: -1
-    chMaxY: 46
+    chMaxY: 39
     chSize: 64
     submeshChange: 0
     invoked: 1
-  - pos: {x: 58.875, y: 9, z: 0}
+  - pos: {x: 40.875, y: 9, z: 0}
     offset: {x: 0, y: 0, z: 0}
     lineSpacing: 1
     isEndOfParagraph: 0
-    readTime: 1.5000002
+    readTime: 0.7500001
     unreadTime: 0
     line: 0
     rawIndex: 15
@@ -7353,7 +7450,7 @@ MonoBehaviour:
     delayData: {fileID: 0}
     waveData: {fileID: 0}
     jitterData: {fileID: 0}
-    readDelay: 0.1
+    readDelay: 0.05
     audioClipData: {fileID: 0}
     stopPreviousSound: 1
     pitchMode: 0
@@ -7369,18 +7466,18 @@ MonoBehaviour:
     soundClipData: {fileID: 0}
     IdxIdentifier: 0
     InfoInUse: 0
-    chMinX: 4
-    chMaxX: 41
+    chMinX: 0
+    chMaxX: 26
     chMinY: -1
-    chMaxY: 46
+    chMaxY: 39
     chSize: 64
     submeshChange: 0
     invoked: 1
-  - pos: {x: 69.625, y: 9, z: 0}
+  - pos: {x: 47.875, y: 9, z: 0}
     offset: {x: 0, y: 0, z: 0}
     lineSpacing: 1
     isEndOfParagraph: 0
-    readTime: 1.6000003
+    readTime: 0.80000013
     unreadTime: 0
     line: 0
     rawIndex: 16
@@ -7397,7 +7494,7 @@ MonoBehaviour:
     delayData: {fileID: 0}
     waveData: {fileID: 0}
     jitterData: {fileID: 0}
-    readDelay: 0.1
+    readDelay: 0.05
     audioClipData: {fileID: 0}
     stopPreviousSound: 1
     pitchMode: 0
@@ -7413,10 +7510,10 @@ MonoBehaviour:
     soundClipData: {fileID: 0}
     IdxIdentifier: 0
     InfoInUse: 0
-    chMinX: 4
-    chMaxX: 45
+    chMinX: 0
+    chMaxX: 28
     chMinY: -1
-    chMaxY: 46
+    chMaxY: 39
     chSize: 64
     submeshChange: 0
     invoked: 1
@@ -7478,23 +7575,23 @@ MonoBehaviour:
   textMesh: {fileID: 0}
   rawTopLeftBounds: {x: 125, y: -25, z: 0}
   rawBottomRightBounds: {x: -125, y: 25, z: 0}
-  rawBottomRightTextBounds: {x: 161.75, y: -16, z: 0}
-  topLeftBounds: {x: 745.52094, y: 177.77502, z: 0}
-  topRightBounds: {x: 1168.4409, y: 177.77502, z: 0}
-  bottomLeftBounds: {x: 745.52094, y: 102.629974, z: 0}
-  bottomRightBounds: {x: 1168.4409, y: 102.629974, z: 0}
-  centerBounds: {x: 956.98096, y: 140.2025, z: 0}
-  topLeftTextBounds: {x: 820.16626, y: 152.22571, z: 0}
-  topRightTextBounds: {x: 1093.7955, y: 152.22571, z: 0}
-  bottomLeftTextBounds: {x: 820.16626, y: 128.17929, z: 0}
-  bottomRightTextBounds: {x: 1093.7955, y: 128.17929, z: 0}
-  centerTextBounds: {x: 956.9809, y: 140.2025, z: 0}
-  finalTopLeftTextBounds: {x: 820.16626, y: 152.22571, z: 0}
-  finalTopRightTextBounds: {x: 1093.7955, y: 152.22571, z: 0}
-  finalBottomLeftTextBounds: {x: 820.16626, y: 128.17929, z: 0}
-  finalBottomRightTextBounds: {x: 1093.7955, y: 128.17929, z: 0}
-  finalCenterTextBounds: {x: 956.9809, y: 140.2025, z: 0}
-  unwrappedBottomRightTextBounds: {x: 162, y: -16, z: 0}
+  rawBottomRightTextBounds: {x: 109.75, y: -16, z: 0}
+  topLeftBounds: {x: 382.46777, y: 93.0773, z: 0}
+  topRightBounds: {x: 599.4345, y: 93.0773, z: 0}
+  bottomLeftBounds: {x: 382.46777, y: 54.52632, z: 0}
+  bottomRightBounds: {x: 599.4345, y: 54.52632, z: 0}
+  centerBounds: {x: 490.95114, y: 73.80181, z: 0}
+  topLeftTextBounds: {x: 443.32693, y: 79.96997, z: 0}
+  topRightTextBounds: {x: 538.5753, y: 79.96997, z: 0}
+  bottomLeftTextBounds: {x: 443.32693, y: 67.63365, z: 0}
+  bottomRightTextBounds: {x: 538.5753, y: 67.63365, z: 0}
+  centerTextBounds: {x: 490.9511, y: 73.80181, z: 0}
+  finalTopLeftTextBounds: {x: 443.32693, y: 79.96997, z: 0}
+  finalTopRightTextBounds: {x: 538.5753, y: 79.96997, z: 0}
+  finalBottomLeftTextBounds: {x: 443.32693, y: 67.63365, z: 0}
+  finalBottomRightTextBounds: {x: 538.5753, y: 67.63365, z: 0}
+  finalCenterTextBounds: {x: 490.9511, y: 73.80181, z: 0}
+  unwrappedBottomRightTextBounds: {x: 110.25, y: -16, z: 0}
   onCompleteEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -7517,9 +7614,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   debugMode: 0
-  totalReadTime: 1.6000103
+  totalReadTime: 0.80001014
   totalUnreadTime: 0.00001
-  currentReadTime: 1.6000103
+  currentReadTime: 0.80001014
   autoRead: 1
   rememberReadPosition: 1
   autoQuality: 0
@@ -14374,9 +14471,9 @@ RectTransform:
   - {fileID: 3368903922385928434}
   m_Father: {fileID: 7206692720888251142}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 391}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: -131}
   m_SizeDelta: {x: 500, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9212144139110187919

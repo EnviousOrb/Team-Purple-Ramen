@@ -54,10 +54,6 @@ public class gameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (TextBoxText.reading == false)
-        {
-            StartCoroutine(SuperHideTextBox(8));
-        }
         if (Input.GetButtonDown("Cancel"))
         {
             if (menuActive == null)
@@ -105,6 +101,7 @@ public class gameManager : MonoBehaviour
         }
         TextBox.SetActive(true);
         TextBoxText.text = newText;
+        SuperHideTextBox(8);
     }
     public void HideTextBox()
     {
