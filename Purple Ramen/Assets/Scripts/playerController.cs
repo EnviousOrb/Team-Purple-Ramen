@@ -63,6 +63,7 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
     bool isCrouching;   
     bool playSteps;
     bool isMoving;
+    bool defaultStaffIsEquiped = false;
 
     [HeaderAttribute("----- TheStuffs -----")]
     bool isSlowed;
@@ -451,7 +452,7 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
 
     private void EquipDefaultStaff()
     {
-        if (defaultStaffOrbPrefab != null)
+        if (!defaultStaffIsEquiped && defaultStaffOrbPrefab != null)
         {
             destoryStaffModelPrefab();
 
@@ -467,6 +468,7 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
                 changeStaff();
             }
         }
+        defaultStaffIsEquiped = true;
     }
 
     private void destoryStaffModelPrefab()
