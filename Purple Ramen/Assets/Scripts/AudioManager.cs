@@ -7,10 +7,10 @@ using Unity.VisualScripting;
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance;
-    public soundObject[] BGM, SFX, NpcSFX, PlayerSFX;
+    public soundObject[] BGM, SFX, NpcSFX, PlayerSFX, BossSFX;
     public float fadeDuration;
     public float fadeVolume;
-    public AudioSource BGMSource, SFXSource,NPCSource, PlayerSource;
+    public AudioSource BGMSource, SFXSource,NPCSource, BossSource, PlayerSource;
 
     private void Awake()
     {
@@ -24,6 +24,7 @@ public class AudioManager : MonoBehaviour
         }
         playBGM(BGM[0].soundName);
         PlayerSource = GameObject.FindWithTag("Player").GetComponent<AudioSource>();
+        BossSource = GameObject.FindWithTag("Boss").GetComponent<AudioSource>();
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -107,6 +108,20 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    public void playBossSFX(string name)
+    {
+        soundObject so = Array.Find(BossSFX, x => x.name == name);
+
+        if (so == null)
+        {
+            Debug.Log("Sound Effect Not Found");
+        }
+        else
+        {
+            BossSource.PlayOneShot(so.soundClip);
+        }
+    }
+
 
     public void playNpcSFX(string name)
     {
@@ -127,6 +142,7 @@ public class AudioManager : MonoBehaviour
         BGMSource.Stop();
         PlayerSource.Stop();
         NPCSource.Stop();
+        BossSource.Stop();
     }
 
     public void toggleBGM()
@@ -138,6 +154,7 @@ public class AudioManager : MonoBehaviour
     {
         SFXSource.mute = !SFXSource.mute;
         PlayerSource.mute = !PlayerSource.mute;
+        BossSource.mute = !BossSource.mute;
     }
 
     public void toggleNPC()
@@ -154,6 +171,7 @@ public class AudioManager : MonoBehaviour
     {
         SFXSource.volume = volume;
         PlayerSource.volume = volume;
+        BossSource.volume = volume;
     }
     public void NPCVolume(float volume)
     {
