@@ -143,7 +143,7 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
 
     public void takeDamage(int amount, int type)
     {
-        Debug.Log("TakeDamageStart");
+        // Debug.Log("TakeDamageStart");
         //1 = water, 2 = fire, 3 = lightning, 4 = plant
         switch (enemyType)
         {
@@ -315,7 +315,7 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
         // Performs a raycast to check for line of sight to the player.
         if (Physics.Raycast(headPos.position, playerDir, out hit))
         {
-            Debug.DrawRay(headPos.position, playerDir, Color.red);
+            // Debug.DrawRay(headPos.position, playerDir, Color.red);
             // Checks if the raycast hit the player and the angle is within the view cone.
             if (hit.collider.CompareTag("Player") || angleToPlayer <= viewCone)
             {

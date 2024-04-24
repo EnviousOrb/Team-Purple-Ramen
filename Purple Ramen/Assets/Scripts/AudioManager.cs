@@ -65,7 +65,7 @@ public class AudioManager : MonoBehaviour
         soundObject so = Array.Find(BGM, x => x.name == name);
             if (so == null)
             {
-                Debug.Log("Background Music Not Found");
+                // Debug.Log("Background Music Not Found");
             }
             else
             {
@@ -85,7 +85,7 @@ public class AudioManager : MonoBehaviour
 
         if (so == null)
         {
-            Debug.Log("Sound Effect Not Found");
+            // Debug.Log("Sound Effect Not Found");
         }
         else
         {
@@ -99,7 +99,7 @@ public class AudioManager : MonoBehaviour
 
         if (so == null)
         {
-            Debug.Log("Sound Effect Not Found");
+            // Debug.Log("Sound Effect Not Found");
         }
         else
         {
@@ -114,7 +114,7 @@ public class AudioManager : MonoBehaviour
 
         if (so == null)
         {
-            Debug.Log("NPC Sound Effect Not Found");
+            // Debug.Log("NPC Sound Effect Not Found");
         }
         else
         {

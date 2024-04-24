@@ -308,7 +308,7 @@ public class MinibossAI : MonoBehaviour, IDamage
         // Performs a raycast to check for line of sight to the player.
         if (Physics.Raycast(headPos.position, playerDir, out hit))
         {
-            Debug.DrawRay(headPos.position, playerDir, Color.red);
+            // Debug.DrawRay(headPos.position, playerDir, Color.red);
             // Checks if the raycast hit the player and the angle is within the view cone.
             if (hit.collider.CompareTag("Player") || angleToPlayer <= viewCone)
             {
