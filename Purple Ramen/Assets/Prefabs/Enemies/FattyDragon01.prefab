@@ -399,9 +399,9 @@ MonoBehaviour:
   dropRolls: 3
   paralysisMat: {fileID: 2100000, guid: 91f88aab6563f6b40908c28e8758cb87, type: 2}
   rootEffect: {fileID: 8100678192781633772}
-  particleCrit: {fileID: 0}
-  particleWeak: {fileID: 0}
-  particleNormal: {fileID: 0}
+  particleCrit: {fileID: 820789890452675016}
+  particleWeak: {fileID: 7080764045439280594}
+  particleNormal: {fileID: 4254232644683432810}
   associatedSpawner: {fileID: 0}
 --- !u!95 &4732715823649715118
 Animator:
@@ -2253,6 +2253,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9b62484e29ab1b143bee29b296a3bd3e, type: 3}
+--- !u!198 &4254232644683432810 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7742136237191562227, guid: 9b62484e29ab1b143bee29b296a3bd3e, type: 3}
+  m_PrefabInstance: {fileID: 5799376209771069593}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7655223559849328786 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4199418272963411979, guid: 9b62484e29ab1b143bee29b296a3bd3e, type: 3}
@@ -2320,6 +2325,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3191333249140933229, guid: 0c49dc5df3f91ce44b594f1b3b54b950, type: 3}
   m_PrefabInstance: {fileID: 7648784554169303978}
   m_PrefabAsset: {fileID: 0}
+--- !u!198 &7080764045439280594 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 605202418569160312, guid: 0c49dc5df3f91ce44b594f1b3b54b950, type: 3}
+  m_PrefabInstance: {fileID: 7648784554169303978}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &9077444403006794650
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2377,6 +2387,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 90d6189650bab3343aa39011a9f3bb70, type: 3}
+--- !u!198 &820789890452675016 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 8547136760801014354, guid: 90d6189650bab3343aa39011a9f3bb70, type: 3}
+  m_PrefabInstance: {fileID: 9077444403006794650}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2557299191420982545 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6810803315855163019, guid: 90d6189650bab3343aa39011a9f3bb70, type: 3}
