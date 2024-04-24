@@ -394,7 +394,7 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
 
     public void LoadPlayer()
     {
-      //staffList= sceneInfo.staffList;
+        
     }
 
     public void SavePlayer()
@@ -423,15 +423,21 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
 
     void selectStaff()
     {
-        if(Input.GetAxis("Mouse ScrollWheel") > 0 && selectedStaff < sceneInfo.staffList.Count - 1)
+        int previousStaff = selectedStaff;
+
+        if (Input.GetAxis("Mouse ScrollWheel") > 0 && selectedStaff < sceneInfo.staffList.Count - 1)
         {
             selectedStaff++;
-            changeStaff();
         }
 
         if (Input.GetAxis("Mouse ScrollWheel") < 0 && selectedStaff > 0)
         {
             selectedStaff--;
+        }
+
+        if (previousStaff != selectedStaff)
+        {
+            sceneInfo.selectedStaffIndex = selectedStaff;
             changeStaff();
         }
     }
@@ -449,31 +455,32 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
         GameObject newOrb = Instantiate(sceneInfo.staffList[selectedStaff].staffOrbModelPrefab, staffOrbModel.transform);
 
         newOrb.transform.localPosition = Vector3.zero;
+
+        defaultStaffStats = sceneInfo.staffList[selectedStaff];
+        defaultStaffOrbPrefab = sceneInfo.staffList[selectedStaff].staffOrbModelPrefab;
+
         newOrb.SetActive(true);
     }
 
     private void EquipDefaultStaff()
     {
-        defaultStaffIsEquiped = sceneInfo.staffList.Exists(staff => staff == defaultStaffStats);
-
-        destoryStaffModelPrefab();
-
-        GameObject orbInstance = Instantiate(defaultStaffOrbPrefab, staffOrbModel.transform);
-        orbInstance.transform.localPosition = Vector3.zero;
-
-        if (!defaultStaffIsEquiped && defaultStaffOrbPrefab != null)
+        if (sceneInfo.staffList.Count == 0)
         {
+            GameObject orbInstance = Instantiate(defaultStaffOrbPrefab, staffOrbModel.transform);
+            orbInstance.transform.localPosition = Vector3.zero;
 
-            staffElementalStats defaultStats = defaultStaffStats;
-
-            if (defaultStats != null)
+            if (defaultStaffStats != null)
             {
-                sceneInfo.staffList.Add(defaultStats);
-                selectedStaff = sceneInfo.staffList.IndexOf(defaultStats);
+                sceneInfo.staffList.Add(defaultStaffStats);
+                selectedStaff = sceneInfo.staffList.IndexOf(defaultStaffStats);
                 changeStaff();
             }
         }
-        defaultStaffIsEquiped = true;
+        else
+        {
+            selectedStaff = sceneInfo.selectedStaffIndex;
+            changeStaff();
+        }
     }
 
     private void destoryStaffModelPrefab()
