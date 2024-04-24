@@ -18,9 +18,6 @@ public class catScript : MonoBehaviour
             playerController player = other.GetComponent<playerController>();
             if (player != null && player.itemList.Contains(requiredItem))
             {
-                // Player has the required item. Trigger the win condition.
-                gameManager.instance.stateWin();
-
                 // Remove the item from the player's inventory
                 player.itemList.Remove(requiredItem);
 
