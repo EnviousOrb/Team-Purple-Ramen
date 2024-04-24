@@ -456,12 +456,13 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
     {
         defaultStaffIsEquiped = sceneInfo.staffList.Exists(staff => staff == defaultStaffStats);
 
+        destoryStaffModelPrefab();
+
+        GameObject orbInstance = Instantiate(defaultStaffOrbPrefab, staffOrbModel.transform);
+        orbInstance.transform.localPosition = Vector3.zero;
+
         if (!defaultStaffIsEquiped && defaultStaffOrbPrefab != null)
         {
-            destoryStaffModelPrefab();
-
-            GameObject orbInstance = Instantiate(defaultStaffOrbPrefab, staffOrbModel.transform);
-            orbInstance.transform.localPosition = Vector3.zero;
 
             staffElementalStats defaultStats = defaultStaffStats;
 
