@@ -1197,6 +1197,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1309905299}
   m_LocalEulerAnglesHint: {x: 0, y: 273.318, z: 0}
+--- !u!1 &423066886 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8181893369802180346, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
+  m_PrefabInstance: {fileID: 1959223859}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &429316154
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1327,11 +1332,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
---- !u!1 &451298482 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2366004603302663533, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
-  m_PrefabInstance: {fileID: 1959223859}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &452206523 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1448653227136698331, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
@@ -3564,7 +3564,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: Hub Area
-  Loadingscreen: {fileID: 451298482}
+  Loadingscreen: {fileID: 423066886}
   loadingTimer: 5
   isNextScene: 1
   sceneInfo: {fileID: 11400000, guid: e9b35b64eab44834da85e8f354f6af30, type: 2}
@@ -4629,6 +4629,10 @@ PrefabInstance:
     - target: {fileID: 2681700440528555825, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
       propertyPath: m_Name
       value: UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 3886933930385285250, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
+      propertyPath: m_CullTransparentMesh
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4208994448801702038, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
       propertyPath: _text
