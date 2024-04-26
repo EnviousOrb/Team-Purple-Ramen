@@ -100,7 +100,7 @@ public class AudioManager : MonoBehaviour
 
         if (so == null)
         {
-            // Debug.Log("Sound Effect Not Found");
+            Debug.Log("Sound Effect Not Found");
         }
         else
         {
@@ -142,7 +142,8 @@ public class AudioManager : MonoBehaviour
         BGMSource.Stop();
         PlayerSource.Stop();
         NPCSource.Stop();
-        BossSource.Stop();
+        if(BossSource != null)
+            BossSource.Stop();
     }
 
     public void toggleBGM()
@@ -154,7 +155,8 @@ public class AudioManager : MonoBehaviour
     {
         SFXSource.mute = !SFXSource.mute;
         PlayerSource.mute = !PlayerSource.mute;
-        BossSource.mute = !BossSource.mute;
+        if(BossSource != null)
+            BossSource.mute = !BossSource.mute;
     }
 
     public void toggleNPC()
@@ -171,7 +173,8 @@ public class AudioManager : MonoBehaviour
     {
         SFXSource.volume = volume;
         PlayerSource.volume = volume;
-        BossSource.volume = volume;
+        if(BossSource != null)
+            BossSource.volume = volume;
     }
     public void NPCVolume(float volume)
     {

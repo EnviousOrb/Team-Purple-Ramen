@@ -752,6 +752,59 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1448653227136698331, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
   m_PrefabInstance: {fileID: 1620490714}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2001786420
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2001786422}
+  - component: {fileID: 2001786421}
+  m_Layer: 6
+  m_Name: Music Transition Area (1)
+  m_TagString: Main Area
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &2001786421
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2001786420}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 414.22467, y: 36.396614, z: 132.22699}
+  m_Center: {x: -54.973633, y: -18.698307, z: 49.026123}
+--- !u!4 &2001786422
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2001786420}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 87.21585, y: 18.56015, z: -43}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2047788008
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -860,6 +913,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1118616861777338557, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
+      propertyPath: NPCSource
+      value: 
+      objectReference: {fileID: 4275738351593896254}
+    - target: {fileID: 1118616861777338557, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
+      propertyPath: BGM.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1118616861777338557, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
       propertyPath: NpcSFX.Array.size
       value: 9
       objectReference: {fileID: 0}
@@ -902,6 +963,10 @@ PrefabInstance:
     - target: {fileID: 2681700440528555825, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
       propertyPath: m_Name
       value: UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 2941940239535099510, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
+      propertyPath: m_text
+      value: You Escaped!
       objectReference: {fileID: 0}
     - target: {fileID: 7206692720888251142, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
       propertyPath: m_Pivot.x
@@ -5590,3 +5655,4 @@ SceneRoots:
   - {fileID: 868940745}
   - {fileID: 312956212849735828}
   - {fileID: 6824214948484540021}
+  - {fileID: 2001786422}
