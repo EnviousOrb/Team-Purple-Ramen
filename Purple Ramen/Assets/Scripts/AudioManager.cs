@@ -7,10 +7,10 @@ using Unity.VisualScripting;
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance;
-    public soundObject[] BGM, SFX, NpcSFX, PlayerSFX, BossSFX;
+    public soundObject[] BGM, SFX, NpcSFX, PlayerSFX, BossSFX, EnemySFX;
     public float fadeDuration;
     public float fadeVolume;
-    public AudioSource BGMSource, SFXSource,NPCSource, BossSource, PlayerSource;
+    public AudioSource BGMSource, SFXSource,NPCSource, BossSource, PlayerSource, EnemySource;
 
     private void Awake()
     {
@@ -23,8 +23,13 @@ public class AudioManager : MonoBehaviour
             Destroy(gameObject);
         }
         playBGM(BGM[0].soundName);
-        PlayerSource = GameObject.FindWithTag("Player").GetComponent<AudioSource>();
-        BossSource = GameObject.FindWithTag("Boss").GetComponent<AudioSource>();
+        PlayerSource = GameObject.FindWithTag("Player")?.GetComponent<AudioSource>();
+        BossSource = GameObject.FindWithTag("Boss")?.GetComponent<AudioSource>();
+    }
+
+    private void Update()
+    {
+        EnemySource = GameObject.FindWithTag("Enemy")?.GetComponent<AudioSource>();
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -122,6 +127,20 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    public void playEnemySFX(string name)
+    {
+        soundObject so = Array.Find(EnemySFX, x => x.name == name);
+
+        if (so == null)
+        {
+            Debug.Log("Sound Effect Not Found");
+        }
+        else
+        {
+            EnemySource.PlayOneShot(so.soundClip);
+        }
+    }
+
 
     public void playNpcSFX(string name)
     {
@@ -144,6 +163,8 @@ public class AudioManager : MonoBehaviour
         NPCSource.Stop();
         if(BossSource != null)
             BossSource.Stop();
+        if(EnemySource != null) 
+            EnemySource.Stop();
     }
 
     public void toggleBGM()
@@ -157,6 +178,8 @@ public class AudioManager : MonoBehaviour
         PlayerSource.mute = !PlayerSource.mute;
         if(BossSource != null)
             BossSource.mute = !BossSource.mute;
+        if(EnemySource != null)
+            EnemySource.mute = !EnemySource.mute;
     }
 
     public void toggleNPC()

@@ -750,6 +750,10 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1118616861777338557, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
+      propertyPath: EnemySFX.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1118616861777338557, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
       propertyPath: BossSFX.Array.data[0]
       value: 
       objectReference: {fileID: 11400000, guid: c94ca5c613f83b542a41e16e49a1d56a, type: 2}
@@ -769,9 +773,21 @@ PrefabInstance:
       propertyPath: BossSFX.Array.data[4]
       value: 
       objectReference: {fileID: 11400000, guid: 76761add95db37247ad386db26ec54e8, type: 2}
+    - target: {fileID: 1118616861777338557, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
+      propertyPath: EnemySFX.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 25b3d602f6f5e4c4eb1122b274a330d5, type: 2}
+    - target: {fileID: 1118616861777338557, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
+      propertyPath: EnemySFX.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 3bae83e3bd69042419db19251ffdc256, type: 2}
     - target: {fileID: 2681700440528555825, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
       propertyPath: m_Name
       value: UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 3394662866326879439, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4208994448801702038, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
       propertyPath: _text
@@ -995,7 +1011,7 @@ MonoBehaviour:
   maxEnemiesSpawn: 5
   minibossPOS: {fileID: 1066104976}
   spawnRate: 1
-  spawnRange: 10
+  spawnRange: 30
 --- !u!82 &1621615946
 AudioSource:
   m_ObjectHideFlags: 0

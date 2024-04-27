@@ -139,12 +139,14 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
         }
     }
 
+
     // Coroutine for shooting at the player.
     IEnumerator shoot()
     {
         isShooting = true;
         bullet.GetComponent<Bullet>().self = GetComponentInParent<CapsuleCollider>();
         animator.SetTrigger("Shoot"); // Triggers the shooting animation.
+        AudioManager.instance.playEnemySFX(AudioManager.instance.EnemySFX[0].soundName);
         yield return new WaitForSeconds(shootAniDelay);
 
         Vector3 playerDirection = gameManager.instance.player.transform.position - transform.position;
@@ -251,6 +253,7 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
         }
         activeParticle.Play();
         animator.SetTrigger("TakesDamage");
+        AudioManager.instance.playEnemySFX(AudioManager.instance.EnemySFX[1].soundName);
 
         StartCoroutine(flashRed());
         agent.SetDestination(gameManager.instance.player.transform.position);

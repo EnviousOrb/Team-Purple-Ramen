@@ -4694,6 +4694,10 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1118616861777338557, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
+      propertyPath: EnemySFX.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1118616861777338557, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
       propertyPath: BossSFX.Array.data[0]
       value: 
       objectReference: {fileID: 11400000, guid: c94ca5c613f83b542a41e16e49a1d56a, type: 2}
@@ -4709,9 +4713,21 @@ PrefabInstance:
       propertyPath: BossSFX.Array.data[3]
       value: 
       objectReference: {fileID: 11400000, guid: 76761add95db37247ad386db26ec54e8, type: 2}
+    - target: {fileID: 1118616861777338557, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
+      propertyPath: EnemySFX.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 4c5a215b636efc64783575013f708854, type: 2}
+    - target: {fileID: 1118616861777338557, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
+      propertyPath: EnemySFX.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 76761add95db37247ad386db26ec54e8, type: 2}
     - target: {fileID: 2681700440528555825, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
       propertyPath: m_Name
       value: UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 3394662866326879439, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3886933930385285250, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
       propertyPath: m_CullTransparentMesh
