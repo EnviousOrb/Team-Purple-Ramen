@@ -16,7 +16,7 @@ public class ButtonFunctions : MonoBehaviour
     }
     public void exitSettings()
     {
-        gameManager.instance.stateSettings();
+        gameManager.instance.exitSettings();
     }
     public void respawn()
     {
