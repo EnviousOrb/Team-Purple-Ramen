@@ -291,6 +291,7 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
             {
                 gameManager.instance.stateLose();
                 controller.enabled = false;
+                gameManager.instance.deathCount++;
             }
             AudioManager.instance.playPlayerSFX("Damage SFX");
         }
