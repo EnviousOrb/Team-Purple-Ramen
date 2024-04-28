@@ -31,10 +31,10 @@ public class playerStaffProjectile : MonoBehaviour
 
 
         // If the other object implements IDamage, it calls takeDamage() on it with this bullet's damage value.
-        Debug.Log(other.gameObject.name + " : None");
+        // Debug.Log(other.gameObject.name + " : None");
         if (dmg != null)
         {
-            Debug.Log(other.gameObject.name + " : Has Damage");
+            // Debug.Log(other.gameObject.name + " : Has Damage");
             dmg.takeDamage(damage, 0);
         }
 

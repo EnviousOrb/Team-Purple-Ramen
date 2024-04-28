@@ -24,8 +24,10 @@ public class catScript : MonoBehaviour
                 // Update the inventory UI to reflect this change
                 UIManager.instance.UpdateInventoryUI(player.itemList);
 
-                GateToUnlock.SetActive(true);
-                WallToUnlock.SetActive(false);
+                if(GateToUnlock != null)
+                    GateToUnlock.SetActive(true);
+                if(WallToUnlock != null)
+                    WallToUnlock.SetActive(false);
                 gameManager.instance.UpdateTextBox(thankText.text);
 
             }

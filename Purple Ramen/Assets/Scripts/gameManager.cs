@@ -20,6 +20,7 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject menuInv;
     [SerializeField] GameObject menuSettings;
     [SerializeField] GameObject creditsPanel;
+    [SerializeField] GameObject secretEntrance;
     [SerializeField] public GameObject TextBox;
     public GameObject checkpointMenu;
     public GameObject playerDamageEffect;
@@ -39,6 +40,7 @@ public class gameManager : MonoBehaviour
     float TimeScaleOrig;
 
     private GameObject previousMenu;
+    public int deathCount;
 
     //testing variable
     public bool playerDead;
@@ -93,6 +95,11 @@ public class gameManager : MonoBehaviour
         else if (Input.GetKeyUp(KeyCode.LeftControl))
         {
             PS.unCrouch();
+        }
+
+        if(deathCount >= 3 && secretEntrance != null)
+        {
+            secretEntrance.SetActive(true);
         }
     }
 
@@ -207,6 +214,7 @@ public class gameManager : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         gameManager.instance.stateNormal();
+        deathCount = 0;
     }
     public void exitSettings()
     {

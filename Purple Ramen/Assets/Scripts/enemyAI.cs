@@ -68,8 +68,14 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
     bool isShooting; // Tracks if the enemy is currently shooting.
     bool playerInRange; // Whether the player is within detection range.
 
+    //Optional Wave-based components
+    private WaveManager waveManager;
+
+
+
     void Start()
     {
+        waveManager = FindObjectOfType<WaveManager>();
         originalMat = model.material; // Stores the original material.
         stoppingDistOrig = agent.stoppingDistance; // Stores the original stopping distance.
         agent.stoppingDistance = 0; // Resets stopping distance for roaming behavior.
@@ -106,6 +112,14 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
         }
     }
 
+    void OnDestroy()
+    {
+        if(waveManager!= null)
+        {
+            waveManager.enemyDefeated();
+        }
+    }
+
     // Coroutine for roaming when the player is not detected.
     IEnumerator roam()
     {
@@ -125,12 +139,14 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
         }
     }
 
+
     // Coroutine for shooting at the player.
     IEnumerator shoot()
     {
         isShooting = true;
         bullet.GetComponent<Bullet>().self = GetComponentInParent<CapsuleCollider>();
         animator.SetTrigger("Shoot"); // Triggers the shooting animation.
+        AudioManager.instance.playEnemySFX(AudioManager.instance.EnemySFX[0].soundName);
         yield return new WaitForSeconds(shootAniDelay);
 
         Vector3 playerDirection = gameManager.instance.player.transform.position - transform.position;
@@ -143,7 +159,7 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
 
     public void takeDamage(int amount, int type)
     {
-        Debug.Log("TakeDamageStart");
+        // Debug.Log("TakeDamageStart");
         //1 = water, 2 = fire, 3 = lightning, 4 = plant
         switch (enemyType)
         {
@@ -237,12 +253,14 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
         }
         activeParticle.Play();
         animator.SetTrigger("TakesDamage");
+        AudioManager.instance.playEnemySFX(AudioManager.instance.EnemySFX[1].soundName);
 
         StartCoroutine(flashRed());
         agent.SetDestination(gameManager.instance.player.transform.position);
         if (HP <= 0)
         {
             isDead = true;
+            animator.SetBool("Dead", true);
             agent.acceleration = 0;
             agent.velocity = Vector3.zero;
             if (associatedSpawner)
@@ -315,7 +333,7 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
         // Performs a raycast to check for line of sight to the player.
         if (Physics.Raycast(headPos.position, playerDir, out hit))
         {
-            Debug.DrawRay(headPos.position, playerDir, Color.red);
+            // Debug.DrawRay(headPos.position, playerDir, Color.red);
             // Checks if the raycast hit the player and the angle is within the view cone.
             if (hit.collider.CompareTag("Player") || angleToPlayer <= viewCone)
             {

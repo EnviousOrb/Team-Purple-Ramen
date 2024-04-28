@@ -144,7 +144,7 @@ GameObject:
   - component: {fileID: 2076949602539769819}
   m_Layer: 0
   m_Name: BlueSlime01
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -202,7 +202,9 @@ MonoBehaviour:
   roamPauseTime: 2
   scoreValue: 0
   enemyType: 1
-  drops: []
+  drops:
+  - {fileID: 175361008080907375, guid: d760e180baadc6e4186f206b7d511d74, type: 3}
+  - {fileID: 175361008080907375, guid: 09d7e5a70be5b4944a25279f23828592, type: 3}
   dropRolls: 0
   paralysisMat: {fileID: 0}
   rootEffect: {fileID: 6439218373554873821}
