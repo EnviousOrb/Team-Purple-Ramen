@@ -25,6 +25,7 @@ public class AudioManager : MonoBehaviour
         playBGM(BGM[0].soundName);
         PlayerSource = GameObject.FindWithTag("Player")?.GetComponent<AudioSource>();
         BossSource = GameObject.FindWithTag("Boss")?.GetComponent<AudioSource>();
+        BossSource = GameObject.FindWithTag("Boss")?.GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -160,7 +161,8 @@ public class AudioManager : MonoBehaviour
     {
         BGMSource.Stop();
         PlayerSource.Stop();
-        NPCSource.Stop();
+        if(NPCSource != null)
+            NPCSource.Stop();
         if(BossSource != null)
             BossSource.Stop();
         if(EnemySource != null) 
