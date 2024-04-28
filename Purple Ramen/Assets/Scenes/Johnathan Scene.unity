@@ -621,7 +621,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd43de4d80f03554191be2f7fa41e1f5, type: 3}
---- !u!1001 &1856822439
+--- !u!1001 &1609497009
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -629,55 +629,59 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1129964256768804378, guid: 5dc43ad3766456047a7aae9d8cae5f1a, type: 3}
+    - target: {fileID: 2287082474602192998, guid: fd3483f7096424b46980d941a0b0abbd, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 13.624156
+      value: 10.057119
       objectReference: {fileID: 0}
-    - target: {fileID: 1129964256768804378, guid: 5dc43ad3766456047a7aae9d8cae5f1a, type: 3}
+    - target: {fileID: 2287082474602192998, guid: fd3483f7096424b46980d941a0b0abbd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -505.5
+      value: 0.0000019073486
       objectReference: {fileID: 0}
-    - target: {fileID: 1129964256768804378, guid: 5dc43ad3766456047a7aae9d8cae5f1a, type: 3}
+    - target: {fileID: 2287082474602192998, guid: fd3483f7096424b46980d941a0b0abbd, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5.1181254
+      value: 6.4067907
       objectReference: {fileID: 0}
-    - target: {fileID: 1129964256768804378, guid: 5dc43ad3766456047a7aae9d8cae5f1a, type: 3}
+    - target: {fileID: 2287082474602192998, guid: fd3483f7096424b46980d941a0b0abbd, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.6087614
       objectReference: {fileID: 0}
-    - target: {fileID: 1129964256768804378, guid: 5dc43ad3766456047a7aae9d8cae5f1a, type: 3}
+    - target: {fileID: 2287082474602192998, guid: fd3483f7096424b46980d941a0b0abbd, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1129964256768804378, guid: 5dc43ad3766456047a7aae9d8cae5f1a, type: 3}
+    - target: {fileID: 2287082474602192998, guid: fd3483f7096424b46980d941a0b0abbd, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.7933534
       objectReference: {fileID: 0}
-    - target: {fileID: 1129964256768804378, guid: 5dc43ad3766456047a7aae9d8cae5f1a, type: 3}
+    - target: {fileID: 2287082474602192998, guid: fd3483f7096424b46980d941a0b0abbd, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1129964256768804378, guid: 5dc43ad3766456047a7aae9d8cae5f1a, type: 3}
+    - target: {fileID: 2287082474602192998, guid: fd3483f7096424b46980d941a0b0abbd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1129964256768804378, guid: 5dc43ad3766456047a7aae9d8cae5f1a, type: 3}
+    - target: {fileID: 2287082474602192998, guid: fd3483f7096424b46980d941a0b0abbd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 105
       objectReference: {fileID: 0}
-    - target: {fileID: 1129964256768804378, guid: 5dc43ad3766456047a7aae9d8cae5f1a, type: 3}
+    - target: {fileID: 2287082474602192998, guid: fd3483f7096424b46980d941a0b0abbd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5532211202041428160, guid: 5dc43ad3766456047a7aae9d8cae5f1a, type: 3}
+    - target: {fileID: 2737861739852807587, guid: fd3483f7096424b46980d941a0b0abbd, type: 3}
       propertyPath: m_Name
-      value: Pickup-Purple Ramen
+      value: EvilMage01
+      objectReference: {fileID: 0}
+    - target: {fileID: 8446238464630642690, guid: fd3483f7096424b46980d941a0b0abbd, type: 3}
+      propertyPath: shootAniDelay
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 5dc43ad3766456047a7aae9d8cae5f1a, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: fd3483f7096424b46980d941a0b0abbd, type: 3}
 --- !u!1001 &2071093279
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1144,4 +1148,4 @@ SceneRoots:
   - {fileID: 2820905398715763217}
   - {fileID: 1562889432}
   - {fileID: 1249978122}
-  - {fileID: 1856822439}
+  - {fileID: 1609497009}
