@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class Teleporture : MonoBehaviour
 {
-    [SerializeField] GameObject placeToTeleport;
+    [SerializeField] Transform placeToTeleport;
 
     private void OnTriggerEnter(Collider other)
     {
-        other.transform.position = placeToTeleport.transform.position;
+        gameManager.instance.PS.GetComponent<CapsuleCollider>().transform.position = placeToTeleport.position;
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        gameManager.instance.PS.GetComponent<CapsuleCollider>().transform.position = placeToTeleport.position;
     }
 }
