@@ -260,6 +260,7 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
         if (HP <= 0)
         {
             isDead = true;
+            animator.SetBool("Dead", true);
             agent.acceleration = 0;
             agent.velocity = Vector3.zero;
             if (associatedSpawner)
