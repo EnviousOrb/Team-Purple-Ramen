@@ -8,7 +8,6 @@ public class Chest : MonoBehaviour
     [SerializeField] List<staffElementalStats> staffList;
     [SerializeField] AudioClip[] chestAudio; // Array of audio clips for chest interactions
     [SerializeField] GameObject chestLight;
-    [SerializeField] bool randomReward = true;
 
     private Animator animate;
     private AudioSource AS;
