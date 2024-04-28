@@ -84,50 +84,36 @@ public class UIManager : MonoBehaviour
 
     public void UpdateInventoryUI(List<IInventory> itemList)
     {
-        //Creates a copy of the list to track items that don't have a spot assigned to them
-        List<IInventory> remainingItems = new(itemList);
-
-        int maxIndex = Math.Min(5, itemList.Count);
-
-        for (int i = 1; i < maxIndex; i++)
+        foreach(var slot in inventoryUISlotLocation)
         {
-            if (itemList[i] is staffElementalStats)
-            {
-                IInventory currentItem = itemList[i];
-                reservedSpots4Staffs[i] = currentItem;
-                remainingItems.Remove(currentItem);
-
-                inventoryUISlotLocation[i].sprite = currentItem.InventorySprite;
-                inventoryUISlotLocation[i].enabled = true;
-
-                if (inventoryUISlotLocation[i].TryGetComponent<Button>(out var slotButton))
-                {
-                    slotButton.onClick.RemoveAllListeners();
-                    slotButton.onClick.AddListener(() => UpdateMainSlot(currentItem));
-                }
-            }
+            slot.sprite = null;
+            slot.enabled = false;
         }
 
+        List<IInventory> weaponItems = itemList.Where(item => item is staffElementalStats).ToList();
+        List<IInventory> otherItems = itemList.Except(weaponItems).ToList();
+
+        UpdateWeaponHotbar(weaponItems);
+
+        int slotIndex = 0;
+
         //assign rest of items to generic slots
-        foreach (IInventory item in remainingItems)
+        foreach (IInventory item in otherItems)
         {
-            //Find first available slot
-            int slotIndex = inventoryUISlotLocation.FindIndex(slot => slot.sprite == null && !reservedSpots4Staffs.ContainsKey(inventoryUISlotLocation.IndexOf(slot)));
+            if (slotIndex >= inventoryUISlotLocation.Count)
+                break;
 
-            //check if spot was found and is a valid index
-            if (slotIndex != -1 && slotIndex < inventoryUISlotLocation.Count)
+            //if it is, then go through motions
+            inventoryUISlotLocation[slotIndex].sprite = item.InventorySprite;
+            inventoryUISlotLocation[slotIndex].enabled = true;
+
+            //update the onClick event like before
+            if (inventoryUISlotLocation[slotIndex].TryGetComponent<Button>(out var slotButton))
             {
-                //if it is, then go through motions
-                inventoryUISlotLocation[slotIndex].sprite = item.InventorySprite;
-                inventoryUISlotLocation[slotIndex].enabled = true;
-
-                //update the onClick event like before
-                if (inventoryUISlotLocation[slotIndex].TryGetComponent<Button>(out var slotButton))
-                {
-                    slotButton.onClick.RemoveAllListeners();
-                    slotButton.onClick.AddListener(() => UpdateMainSlot(item));
-                }
+                slotButton.onClick.RemoveAllListeners();
+                slotButton.onClick.AddListener(() => UpdateMainSlot(item));
             }
+            slotIndex++;
         }
     }
 

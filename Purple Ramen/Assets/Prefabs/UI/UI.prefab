@@ -6055,7 +6055,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1470905606194189809
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7576,21 +7576,21 @@ MonoBehaviour:
   rawTopLeftBounds: {x: 125, y: -25, z: 0}
   rawBottomRightBounds: {x: -125, y: 25, z: 0}
   rawBottomRightTextBounds: {x: 109.75, y: -16, z: 0}
-  topLeftBounds: {x: 382.46777, y: 93.0773, z: 0}
-  topRightBounds: {x: 599.4345, y: 93.0773, z: 0}
-  bottomLeftBounds: {x: 382.46777, y: 54.52632, z: 0}
-  bottomRightBounds: {x: 599.4345, y: 54.52632, z: 0}
-  centerBounds: {x: 490.95114, y: 73.80181, z: 0}
-  topLeftTextBounds: {x: 443.32693, y: 79.96997, z: 0}
-  topRightTextBounds: {x: 538.5753, y: 79.96997, z: 0}
-  bottomLeftTextBounds: {x: 443.32693, y: 67.63365, z: 0}
-  bottomRightTextBounds: {x: 538.5753, y: 67.63365, z: 0}
-  centerTextBounds: {x: 490.9511, y: 73.80181, z: 0}
-  finalTopLeftTextBounds: {x: 443.32693, y: 79.96997, z: 0}
-  finalTopRightTextBounds: {x: 538.5753, y: 79.96997, z: 0}
-  finalBottomLeftTextBounds: {x: 443.32693, y: 67.63365, z: 0}
-  finalBottomRightTextBounds: {x: 538.5753, y: 67.63365, z: 0}
-  finalCenterTextBounds: {x: 490.9511, y: 73.80181, z: 0}
+  topLeftBounds: {x: 745.52094, y: 181.77502, z: 0}
+  topRightBounds: {x: 1168.4409, y: 181.77502, z: 0}
+  bottomLeftBounds: {x: 745.52094, y: 106.629974, z: 0}
+  bottomRightBounds: {x: 1168.4409, y: 106.629974, z: 0}
+  centerBounds: {x: 956.98096, y: 144.2025, z: 0}
+  topLeftTextBounds: {x: 864.14996, y: 156.22571, z: 0}
+  topRightTextBounds: {x: 1049.8119, y: 156.22571, z: 0}
+  bottomLeftTextBounds: {x: 864.14996, y: 132.17929, z: 0}
+  bottomRightTextBounds: {x: 1049.8119, y: 132.17929, z: 0}
+  centerTextBounds: {x: 956.98096, y: 144.2025, z: 0}
+  finalTopLeftTextBounds: {x: 864.14996, y: 156.22571, z: 0}
+  finalTopRightTextBounds: {x: 1049.8119, y: 156.22571, z: 0}
+  finalBottomLeftTextBounds: {x: 864.14996, y: 132.17929, z: 0}
+  finalBottomRightTextBounds: {x: 1049.8119, y: 132.17929, z: 0}
+  finalCenterTextBounds: {x: 956.98096, y: 144.2025, z: 0}
   unwrappedBottomRightTextBounds: {x: 110.25, y: -16, z: 0}
   onCompleteEvent:
     m_PersistentCalls:
@@ -9428,6 +9428,7 @@ MonoBehaviour:
   menuInv: {fileID: 6516667426220124201}
   menuSettings: {fileID: 5396236835162169632}
   creditsPanel: {fileID: 3149388324850782363}
+  secretEntrance: {fileID: 0}
   TextBox: {fileID: 3394662866326879439}
   checkpointMenu: {fileID: 0}
   playerDamageEffect: {fileID: 6295160639811827293}
@@ -9442,6 +9443,7 @@ MonoBehaviour:
   PS: {fileID: 0}
   playerScore: 0
   isPaused: 0
+  deathCount: 0
   playerDead: 0
 --- !u!114 &5313599917380490847
 MonoBehaviour:
@@ -12202,6 +12204,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c413871a35d07c74d8462931047dad76, type: 2}
   - {fileID: 11400000, guid: e563a0414daa4114db62441e3b972893, type: 2}
   BossSFX: []
+  EnemySFX: []
   fadeDuration: 3
   fadeVolume: 1
   BGMSource: {fileID: 3076048018186446309}
@@ -12209,6 +12212,7 @@ MonoBehaviour:
   NPCSource: {fileID: 0}
   BossSource: {fileID: 0}
   PlayerSource: {fileID: 0}
+  EnemySource: {fileID: 0}
 --- !u!1 &6407627759228031261
 GameObject:
   m_ObjectHideFlags: 0
