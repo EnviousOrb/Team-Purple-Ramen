@@ -983,11 +983,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc31370304ee39047a4727c0608e4327, type: 3}
---- !u!1 &690487395 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5478317941108307477, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
-  m_PrefabInstance: {fileID: 1162443904}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &691827512
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1470,11 +1465,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b12a3971bdf3cb040b4ceee236b63681, type: 3}
---- !u!82 &910438213 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 7530645113933781427, guid: bc31370304ee39047a4727c0608e4327, type: 3}
-  m_PrefabInstance: {fileID: 671941334}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1149172115
 GameObject:
   m_ObjectHideFlags: 0
@@ -1593,19 +1583,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 621437839}
     - target: {fileID: 1118616861777338557, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
-      propertyPath: PlayerSource
-      value: 
-      objectReference: {fileID: 910438213}
-    - target: {fileID: 1118616861777338557, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
       propertyPath: BGM.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1118616861777338557, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
       propertyPath: BGM.Array.data[0]
-      value: 
-      objectReference: {fileID: 11400000, guid: d2a79bfc7e5714241b3d9fb4e9024c37, type: 2}
-    - target: {fileID: 1118616861777338557, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
-      propertyPath: BGM.Array.data[1]
       value: 
       objectReference: {fileID: 11400000, guid: d2a79bfc7e5714241b3d9fb4e9024c37, type: 2}
     - target: {fileID: 1118616861777338557, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
@@ -1659,14 +1641,14 @@ PrefabInstance:
     - target: {fileID: 1118616861777338557, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
       propertyPath: EnemySFX.Array.data[1]
       value: 
-      objectReference: {fileID: 11400000, guid: 76761add95db37247ad386db26ec54e8, type: 2}
+      objectReference: {fileID: 11400000, guid: 8461ef9a93b31cc4f88bee634087f50a, type: 2}
     - target: {fileID: 2681700440528555825, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
-    - target: {fileID: 3394662866326879439, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
-      propertyPath: m_IsActive
-      value: 0
+    - target: {fileID: 3539745327254319430, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
+      propertyPath: textMesh
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7206692720888251142, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
       propertyPath: m_Pivot.x
@@ -1748,10 +1730,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8669131866018396485, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
-      propertyPath: hotbarWeapon
-      value: 
-      objectReference: {fileID: 690487395}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
