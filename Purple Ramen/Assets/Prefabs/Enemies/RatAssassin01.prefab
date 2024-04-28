@@ -1779,7 +1779,7 @@ MonoBehaviour:
   damageMat: {fileID: 2100000, guid: 61a868ed95d3914428f24f0450c95593, type: 2}
   shootRate: 1
   stoppingDist: 4
-  shootAniDelay: 0
+  shootAniDelay: 0.4
   animator: {fileID: 7125678977299575686}
   animSpeedTrans: 1
   headPos: {fileID: 760643911113341757}
@@ -1883,10 +1883,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.7
   m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: 0.5, z: 0}
+  m_Center: {x: 0, y: 0.75, z: 0}
 --- !u!82 &3401767706770326759
 AudioSource:
   m_ObjectHideFlags: 0
