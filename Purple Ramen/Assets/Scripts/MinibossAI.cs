@@ -13,6 +13,7 @@ public class MinibossAI : MonoBehaviour, IDamage
     [SerializeField] NavMeshAgent agent; // Navigation component for AI movement.
     [SerializeField] Transform shootPos; // Optional. The place where the Miniboss shoots from
     [SerializeField] GameObject itemToDrop; //Optional. Drops an item from a pre-defined position after enemy dies
+    [SerializeField] GameObject gateToUnlock;
     [SerializeField] Collider weaponCollider;
     public Image hpBar; // The physical representation of the miniboss' healthbar
 
@@ -253,6 +254,10 @@ public class MinibossAI : MonoBehaviour, IDamage
             StartCoroutine(DeathAnimate());
             hpBar.gameObject.SetActive(false);
             minibossName.gameObject.SetActive(false);
+            if(gateToUnlock != null)
+            {
+                gateToUnlock.SetActive(false);
+            }
         }
     }
 
