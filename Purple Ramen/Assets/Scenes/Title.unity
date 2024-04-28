@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311918, g: 0.3807398, b: 0.35872716, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2328,12 +2328,16 @@ MonoBehaviour:
   - {fileID: 11400000, guid: dda7392c511e5ff4bb6ac7764724cc58, type: 2}
   - {fileID: 11400000, guid: c413871a35d07c74d8462931047dad76, type: 2}
   - {fileID: 11400000, guid: e563a0414daa4114db62441e3b972893, type: 2}
+  BossSFX: []
+  EnemySFX: []
   fadeDuration: 3
   fadeVolume: 1
   BGMSource: {fileID: 3076048016512910711}
   SFXSource: {fileID: 7865968218460469963}
   NPCSource: {fileID: 6882036814245685349}
+  BossSource: {fileID: 0}
   PlayerSource: {fileID: 0}
+  EnemySource: {fileID: 0}
 --- !u!1 &1133318117590079328
 GameObject:
   m_ObjectHideFlags: 0
@@ -4382,7 +4386,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8e8c30774fa6c045babe2d6f4a63212, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LevelName: Level 1
+  LevelName: Hub Area
   menuMain: {fileID: 0}
 --- !u!114 &2553428571958970516
 MonoBehaviour:
@@ -17241,6 +17245,7 @@ MonoBehaviour:
   menuInv: {fileID: 376902269922141253}
   menuSettings: {fileID: 5396236835770335666}
   creditsPanel: {fileID: 3149388324376834057}
+  secretEntrance: {fileID: 0}
   TextBox: {fileID: 3394662866800827485}
   checkpointMenu: {fileID: 0}
   playerDamageEffect: {fileID: 6295160640285775567}
@@ -17255,6 +17260,8 @@ MonoBehaviour:
   PS: {fileID: 0}
   playerScore: 0
   isPaused: 0
+  deathCount: 0
+  playerDead: 0
 --- !u!1 &8827117176189904994
 GameObject:
   m_ObjectHideFlags: 0
