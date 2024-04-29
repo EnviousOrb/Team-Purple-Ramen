@@ -1,18 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using System.Linq;
+using UnityEngine;
 
-public class npcScript : MonoBehaviour
+public class hubcatScript : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> requiredItems;
-    [SerializeField] private ItemData rewardItem;
+    [SerializeField] private List<staffElementalStats> requiredStaffs;
     [SerializeField] private SuperTextMesh questText;
     [SerializeField] private SuperTextMesh thankText;
     [SerializeField] private GameObject gateToUnlock;
     [SerializeField] private GameObject checkpointToUnlock;
-
-    bool rewardGiven = false;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -20,13 +17,8 @@ public class npcScript : MonoBehaviour
         {
             playerController player = other.GetComponent<playerController>();
 
-            if (requiredItems.All(obj => obj.activeInHierarchy))
+            if (requiredStaffs.All(obj => obj.InventorySprite))
             {
-                if (!rewardGiven)
-                {
-                    player.itemList.Add(rewardItem);
-                    rewardGiven = true;
-                }
                 if (checkpointToUnlock != null)
                 {
                     checkpointToUnlock.SetActive(true);

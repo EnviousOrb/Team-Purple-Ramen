@@ -52261,8 +52261,7 @@ Transform:
   m_LocalPosition: {x: 3.5, y: 3, z: 19.88}
   m_LocalScale: {x: 5, y: 6, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 727186215949110753}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!4 &727186215949110753
@@ -52273,12 +52272,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4497834515966426717}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0.0000014603136}
+  m_LocalPosition: {x: 3.5, y: 3, z: 19.88}
+  m_LocalScale: {x: 5, y: 6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 727186215426538459}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!4 &727186215960234931
 Transform:
@@ -53607,8 +53606,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5054898309967584918}
   - component: {fileID: 4140033163040574038}
-  - component: {fileID: 5573044668299356726}
   - component: {fileID: 5573044668299356725}
+  - component: {fileID: 5573044668299356726}
   - component: {fileID: 1014601651839703905}
   - component: {fileID: 4275738351593896254}
   m_Layer: 0
@@ -55975,11 +55974,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 2504189615888664259}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90cf2a88e6ed8394896273dc81337859, type: 3}
+  m_Script: {fileID: 11500000, guid: 699a2a885e1525048a5862ff8f67ec55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  requiredItems: []
-  rewardItem: {fileID: 11400000, guid: 519f32b8efc73a24ebac12910653f614, type: 2}
+  requiredStaffs:
+  - {fileID: 11400000, guid: ae4e4e4e72cabf54db1aad16fe844089, type: 2}
+  - {fileID: 11400000, guid: b68456a01892c344581fba699e53ba08, type: 2}
+  - {fileID: 11400000, guid: 3c5fb556c327e024eabbdf1b23c102b7, type: 2}
+  - {fileID: 11400000, guid: bda45e667c093024cbc8cd8f45874648, type: 2}
   questText: {fileID: 5555380111120298559}
   thankText: {fileID: 1727992017233145054}
   gateToUnlock: {fileID: 4497834515478169703}
@@ -56554,6 +56556,7 @@ SceneRoots:
   - {fileID: 6824214948484540021}
   - {fileID: 2001786422}
   - {fileID: 727186215426538459}
+  - {fileID: 727186215949110753}
   - {fileID: 1219751494}
   - {fileID: 2027780273}
   - {fileID: 1914086380}
