@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using STMTools;
+using JetBrains.Annotations;
 
 public class gameManager : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject menuInv;
     [SerializeField] GameObject menuSettings;
     [SerializeField] GameObject creditsPanel;
+    [SerializeField] GameObject secretEntrance;
     [SerializeField] public GameObject TextBox;
     public GameObject checkpointMenu;
     public GameObject playerDamageEffect;
@@ -38,8 +40,12 @@ public class gameManager : MonoBehaviour
     float TimeScaleOrig;
 
     private GameObject previousMenu;
+    public int deathCount;
 
-    // Awake is called before Start
+    //testing variable
+    public bool playerDead;
+
+
     void Awake()
     {
         instance = this;
@@ -90,18 +96,22 @@ public class gameManager : MonoBehaviour
         {
             PS.unCrouch();
         }
+
+        if(deathCount >= 3 && secretEntrance != null)
+        {
+            secretEntrance.SetActive(true);
+        }
     }
 
     public void UpdateTextBox(string newText)
     {
-        StopCoroutine(SuperHideTextBox(20));
         if (TextBoxText.reading == true)
         {
             TextBoxText.Rebuild();
         }
         TextBox.SetActive(true);
         TextBoxText.text = newText;
-        StartCoroutine(SuperHideTextBox(8));
+        SuperHideTextBox(8);
     }
     public void HideTextBox()
     {
@@ -147,7 +157,10 @@ public class gameManager : MonoBehaviour
     {
         menuActive = menuLose;
         HideTextBox();
-        Pause();
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        playerDead = true;
+        menuActive.SetActive(true);
         NotifyEnemiesPlayerDied();
         AudioManager.instance.stopAll();
     }
@@ -201,10 +214,11 @@ public class gameManager : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         gameManager.instance.stateNormal();
+        deathCount = 0;
     }
     public void exitSettings()
     {
-        gameManager.instance.stateSettings();
+        gameManager.instance.menuSettings.SetActive(false);
     }
     public void respawn()
     {

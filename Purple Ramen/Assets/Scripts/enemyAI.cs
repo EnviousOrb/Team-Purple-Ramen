@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
@@ -52,13 +53,14 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
     [SerializeField] int dropRolls;
     [SerializeField] Material paralysisMat;
     [SerializeField] GameObject rootEffect;
-    /*[SerializeField] ParticleSystem particleCrit;
+    [SerializeField] ParticleSystem particleCrit;
     [SerializeField] ParticleSystem particleWeak;
     [SerializeField] ParticleSystem particleNormal;
-    ParticleSystem activeParticle;*/
+    ParticleSystem activeParticle;
     bool paralyzed;
     bool burning;
     bool dotCD;
+    bool isDead;
     public Spawner associatedSpawner;
     int originalSpeed;
 
@@ -66,40 +68,56 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
     bool isShooting; // Tracks if the enemy is currently shooting.
     bool playerInRange; // Whether the player is within detection range.
 
+    //Optional Wave-based components
+    private WaveManager waveManager;
+
+
+
     void Start()
     {
+        waveManager = FindObjectOfType<WaveManager>();
         originalMat = model.material; // Stores the original material.
         stoppingDistOrig = agent.stoppingDistance; // Stores the original stopping distance.
         agent.stoppingDistance = 0; // Resets stopping distance for roaming behavior.
         originalSpeed = speed;
-        //activeParticle = particleNormal;
+        activeParticle = particleNormal;
     }
 
     void Update()
     {
-        
-        if (paralyzed && model.material == originalMat)
-            model.material = paralysisMat;
-        else if (!paralyzed)
+        if (!isDead)
         {
-            animator.SetBool("Aggro", true);
-            float animSpeed = agent.velocity.normalized.magnitude; // Calculates speed for animation.
-            animator.SetFloat("Speed", Mathf.Lerp(animator.GetFloat("Speed"), animSpeed, Time.deltaTime * animSpeedTrans)); // Smoothly transitions animation speed.
+            if (paralyzed && model.material == originalMat)
+                model.material = paralysisMat;
+            else if (!paralyzed)
+            {
+                animator.SetBool("Aggro", true);
+                float animSpeed = agent.velocity.normalized.magnitude; // Calculates speed for animation.
+                animator.SetFloat("Speed", Mathf.Lerp(animator.GetFloat("Speed"), animSpeed, Time.deltaTime * animSpeedTrans)); // Smoothly transitions animation speed.
 
-            // Determines behavior based on player visibility and range.
-            if (playerInRange && !canSeePlayer())
-            {
-                StartCoroutine(roam()); // Starts roaming if player is out of sight but in range.
-                animator.SetBool("Aggro", false);
+                // Determines behavior based on player visibility and range.
+                if (playerInRange && !canSeePlayer())
+                {
+                    StartCoroutine(roam()); // Starts roaming if player is out of sight but in range.
+                    animator.SetBool("Aggro", false);
+                }
+                else if (!playerInRange)
+                {
+                    StartCoroutine(roam()); // Starts roaming if player is not in range.
+                    animator.SetBool("Aggro", false);
+                }
             }
-            else if (!playerInRange)
-            {
-                StartCoroutine(roam()); // Starts roaming if player is not in range.
-                animator.SetBool("Aggro", false);
-            }
+            if (burning && !dotCD)
+                StartCoroutine(BurnTick());
         }
-        if (burning && !dotCD)
-            StartCoroutine(BurnTick());
+    }
+
+    void OnDestroy()
+    {
+        if(waveManager!= null)
+        {
+            waveManager.enemyDefeated();
+        }
     }
 
     // Coroutine for roaming when the player is not detected.
@@ -121,14 +139,16 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
         }
     }
 
+
     // Coroutine for shooting at the player.
     IEnumerator shoot()
     {
         isShooting = true;
         bullet.GetComponent<Bullet>().self = GetComponentInParent<CapsuleCollider>();
         animator.SetTrigger("Shoot"); // Triggers the shooting animation.
+        AudioManager.instance.playEnemySFX(AudioManager.instance.EnemySFX[0].soundName);
         yield return new WaitForSeconds(shootAniDelay);
-        
+
         Vector3 playerDirection = gameManager.instance.player.transform.position - transform.position;
         GameObject projectile = Instantiate(bullet, shootPos.position, Quaternion.LookRotation(playerDirection));
 
@@ -139,6 +159,7 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
 
     public void takeDamage(int amount, int type)
     {
+        // Debug.Log("TakeDamageStart");
         //1 = water, 2 = fire, 3 = lightning, 4 = plant
         switch (enemyType)
         {
@@ -147,19 +168,19 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
                 {
                     case 1:
                         HP -= amount;
-                        //activeParticle = particleNormal;
+                        activeParticle = particleNormal;
                         break;
                     case 2:
                         HP -= amount / 2;
-                        //activeParticle = particleWeak;
+                        activeParticle = particleWeak;
                         break;
                     case 3:
                         HP -= amount * 2;
-                        //activeParticle = particleCrit;
+                        activeParticle = particleCrit;
                         break;
                     case 4:
                         HP -= amount;
-                        //activeParticle = particleNormal;
+                        activeParticle = particleNormal;
                         break;
                 }
                 break;
@@ -168,19 +189,19 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
                 {
                     case 1:
                         HP -= amount * 2;
-                        //activeParticle = particleCrit;
+                        activeParticle = particleCrit;
                         break;
                     case 2:
                         HP -= amount;
-                        //activeParticle = particleNormal;
+                        activeParticle = particleNormal;
                         break;
                     case 3:
                         HP -= amount;
-                        //activeParticle = particleNormal;
+                        activeParticle = particleNormal;
                         break;
                     case 4:
                         HP -= amount / 2;
-                        //activeParticle = particleWeak;
+                        activeParticle = particleWeak;
                         break;
                 }
                 break;
@@ -189,19 +210,19 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
                 {
                     case 1:
                         HP -= amount / 2;
-                        //activeParticle = particleWeak;
+                        activeParticle = particleWeak;
                         break;
                     case 2:
                         HP -= amount;
-                        //activeParticle = particleNormal;
+                        activeParticle = particleNormal;
                         break;
                     case 3:
                         HP -= amount;
-                       //activeParticle = particleNormal;
+                        activeParticle = particleNormal;
                         break;
                     case 4:
                         HP -= amount * 2;
-                        //activeParticle = particleCrit;
+                        activeParticle = particleCrit;
                         break;
                 }
                 break;
@@ -210,19 +231,19 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
                 {
                     case 1:
                         HP -= amount;
-                        //activeParticle = particleCrit;
+                        activeParticle = particleCrit;
                         break;
                     case 2:
                         HP -= amount * 2;
-                        //activeParticle = particleCrit;
+                        activeParticle = particleCrit;
                         break;
                     case 3:
                         HP -= amount / 2;
-                        //activeParticle = particleCrit;
+                        activeParticle = particleCrit;
                         break;
                     case 4:
                         HP -= amount;
-                        //activeParticle = particleCrit;
+                        activeParticle = particleCrit;
                         break;
                 }
                 break;
@@ -230,13 +251,16 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
                 HP -= amount;
                 break;
         }
-        //activeParticle.Play();
+        activeParticle.Play();
         animator.SetTrigger("TakesDamage");
+        AudioManager.instance.playEnemySFX(AudioManager.instance.EnemySFX[1].soundName);
 
         StartCoroutine(flashRed());
         agent.SetDestination(gameManager.instance.player.transform.position);
         if (HP <= 0)
         {
+            isDead = true;
+            animator.SetBool("Dead", true);
             agent.acceleration = 0;
             agent.velocity = Vector3.zero;
             if (associatedSpawner)
@@ -253,7 +277,6 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
             {
                 minibossAI.MinionDeath();
             }
-            animator.SetBool("Dead", true);
             StartCoroutine(enemyDeath());
         }
     }
@@ -261,8 +284,8 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
     IEnumerator enemyDeath()
     {
         yield return new WaitForSeconds(8);
-            Destroy(gameObject);
-        }
+        Destroy(gameObject);
+    }
 
     public void EnemiesCelebrate()
     {
@@ -310,7 +333,7 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
         // Performs a raycast to check for line of sight to the player.
         if (Physics.Raycast(headPos.position, playerDir, out hit))
         {
-            Debug.DrawRay(headPos.position, playerDir, Color.red);
+            // Debug.DrawRay(headPos.position, playerDir, Color.red);
             // Checks if the raycast hit the player and the angle is within the view cone.
             if (hit.collider.CompareTag("Player") || angleToPlayer <= viewCone)
             {
@@ -318,10 +341,8 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
                 agent.SetDestination(gameManager.instance.player.transform.position); // Moves towards the player.
 
                 // Initiates shooting if not already doing so.
-                if (!isShooting)
-                {
+                if (!isShooting && !gameManager.instance.playerDead)
                     StartCoroutine(shoot());
-                }
                 // Rotates to face the player if within stopping distance.
                 if (agent.remainingDistance <= agent.stoppingDistance)
                 {
@@ -368,14 +389,11 @@ public class enemyAI : MonoBehaviour, IDamage, ISlow, IParalyze, IBurn
     }
     IEnumerator Slow(float slowMod, int slowLength)
     {
-        if(rootEffect != null)
-        {
-            agent.speed = originalSpeed * slowMod;
-            rootEffect.SetActive(true);
-            yield return new WaitForSeconds(slowLength);
-            rootEffect.SetActive(false);
-            agent.speed = originalSpeed;
-        }
+        agent.speed = originalSpeed * slowMod;
+        rootEffect.SetActive(true);
+        yield return new WaitForSeconds(slowLength);
+        rootEffect.SetActive(false);
+        agent.speed = originalSpeed;
     }
     IEnumerator Paralyzed(float duration)
     {

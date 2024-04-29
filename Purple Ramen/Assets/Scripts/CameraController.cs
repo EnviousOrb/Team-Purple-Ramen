@@ -7,6 +7,7 @@ public class CameraController : MonoBehaviour
 {
     [SerializeField] int sensitivity; // How sensitive the camera movement is to mouse movement.
     [SerializeField] int topClamp, botClamp; // Limits for the camera's vertical rotation to prevent it from going too far up or down.
+    int originalSens;
     float xrot; // Current vertical rotation of the camera.
 
     // Start is called before the first frame update
@@ -15,11 +16,16 @@ public class CameraController : MonoBehaviour
         // Locks the cursor to the center of the screen and hides it for an immersive FPS experience.
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        originalSens = sensitivity;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (gameManager.instance.playerDead)
+            sensitivity = 0;
+        else
+            sensitivity = originalSens;
         // Gets vertical mouse movement, adjusts it by time and sensitivity.
         float mousey = Input.GetAxis("Mouse Y") * Time.deltaTime * sensitivity;
         // Gets horizontal mouse movement, adjusts it by time and sensitivity.

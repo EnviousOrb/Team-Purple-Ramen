@@ -35,6 +35,8 @@ public class Bullet : MonoBehaviour
             return;
         if (self != null)
         {
+            // Debug.Log(other + "other");
+            // Debug.Log(self + "self");
             if (other == self)
                 return;
         }
@@ -49,7 +51,7 @@ public class Bullet : MonoBehaviour
         }
 
         // If the other object implements IDamage, it calls takeDamage() on it with this bullet's damage value.
-        Debug.Log(other.gameObject.name + " : None");
+        // Debug.Log(other.gameObject.name + " : None");
 
         if (dmg != null)
         {

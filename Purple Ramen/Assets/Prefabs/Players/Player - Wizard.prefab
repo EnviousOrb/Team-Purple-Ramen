@@ -2971,7 +2971,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 810aa18acab0fbf46854eb1ff9dd5378, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensitivity: 200
+  sensitivity: 300
   topClamp: 90
   botClamp: -90
 --- !u!20 &718080605865625637
@@ -3266,11 +3266,10 @@ MonoBehaviour:
   staffCollider: {fileID: 1550671607420705973}
   defaultStaffOrbPrefab: {fileID: 2711195535153780955, guid: fb11b7b109772b448a08b82ba29e6ec5, type: 3}
   defaultStaffStats: {fileID: 11400000, guid: bda45e667c093024cbc8cd8f45874648, type: 2}
-  staffList: []
   staffOrbModel: {fileID: 7023054896164586701}
   shootDamage: 0
   shootDistance: 0
-  shootRate: 0
+  shootRate: 0.2
 --- !u!143 &3590467474444880502
 CharacterController:
   m_ObjectHideFlags: 0

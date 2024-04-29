@@ -13,6 +13,7 @@ public class MinibossAI : MonoBehaviour, IDamage
     [SerializeField] NavMeshAgent agent; // Navigation component for AI movement.
     [SerializeField] Transform shootPos; // Optional. The place where the Miniboss shoots from
     [SerializeField] GameObject itemToDrop; //Optional. Drops an item from a pre-defined position after enemy dies
+    [SerializeField] GameObject gateToUnlock;
     [SerializeField] Collider weaponCollider;
     public Image hpBar; // The physical representation of the miniboss' healthbar
 
@@ -77,6 +78,7 @@ public class MinibossAI : MonoBehaviour, IDamage
     bool isMelee;
     bool isSummoning;
     bool isJumping;
+    bool isDead;
 
     void Start()
     {
@@ -90,27 +92,30 @@ public class MinibossAI : MonoBehaviour, IDamage
 
     void Update()
     {
-        float animSpeed = agent.velocity.normalized.magnitude; // Calculates speed for animation.
-        animator.SetFloat("Speed", Mathf.Lerp(animator.GetFloat("Speed"), animSpeed, Time.deltaTime * animSpeedTrans)); // Smoothly transitions animation speed.
+        if (!isDead)
+        {
+            float animSpeed = agent.velocity.normalized.magnitude; // Calculates speed for animation.
+            animator.SetFloat("Speed", Mathf.Lerp(animator.GetFloat("Speed"), animSpeed, Time.deltaTime * animSpeedTrans)); // Smoothly transitions animation speed.
 
-        hpBar.fillAmount = (float)HP / ogHealth;
+            hpBar.fillAmount = (float)HP / ogHealth;
 
-        animator.SetBool("playerInRange", true);
-        // Determines behavior based on player visibility and range.
-        if (playerInRange && !canSeePlayer())
-        {
-            animator.SetBool("playerInRange", false);
-            StartCoroutine(Roam()); // Starts roaming if player is out of sight but in range.
-        }
-        else if(playerInRange && canSeePlayer())
-        {
-            action = rand.Next(4);
-            MinibossAttack(action);
-        }
-        else if (!playerInRange)
-        {
-            animator.SetBool("playerInRange", false);
-            StartCoroutine(Roam()); // Starts roaming if player is not in range.
+            animator.SetBool("playerInRange", true);
+            // Determines behavior based on player visibility and range.
+            if (playerInRange && !canSeePlayer())
+            {
+                animator.SetBool("playerInRange", false);
+                StartCoroutine(Roam()); // Starts roaming if player is out of sight but in range.
+            }
+            else if (playerInRange && canSeePlayer())
+            {
+                action = rand.Next(4);
+                MinibossAttack(action);
+            }
+            else if (!playerInRange)
+            {
+                animator.SetBool("playerInRange", false);
+                StartCoroutine(Roam()); // Starts roaming if player is not in range.
+            }
         }
     }
 
@@ -147,19 +152,19 @@ public class MinibossAI : MonoBehaviour, IDamage
             case 1:
                 if (canShoot && !isShooting)
                 {
-                    Shoot();
+                    StartCoroutine(Shoot());
                 }
                 break;
             case 2:
                 if (canMeleeAttack && !isMelee)
                 {
-                    MeleeAttack();
+                    StartCoroutine(MeleeAttack());
                 }
                 break;
             case 3:
                 if (canSummon && !isSummoning)
                 {
-                    Summoning();
+                    StartCoroutine(Summoning());
                 }
                 break;
             default:
@@ -171,41 +176,48 @@ public class MinibossAI : MonoBehaviour, IDamage
     {
         isDashing = true;
         animator.SetTrigger("Dash");
+        AudioManager.instance.playBossSFX(AudioManager.instance.BossSFX[0].soundName);
         isDashing = false;
     }
 
-    public void Shoot()
+    IEnumerator Shoot()
     {
         if (shootPos != null)
         {
             isShooting = true;
             animator.SetTrigger("Shoot"); // Triggers the shooting animation.
+            AudioManager.instance.playBossSFX(AudioManager.instance.BossSFX[1].soundName);
             Vector3 playerDirection = gameManager.instance.player.transform.position - transform.position;
             Instantiate(bullet, shootPos.position, Quaternion.LookRotation(playerDirection)); // Spawns the bullet.
             bullet.GetComponent<Bullet>().self = GetComponentInParent<CapsuleCollider>();
+            yield return new WaitForSeconds(shootRate);
             isShooting = false;
         }
     }
 
-    public void MeleeAttack()
+    IEnumerator MeleeAttack()
     {
         isMelee = true;
         animator.SetTrigger("Melee");
+        yield return new WaitForSeconds(shootRate);
+        AudioManager.instance.playBossSFX(AudioManager.instance.BossSFX[2].soundName);
         isMelee = false;
     }
 
-    public void Summoning()
+    IEnumerator Summoning()
     {
         if (enemiesInScene < maxEnemiesSpawn)
         {
             isSummoning = true;
             animator.SetBool("Summon", true);
+            AudioManager.instance.playBossSFX(AudioManager.instance.BossSFX[3].soundName);
             Vector3 randomOffset = Random.insideUnitSphere * spawnRange;
             Vector3 spawnPOS = minibossPOS.position + randomOffset;
             randomOffset.y = minibossPOS.position.y;
             Instantiate(enemyToSummon, spawnPOS, Quaternion.identity);
             enemiesInScene++;
         }
+        yield return new WaitForSeconds(spawnRate);
         animator.SetBool("Summon", false);
         isSummoning = false;
     }
@@ -224,12 +236,14 @@ public class MinibossAI : MonoBehaviour, IDamage
         HP -= amount; // Reduces health by the damage amount.
         StartCoroutine(FlashRed()); // Flashes red to indicate damaged.
         animator.SetTrigger("takeDamage");
+        AudioManager.instance.playBossSFX(AudioManager.instance.BossSFX[4].soundName);
         // Directs the enemy to move towards the player's position upon taking damage.
         agent.SetDestination(gameManager.instance.player.transform.position);
 
         // Checks if health has dropped to 0 or below.
         if (HP <= 0)
         {
+            isDead = true;
             agent.acceleration = 0;
             agent.velocity = Vector3.zero;
             if (itemToDrop != null)
@@ -240,6 +254,10 @@ public class MinibossAI : MonoBehaviour, IDamage
             StartCoroutine(DeathAnimate());
             hpBar.gameObject.SetActive(false);
             minibossName.gameObject.SetActive(false);
+            if(gateToUnlock != null)
+            {
+                gateToUnlock.SetActive(false);
+            }
         }
     }
 
@@ -268,7 +286,7 @@ public class MinibossAI : MonoBehaviour, IDamage
     }
     // Detects when the player enters the enemy's detection range.
     private void OnTriggerEnter(Collider other)
-    { 
+    {
         if (other.CompareTag("Player"))
         {
             playerInRange = true; // Marks that the player is in range.
@@ -303,7 +321,7 @@ public class MinibossAI : MonoBehaviour, IDamage
         // Performs a raycast to check for line of sight to the player.
         if (Physics.Raycast(headPos.position, playerDir, out hit))
         {
-            Debug.DrawRay(headPos.position, playerDir, Color.red);
+            // Debug.DrawRay(headPos.position, playerDir, Color.red);
             // Checks if the raycast hit the player and the angle is within the view cone.
             if (hit.collider.CompareTag("Player") || angleToPlayer <= viewCone)
             {

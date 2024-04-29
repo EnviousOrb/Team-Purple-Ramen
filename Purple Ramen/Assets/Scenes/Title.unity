@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311918, g: 0.3807398, b: 0.35872716, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -210,74 +210,6 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: -10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1218960233
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1218960236}
-  - component: {fileID: 1218960235}
-  - component: {fileID: 1218960234}
-  m_Layer: 0
-  m_Name: EventSystem
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1218960234
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1218960233}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SendPointerHoverToParent: 1
-  m_HorizontalAxis: Horizontal
-  m_VerticalAxis: Vertical
-  m_SubmitButton: Submit
-  m_CancelButton: Cancel
-  m_InputActionsPerSecond: 10
-  m_RepeatDelay: 0.5
-  m_ForceModuleActive: 0
---- !u!114 &1218960235
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1218960233}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
-  m_sendNavigationEvents: 1
-  m_DragThreshold: 10
---- !u!4 &1218960236
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1218960233}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2253,7 +2185,7 @@ RectTransform:
   m_Father: {fileID: 7305129407958033244}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2289,8 +2221,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BGM:
-  - {fileID: 11400000, guid: 2bc36f79235b0cf46aaa45cfdd62a5c3, type: 2}
-  - {fileID: 11400000, guid: 74f408291bd6560429e8a6cd92e15ebf, type: 2}
+  - {fileID: 11400000, guid: 203a3689b2dac8f40a08518d6de3aa95, type: 2}
   SFX:
   - {fileID: 11400000, guid: ed32ed0b30b992d489e0f8d274614803, type: 2}
   - {fileID: 11400000, guid: aa0e40dfa7ba14543b3fc619561a058e, type: 2}
@@ -2328,12 +2259,16 @@ MonoBehaviour:
   - {fileID: 11400000, guid: dda7392c511e5ff4bb6ac7764724cc58, type: 2}
   - {fileID: 11400000, guid: c413871a35d07c74d8462931047dad76, type: 2}
   - {fileID: 11400000, guid: e563a0414daa4114db62441e3b972893, type: 2}
+  BossSFX: []
+  EnemySFX: []
   fadeDuration: 3
   fadeVolume: 1
   BGMSource: {fileID: 3076048016512910711}
   SFXSource: {fileID: 7865968218460469963}
   NPCSource: {fileID: 6882036814245685349}
+  BossSource: {fileID: 0}
   PlayerSource: {fileID: 0}
+  EnemySource: {fileID: 0}
 --- !u!1 &1133318117590079328
 GameObject:
   m_ObjectHideFlags: 0
@@ -2632,8 +2567,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 2373911030513584061}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -7.3, y: 0}
   m_SizeDelta: {x: 37.4, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2942,7 +2877,6 @@ RectTransform:
   m_Children:
   - {fileID: 5403910732775217585}
   - {fileID: 1544041903733627709}
-  - {fileID: 4996595118791068967}
   - {fileID: 8822097701130145537}
   - {fileID: 6700568546659936255}
   - {fileID: 8628151864745310995}
@@ -2952,6 +2886,7 @@ RectTransform:
   - {fileID: 4518260363645047980}
   - {fileID: 5332144851744288396}
   - {fileID: 4219061991178665798}
+  - {fileID: 4996595118791068967}
   m_Father: {fileID: 7206692720414303124}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -4174,7 +4109,7 @@ RectTransform:
   m_Father: {fileID: 947589142827961458}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -4382,7 +4317,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8e8c30774fa6c045babe2d6f4a63212, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LevelName: Level 1
+  LevelName: Hub Area
   menuMain: {fileID: 0}
 --- !u!114 &2553428571958970516
 MonoBehaviour:
@@ -5829,7 +5764,7 @@ RectTransform:
   m_Father: {fileID: 6131934795759502577}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -6110,8 +6045,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 5240808534111076703}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -7.3, y: 0}
   m_SizeDelta: {x: 37.4, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -14784,8 +14719,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 5567548259627027691}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -7.3, y: 0}
   m_SizeDelta: {x: 37.4, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -17241,6 +17176,7 @@ MonoBehaviour:
   menuInv: {fileID: 376902269922141253}
   menuSettings: {fileID: 5396236835770335666}
   creditsPanel: {fileID: 3149388324376834057}
+  secretEntrance: {fileID: 0}
   TextBox: {fileID: 3394662866800827485}
   checkpointMenu: {fileID: 0}
   playerDamageEffect: {fileID: 6295160640285775567}
@@ -17255,6 +17191,8 @@ MonoBehaviour:
   PS: {fileID: 0}
   playerScore: 0
   isPaused: 0
+  deathCount: 0
+  playerDead: 0
 --- !u!1 &8827117176189904994
 GameObject:
   m_ObjectHideFlags: 0
@@ -17814,4 +17752,3 @@ SceneRoots:
   m_Roots:
   - {fileID: 462225508}
   - {fileID: 1348717104}
-  - {fileID: 1218960236}

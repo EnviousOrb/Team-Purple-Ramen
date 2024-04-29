@@ -9,7 +9,6 @@ public class catScript : MonoBehaviour
     [SerializeField] public GameObject WallToUnlock;
     [SerializeField] private SuperTextMesh questText;
     [SerializeField] private SuperTextMesh thankText;
-    bool isSpeaking;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -18,17 +17,16 @@ public class catScript : MonoBehaviour
             playerController player = other.GetComponent<playerController>();
             if (player != null && player.itemList.Contains(requiredItem))
             {
-                // Player has the required item. Trigger the win condition.
-                gameManager.instance.stateWin();
-
                 // Remove the item from the player's inventory
                 player.itemList.Remove(requiredItem);
 
                 // Update the inventory UI to reflect this change
                 UIManager.instance.UpdateInventoryUI(player.itemList);
 
-                GateToUnlock.SetActive(true);
-                WallToUnlock.SetActive(false);
+                if(GateToUnlock != null)
+                    GateToUnlock.SetActive(true);
+                if(WallToUnlock != null)
+                    WallToUnlock.SetActive(false);
                 gameManager.instance.UpdateTextBox(thankText.text);
 
             }
@@ -52,12 +50,10 @@ public class catScript : MonoBehaviour
 
     IEnumerator CatSpeak()
     {
-        isSpeaking = true;
         int randomIndex = UnityEngine.Random.Range(0, AudioManager.instance.NpcSFX.Length);
         string randomSFXName = AudioManager.instance.NpcSFX[randomIndex].name;
         AudioManager.instance.playNpcSFX(randomSFXName);
         yield return new WaitForSeconds(0.3f);
-        isSpeaking = false;
     }
 }
 

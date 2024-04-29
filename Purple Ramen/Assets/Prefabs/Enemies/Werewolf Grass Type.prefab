@@ -979,7 +979,7 @@ GameObject:
   - component: {fileID: 4799585882578898476}
   m_Layer: 0
   m_Name: Werewolf Grass Type
-  m_TagString: Enemy
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -999,6 +999,7 @@ Transform:
   m_Children:
   - {fileID: 6767430074910377976}
   - {fileID: 8080801643976997665}
+  - {fileID: 459832745655609543}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7413336417966480280
@@ -2733,3 +2734,65 @@ Transform:
   - {fileID: 1271462571109360602}
   m_Father: {fileID: 1512407894609685933}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &3558364624392794023
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3890572397516007303}
+    m_Modifications:
+    - target: {fileID: 3963307000805885792, guid: fd2abb94c376832419e7fd8cd5132a72, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.9811001
+      objectReference: {fileID: 0}
+    - target: {fileID: 3963307000805885792, guid: fd2abb94c376832419e7fd8cd5132a72, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.14417064
+      objectReference: {fileID: 0}
+    - target: {fileID: 3963307000805885792, guid: fd2abb94c376832419e7fd8cd5132a72, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.5196501
+      objectReference: {fileID: 0}
+    - target: {fileID: 3963307000805885792, guid: fd2abb94c376832419e7fd8cd5132a72, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3963307000805885792, guid: fd2abb94c376832419e7fd8cd5132a72, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3963307000805885792, guid: fd2abb94c376832419e7fd8cd5132a72, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3963307000805885792, guid: fd2abb94c376832419e7fd8cd5132a72, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3963307000805885792, guid: fd2abb94c376832419e7fd8cd5132a72, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3963307000805885792, guid: fd2abb94c376832419e7fd8cd5132a72, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3963307000805885792, guid: fd2abb94c376832419e7fd8cd5132a72, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7825970351715753548, guid: fd2abb94c376832419e7fd8cd5132a72, type: 3}
+      propertyPath: m_Name
+      value: Effects
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: fd2abb94c376832419e7fd8cd5132a72, type: 3}
+--- !u!4 &459832745655609543 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3963307000805885792, guid: fd2abb94c376832419e7fd8cd5132a72, type: 3}
+  m_PrefabInstance: {fileID: 3558364624392794023}
+  m_PrefabAsset: {fileID: 0}

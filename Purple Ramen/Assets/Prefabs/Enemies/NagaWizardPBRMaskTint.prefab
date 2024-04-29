@@ -2011,8 +2011,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8322264715320270917}
+  - component: {fileID: 1183721605243545257}
   - component: {fileID: 8130951446194687295}
   - component: {fileID: 4316232772649526631}
+  - component: {fileID: 4671757218125034948}
   m_Layer: 0
   m_Name: NagaWizardStaff
   m_TagString: Untagged
@@ -2036,6 +2038,19 @@ Transform:
   - {fileID: 3063480822140032869}
   m_Father: {fileID: 4910218957588797713}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1183721605243545257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8329988233675666045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cff79d5f9dbb0e4ba48f71b7332ccf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meleeStrength: 10
 --- !u!33 &8130951446194687295
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -2086,6 +2101,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &4671757218125034948
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8329988233675666045}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.9465018, y: 2.4246664, z: 0.29570475}
+  m_Center: {x: 0.13769767, y: -0.32437629, z: 0.02586822}
 --- !u!1 &8343661031274992483
 GameObject:
   m_ObjectHideFlags: 0
@@ -2327,14 +2363,13 @@ GameObject:
   m_Component:
   - component: {fileID: 4090201176088002163}
   - component: {fileID: -8197357503021694462}
-  - component: {fileID: 5215750097793790126}
   - component: {fileID: 6176710172087369268}
   - component: {fileID: 4540104689732251616}
   - component: {fileID: 8223908372417662909}
   - component: {fileID: 102078692543900581}
   m_Layer: 0
   m_Name: NagaWizardPBRMaskTint
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2369,62 +2404,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minibossName: {fileID: 0}
-  model: {fileID: 0}
-  agent: {fileID: 0}
-  shootPos: {fileID: 0}
-  itemToDrop: {fileID: 0}
-  weaponCollider: {fileID: 0}
-  hpBar: {fileID: 0}
-  HP: 0
-  speed: 0
-  bullet: {fileID: 0}
-  damageMat: {fileID: 0}
-  shootRate: 0
-  stoppingDist: 0
-  animator: {fileID: 0}
-  animSpeedTrans: 0
-  headPos: {fileID: 0}
-  viewCone: 0
-  faceTargetSpeed: 0
-  animatedSpeedTrans: 0
-  roamDist: 0
-  roamPauseTime: 0
-  canSummon: 0
-  canDash: 0
-  canMeleeAttack: 0
-  canShoot: 0
-  dashCooldown: 0
-  dashSpeed: 0
-  dashDistance: 0
-  jumpForce: 0
-  enemyToSummon: {fileID: 0}
-  maxEnemiesSpawn: 0
-  minibossPOS: {fileID: 0}
-  spawnRate: 0
-  spawnRange: 0
---- !u!114 &5215750097793790126
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8819722108260078762}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3a6f4ab2f5b2e6499094e1aab46a5bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   model: {fileID: 7561648235343051972}
   agent: {fileID: 4540104689732251616}
   shootPos: {fileID: 3063480822140032869}
   itemToDrop: {fileID: 0}
+  weaponCollider: {fileID: 4671757218125034948}
+  hpBar: {fileID: 0}
   HP: 20
   speed: 2
   bullet: {fileID: 6654342452342103052, guid: 981cb1a764e5eb346aa6494c88ad1c1f, type: 3}
   damageMat: {fileID: 2100000, guid: 61a868ed95d3914428f24f0450c95593, type: 2}
   shootRate: 2
   stoppingDist: 10
-  shootAniDelay: 0
   animator: {fileID: 6176710172087369268}
   animSpeedTrans: 1
   headPos: {fileID: 5313288169958701758}
@@ -2433,13 +2424,19 @@ MonoBehaviour:
   animatedSpeedTrans: 2
   roamDist: 20
   roamPauseTime: 3
-  scoreValue: 0
-  enemyType: 0
-  drops: []
-  dropRolls: 0
-  paralysisMat: {fileID: 0}
-  rootEffect: {fileID: 0}
-  associatedSpawner: {fileID: 0}
+  canSummon: 1
+  canDash: 0
+  canMeleeAttack: 0
+  canShoot: 1
+  dashCooldown: 3
+  dashSpeed: 10
+  dashDistance: 20
+  jumpForce: 10
+  enemyToSummon: {fileID: 2390462997160779003, guid: 87aae30691a8f224298d712293c43564, type: 3}
+  maxEnemiesSpawn: 3
+  minibossPOS: {fileID: 5847614146998590619}
+  spawnRate: 1
+  spawnRange: 5
 --- !u!95 &6176710172087369268
 Animator:
   serializedVersion: 5
@@ -2524,7 +2521,7 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
-  m_Height: 1
+  m_Height: 1.5
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &8829150342802021833
