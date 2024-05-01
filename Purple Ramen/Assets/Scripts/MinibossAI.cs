@@ -238,6 +238,9 @@ public class MinibossAI : MonoBehaviour, IDamage
     // Method called when the enemy takes damage.
     public void takeDamage(int amount, int type)
     {
+        if (type == 0)
+            return;
+        // ^ makes enemy bullets not damage boss
         HP -= amount; // Reduces health by the damage amount.
         StartCoroutine(FlashRed()); // Flashes red to indicate damaged.
         animator.SetTrigger("takeDamage");
