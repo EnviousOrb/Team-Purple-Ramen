@@ -112,7 +112,7 @@ public class gameManager : MonoBehaviour
         }
         TextBox.SetActive(true);
         TextBoxText.text = newText;
-        SuperHideTextBox(8);
+        StartCoroutine(SuperHideTextBox(8));
     }
     public void HideTextBox()
     {
