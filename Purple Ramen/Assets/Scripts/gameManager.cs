@@ -63,6 +63,14 @@ public class gameManager : MonoBehaviour
                 statePaused();
             else if (menuActive == menuPause)
                 stateNormal();
+            else if (menuActive == menuSettings)
+            {
+                menuActive = previousMenu;
+                menuSettings.SetActive(false);
+            }
+            
+
+
             else if (menuActive == menuMain)
             {
                 Cursor.lockState = CursorLockMode.None;
@@ -210,7 +218,8 @@ public class gameManager : MonoBehaviour
     }
     public void exitSettings()
     {
-        gameManager.instance.menuSettings.SetActive(false);
+        menuActive = previousMenu;
+        menuSettings.SetActive(false);
     }
     public void respawn()
     {
