@@ -33,8 +33,10 @@ public class OnExitLevel : MonoBehaviour
     }
     IEnumerator Loading()
     {
+        gameManager.instance.PS.enabled = false;
         Loadingscreen.SetActive(true);
         yield return new WaitForSeconds(loadingTimer);
+        gameManager.instance.PS.enabled = true;
         Loadingscreen.SetActive(false);
     }
 }
