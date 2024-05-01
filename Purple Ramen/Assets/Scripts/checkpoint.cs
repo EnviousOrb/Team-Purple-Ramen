@@ -8,7 +8,7 @@ public class checkPoint : MonoBehaviour
     {
         if (other.CompareTag("Player") && gameManager.instance.playerSpawnPos.transform.position != transform.position)
         {
-            gameManager.instance.transform.position = transform.position;
+            gameManager.instance.playerSpawnPos.transform.position = transform.position;
             StartCoroutine(menuPopup());
         }
     }

@@ -37,7 +37,7 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
     [SerializeField] Collider staffCollider;
 
     [HeaderAttribute("----- Wizard Range Attack -----")]
-    [SerializeField] private GameObject defaultStaffOrbPrefab;
+    [SerializeField] public GameObject defaultStaffOrbPrefab;
     [SerializeField] staffElementalStats defaultStaffStats;
    // [SerializeField]public List<staffElementalStats> staffList = new List<staffElementalStats>();   // Inventory to hold all aquired staves.
     [SerializeField] GameObject staffOrbModel;  // The staff orb container. 
@@ -291,7 +291,6 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
             {
                 gameManager.instance.stateLose();
                 controller.enabled = false;
-                gameManager.instance.deathCount++;
             }
             AudioManager.instance.playPlayerSFX("Damage SFX");
         }

@@ -70,6 +70,7 @@ public class MinibossAI : MonoBehaviour, IDamage
     int originalSpeed;
     int ogHealth;
     int action;
+    float distance;
 
     //Bools
     bool isShooting; // Tracks if the enemy is currently shooting.
@@ -92,6 +93,7 @@ public class MinibossAI : MonoBehaviour, IDamage
 
     void Update()
     {
+        distance = Vector3.Distance(gameObject.transform.position, gameManager.instance.player.transform.position);
         if (!isDead)
         {
             float animSpeed = agent.velocity.normalized.magnitude; // Calculates speed for animation.
@@ -197,11 +199,14 @@ public class MinibossAI : MonoBehaviour, IDamage
 
     IEnumerator MeleeAttack()
     {
-        isMelee = true;
-        animator.SetTrigger("Melee");
-        yield return new WaitForSeconds(shootRate);
-        AudioManager.instance.playBossSFX(AudioManager.instance.BossSFX[2].soundName);
-        isMelee = false;
+        if (distance < gameManager.instance.player.GetComponent<SphereCollider>().radius)
+        {
+            isMelee = true;
+            animator.SetTrigger("Melee");
+            yield return new WaitForSeconds(shootRate);
+            AudioManager.instance.playBossSFX(AudioManager.instance.BossSFX[2].soundName);
+            isMelee = false;
+        }
     }
 
     IEnumerator Summoning()
