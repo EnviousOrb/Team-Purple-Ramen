@@ -10,6 +10,7 @@ public class hubcatScript : MonoBehaviour
     [SerializeField] private SuperTextMesh thankText;
     [SerializeField] private GameObject gateToUnlock;
     [SerializeField] private GameObject checkpointToUnlock;
+    [SerializeField] SceneInfo sceneInfo;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -17,7 +18,7 @@ public class hubcatScript : MonoBehaviour
         {
             playerController player = other.GetComponent<playerController>();
 
-            if (requiredStaffs.All(obj => obj.InventorySprite))
+            if (requiredStaffs.All(reqStaff => sceneInfo.staffList.Any(staff => staff == reqStaff)))
             {
                 if (checkpointToUnlock != null)
                 {
