@@ -84,15 +84,6 @@ public class gameManager : MonoBehaviour
                 stateNormal();
         }
 
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            UIManager.instance.hotbarWeapon.SetActive(true);
-        }
-        else if (Input.GetKeyUp(KeyCode.Q))
-        {
-            UIManager.instance.hotbarWeapon.SetActive(false);
-        }
-
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
             PS.crouch();
