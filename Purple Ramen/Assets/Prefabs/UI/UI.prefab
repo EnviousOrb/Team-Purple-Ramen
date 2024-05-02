@@ -2918,7 +2918,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Restart
+  m_Text: Return to Hub
 --- !u!114 &7163399949705404011
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8965,13 +8965,6 @@ MonoBehaviour:
   - {fileID: 7359805443185625937}
   - {fileID: 5603275155965437005}
   - {fileID: 8665332142566034183}
-  weaponHotbar:
-  - {fileID: 6386943211907112551}
-  - {fileID: 2325696221803985910}
-  - {fileID: 7744382287615062363}
-  - {fileID: 5929418193714406594}
-  - {fileID: 8059282060900956879}
-  hotbarWeapon: {fileID: 5478317941108307477}
   weapon: {fileID: 11400000, guid: bda45e667c093024cbc8cd8f45874648, type: 2}
   mainSlotImage: {fileID: 7144272080292204103}
   descriptionText: {fileID: 5042650098133669696}
@@ -9339,7 +9332,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Quit
+  m_Text: Exit the Game
 --- !u!114 &3392282166481893988
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10183,7 +10176,7 @@ MonoBehaviour:
   menuSettings: {fileID: 5396236835162169632}
   creditsPanel: {fileID: 3149388324850782363}
   TextBox: {fileID: 3394662866326879439}
-  checkpointMenu: {fileID: 0}
+  checkpointMenu: {fileID: 8240157364225836673}
   playerDamageEffect: {fileID: 6295160639811827293}
   playerSlowEffect: {fileID: 8267171776333769268}
   playerHealEffect: {fileID: 6277476298634954033}
@@ -12331,7 +12324,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Restart
+  m_Text: Return to Hub
 --- !u!114 &4277766446366978617
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12916,8 +12909,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BGM:
-  - {fileID: 11400000, guid: 1a0c7780c5050cd4787dab2aa4012ac6, type: 2}
-  - {fileID: 11400000, guid: 74f408291bd6560429e8a6cd92e15ebf, type: 2}
+  - {fileID: 11400000, guid: df0889e674b42c54cbf119a743dfa1a3, type: 2}
+  - {fileID: 11400000, guid: b41d64a30944df04bbc55bcebdfacd05, type: 2}
   SFX:
   - {fileID: 11400000, guid: ed32ed0b30b992d489e0f8d274614803, type: 2}
   - {fileID: 11400000, guid: aa0e40dfa7ba14543b3fc619561a058e, type: 2}
@@ -12955,13 +12948,20 @@ MonoBehaviour:
   - {fileID: 11400000, guid: dda7392c511e5ff4bb6ac7764724cc58, type: 2}
   - {fileID: 11400000, guid: c413871a35d07c74d8462931047dad76, type: 2}
   - {fileID: 11400000, guid: e563a0414daa4114db62441e3b972893, type: 2}
-  BossSFX: []
-  EnemySFX: []
+  BossSFX:
+  - {fileID: 11400000, guid: c94ca5c613f83b542a41e16e49a1d56a, type: 2}
+  - {fileID: 11400000, guid: 4c3a0d7d7b5cbaf4c84e680ba83369ef, type: 2}
+  - {fileID: 11400000, guid: 8461ef9a93b31cc4f88bee634087f50a, type: 2}
+  - {fileID: 11400000, guid: 8a4175f7666f50f4ab4b11d5754a67a6, type: 2}
+  - {fileID: 11400000, guid: 76761add95db37247ad386db26ec54e8, type: 2}
+  EnemySFX:
+  - {fileID: 11400000, guid: 25b3d602f6f5e4c4eb1122b274a330d5, type: 2}
+  - {fileID: 11400000, guid: 3bae83e3bd69042419db19251ffdc256, type: 2}
   fadeDuration: 3
   fadeVolume: 1
   BGMSource: {fileID: 3076048018186446309}
   SFXSource: {fileID: 7865968217986505305}
-  NPCSource: {fileID: 0}
+  NPCSource: {fileID: 7581921548394812868}
   BossSource: {fileID: 0}
   PlayerSource: {fileID: 0}
   EnemySource: {fileID: 0}
@@ -15106,7 +15106,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Quit
+  m_Text: Exit Game
 --- !u!114 &4657145359100640271
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17941,7 +17941,7 @@ MonoBehaviour:
   info: []
   lineHeights:
   - 80
-  _text: Floracanine
+  _text: Infernix
   drawText: 
   hyphenedText: 
   font: {fileID: 12800000, guid: bf1a036766026f24cb4ee65f808fc4ba, type: 3}
