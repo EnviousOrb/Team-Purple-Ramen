@@ -312,7 +312,7 @@ PrefabInstance:
     - target: {fileID: 4407843982003129554, guid: dec5073aff06ac8408abfe84a64024fd, type: 3}
       propertyPath: gateToUnlock
       value: 
-      objectReference: {fileID: 336510174}
+      objectReference: {fileID: 0}
     - target: {fileID: 4407843982003129554, guid: dec5073aff06ac8408abfe84a64024fd, type: 3}
       propertyPath: minibossName
       value: 
@@ -565,7 +565,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4521154084426333611, guid: 54cd83de81f0aca448176b3ef5162322, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -11
+      value: -13
       objectReference: {fileID: 0}
     - target: {fileID: 4521154084426333611, guid: 54cd83de81f0aca448176b3ef5162322, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1096,59 +1096,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.0000001, y: 2, z: 1.0000002}
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
---- !u!1 &336510174
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 336510176}
-  - component: {fileID: 336510175}
-  m_Layer: 0
-  m_Name: Exit Trigger Lock
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!65 &336510175
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 336510174}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 31.83524, y: 37.581543, z: 37.662453}
-  m_Center: {x: -1.6160183, y: 1.7063942, z: 7.421502}
---- !u!4 &336510176
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 336510174}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -12.506945, y: 22.966002, z: 78.53041}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 948290056}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &340179029
 GameObject:
   m_ObjectHideFlags: 0
@@ -2811,7 +2758,6 @@ Transform:
   - {fileID: 1145776557}
   - {fileID: 657408424}
   - {fileID: 1887276746}
-  - {fileID: 336510176}
   - {fileID: 1618875988}
   - {fileID: 1821306108}
   - {fileID: 2129368617}

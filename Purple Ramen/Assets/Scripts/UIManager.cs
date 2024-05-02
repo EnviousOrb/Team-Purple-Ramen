@@ -42,13 +42,10 @@ public class UIManager : MonoBehaviour
             slot.enabled = false;
         }
 
-        List<IInventory> weaponItems = itemList.Where(item => item is staffElementalStats).ToList();
-        List<IInventory> otherItems = itemList.Except(weaponItems).ToList();
-
         int slotIndex = 0;
 
         //assign rest of items to generic slots
-        foreach (IInventory item in otherItems)
+        foreach (IInventory item in itemList)
         {
             if (slotIndex >= inventoryUISlotLocation.Count)
                 break;
