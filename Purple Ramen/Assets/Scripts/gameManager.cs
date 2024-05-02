@@ -51,7 +51,6 @@ public class gameManager : MonoBehaviour
         PS = player.GetComponent<playerController>();
         TimeScaleOrig = Time.timeScale;
         playerSpawnPos = GameObject.FindWithTag("Player Spawn Pos");
-        DontDestroyOnLoad(gameObject);
     }
 
     // Update is called once per frame
@@ -85,14 +84,6 @@ public class gameManager : MonoBehaviour
                 stateNormal();
         }
 
-        //if (Input.GetKeyDown(KeyCode.Q))
-        //{
-        //    UIManager.instance.hotbarWeapon.SetActive(true);
-        //}
-        //else if (Input.GetKeyUp(KeyCode.Q))
-        //{
-        //    UIManager.instance.hotbarWeapon.SetActive(false);
-        //}
 
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {

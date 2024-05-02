@@ -9,8 +9,6 @@ public class UIManager : MonoBehaviour
 {
     public Dictionary<int, IInventory> reservedSpots4Staffs = new();
     [SerializeField] public List<Image> inventoryUISlotLocation = new(); // UI images for inventory slots.
-    //[SerializeField] public List<Image> weaponHotbar = new();
-    //[SerializeField] public GameObject hotbarWeapon;
     [SerializeField] public staffElementalStats weapon;
     [SerializeField] private Image mainSlotImage; // UI image for the main slot.
     [SerializeField] private SuperTextMesh descriptionText;
@@ -28,7 +26,6 @@ public class UIManager : MonoBehaviour
         {
             instance = this;
         }
-        UpdateInventoryUI(weapon);
     }
 
     public void UpdateMainSlot(IInventory item)
@@ -36,24 +33,6 @@ public class UIManager : MonoBehaviour
         mainSlotImage.sprite = item.InventorySprite;
         descriptionText.text = item.InventoryText;
     }
-    //public void UpdateWeaponHotbar(List<IInventory> weaponList)
-    //{
-    //    foreach (var slot in weaponHotbar)
-    //    {
-    //        slot.sprite = null;
-    //        slot.enabled = false;
-    //    }
-    //
-    //    List<IInventory> weaponItems = weaponList.Where(item => item is staffElementalStats).ToList();
-    //
-    //    for(int i = 1; i < Math.Min(weaponItems.Count, weaponHotbar.Count); i++)
-    //    {
-    //        IInventory currentWeapon = weaponItems[i];
-    //
-    //        weaponHotbar[i].sprite = currentWeapon.InventorySprite;
-    //        weaponHotbar[i].enabled = true;
-    //    }
-    //}
 
     public void UpdateInventoryUI(IInventory item)
     {
@@ -76,11 +55,8 @@ public class UIManager : MonoBehaviour
                 slotButton.onClick.RemoveAllListeners();
                 slotButton.onClick.AddListener(() => UpdateMainSlot(item));
             }
-
-            //UpdateWeaponHotbar(new List<IInventory> { item });
         }
     }
-
 
     public void UpdateInventoryUI(List<IInventory> itemList)
     {
@@ -89,16 +65,12 @@ public class UIManager : MonoBehaviour
             slot.sprite = null;
             slot.enabled = false;
         }
-
         List<IInventory> weaponItems = itemList.Where(item => item is staffElementalStats).ToList();
         List<IInventory> otherItems = itemList.Except(weaponItems).ToList();
-
-        //UpdateWeaponHotbar(weaponItems);
-
         int slotIndex = 0;
 
         //assign rest of items to generic slots
-        foreach (IInventory item in otherItems)
+        foreach (IInventory item in itemList)
         {
             if (slotIndex >= inventoryUISlotLocation.Count)
                 break;
