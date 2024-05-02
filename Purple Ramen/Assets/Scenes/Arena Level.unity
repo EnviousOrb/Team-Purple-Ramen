@@ -695,10 +695,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5063915699545036162, guid: 539838c3a9aabc2478da23fb8ae7d041, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1991853598}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 539838c3a9aabc2478da23fb8ae7d041, type: 3}
 --- !u!1 &194759528
 GameObject:
@@ -1123,11 +1120,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 704cb1061abee184e96f23eff1472713, type: 3}
---- !u!1 &291228843 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3513249980428956497, guid: b2c071dc38dcc5c4ca6505ba2529c179, type: 3}
-  m_PrefabInstance: {fileID: 925137264}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &291228844 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8570306689286413773, guid: b2c071dc38dcc5c4ca6505ba2529c179, type: 3}
@@ -1417,11 +1409,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1309905299}
   m_LocalEulerAnglesHint: {x: 0, y: 273.318, z: 0}
---- !u!1 &423066886 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8181893369802180346, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
-  m_PrefabInstance: {fileID: 1959223859}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &429316154
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3845,6 +3832,10 @@ PrefabInstance:
       propertyPath: m_Radius
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 1183721605243545257, guid: de2d30c724369404597a98d89da6e94c, type: 3}
+      propertyPath: meleeStrength
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4090201176088002163, guid: de2d30c724369404597a98d89da6e94c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 64.52812
@@ -4290,8 +4281,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: Hub Area
-  Loadingscreen: {fileID: 423066886}
-  loadingTimer: 5
+  Loadingscreen: {fileID: 1531493536}
+  loadingTimer: 0
   isNextScene: 1
   sceneInfo: {fileID: 11400000, guid: e9b35b64eab44834da85e8f354f6af30, type: 2}
 --- !u!1 &1422480427 stripped
@@ -4500,15 +4491,15 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1309905299}
   m_LocalEulerAnglesHint: {x: 0, y: 183.997, z: 0}
---- !u!1 &1525193798 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1788229710250083417, guid: 704cb1061abee184e96f23eff1472713, type: 3}
-  m_PrefabInstance: {fileID: 284395796}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1525193800 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8613938867829074414, guid: 704cb1061abee184e96f23eff1472713, type: 3}
   m_PrefabInstance: {fileID: 284395796}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1531493536 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2366004603302663533, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
+  m_PrefabInstance: {fileID: 1959223859}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1546473453 stripped
 GameObject:
@@ -6276,33 +6267,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
---- !u!1 &1991853593 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5063915699545036162, guid: 539838c3a9aabc2478da23fb8ae7d041, type: 3}
-  m_PrefabInstance: {fileID: 193401520}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1991853598
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1991853593}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8be72ad182e95344810a4a1929bf05b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemies:
-  - {fileID: 2390462997160779003, guid: 87aae30691a8f224298d712293c43564, type: 3}
-  spawnLocs:
-  - {fileID: 1525193798}
-  - {fileID: 291228843}
-  miniBoss: {fileID: 8819722108260078762, guid: de2d30c724369404597a98d89da6e94c, type: 3}
-  areaArena: {fileID: 0}
-  areaBoss: {fileID: 0}
-  timeBetweenWaves: 10
-  spawnRate: 1
 --- !u!1 &2056252737
 GameObject:
   m_ObjectHideFlags: 0
