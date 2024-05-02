@@ -406,7 +406,6 @@ public class playerController : MonoBehaviour, IDamage, ISlow, IMana, IHeal
     public void getStaffStats(staffElementalStats staff)
     {
         sceneInfo.staffList.Add(staff);
-       // staffList.Add(staff);
         GetItem(staff);
 
         // Update Stats to the stats of the current selected staff.

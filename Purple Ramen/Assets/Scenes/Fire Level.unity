@@ -310,24 +310,18 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2070224124}
     - target: {fileID: 4407843982003129554, guid: dec5073aff06ac8408abfe84a64024fd, type: 3}
-      propertyPath: gateToUnlock
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4407843982003129554, guid: dec5073aff06ac8408abfe84a64024fd, type: 3}
       propertyPath: minibossName
       value: 
       objectReference: {fileID: 2077321431}
+    - target: {fileID: 4407843982003129554, guid: dec5073aff06ac8408abfe84a64024fd, type: 3}
+      propertyPath: weaponCollider
+      value: 
+      objectReference: {fileID: 750580045}
     - target: {fileID: 4743021106651306863, guid: dec5073aff06ac8408abfe84a64024fd, type: 3}
       propertyPath: m_Name
       value: FylingDemonPBRMaskTint
       objectReference: {fileID: 0}
-    - target: {fileID: 6618315473861066710, guid: dec5073aff06ac8408abfe84a64024fd, type: 3}
-      propertyPath: meleeStrength
-      value: 3
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 3456810921622713193, guid: dec5073aff06ac8408abfe84a64024fd, type: 3}
-    - {fileID: 4340977463175794185, guid: dec5073aff06ac8408abfe84a64024fd, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -2488,6 +2482,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!65 &750580045 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 1752362535233703798, guid: dec5073aff06ac8408abfe84a64024fd, type: 3}
+  m_PrefabInstance: {fileID: 116798023}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &845639475
 PrefabInstance:
   m_ObjectHideFlags: 0

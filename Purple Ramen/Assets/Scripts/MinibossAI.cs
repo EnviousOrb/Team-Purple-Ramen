@@ -8,7 +8,7 @@ using Unity.VisualScripting;
 public class MinibossAI : MonoBehaviour, IDamage
 {
     [HeaderAttribute("-----Components-----")]
-    [SerializeField] SuperTextMesh minibossName; //The visual representation of the miniboss' name
+    [SerializeField] public SuperTextMesh minibossName; //The visual representation of the miniboss' name
     [SerializeField] Renderer model; // The enemy's visual model.
     [SerializeField] NavMeshAgent agent; // Navigation component for AI movement.
     [SerializeField] Transform shootPos; // Optional. The place where the Miniboss shoots from

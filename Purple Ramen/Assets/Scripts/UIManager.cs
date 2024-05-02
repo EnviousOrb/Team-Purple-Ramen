@@ -69,13 +69,13 @@ public class UIManager : MonoBehaviour
         List<IInventory> otherItems = itemList.Except(weaponItems).ToList();
         int slotIndex = 0;
 
-        //assign rest of items to generic slots
+        //assign itmes to slots
         foreach (IInventory item in itemList)
         {
             if (slotIndex >= inventoryUISlotLocation.Count)
                 break;
 
-            //if it is, then go through motions
+            //same as it ever was
             inventoryUISlotLocation[slotIndex].sprite = item.InventorySprite;
             inventoryUISlotLocation[slotIndex].enabled = true;
 
