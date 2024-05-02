@@ -9,9 +9,9 @@ public class UIManager : MonoBehaviour
 {
     public Dictionary<int, IInventory> reservedSpots4Staffs = new();
     [SerializeField] public List<Image> inventoryUISlotLocation = new(); // UI images for inventory slots.
-    [SerializeField] public staffElementalStats weapon;
     [SerializeField] private Image mainSlotImage; // UI image for the main slot.
     [SerializeField] private SuperTextMesh descriptionText;
+    [SerializeField] SceneInfo sceneInfo;
     public Slider bgmSlider, sfxSlider, npcSlider;
 
     public static UIManager instance;
@@ -25,6 +25,10 @@ public class UIManager : MonoBehaviour
         else
         {
             instance = this;
+        }
+        foreach(var staff in sceneInfo.staffList)
+        {
+            UpdateInventoryUI(staff);
         }
     }
 
@@ -57,19 +61,10 @@ public class UIManager : MonoBehaviour
             }
         }
     }
-
     public void UpdateInventoryUI(List<IInventory> itemList)
     {
-        foreach(var slot in inventoryUISlotLocation)
-        {
-            slot.sprite = null;
-            slot.enabled = false;
-        }
-        List<IInventory> weaponItems = itemList.Where(item => item is staffElementalStats).ToList();
-        List<IInventory> otherItems = itemList.Except(weaponItems).ToList();
         int slotIndex = 0;
-
-        //assign itmes to slots
+        //same as it ever was
         foreach (IInventory item in itemList)
         {
             if (slotIndex >= inventoryUISlotLocation.Count)
