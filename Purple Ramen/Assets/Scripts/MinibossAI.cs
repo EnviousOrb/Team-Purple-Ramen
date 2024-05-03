@@ -353,4 +353,12 @@ public class MinibossAI : MonoBehaviour, IDamage
         Quaternion targetRotation = Quaternion.LookRotation(new Vector3(playerDir.x, 0, playerDir.z)); // Calculates the rotation needed to face the player.
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * faceTargetSpeed); // Smoothly rotates towards the player.
     }
+
+    public void EnemiesCelebrate()
+    {
+        if (!animator.GetBool("Dead"))  // Ensure dead enemies do not celebrate
+        {
+            animator.SetTrigger("PlayerIsDead");
+        }
+    }
 }

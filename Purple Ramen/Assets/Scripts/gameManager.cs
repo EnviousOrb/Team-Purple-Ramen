@@ -201,6 +201,12 @@ public class gameManager : MonoBehaviour
         {
             enemy.GetComponent<enemyAI>()?.EnemiesCelebrate();
         }
+
+        foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("Boss"))
+        {
+            enemy.GetComponent<MinibossAI>()?.EnemiesCelebrate();
+        }
+
     }
 
     public void resume()
