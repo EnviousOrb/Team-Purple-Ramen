@@ -1,13 +1,10 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    public Dictionary<int, IInventory> reservedSpots4Staffs = new();
     [SerializeField] public List<Image> inventoryUISlotLocation = new(); // UI images for inventory slots.
     [SerializeField] private Image mainSlotImage; // UI image for the main slot.
     [SerializeField] private SuperTextMesh descriptionText;
@@ -26,10 +23,7 @@ public class UIManager : MonoBehaviour
         {
             instance = this;
         }
-        foreach(var staff in sceneInfo.staffList)
-        {
-            UpdateInventoryUI(staff);
-        }
+        UpdateInventoryUI(sceneInfo.staffList.Cast<IInventory>().ToList());
     }
 
     public void UpdateMainSlot(IInventory item)
@@ -38,49 +32,30 @@ public class UIManager : MonoBehaviour
         descriptionText.text = item.InventoryText;
     }
 
-    public void UpdateInventoryUI(IInventory item)
-    {
-        //clears any previous items from the inventory UI (this will probably be used when transitioning from level to hub)
-        foreach (var slot in inventoryUISlotLocation)
-        {
-            slot.sprite = null;
-            slot.enabled = false;
-        }
-
-        if (item is staffElementalStats)
-        {
-            reservedSpots4Staffs[0] = item;
-
-            inventoryUISlotLocation[0].sprite = item.InventorySprite;
-            inventoryUISlotLocation[0].enabled = true;
-
-            if (inventoryUISlotLocation[0].TryGetComponent<Button>(out var slotButton))
-            {
-                slotButton.onClick.RemoveAllListeners();
-                slotButton.onClick.AddListener(() => UpdateMainSlot(item));
-            }
-        }
-    }
     public void UpdateInventoryUI(List<IInventory> itemList)
     {
-        int slotIndex = 0;
-        //same as it ever was
-        foreach (IInventory item in itemList)
+        itemList = sceneInfo.staffList.Cast<IInventory>().ToList();
+
+        for (int slotIndex = 0; slotIndex < inventoryUISlotLocation.Count; slotIndex++)
         {
-            if (slotIndex >= inventoryUISlotLocation.Count)
-                break;
+            //clear other slots
+            inventoryUISlotLocation[slotIndex].sprite = null;
+            inventoryUISlotLocation[slotIndex].enabled = false;
 
-            //same as it ever was
-            inventoryUISlotLocation[slotIndex].sprite = item.InventorySprite;
-            inventoryUISlotLocation[slotIndex].enabled = true;
-
-            //update the onClick event like before
-            if (inventoryUISlotLocation[slotIndex].TryGetComponent<Button>(out var slotButton))
+            //if empty, update it
+            if (slotIndex < itemList.Count)
             {
-                slotButton.onClick.RemoveAllListeners();
-                slotButton.onClick.AddListener(() => UpdateMainSlot(item));
+                //same as it ever was
+                IInventory item = itemList[slotIndex];
+                inventoryUISlotLocation[slotIndex].sprite = item.InventorySprite;
+                inventoryUISlotLocation[slotIndex].enabled = true;
+
+                if (inventoryUISlotLocation[slotIndex].TryGetComponent<Button>(out var slotButton))
+                {
+                    slotButton.onClick.RemoveAllListeners();
+                    slotButton.onClick.AddListener(() => UpdateMainSlot(item));
+                }
             }
-            slotIndex++;
         }
     }
 

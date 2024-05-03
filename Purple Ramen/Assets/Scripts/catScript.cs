@@ -50,7 +50,7 @@ public class catScript : MonoBehaviour
 
     IEnumerator CatSpeak()
     {
-        int randomIndex = UnityEngine.Random.Range(0, AudioManager.instance.NpcSFX.Length);
+        int randomIndex = Random.Range(0, AudioManager.instance.NpcSFX.Length);
         string randomSFXName = AudioManager.instance.NpcSFX[randomIndex].name;
         AudioManager.instance.playNpcSFX(randomSFXName);
         yield return new WaitForSeconds(0.3f);

@@ -123,6 +123,75 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 23800000, guid: 3fd8343527f67ee4bbf36c0781bbc231, type: 2}
+--- !u!1001 &10798177
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1422480440}
+    m_Modifications:
+    - target: {fileID: 5315876966903466340, guid: b215e90b8ee256947b63f0382537c9f5, type: 3}
+      propertyPath: m_Name
+      value: EnemyMarker
+      objectReference: {fileID: 0}
+    - target: {fileID: 5860143323592403306, guid: b215e90b8ee256947b63f0382537c9f5, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5860143323592403306, guid: b215e90b8ee256947b63f0382537c9f5, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5860143323592403306, guid: b215e90b8ee256947b63f0382537c9f5, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5860143323592403306, guid: b215e90b8ee256947b63f0382537c9f5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.129
+      objectReference: {fileID: 0}
+    - target: {fileID: 5860143323592403306, guid: b215e90b8ee256947b63f0382537c9f5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.2979348
+      objectReference: {fileID: 0}
+    - target: {fileID: 5860143323592403306, guid: b215e90b8ee256947b63f0382537c9f5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.085
+      objectReference: {fileID: 0}
+    - target: {fileID: 5860143323592403306, guid: b215e90b8ee256947b63f0382537c9f5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.7933506
+      objectReference: {fileID: 0}
+    - target: {fileID: 5860143323592403306, guid: b215e90b8ee256947b63f0382537c9f5, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5860143323592403306, guid: b215e90b8ee256947b63f0382537c9f5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.60876507
+      objectReference: {fileID: 0}
+    - target: {fileID: 5860143323592403306, guid: b215e90b8ee256947b63f0382537c9f5, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5860143323592403306, guid: b215e90b8ee256947b63f0382537c9f5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5860143323592403306, guid: b215e90b8ee256947b63f0382537c9f5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5860143323592403306, guid: b215e90b8ee256947b63f0382537c9f5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b215e90b8ee256947b63f0382537c9f5, type: 3}
 --- !u!4 &32958485 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1448653227136698331, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
@@ -193,9 +262,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1774913864221245121, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1845518484278650557, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 2651562866206995817, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
       propertyPath: m_Name
       value: Light_08 (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2651562866206995817, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5476907822930849397, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -535,7 +620,7 @@ GameObject:
   - component: {fileID: 188079890}
   - component: {fileID: 188079889}
   - component: {fileID: 188079888}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube (20)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -709,7 +794,7 @@ GameObject:
   - component: {fileID: 194759531}
   - component: {fileID: 194759530}
   - component: {fileID: 194759529}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube (17)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -814,7 +899,7 @@ GameObject:
   - component: {fileID: 235602389}
   - component: {fileID: 235602388}
   - component: {fileID: 235602387}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -972,9 +1057,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1774913864221245121, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1845518484278650557, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 2651562866206995817, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
       propertyPath: m_Name
       value: Light_08 (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2651562866206995817, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5476907822930849397, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1046,9 +1147,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1774913864221245121, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1845518484278650557, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 2651562866206995817, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
       propertyPath: m_Name
       value: Light_08 (15)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2651562866206995817, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5476907822930849397, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1142,7 +1259,7 @@ GameObject:
   - component: {fileID: 306980523}
   - component: {fileID: 306980522}
   - component: {fileID: 306980521}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1295,9 +1412,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1774913864221245121, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1845518484278650557, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 2651562866206995817, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
       propertyPath: m_Name
       value: Light_08 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2651562866206995817, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5476907822930849397, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1316,7 +1449,7 @@ GameObject:
   - component: {fileID: 372333913}
   - component: {fileID: 372333912}
   - component: {fileID: 372333911}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube (16)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1637,9 +1770,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.609
       objectReference: {fileID: 0}
+    - target: {fileID: 1774913864221245121, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1845518484278650557, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 2651562866206995817, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
       propertyPath: m_Name
       value: Light_08 (17)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2651562866206995817, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5476907822930849397, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1650,6 +1799,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 1448653227136698331, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
   m_PrefabInstance: {fileID: 435526653}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &454536006 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5860143323592403306, guid: b215e90b8ee256947b63f0382537c9f5, type: 3}
+  m_PrefabInstance: {fileID: 10798177}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &468353657
 GameObject:
@@ -1663,7 +1817,7 @@ GameObject:
   - component: {fileID: 468353660}
   - component: {fileID: 468353659}
   - component: {fileID: 468353658}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube (12)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1816,9 +1970,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1774913864221245121, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1845518484278650557, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 2651562866206995817, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
       propertyPath: m_Name
       value: Light_08 (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2651562866206995817, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5476907822930849397, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1885,9 +2055,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1774913864221245121, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1845518484278650557, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 2651562866206995817, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
       propertyPath: m_Name
       value: Light_08 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2651562866206995817, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5476907822930849397, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2061,9 +2247,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1774913864221245121, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1845518484278650557, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 2651562866206995817, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
       propertyPath: m_Name
       value: Light_08 (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2651562866206995817, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5476907822930849397, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2344,9 +2546,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1774913864221245121, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1845518484278650557, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 2651562866206995817, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
       propertyPath: m_Name
       value: Light_08
+      objectReference: {fileID: 0}
+    - target: {fileID: 2651562866206995817, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5476907822930849397, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2370,7 +2588,7 @@ GameObject:
   - component: {fileID: 736329225}
   - component: {fileID: 736329224}
   - component: {fileID: 736329223}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2486,7 +2704,7 @@ GameObject:
   - component: {fileID: 780483061}
   - component: {fileID: 780483060}
   - component: {fileID: 780483059}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2644,9 +2862,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.609
       objectReference: {fileID: 0}
+    - target: {fileID: 1774913864221245121, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1845518484278650557, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 2651562866206995817, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
       propertyPath: m_Name
       value: Light_08 (16)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2651562866206995817, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5476907822930849397, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2718,9 +2952,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1774913864221245121, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1845518484278650557, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 2651562866206995817, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
       propertyPath: m_Name
       value: Light_08 (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2651562866206995817, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5476907822930849397, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2919,9 +3169,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1774913864221245121, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1845518484278650557, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 2651562866206995817, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
       propertyPath: m_Name
       value: Light_08 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2651562866206995817, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4013508439877792364, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
       propertyPath: m_Shadows.m_Bias
@@ -2930,6 +3192,10 @@ PrefabInstance:
     - target: {fileID: 4013508439877792364, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
       propertyPath: m_Shadows.m_NormalBias
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5476907822930849397, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3071,9 +3337,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1774913864221245121, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1845518484278650557, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 2651562866206995817, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
       propertyPath: m_Name
       value: Light_08 (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2651562866206995817, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5476907822930849397, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3092,7 +3374,7 @@ GameObject:
   - component: {fileID: 990529744}
   - component: {fileID: 990529743}
   - component: {fileID: 990529742}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3213,7 +3495,7 @@ GameObject:
   - component: {fileID: 1095928108}
   - component: {fileID: 1095928107}
   - component: {fileID: 1095928106}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3318,7 +3600,7 @@ GameObject:
   - component: {fileID: 1103993530}
   - component: {fileID: 1103993529}
   - component: {fileID: 1103993528}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube (14)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3486,9 +3768,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.609
       objectReference: {fileID: 0}
+    - target: {fileID: 1774913864221245121, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1845518484278650557, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 2651562866206995817, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
       propertyPath: m_Name
       value: Light_08 (18)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2651562866206995817, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5476907822930849397, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3560,9 +3858,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1774913864221245121, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1845518484278650557, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 2651562866206995817, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
       propertyPath: m_Name
       value: Light_08 (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2651562866206995817, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5476907822930849397, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3629,9 +3943,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1774913864221245121, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1845518484278650557, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 2651562866206995817, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
       propertyPath: m_Name
       value: Light_08 (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2651562866206995817, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5476907822930849397, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3650,7 +3980,7 @@ GameObject:
   - component: {fileID: 1207976037}
   - component: {fileID: 1207976036}
   - component: {fileID: 1207976035}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube (18)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3890,7 +4220,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 4090201176088002163, guid: de2d30c724369404597a98d89da6e94c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 454536006}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 8819722108260078762, guid: de2d30c724369404597a98d89da6e94c, type: 3}
       insertIndex: -1
@@ -3908,7 +4241,7 @@ GameObject:
   - component: {fileID: 1267693271}
   - component: {fileID: 1267693270}
   - component: {fileID: 1267693269}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4386,6 +4719,11 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!4 &1422480440 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4090201176088002163, guid: de2d30c724369404597a98d89da6e94c, type: 3}
+  m_PrefabInstance: {fileID: 1266822060}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1485349429
 GameObject:
   m_ObjectHideFlags: 0
@@ -4398,7 +4736,7 @@ GameObject:
   - component: {fileID: 1485349432}
   - component: {fileID: 1485349431}
   - component: {fileID: 1485349430}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube (23)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4625,7 +4963,7 @@ GameObject:
   - component: {fileID: 1568315349}
   - component: {fileID: 1568315348}
   - component: {fileID: 1568315347}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube (19)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4943,7 +5281,7 @@ GameObject:
   - component: {fileID: 1636670309}
   - component: {fileID: 1636670308}
   - component: {fileID: 1636670307}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube (13)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5142,7 +5480,7 @@ GameObject:
   - component: {fileID: 1648274373}
   - component: {fileID: 1648274372}
   - component: {fileID: 1648274371}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5402,9 +5740,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1774913864221245121, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1845518484278650557, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 2651562866206995817, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
       propertyPath: m_Name
       value: Light_08 (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2651562866206995817, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5476907822930849397, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5530,7 +5884,7 @@ GameObject:
   - component: {fileID: 1827126169}
   - component: {fileID: 1827126168}
   - component: {fileID: 1827126167}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube (22)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5683,9 +6037,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1774913864221245121, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1845518484278650557, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 2651562866206995817, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
       propertyPath: m_Name
       value: Light_08 (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2651562866206995817, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5476907822930849397, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5704,7 +6074,7 @@ GameObject:
   - component: {fileID: 1842991416}
   - component: {fileID: 1842991415}
   - component: {fileID: 1842991414}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube (15)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5961,14 +6331,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
-    - target: {fileID: 3394662866326879439, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3886933930385285250, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
-      propertyPath: m_CullTransparentMesh
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4208994448801702038, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
       propertyPath: _text
       value: Volt Serpentra
@@ -6053,6 +6415,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8669131866018396485, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
+      propertyPath: defaultStaff
+      value: 
+      objectReference: {fileID: 11400000, guid: bda45e667c093024cbc8cd8f45874648, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6250,9 +6616,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1774913864221245121, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1845518484278650557, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 2651562866206995817, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
       propertyPath: m_Name
       value: Light_08 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2651562866206995817, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4013508439877792364, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
       propertyPath: m_Shadows.m_Bias
@@ -6261,6 +6639,10 @@ PrefabInstance:
     - target: {fileID: 4013508439877792364, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
       propertyPath: m_Shadows.m_NormalBias
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5476907822930849397, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6332,7 +6714,7 @@ GameObject:
   - component: {fileID: 2064678262}
   - component: {fileID: 2064678261}
   - component: {fileID: 2064678260}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube (21)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6437,7 +6819,7 @@ GameObject:
   - component: {fileID: 2068571853}
   - component: {fileID: 2068571852}
   - component: {fileID: 2068571851}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
