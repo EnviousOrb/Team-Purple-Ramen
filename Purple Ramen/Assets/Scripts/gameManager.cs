@@ -36,6 +36,7 @@ public class gameManager : MonoBehaviour
     public int playerScore;
 
     public bool isPaused;
+    public bool keysDisabled;
     float TimeScaleOrig;
 
     private GameObject previousMenu;
@@ -56,42 +57,45 @@ public class gameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Cancel"))
+        if (!keysDisabled)
         {
-            if (menuActive == null)
-                statePaused();
-            else if (menuActive == menuPause)
-                stateNormal();
-            else if (menuActive == menuSettings)
+            if (Input.GetButtonDown("Cancel"))
             {
-                menuActive = previousMenu;
-                menuSettings.SetActive(false);
+                if (menuActive == null)
+                    statePaused();
+                else if (menuActive == menuPause)
+                    stateNormal();
+                else if (menuActive == menuSettings)
+                {
+                    menuActive = previousMenu;
+                    menuSettings.SetActive(false);
+                }
+
+
+
+                else if (menuActive == menuMain)
+                {
+                    Cursor.lockState = CursorLockMode.None;
+                }
             }
-            
 
-
-            else if (menuActive == menuMain)
+            if (Input.GetKeyDown(KeyCode.I))
             {
-                Cursor.lockState = CursorLockMode.None;
+                if (menuActive == null)
+                    stateInv();
+                else if (menuActive == menuInv)
+                    stateNormal();
             }
-        }
-
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            if (menuActive == null)
-                stateInv();
-            else if (menuActive == menuInv)
-                stateNormal();
-        }
 
 
-        if (Input.GetKeyDown(KeyCode.LeftControl))
-        {
-            PS.crouch();
-        }
-        else if (Input.GetKeyUp(KeyCode.LeftControl))
-        {
-            PS.unCrouch();
+            if (Input.GetKeyDown(KeyCode.LeftControl))
+            {
+                PS.crouch();
+            }
+            else if (Input.GetKeyUp(KeyCode.LeftControl))
+            {
+                PS.unCrouch();
+            }
         }
     }
 
