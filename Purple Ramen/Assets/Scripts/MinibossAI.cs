@@ -108,7 +108,7 @@ public class MinibossAI : MonoBehaviour, IDamage
                 animator.SetBool("playerInRange", false);
                 StartCoroutine(Roam()); // Starts roaming if player is out of sight but in range.
             }
-            else if (playerInRange && canSeePlayer())
+            else if (playerInRange && canSeePlayer() && !gameManager.instance.playerDead)
             {
                 action = rand.Next(4);
                 MinibossAttack(action);
