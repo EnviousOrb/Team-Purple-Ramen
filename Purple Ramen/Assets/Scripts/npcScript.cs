@@ -6,13 +6,10 @@ using System.Linq;
 public class npcScript : MonoBehaviour
 {
     [SerializeField] private List<GameObject> requiredItems;
-    [SerializeField] private ItemData rewardItem;
     [SerializeField] private SuperTextMesh questText;
     [SerializeField] private SuperTextMesh thankText;
     [SerializeField] private GameObject gateToUnlock;
     [SerializeField] private GameObject checkpointToUnlock;
-
-    bool rewardGiven = false;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -22,11 +19,6 @@ public class npcScript : MonoBehaviour
 
             if (requiredItems.All(obj => obj.activeInHierarchy))
             {
-                if (!rewardGiven)
-                {
-                    player.itemList.Add(rewardItem);
-                    rewardGiven = true;
-                }
                 if (checkpointToUnlock != null)
                 {
                     checkpointToUnlock.SetActive(true);

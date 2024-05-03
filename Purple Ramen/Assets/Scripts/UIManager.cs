@@ -34,7 +34,7 @@ public class UIManager : MonoBehaviour
 
     public void UpdateInventoryUI(List<IInventory> itemList)
     {
-        itemList = sceneInfo.staffList.Cast<IInventory>().ToList();
+        itemList.AddRange(sceneInfo.nonPersistentItems.Cast<IInventory>().ToList());
 
         for (int slotIndex = 0; slotIndex < inventoryUISlotLocation.Count; slotIndex++)
         {

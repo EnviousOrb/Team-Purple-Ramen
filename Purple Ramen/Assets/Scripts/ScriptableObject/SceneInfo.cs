@@ -9,6 +9,7 @@ public class SceneInfo : ScriptableObject
     //SceneInfo functions like a Staff Manager
     public static SceneInfo instance;
     public List<staffElementalStats> staffList = new();
+    public List<ItemData> nonPersistentItems = new();
     public int selectedStaffIndex = 0;
 
     public bool isNextScene = true;

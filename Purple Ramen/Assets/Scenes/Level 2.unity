@@ -393,7 +393,7 @@ Transform:
   m_GameObject: {fileID: 8120457}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 74.74, y: 0.543, z: 45.459}
+  m_LocalPosition: {x: 74.74, y: 0.41, z: 45.459}
   m_LocalScale: {x: 0.4, y: 0.01, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5512,6 +5512,10 @@ PrefabInstance:
     - target: {fileID: 5271871050711081415, guid: 16d8014334e319d4c85216cab152991d, type: 3}
       propertyPath: m_NavMeshLayer
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8839126848265256761, guid: 16d8014334e319d4c85216cab152991d, type: 3}
+      propertyPath: _text
+      value: Thanks, Stranger! I'll let my father know that your work here is done.
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -24094,7 +24098,7 @@ Transform:
   m_GameObject: {fileID: 842729726}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 72.9, y: 0.021465778, z: 54.79}
+  m_LocalPosition: {x: 72.9, y: -0.146, z: 54.79}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -34725,7 +34729,7 @@ Transform:
   m_GameObject: {fileID: 1264798239}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 72.9, y: 0.021465778, z: 59.87}
+  m_LocalPosition: {x: 72.9, y: -0.146, z: 59.87}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -44801,6 +44805,10 @@ PrefabInstance:
       propertyPath: m_NavMeshLayer
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8839126848265256761, guid: f505c95be96013546891c5d68082c90d, type: 3}
+      propertyPath: _text
+      value: Thanks, Stranger, I'll let father know the job's done.
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -50026,37 +50034,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1794666480}
   m_Mesh: {fileID: 3558006837228905961, guid: 3a06c2f06de8d9c4f8efdec1d401bba9, type: 3}
---- !u!1 &1796713202
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1796713203}
-  m_Layer: 0
-  m_Name: Checkpoint 3
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 1
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &1796713203
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1796713202}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 18.017273, y: 0.8639915, z: 39.861366}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1873952681}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1802135129
 GameObject:
   m_ObjectHideFlags: 0
@@ -51627,7 +51604,6 @@ Transform:
   - {fileID: 1559918094}
   - {fileID: 1425662877}
   - {fileID: 1668085060}
-  - {fileID: 1796713203}
   - {fileID: 1753419229}
   m_Father: {fileID: 1735171559}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -57639,6 +57615,10 @@ PrefabInstance:
     - target: {fileID: 4273688902249092217, guid: 07ddb53afdae74d428acbd66c6784bf2, type: 3}
       propertyPath: m_Name
       value: Werewolf Grass Type
+      objectReference: {fileID: 0}
+    - target: {fileID: 7413336417966480280, guid: 07ddb53afdae74d428acbd66c6784bf2, type: 3}
+      propertyPath: HP
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 7413336417966480280, guid: 07ddb53afdae74d428acbd66c6784bf2, type: 3}
       propertyPath: hpBar
@@ -68084,7 +68064,7 @@ Transform:
   m_GameObject: {fileID: 2056375847565919457}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 74.74, y: -0.02, z: 45.42}
+  m_LocalPosition: {x: 74.74, y: -0.18, z: 45.42}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -71888,7 +71868,6 @@ MonoBehaviour:
   - {fileID: 6296350058892367607}
   - {fileID: 134057654}
   - {fileID: 151101106}
-  rewardItem: {fileID: 11400000, guid: 7dbed68be6b04844d970ed1ee64103aa, type: 2}
   questText: {fileID: 432396397}
   thankText: {fileID: 153721385}
   gateToUnlock: {fileID: 0}
@@ -76079,6 +76058,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4208994448801702038, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
+      propertyPath: _text
+      value: Floracanine
+      objectReference: {fileID: 0}
     - target: {fileID: 7206692720888251142, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -79889,11 +79872,10 @@ MonoBehaviour:
   requiredItems:
   - {fileID: 1425662876}
   - {fileID: 1668085059}
-  rewardItem: {fileID: 11400000, guid: 1e055f38362aa714cb8970a0e00dce54, type: 2}
   questText: {fileID: 2088563811}
   thankText: {fileID: 1559918095}
   gateToUnlock: {fileID: 957630380}
-  checkpointToUnlock: {fileID: 1796713202}
+  checkpointToUnlock: {fileID: 0}
 --- !u!1 &4343600513281688753
 GameObject:
   m_ObjectHideFlags: 0
@@ -90305,7 +90287,6 @@ MonoBehaviour:
   - {fileID: 3416425246295342602}
   - {fileID: 2671454998199751333}
   - {fileID: 2630389102285549447}
-  rewardItem: {fileID: 11400000, guid: 27529f40ca2573e46b716b561ad86025, type: 2}
   questText: {fileID: 1661285460}
   thankText: {fileID: 1593902830}
   gateToUnlock: {fileID: 0}
@@ -93348,7 +93329,7 @@ Transform:
   m_GameObject: {fileID: 6888844904404809525}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 79.172, y: 0.543, z: 45.459}
+  m_LocalPosition: {x: 79.172, y: 0.41, z: 45.459}
   m_LocalScale: {x: 0.4, y: 0.01, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -100367,7 +100348,7 @@ Transform:
   m_GameObject: {fileID: 7620558334335891278}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 79.19, y: -0.02, z: 45.42}
+  m_LocalPosition: {x: 79.19, y: -0.18, z: 45.42}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -127699,7 +127680,7 @@ Transform:
   m_GameObject: {fileID: 8308592849974659140}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 72.9, y: 0.021465778, z: 57.13079}
+  m_LocalPosition: {x: 72.9, y: -0.146, z: 57.13079}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
