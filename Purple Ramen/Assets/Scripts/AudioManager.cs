@@ -199,7 +199,7 @@ public class AudioManager : MonoBehaviour
     {
         SFXSource.volume = volume;
         PlayerSource.volume = volume;
-        if(BossSource != null)
+        if (BossSource != null)
             BossSource.volume = volume;
     }
 
