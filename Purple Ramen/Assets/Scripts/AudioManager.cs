@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 
 public class AudioManager : MonoBehaviour
 {
+    [SerializeField] SceneInfo sceneInfo;
     public static AudioManager instance;
     public soundObject[] BGM, SFX, NpcSFX, PlayerSFX, BossSFX, EnemySFX;
     public float fadeDuration;
@@ -178,9 +179,9 @@ public class AudioManager : MonoBehaviour
     {
         SFXSource.mute = !SFXSource.mute;
         PlayerSource.mute = !PlayerSource.mute;
-        if(BossSource != null)
+        if (BossSource != null)
             BossSource.mute = !BossSource.mute;
-        if(EnemySource != null)
+        if (EnemySource != null)
             EnemySource.mute = !EnemySource.mute;
     }
 
@@ -201,6 +202,7 @@ public class AudioManager : MonoBehaviour
         if(BossSource != null)
             BossSource.volume = volume;
     }
+
     public void NPCVolume(float volume)
     {
         NPCSource.volume = volume;

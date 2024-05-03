@@ -4615,7 +4615,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneName: Hub Area
   Loadingscreen: {fileID: 1531493536}
-  loadingTimer: 0
+  loadingTimer: 3
   isNextScene: 1
   sceneInfo: {fileID: 11400000, guid: e9b35b64eab44834da85e8f354f6af30, type: 2}
 --- !u!1 &1422480427 stripped
@@ -6284,13 +6284,17 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1118616861777338557, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
+      propertyPath: BGM.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1118616861777338557, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
       propertyPath: BGM.Array.data[0]
       value: 
       objectReference: {fileID: 11400000, guid: de6000d9551dfac45ace5cce9d212ca0, type: 2}
     - target: {fileID: 1118616861777338557, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
       propertyPath: BGM.Array.data[1]
       value: 
-      objectReference: {fileID: 11400000, guid: 372ac856aab674545b8b4338abc7ddce, type: 2}
+      objectReference: {fileID: 11400000, guid: e1ef7ce6b6147074b9cb0f7bdd34d4cc, type: 2}
     - target: {fileID: 1118616861777338557, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
       propertyPath: BossSFX.Array.size
       value: 5

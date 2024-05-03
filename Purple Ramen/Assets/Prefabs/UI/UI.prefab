@@ -10189,6 +10189,7 @@ MonoBehaviour:
   PS: {fileID: 0}
   playerScore: 0
   isPaused: 0
+  keysDisabled: 0
   playerDead: 0
 --- !u!114 &5313599917380490847
 MonoBehaviour:
@@ -12908,9 +12909,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6558a3d25af4bc846852ccfa97b6699f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneInfo: {fileID: 11400000, guid: e9b35b64eab44834da85e8f354f6af30, type: 2}
   BGM:
   - {fileID: 11400000, guid: df0889e674b42c54cbf119a743dfa1a3, type: 2}
-  - {fileID: 11400000, guid: b41d64a30944df04bbc55bcebdfacd05, type: 2}
   SFX:
   - {fileID: 11400000, guid: ed32ed0b30b992d489e0f8d274614803, type: 2}
   - {fileID: 11400000, guid: aa0e40dfa7ba14543b3fc619561a058e, type: 2}
