@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class catScript : MonoBehaviour
 {
     [SerializeField] private ItemData requiredItem; // The item the cat wants
@@ -9,51 +8,53 @@ public class catScript : MonoBehaviour
     [SerializeField] public GameObject WallToUnlock;
     [SerializeField] private SuperTextMesh questText;
     [SerializeField] private SuperTextMesh thankText;
+    private bool itemGiven = false;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             playerController player = other.GetComponent<playerController>();
-            if (player != null && player.itemList.Contains(requiredItem))
+            if (player != null)
             {
-                // Remove the item from the player's inventory
-                player.itemList.Remove(requiredItem);
+                PlayRandomCatSound();
 
-                // Update the inventory UI to reflect this change
-                UIManager.instance.UpdateInventoryUI(player.itemList);
+                if (!itemGiven && player.itemList.Contains(requiredItem))
+                {
+                    player.itemList.Remove(requiredItem);
 
-                if(GateToUnlock != null)
-                    GateToUnlock.SetActive(true);
-                if(WallToUnlock != null)
-                    WallToUnlock.SetActive(false);
-                gameManager.instance.UpdateTextBox(thankText.text);
+                    UIManager.instance.UpdateInventoryUI(player.itemList);
 
-            }
-            else
-            {
-                // Player doesn't have the required item. Just show the regular cat menu.
-                gameManager.instance.UpdateTextBox(questText.text);
-                StartCoroutine(CatSpeak());
+                    if (GateToUnlock != null)
+                        GateToUnlock.SetActive(true);
+                    if (WallToUnlock != null)
+                        WallToUnlock.SetActive(false);
+
+                    gameManager.instance.UpdateTextBox(thankText.text, 15);
+                    itemGiven = true;
+                }
+                else if (itemGiven)
+                {
+                    gameManager.instance.UpdateTextBox(thankText.text, 15);
+                }
+                else
+                {
+                    gameManager.instance.UpdateTextBox(questText.text, 15);
+                }
             }
         }
     }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            // You might want to deactivate the win menu here as well if you're using OnTriggerExit to close the catMenu.
-            gameManager.instance.HideTextBox();
-        }
-    }
-
-    IEnumerator CatSpeak()
+    private void PlayRandomCatSound()
     {
         int randomIndex = Random.Range(0, AudioManager.instance.NpcSFX.Length);
         string randomSFXName = AudioManager.instance.NpcSFX[randomIndex].name;
         AudioManager.instance.playNpcSFX(randomSFXName);
-        yield return new WaitForSeconds(0.3f);
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        gameManager.instance.HideTextBox();
     }
 }
 

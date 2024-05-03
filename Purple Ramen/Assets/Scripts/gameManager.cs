@@ -99,7 +99,7 @@ public class gameManager : MonoBehaviour
         }
     }
 
-    public void UpdateTextBox(string newText)
+    public void UpdateTextBox(string newText, float duration = 8)
     {
         if (TextBoxText.reading == true)
         {
@@ -107,8 +107,9 @@ public class gameManager : MonoBehaviour
         }
         TextBox.SetActive(true);
         TextBoxText.text = newText;
-        StartCoroutine(SuperHideTextBox(8));
+        StartCoroutine(SuperHideTextBox(duration));
     }
+
     public void HideTextBox()
     {
         TextBox.SetActive(false);
