@@ -29,14 +29,14 @@ public class Bonfire : MonoBehaviour
             UIManager.instance.UpdateInventoryUI(player.itemList);
 
             gameManager.instance.UpdateTextBox("You've recieved..." + recipe.resultItem.name);
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(3f);
             gameManager.instance.HideTextBox();
 
         }
         else
         {
             gameManager.instance.UpdateTextBox("You're missing some required items...");
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(3f);
             gameManager.instance.HideTextBox();
 
         }
