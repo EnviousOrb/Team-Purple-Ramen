@@ -9,7 +9,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Image mainSlotImage; // UI image for the main slot.
     [SerializeField] private SuperTextMesh descriptionText;
     [SerializeField] SceneInfo sceneInfo;
-    public Slider bgmSlider, sfxSlider, npcSlider;
+    public Slider bgmSlider, sfxSlider, npcSlider, enemySlider;
 
     public static UIManager instance;
 
@@ -74,6 +74,11 @@ public class UIManager : MonoBehaviour
         AudioManager.instance.toggleNPC();
     }
 
+    public void toggleEnemy()
+    {
+        AudioManager.instance.toggleEnemy();
+    }
+
     public void BGMVolume()
     {
         AudioManager.instance.bgmVolume(bgmSlider.value);
@@ -87,6 +92,10 @@ public class UIManager : MonoBehaviour
     public void NPCVolume()
     {
         AudioManager.instance.NPCVolume(npcSlider.value);
+    }
+    public void EnemyVolume()
+    {
+        AudioManager.instance.EnemyVolume(enemySlider.value);
     }
 }
 

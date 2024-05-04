@@ -183,6 +183,10 @@ public class AudioManager : MonoBehaviour
         sceneInfo.isSFXSourceMuted = SFXSource.mute;
         PlayerSource.mute = !PlayerSource.mute;
         sceneInfo.isPlayerSourceMuted = PlayerSource.mute;
+    }
+
+    public void toggleEnemy()
+    {
         if (BossSource != null)
         {
             BossSource.mute = !BossSource.mute;
@@ -213,10 +217,19 @@ public class AudioManager : MonoBehaviour
         sceneInfo.SFXSourceVolume = volume;
         PlayerSource.volume = volume;
         sceneInfo.PlayerSourceVolume = volume;
+    }
+
+    public void EnemyVolume(float volume)
+    {
         if (BossSource != null)
         {
             BossSource.volume = volume;
             sceneInfo.BossSourceVolume = volume;
+        }
+        if (EnemySource != null)
+        {
+            EnemySource.volume = volume;
+            sceneInfo.EnemySourceVolume = volume;
         }
     }
 
