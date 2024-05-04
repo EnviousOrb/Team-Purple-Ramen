@@ -187,15 +187,43 @@ public class MinibossAI : MonoBehaviour, IDamage
         if (shootPos != null)
         {
             isShooting = true;
-            animator.SetTrigger("Shoot"); // Triggers the shooting animation.
+            animator.SetTrigger("Shoot");
             AudioManager.instance.playBossSFX(AudioManager.instance.BossSFX[1].soundName);
-            Vector3 playerDirection = gameManager.instance.player.transform.position - transform.position;
-            Instantiate(bullet, shootPos.position, Quaternion.LookRotation(playerDirection)); // Spawns the bullet.
+
+            Vector3 playerPosition = gameManager.instance.player.transform.position;
+            Vector3 shootDirection = playerPosition - shootPos.position; 
+
+            float targetHeight = gameManager.instance.player.GetComponent<CapsuleCollider>().height;
+            shootDirection.y += targetHeight * 15f; //Adjusting the last number up raises the height and down lowers the height of boss projectile attacks.
+
+            Instantiate(bullet, shootPos.position, Quaternion.LookRotation(shootDirection));
             bullet.GetComponent<Bullet>().self = GetComponentInParent<CapsuleCollider>();
+
             yield return new WaitForSeconds(shootRate);
             isShooting = false;
         }
     }
+
+
+    //IEnumerator Shoot()
+    //{
+    //    if (shootPos != null)
+    //    {
+    //        isShooting = true;
+    //        animator.SetTrigger("Shoot");
+    //        AudioManager.instance.playBossSFX(AudioManager.instance.BossSFX[1].soundName);
+    //
+    //        Vector3 playerPosition = gameManager.instance.player.transform.position;
+    //        Vector3 shootDirection = playerPosition - shootPos.position;
+    //        shootDirection.y += (playerPosition.y - shootPos.position.y);
+    //
+    //        Instantiate(bullet, shootPos.position, Quaternion.LookRotation(shootDirection));
+    //        bullet.GetComponent<Bullet>().self = GetComponentInParent<CapsuleCollider>();
+    //
+    //        yield return new WaitForSeconds(shootRate);
+    //        isShooting = false;
+    //    }
+    //}
 
     IEnumerator MeleeAttack()
     {
