@@ -10,7 +10,6 @@ public class OnExitLevel : MonoBehaviour
 {
 
     public string sceneName;
-    EventSystem es;
     public GameObject Loadingscreen;
     public int loadingTimer;
     public bool isNextScene = true;

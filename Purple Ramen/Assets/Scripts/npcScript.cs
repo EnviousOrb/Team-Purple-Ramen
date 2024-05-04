@@ -25,7 +25,7 @@ public class npcScript : MonoBehaviour
                 }
                 UIManager.instance.UpdateInventoryUI(player.itemList);
 
-                gameManager.instance.UpdateTextBox(thankText.text);
+                gameManager.instance.UpdateTextBox(thankText.text,20);
 
                 StartCoroutine(NpcSpeak());
 
@@ -36,7 +36,7 @@ public class npcScript : MonoBehaviour
             }
             else
             {
-                gameManager.instance.UpdateTextBox(questText.text);
+                gameManager.instance.UpdateTextBox(questText.text,20);
                 StartCoroutine(NpcSpeak());
             }
         }

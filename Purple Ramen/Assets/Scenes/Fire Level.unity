@@ -2751,6 +2751,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc31370304ee39047a4727c0608e4327, type: 3}
+--- !u!82 &845639476 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 7530645113933781427, guid: bc31370304ee39047a4727c0608e4327, type: 3}
+  m_PrefabInstance: {fileID: 845639475}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &909649723
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4162,6 +4167,10 @@ PrefabInstance:
       propertyPath: NPCSource
       value: 
       objectReference: {fileID: 1888845246}
+    - target: {fileID: 1118616861777338557, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
+      propertyPath: PlayerSource
+      value: 
+      objectReference: {fileID: 845639476}
     - target: {fileID: 1118616861777338557, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
       propertyPath: BGM.Array.size
       value: 2

@@ -13,6 +13,20 @@ public class SceneInfo : ScriptableObject
     public int selectedStaffIndex = 0;
 
     public bool isNextScene = true;
+
+    public bool isBGMSourceMuted;
+    public bool isSFXSourceMuted;
+    public bool isPlayerSourceMuted;
+    public bool isBossSourceMuted;
+    public bool isEnemySourceMuted;
+    public bool isNPCSourceMuted;
+
+    public float BGMSourceVolume;
+    public float SFXSourceVolume;
+    public float PlayerSourceVolume;
+    public float BossSourceVolume;
+    public float EnemySourceVolume;
+    public float NPCSourceVolume;
 }
 
 

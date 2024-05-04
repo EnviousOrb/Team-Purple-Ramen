@@ -24,6 +24,7 @@ public class AudioManager : MonoBehaviour
             Destroy(gameObject);
         }
         playBGM(BGM[0].soundName);
+        BeegAudioLoad();
         PlayerSource = GameObject.FindWithTag("Player")?.GetComponent<AudioSource>();
         BossSource = GameObject.FindWithTag("Boss")?.GetComponent<AudioSource>();
         BossSource = GameObject.FindWithTag("Boss")?.GetComponent<AudioSource>();
@@ -173,38 +174,79 @@ public class AudioManager : MonoBehaviour
     public void toggleBGM()
     {
         BGMSource.mute = !BGMSource.mute;
+        sceneInfo.isBGMSourceMuted = BGMSource.mute;
     }
 
     public void toggleSFX()
     {
         SFXSource.mute = !SFXSource.mute;
+        sceneInfo.isSFXSourceMuted = SFXSource.mute;
         PlayerSource.mute = !PlayerSource.mute;
+        sceneInfo.isPlayerSourceMuted = PlayerSource.mute;
         if (BossSource != null)
+        {
             BossSource.mute = !BossSource.mute;
+            sceneInfo.isBossSourceMuted = BossSource.mute;
+        }
         if (EnemySource != null)
+        {
             EnemySource.mute = !EnemySource.mute;
+            sceneInfo.isEnemySourceMuted = EnemySource.mute;
+        }
     }
 
     public void toggleNPC()
     {
         NPCSource.mute = !NPCSource.mute;
+        sceneInfo.isNPCSourceMuted = NPCSource.mute;
     }
 
     public void bgmVolume(float volume)
     {
         BGMSource.volume = volume;
+        sceneInfo.BGMSourceVolume = volume;
     }
 
     public void sfxVolume(float volume)
     {
         SFXSource.volume = volume;
+        sceneInfo.SFXSourceVolume = volume;
         PlayerSource.volume = volume;
+        sceneInfo.PlayerSourceVolume = volume;
         if (BossSource != null)
+        {
             BossSource.volume = volume;
+            sceneInfo.BossSourceVolume = volume;
+        }
     }
 
     public void NPCVolume(float volume)
     {
         NPCSource.volume = volume;
+        sceneInfo.NPCSourceVolume = volume;
+    }
+
+    public void BeegAudioLoad()
+    {
+        if (sceneInfo != null)
+        {
+            BGMSource.mute = sceneInfo.isBGMSourceMuted;
+            SFXSource.mute = sceneInfo.isSFXSourceMuted;
+            PlayerSource.mute = sceneInfo.isPlayerSourceMuted;
+            if (BossSource != null)
+                BossSource.mute = sceneInfo.isBossSourceMuted;
+            if (EnemySource != null)
+                EnemySource.mute = sceneInfo.isEnemySourceMuted;
+            NPCSource.mute = sceneInfo.isNPCSourceMuted;
+
+            BGMSource.volume = sceneInfo.BGMSourceVolume;
+            SFXSource.volume = sceneInfo.SFXSourceVolume;
+            PlayerSource.volume = sceneInfo.PlayerSourceVolume;
+            if (BossSource != null)
+                BossSource.volume = sceneInfo.BossSourceVolume;
+            if (EnemySource != null)
+                EnemySource.volume = sceneInfo.EnemySourceVolume;
+            NPCSource.volume = sceneInfo.NPCSourceVolume;
+        }
     }
 }

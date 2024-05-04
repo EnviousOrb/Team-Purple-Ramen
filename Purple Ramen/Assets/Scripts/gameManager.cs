@@ -187,7 +187,6 @@ public class gameManager : MonoBehaviour
     public void HideCredits()
     {
         creditsPanel.SetActive(false);
-        ShowMainMenu();
     }
 
     public void ShowMainMenu()
@@ -222,6 +221,7 @@ public class gameManager : MonoBehaviour
     {
         menuActive = previousMenu;
         menuSettings.SetActive(false);
+        isPaused = false;
     }
     public void respawn()
     {

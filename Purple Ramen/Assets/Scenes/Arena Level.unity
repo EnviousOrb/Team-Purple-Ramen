@@ -6097,6 +6097,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1118616861777338557, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
+      propertyPath: PlayerSource
+      value: 
+      objectReference: {fileID: 2077247845}
+    - target: {fileID: 1118616861777338557, guid: dc7b7bbd4d74621409aaccacdae4c508, type: 3}
       propertyPath: BGM.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -6791,6 +6795,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc31370304ee39047a4727c0608e4327, type: 3}
+--- !u!82 &2077247845 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 7530645113933781427, guid: bc31370304ee39047a4727c0608e4327, type: 3}
+  m_PrefabInstance: {fileID: 2077247844}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2104969990 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1448653227136698331, guid: ec11024d2732ad74aa0682b802d557cd, type: 3}
