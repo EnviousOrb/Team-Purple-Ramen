@@ -27,6 +27,10 @@ public class SceneInfo : ScriptableObject
     public float BossSourceVolume;
     public float EnemySourceVolume;
     public float NPCSourceVolume;
+
+    public bool hasVoltDied;
+    public bool hasFloracanineDied;
+    public bool hasInfernixDied;
 }
 
 

@@ -8,6 +8,7 @@ using Unity.VisualScripting;
 public class MinibossAI : MonoBehaviour, IDamage
 {
     [HeaderAttribute("-----Components-----")]
+    [SerializeField] SceneInfo sceneInfo;
     [SerializeField] public SuperTextMesh minibossName; //The visual representation of the miniboss' name
     [SerializeField] Renderer model; // The enemy's visual model.
     [SerializeField] NavMeshAgent agent; // Navigation component for AI movement.
@@ -204,27 +205,6 @@ public class MinibossAI : MonoBehaviour, IDamage
         }
     }
 
-
-    //IEnumerator Shoot()
-    //{
-    //    if (shootPos != null)
-    //    {
-    //        isShooting = true;
-    //        animator.SetTrigger("Shoot");
-    //        AudioManager.instance.playBossSFX(AudioManager.instance.BossSFX[1].soundName);
-    //
-    //        Vector3 playerPosition = gameManager.instance.player.transform.position;
-    //        Vector3 shootDirection = playerPosition - shootPos.position;
-    //        shootDirection.y += (playerPosition.y - shootPos.position.y);
-    //
-    //        Instantiate(bullet, shootPos.position, Quaternion.LookRotation(shootDirection));
-    //        bullet.GetComponent<Bullet>().self = GetComponentInParent<CapsuleCollider>();
-    //
-    //        yield return new WaitForSeconds(shootRate);
-    //        isShooting = false;
-    //    }
-    //}
-
     IEnumerator MeleeAttack()
     {
         if (distance < gameManager.instance.player.GetComponent<SphereCollider>().radius)
@@ -284,7 +264,22 @@ public class MinibossAI : MonoBehaviour, IDamage
             agent.velocity = Vector3.zero;
             if (itemToDrop != null)
             {
-                itemToDrop.SetActive(true);
+                if (minibossName.text == "Volt Serpentra" && !sceneInfo.hasVoltDied)
+                {
+                    itemToDrop.SetActive(true);
+                    sceneInfo.hasVoltDied = true;
+                }
+                else if (minibossName.text == "Floracanine" && !sceneInfo.hasFloracanineDied)
+                {
+                    itemToDrop.SetActive(true);
+                    sceneInfo.hasFloracanineDied = true;
+                }
+                else if(minibossName.text == "Infernix" && !sceneInfo.hasInfernixDied)
+                {
+                    itemToDrop.SetActive(true);
+                    sceneInfo.hasInfernixDied = true;
+                }
+
             }
             animator.SetBool("Death", true);
             StartCoroutine(DeathAnimate());
