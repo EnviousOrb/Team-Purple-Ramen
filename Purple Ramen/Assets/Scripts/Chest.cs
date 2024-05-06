@@ -69,7 +69,7 @@ public class Chest : MonoBehaviour
         {
             staffElementalStats selectedStaff = staffList[Random.Range(0, staffList.Count)];
             gameManager.instance.PS.getStaffStats(selectedStaff);
-            gameManager.instance.UpdateTextBox("You've received a magical staff orb!");
+            gameManager.instance.UpdateTextBox("You've received a magical staff orb! Use the scroll wheel to find your new abilities!");
             itemGiven = true;
         }
 

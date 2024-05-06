@@ -8,7 +8,8 @@ using Unity.VisualScripting;
 public class MinibossAI : MonoBehaviour, IDamage
 {
     [HeaderAttribute("-----Components-----")]
-    [SerializeField] SuperTextMesh minibossName; //The visual representation of the miniboss' name
+    [SerializeField] SceneInfo sceneInfo;
+    [SerializeField] public SuperTextMesh minibossName; //The visual representation of the miniboss' name
     [SerializeField] Renderer model; // The enemy's visual model.
     [SerializeField] NavMeshAgent agent; // Navigation component for AI movement.
     [SerializeField] Transform shootPos; // Optional. The place where the Miniboss shoots from
@@ -70,6 +71,7 @@ public class MinibossAI : MonoBehaviour, IDamage
     int originalSpeed;
     int ogHealth;
     int action;
+    float distance;
 
     //Bools
     bool isShooting; // Tracks if the enemy is currently shooting.
@@ -92,6 +94,7 @@ public class MinibossAI : MonoBehaviour, IDamage
 
     void Update()
     {
+        distance = Vector3.Distance(gameObject.transform.position, gameManager.instance.player.transform.position);
         if (!isDead)
         {
             float animSpeed = agent.velocity.normalized.magnitude; // Calculates speed for animation.
@@ -106,7 +109,7 @@ public class MinibossAI : MonoBehaviour, IDamage
                 animator.SetBool("playerInRange", false);
                 StartCoroutine(Roam()); // Starts roaming if player is out of sight but in range.
             }
-            else if (playerInRange && canSeePlayer())
+            else if (playerInRange && canSeePlayer() && !gameManager.instance.playerDead)
             {
                 action = rand.Next(4);
                 MinibossAttack(action);
@@ -185,11 +188,18 @@ public class MinibossAI : MonoBehaviour, IDamage
         if (shootPos != null)
         {
             isShooting = true;
-            animator.SetTrigger("Shoot"); // Triggers the shooting animation.
+            animator.SetTrigger("Shoot");
             AudioManager.instance.playBossSFX(AudioManager.instance.BossSFX[1].soundName);
-            Vector3 playerDirection = gameManager.instance.player.transform.position - transform.position;
-            Instantiate(bullet, shootPos.position, Quaternion.LookRotation(playerDirection)); // Spawns the bullet.
+
+            Vector3 playerPosition = gameManager.instance.player.transform.position;
+            Vector3 shootDirection = playerPosition - shootPos.position; 
+
+            float targetHeight = gameManager.instance.player.GetComponent<CapsuleCollider>().height;
+            shootDirection.y += targetHeight * 15f; //Adjusting the last number up raises the height and down lowers the height of boss projectile attacks.
+
+            Instantiate(bullet, shootPos.position, Quaternion.LookRotation(shootDirection));
             bullet.GetComponent<Bullet>().self = GetComponentInParent<CapsuleCollider>();
+
             yield return new WaitForSeconds(shootRate);
             isShooting = false;
         }
@@ -197,11 +207,14 @@ public class MinibossAI : MonoBehaviour, IDamage
 
     IEnumerator MeleeAttack()
     {
-        isMelee = true;
-        animator.SetTrigger("Melee");
-        yield return new WaitForSeconds(shootRate);
-        AudioManager.instance.playBossSFX(AudioManager.instance.BossSFX[2].soundName);
-        isMelee = false;
+        if (distance < gameManager.instance.player.GetComponent<SphereCollider>().radius)
+        {
+            isMelee = true;
+            animator.SetTrigger("Melee");
+            yield return new WaitForSeconds(shootRate);
+            AudioManager.instance.playBossSFX(AudioManager.instance.BossSFX[2].soundName);
+            isMelee = false;
+        }
     }
 
     IEnumerator Summoning()
@@ -233,6 +246,9 @@ public class MinibossAI : MonoBehaviour, IDamage
     // Method called when the enemy takes damage.
     public void takeDamage(int amount, int type)
     {
+        if (type == 0)
+            return;
+        // ^ makes enemy bullets not damage boss
         HP -= amount; // Reduces health by the damage amount.
         StartCoroutine(FlashRed()); // Flashes red to indicate damaged.
         animator.SetTrigger("takeDamage");
@@ -248,7 +264,22 @@ public class MinibossAI : MonoBehaviour, IDamage
             agent.velocity = Vector3.zero;
             if (itemToDrop != null)
             {
-                itemToDrop.SetActive(true);
+                if (minibossName.text == "Volt Serpentra" && !sceneInfo.hasVoltDied)
+                {
+                    itemToDrop.SetActive(true);
+                    sceneInfo.hasVoltDied = true;
+                }
+                else if (minibossName.text == "Floracanine" && !sceneInfo.hasFloracanineDied)
+                {
+                    itemToDrop.SetActive(true);
+                    sceneInfo.hasFloracanineDied = true;
+                }
+                else if(minibossName.text == "Infernix" && !sceneInfo.hasInfernixDied)
+                {
+                    itemToDrop.SetActive(true);
+                    sceneInfo.hasInfernixDied = true;
+                }
+
             }
             animator.SetBool("Death", true);
             StartCoroutine(DeathAnimate());
@@ -344,5 +375,13 @@ public class MinibossAI : MonoBehaviour, IDamage
     {
         Quaternion targetRotation = Quaternion.LookRotation(new Vector3(playerDir.x, 0, playerDir.z)); // Calculates the rotation needed to face the player.
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * faceTargetSpeed); // Smoothly rotates towards the player.
+    }
+
+    public void EnemiesCelebrate()
+    {
+        if (!animator.GetBool("Dead"))  // Ensure dead enemies do not celebrate
+        {
+            animator.SetTrigger("PlayerIsDead");
+        }
     }
 }

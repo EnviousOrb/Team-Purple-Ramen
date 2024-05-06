@@ -11,7 +11,7 @@ public class ButtonFunctions : MonoBehaviour
     }
     public void restart()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene("Hub Area");
         gameManager.instance.stateNormal();
     }
     public void exitSettings()

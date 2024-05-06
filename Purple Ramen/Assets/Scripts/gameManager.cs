@@ -20,7 +20,6 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject menuInv;
     [SerializeField] GameObject menuSettings;
     [SerializeField] GameObject creditsPanel;
-    [SerializeField] GameObject secretEntrance;
     [SerializeField] public GameObject TextBox;
     public GameObject checkpointMenu;
     public GameObject playerDamageEffect;
@@ -37,10 +36,10 @@ public class gameManager : MonoBehaviour
     public int playerScore;
 
     public bool isPaused;
+    public bool keysDisabled;
     float TimeScaleOrig;
 
     private GameObject previousMenu;
-    public int deathCount;
 
     //testing variable
     public bool playerDead;
@@ -53,57 +52,54 @@ public class gameManager : MonoBehaviour
         PS = player.GetComponent<playerController>();
         TimeScaleOrig = Time.timeScale;
         playerSpawnPos = GameObject.FindWithTag("Player Spawn Pos");
-        DontDestroyOnLoad(gameObject);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Cancel"))
+        if (!keysDisabled)
         {
-            if (menuActive == null)
-                statePaused();
-            else if (menuActive == menuPause)
-                stateNormal();
-            else if (menuActive == menuMain)
+            if (Input.GetButtonDown("Cancel"))
             {
-                Cursor.lockState = CursorLockMode.None;
+                if (menuActive == null)
+                    statePaused();
+                else if (menuActive == menuPause)
+                    stateNormal();
+                else if (menuActive == menuSettings)
+                {
+                    menuActive = previousMenu;
+                    menuSettings.SetActive(false);
+                }
+
+
+
+                else if (menuActive == menuMain)
+                {
+                    Cursor.lockState = CursorLockMode.None;
+                }
             }
-        }
 
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            if (menuActive == null)
-                stateInv();
-            else if (menuActive == menuInv)
-                stateNormal();
-        }
+            if (Input.GetKeyDown(KeyCode.I))
+            {
+                if (menuActive == null)
+                    stateInv();
+                else if (menuActive == menuInv)
+                    stateNormal();
+            }
 
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            UIManager.instance.hotbarWeapon.SetActive(true);
-        }
-        else if (Input.GetKeyUp(KeyCode.Q))
-        {
-            UIManager.instance.hotbarWeapon.SetActive(false);
-        }
 
-        if (Input.GetKeyDown(KeyCode.LeftControl))
-        {
-            PS.crouch();
-        }
-        else if (Input.GetKeyUp(KeyCode.LeftControl))
-        {
-            PS.unCrouch();
-        }
-
-        if(deathCount >= 3 && secretEntrance != null)
-        {
-            secretEntrance.SetActive(true);
+            if (Input.GetKeyDown(KeyCode.LeftControl))
+            {
+                PS.crouch();
+            }
+            else if (Input.GetKeyUp(KeyCode.LeftControl))
+            {
+                PS.unCrouch();
+            }
         }
     }
 
-    public void UpdateTextBox(string newText)
+    public void UpdateTextBox(string newText, float duration = 8)
     {
         if (TextBoxText.reading == true)
         {
@@ -111,8 +107,9 @@ public class gameManager : MonoBehaviour
         }
         TextBox.SetActive(true);
         TextBoxText.text = newText;
-        SuperHideTextBox(8);
+        StartCoroutine(SuperHideTextBox(duration));
     }
+
     public void HideTextBox()
     {
         TextBox.SetActive(false);
@@ -190,7 +187,6 @@ public class gameManager : MonoBehaviour
     public void HideCredits()
     {
         creditsPanel.SetActive(false);
-        ShowMainMenu();
     }
 
     public void ShowMainMenu()
@@ -204,6 +200,12 @@ public class gameManager : MonoBehaviour
         {
             enemy.GetComponent<enemyAI>()?.EnemiesCelebrate();
         }
+
+        foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("Boss"))
+        {
+            enemy.GetComponent<MinibossAI>()?.EnemiesCelebrate();
+        }
+
     }
 
     public void resume()
@@ -214,11 +216,12 @@ public class gameManager : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         gameManager.instance.stateNormal();
-        deathCount = 0;
     }
     public void exitSettings()
     {
-        gameManager.instance.menuSettings.SetActive(false);
+        menuActive = previousMenu;
+        menuSettings.SetActive(false);
+        isPaused = false;
     }
     public void respawn()
     {

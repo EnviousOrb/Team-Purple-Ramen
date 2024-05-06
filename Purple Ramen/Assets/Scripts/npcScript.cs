@@ -6,13 +6,10 @@ using System.Linq;
 public class npcScript : MonoBehaviour
 {
     [SerializeField] private List<GameObject> requiredItems;
-    [SerializeField] private ItemData rewardItem;
     [SerializeField] private SuperTextMesh questText;
     [SerializeField] private SuperTextMesh thankText;
     [SerializeField] private GameObject gateToUnlock;
     [SerializeField] private GameObject checkpointToUnlock;
-
-    bool rewardGiven = false;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -22,18 +19,13 @@ public class npcScript : MonoBehaviour
 
             if (requiredItems.All(obj => obj.activeInHierarchy))
             {
-                if (!rewardGiven)
-                {
-                    player.itemList.Add(rewardItem);
-                    rewardGiven = true;
-                }
                 if (checkpointToUnlock != null)
                 {
                     checkpointToUnlock.SetActive(true);
                 }
                 UIManager.instance.UpdateInventoryUI(player.itemList);
 
-                gameManager.instance.UpdateTextBox(thankText.text);
+                gameManager.instance.UpdateTextBox(thankText.text,20);
 
                 StartCoroutine(NpcSpeak());
 
@@ -44,7 +36,7 @@ public class npcScript : MonoBehaviour
             }
             else
             {
-                gameManager.instance.UpdateTextBox(questText.text);
+                gameManager.instance.UpdateTextBox(questText.text,20);
                 StartCoroutine(NpcSpeak());
             }
         }
